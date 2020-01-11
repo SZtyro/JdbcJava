@@ -12,6 +12,7 @@ import pl.sztyro.Entities.Employee;
 
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Map;
 
 
 @SpringBootApplication
@@ -31,7 +32,7 @@ public class DataBaseApplication implements CommandLineRunner {
 
 
 	List<Employee> Employees;
-
+	List<Map<String,Object>>test;
 
 
 	@Override
@@ -55,7 +56,7 @@ public class DataBaseApplication implements CommandLineRunner {
 					rs.getLong(10),
 					rs.getLong(11)
 			)));
-
+		test = jdbcTemplate.queryForList("Select * from job_history");
 
 	}
 }
