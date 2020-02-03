@@ -38,25 +38,7 @@ public class DataBaseApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		String sql = "select * from employees";
-		//baza.listaStringow = jdbcTemplate.query("Select * from employees",(rs,rowNum)-> new Employee(rs.getLong("EMPLOYEE_ID")));
-		//Entities = jdbcTemplate.queryForList(sql);
 
-		RowMapper rowMapper = (ResultSet rs, int rowNum) -> rs.getString(1);
-		Employees = (jdbcTemplate.query(sql, (ResultSet rs, int rowNum) -> new Employee(
-					rs.getLong(1),
-					rs.getString(2),
-					rs.getString(3),
-					rs.getString(4),
-					rs.getString(5),
-					rs.getDate(6).toLocalDate(),
-					rs.getString(7),
-					rs.getInt(8),
-					rs.getDouble(9),
-					rs.getLong(10),
-					rs.getLong(11)
-			)));
-		test = jdbcTemplate.queryForList("Select * from job_history");
 
 	}
 }
