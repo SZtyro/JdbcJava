@@ -1,20 +1,13 @@
 package pl.sztyro.BazaDanych;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
-import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
-import pl.sztyro.Entities.Employee;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,42 +16,26 @@ import java.util.Map;
 @RestController
 public class Controller{
 
-    String username,password;
-    String jdbcUrl = "jdbc:oracle:thin:@//";
+
+
     //@Bean
     JdbcTemplate jdbcTemplate(String[] loginData) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        // extract this 4 parameters using your own logic
         final String driverClassName = "oracle.jdbc.driver.OracleDriver";
         //final String jdbcUrl = "jdbc:oracle:thin:@//155.158.112.45:1521/oltpstud";
-        username = loginData[1];
-        password = loginData[2];
-        //final String username = "ziibd5";
-        //final String password = "haslo1";
-        // Build dataSource manually:
-        //final Class<?> driverClass = ClassUtils.resolveClassName(driverClassName, this.getClass().getClassLoader());
-        //final Driver driver = (Driver) ClassUtils.getConstructorIfAvailable(driverClass).newInstance();
-        //final DataSource dataSource = new SimpleDriverDataSource(driver, jdbcUrl, username, password);
-        // or using DataSourceBuilder:
-        final DataSource dataSource = DataSourceBuilder.create().driverClassName(driverClassName).url(jdbcUrl + loginData[0]).username(username).password(password).build();
-        // and make the jdbcTemplate
+        final DataSource dataSource = DataSourceBuilder.create().driverClassName(driverClassName).url("jdbc:oracle:thin:@//" + loginData[0]).username(loginData[1]).password(loginData[2]).build();
+
         return new JdbcTemplate(dataSource);
     }
 
-
-    @Autowired
-    private klasaBazy baza;
-
     JdbcTemplate jdbcTemplate;
-    //tymczasowo
-    @Autowired
-    private DataBaseApplication main;
+
 
     @RequestMapping("/login")
     public String login(@RequestBody String[] loginData) throws IllegalAccessException, InstantiationException, InvocationTargetException {
     try{
         System.out.println("blblblblblblblb: " + loginData[0] + loginData[1]);
         jdbcTemplate = jdbcTemplate(loginData);
-        System.out.println(jdbcTemplate.getDataSource().getConnection().toString());
+        System.out.println(jdbcTemplate.getDataSource().getConnection());
         return "acces";
     }catch(Exception ex) {
         return ex.toString();

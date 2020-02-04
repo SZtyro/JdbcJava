@@ -7,12 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import pl.sztyro.Entities.Employee;
-
-import java.sql.ResultSet;
-import java.util.List;
-import java.util.Map;
 
 
 @SpringBootApplication
@@ -27,12 +21,6 @@ public class DataBaseApplication implements CommandLineRunner {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	@Autowired
-	private klasaBazy baza;
-
-
-	List<Employee> Employees;
-	List<Map<String,Object>>test;
 
 
 	@Override
