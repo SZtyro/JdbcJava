@@ -1,21 +1,52 @@
 package pl.sztyro.BazaDanych;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.DataSource;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 
+//@CrossOrigin(origins = "http://192.168.1.205:4200")
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class Controller{
 
+    @Autowired
+    private FileService fileService;
+
+    /*@Autowired
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
+    }*/
+
+    @PostMapping(value = "/uploadFiles")
+    @ResponseStatus(HttpStatus.OK)
+    public void handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
+        System.out.println("///////////////////////////////////////////////////////////");
+        System.out.println(file);
+        fileService.storeFile(file);
+    }
+
+    @RequestMapping("/getFiles")
+    public List<String> getFiles(){
+        List<String>fileNames = new ArrayList<String>();
+        for (File f : fileService.filesInFolder) {
+            fileNames.add(f.getName());
+        }
+        return fileNames;
+    }
 
 
     //@Bean
@@ -101,7 +132,9 @@ public class Controller{
 
     @RequestMapping("/delete")
     public void deleteRow(@RequestBody String[] info){
+        System.out.println("Delete from " + info[0] + " where " + info[1] + " = " +info[2]);
         jdbcTemplate.execute("Delete from " + info[0] + " where " + info[1] + " = " +info[2]);
+
     }
 
     @RequestMapping("/getTableNames")
