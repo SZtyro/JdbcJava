@@ -9,7 +9,7 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class Controller{
-
+    
     @RequestMapping("/login")
     public String login(@RequestBody String[] loginData) throws IllegalAccessException, InstantiationException, InvocationTargetException {
         // loginData[0] - url
