@@ -93,7 +93,7 @@ public class Controller {
 
     @RequestMapping("/getTable")
     public List<Map<String, Object>> getTable(@RequestBody String tableName) {
-        //return jdbcTemplate.queryForList("Select * from "+tableName);
+
         return null;
     }
 
