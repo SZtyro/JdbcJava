@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-//@CrossOrigin(origins = "http://192.168.1.205:4200")
 @CrossOrigin(origins = "*")
 @RestController
 public class Controller {
