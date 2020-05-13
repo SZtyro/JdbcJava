@@ -23,7 +23,7 @@ public class DataBaseApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-	//test gitlab branch
+	//test gitlab branch2
 
 	}
 }
