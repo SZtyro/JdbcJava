@@ -15,11 +15,12 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class Controller {
 
@@ -43,14 +44,16 @@ public class Controller {
     }
 
     JdbcTemplate getJdbcTemplate(String[] loginData) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        final String driverClassName = "oracle.jdbc.driver.OracleDriver";
+        // oracle final String driverClassName = "oracle.jdbc.driver.OracleDriver";
+        final String driverClassName = "com.mysql.cj.jdbc.Driver";
         //final String jdbcUrl = "jdbc:oracle:thin:@//155.158.112.45:1521/oltpstud";
-        final DataSource dataSource = DataSourceBuilder.create().driverClassName(driverClassName).url("jdbc:oracle:thin:@//" + loginData[0]).username(loginData[1]).password(loginData[2]).build();
+        // oracle final DataSource dataSource = DataSourceBuilder.create().driverClassName(driverClassName).url("jdbc:oracle:thin:@//" + loginData[0]).username(loginData[1]).password(loginData[2]).build();
+        final DataSource dataSource = DataSourceBuilder.create().driverClassName(driverClassName).url("jdbc:mysql://" + loginData[0] + "?serverTimezone=UTC").username(loginData[1]).password(loginData[2]).build();
 
         return new JdbcTemplate(dataSource);
     }
 
-    @RequestMapping("/sslogin")
+    @RequestMapping("/databaseLogin")
     public String login(@RequestBody String[] loginData) throws IllegalAccessException, InstantiationException, InvocationTargetException {
         try {
             jdbcTemplate = getJdbcTemplate(loginData);
@@ -65,15 +68,21 @@ public class Controller {
     @RequestMapping("/getForeignKeyColumns")
     public List<String> getForeignKeysColumns(@RequestBody String table) {
         RowMapper rowMapper = (ResultSet rs, int rowNum) -> rs.getString(1);
-        List<String> answer = jdbcTemplate.query("select column_name from user_cons_columns where table_name = " + table + "  and constraint_name in " +
-                "(select constraint_name from user_constraints where table_name = " + table + " and constraint_type = 'R' )", rowMapper);
+        // oracle String sql = "select column_name from user_cons_columns where table_name = " + table + "  and constraint_name in " +
+        //         "(select constraint_name from user_constraints where table_name = " + table + " and constraint_type = 'R' )";
+        String sql = "select COLUMN_NAME, CONSTRAINT_NAME, REFERENCED_COLUMN_NAME, REFERENCED_TABLE_NAME " +
+                "from information_schema.KEY_COLUMN_USAGE " +
+                "where TABLE_NAME = " + table + " AND REFERENCED_COLUMN_NAME is NOT null";
+
+
+        List<String> answer = jdbcTemplate.query(sql, rowMapper);
 
         return answer;
     }
 
     @RequestMapping("/getIdList")
     public List<String> getListOfIds(@RequestBody String[] table) {
-        String sql = "select column_name,table_name from user_cons_columns where constraint_name in " +
+        /*String sql = "select column_name,table_name from user_cons_columns where constraint_name in " +
                 "(SELECT r_constraint_name FROM user_constraints where  constraint_type in ('R','P') and constraint_name in " +
                 "(select constraint_name from user_cons_columns where column_name = '" + table[1] + "' and table_name = '" + table[0] + "'))";
 
@@ -85,16 +94,28 @@ public class Controller {
 
         };
         List<String[]> destinationTable = jdbcTemplate.query(sql, rowMapper);
-        String sql2 = "select " + destinationTable.get(0)[0] + " from " + destinationTable.get(0)[1];
-        RowMapper rowMapper2 = (ResultSet rs, int rowNum) -> rs.getString(1);
-        List<String> answer = jdbcTemplate.query(sql2, rowMapper2);
-        return answer;
+        String sql2 = "select " + destinationTable.get(0)[0] + " from " + destinationTable.get(0)[1];*/
+
+        String sql1 = "SELECT REFERENCED_COLUMN_NAME, REFERENCED_TABLE_NAME FROM information_schema.KEY_COLUMN_USAGE WHERE COLUMN_NAME = '" + table[1] + "' AND TABLE_NAME = '" + table[0] + "'";
+        RowMapper rowMapper2 = (ResultSet rs, int rowNum) -> {
+            String[] tab = new String[2];
+            tab[0] = rs.getString(1);
+            tab[1] = rs.getString(2);
+            return tab;
+        };
+
+        List<String[]> answer = jdbcTemplate.query(sql1, rowMapper2);
+        String sql2 = "SELECT " + answer.get(0)[0] + " from " + answer.get(0)[1];
+
+        RowMapper rowMapper3 = (ResultSet rs, int rowNum) -> rs.getString(1);
+        List<String> answer2 = jdbcTemplate.query(sql2, rowMapper3);
+        return answer2;
     }
 
     @RequestMapping("/getTable")
     public List<Map<String, Object>> getTable(@RequestBody String tableName) {
 
-        return null;
+        return jdbcTemplate.queryForList("Select * from " + tableName);
     }
 
     @RequestMapping("/execute")
@@ -105,7 +126,8 @@ public class Controller {
 
     @RequestMapping("/getDataType")
     public List<String> getDataType(@RequestBody String table) {
-        String sql = "select data_type from user_tab_columns where table_name = '" + table + "'";
+        //oracle String sql = "select data_type from user_tab_columns where table_name = '" + table + "'";
+        String sql = "SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" + table + "'";
         RowMapper rowMapper = (ResultSet rs, int rowNum) -> rs.getString(1);
         List<String> answer = jdbcTemplate.query(sql, rowMapper);
         return answer;
@@ -113,7 +135,8 @@ public class Controller {
 
     @RequestMapping("/getPrimaryKey")
     public List<String> getPrimaryKey(@RequestBody String tableName) {
-        String sql = "select column_name from user_cons_columns where constraint_name = (select constraint_name from user_constraints where table_name = '" + tableName + "' and constraint_type = 'P' and position = 1) ";
+        //oracle String sql = "select column_name from user_cons_columns where constraint_name = (select constraint_name from user_constraints where table_name = '" + tableName + "' and constraint_type = 'P' and position = 1) ";
+        String sql = "SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_NAME = '" + tableName + "' AND COLUMN_KEY = 'PRI'";
         RowMapper rowMapper = (ResultSet rs, int rowNum) -> rs.getString(1);
         List<String> answer = jdbcTemplate.query(sql, rowMapper);
         return answer;
@@ -127,8 +150,12 @@ public class Controller {
     }
 
     @RequestMapping("/getTableNames")
-    public List<String> getTableNames() {
-        String sql = "SELECT table_name FROM all_tables where owner = (select user from dual)";
+    public List<String> getTableNames() throws SQLException {
+        //Oracle
+        //String sql = "SELECT table_name FROM all_tables where owner = (select user from dual)";
+        //MySql
+
+        String sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'hurtownia'";
         RowMapper rowMapper = (ResultSet rs, int rowNum) -> rs.getString(1);
         List<String> answer = jdbcTemplate.query(sql, rowMapper);
         return answer;
@@ -165,7 +192,7 @@ public class Controller {
     }
 
     @GetMapping("/loginUser")
-    public String loginUser(@RequestHeader("Authorization") String token) {
+    public boolean loginUser(@RequestHeader("Authorization") String token) {
         String email = GService.verifyToken(token);
         User user = null;
         if (email != null) {
@@ -173,13 +200,16 @@ public class Controller {
                 user = hibernateService.getUserByMail(email);
             } catch (Exception e) {
                 System.out.println("nie ma uzytkownika");
+                return false;
             } finally {
                 if (user == null)
                     hibernateService.addUser(email, "DEMO");
+
+                return true;
             }
 
-            return "Dostep";
+
         } else
-            return "Token za stary";
+            return false;
     }
 }
