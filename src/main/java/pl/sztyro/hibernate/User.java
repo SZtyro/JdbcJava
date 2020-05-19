@@ -3,17 +3,28 @@ package pl.sztyro.hibernate;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 
 @Entity
-@Proxy(lazy=false)
+@Proxy(lazy = false)
 public class User {
 
     @Id
     private String mail;
     private String pack;
+    private String dashboard;
+
+
+    public String getDashboard() {
+        return dashboard;
+    }
+
+
+    public void setDashboard(String dashboard) {
+        this.dashboard = dashboard;
+    }
+
 
     public User() {
     }

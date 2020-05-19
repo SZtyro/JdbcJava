@@ -41,4 +41,39 @@ public class HibernateService {
             session.close();
         }
     }
+
+    public void updateDashboard(String mail, String dashboard) {
+        Session session = hibernateFactory.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            User user = (User)session.load(User.class, mail);
+            user.setDashboard(dashboard);
+            session.update(user);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            transaction.rollback();
+        } finally {
+            session.close();
+        }
+
+    }
+
+    public String getDashboard(String mail) {
+        Session session = hibernateFactory.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        String dashboard = "";
+        try {
+            User user = (User)session.load(User.class, mail);
+            dashboard = user.getDashboard();
+
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            transaction.rollback();
+        } finally {
+            session.close();
+        }
+        return dashboard;
+
+    }
+
 }

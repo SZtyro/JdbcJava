@@ -161,6 +161,15 @@ public class Controller {
         return answer;
     }
 
+    @PostMapping("/saveDashboard")
+    public void saveDashboard(@RequestBody String[] data) {
+        hibernateService.updateDashboard(data[0],data[1]);
+
+    }
+    @PostMapping("/loadDashboard")
+    public String loadDashboard(@RequestBody String mail) {
+        return hibernateService.getDashboard(mail);
+    }
 
     @RequestMapping("/aaa")
     public String tryLogin(@RequestHeader("Authorization") String token) {
