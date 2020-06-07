@@ -44,6 +44,7 @@ public class HibernateService {
 
     public void updateDashboard(String mail, String dashboard) {
         Session session = hibernateFactory.getSessionFactory().openSession();
+        System.out.println(dashboard);
         Transaction transaction = session.beginTransaction();
         try {
             User user = (User)session.load(User.class, mail);
