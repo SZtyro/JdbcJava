@@ -20,7 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://angularjdbc2.azurewebsites.net")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class Controller {
 
