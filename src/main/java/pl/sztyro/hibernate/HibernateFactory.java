@@ -13,9 +13,9 @@ public class HibernateFactory {
     private Configuration getHibernateConfig() {
         Configuration configuration = new Configuration();
         //configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/companyusers");
-        configuration.setProperty("hibernate.connection.url", "jdbc:mysql://nwta-db.mysql.database.azure.com/companyusers");
+        configuration.setProperty("hibernate.connection.url", "jdbc:mysql://sql.adammalota.nazwa.pl/adammalota_nwta");
         //configuration.setProperty("hibernate.connection.username", "root");
-        configuration.setProperty("hibernate.connection.username", "user@nwta-db");
+        configuration.setProperty("hibernate.connection.username", "adammalota_nwta");
         //configuration.setProperty("hibernate.connection.password", "");
         configuration.setProperty("hibernate.connection.password", "Nwta123$");
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL57Dialect");

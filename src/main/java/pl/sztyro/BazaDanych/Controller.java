@@ -49,7 +49,7 @@ public class Controller {
         final String driverClassName = "com.mysql.cj.jdbc.Driver";
         //final String jdbcUrl = "jdbc:oracle:thin:@//155.158.112.45:1521/oltpstud";
         // oracle final DataSource dataSource = DataSourceBuilder.create().driverClassName(driverClassName).url("jdbc:oracle:thin:@//" + loginData[0]).username(loginData[1]).password(loginData[2]).build();
-        final DataSource dataSource = DataSourceBuilder.create().driverClassName(driverClassName).url("jdbc:mysql://" + loginData[0] + "?serverTimezone=UTC").username(loginData[1]).password(loginData[2]).build();
+        final DataSource dataSource = DataSourceBuilder.create().driverClassName(driverClassName).url("jdbc:mysql://" + loginData[0] + "/" + loginData[1] + "?serverTimezone=UTC").username(loginData[2]).password(loginData[3]).build();
 
         return new JdbcTemplate(dataSource);
     }
@@ -150,13 +150,13 @@ public class Controller {
 
     }
 
-    @RequestMapping("/getTableNames")
-    public List<String> getTableNames() throws SQLException {
+    @PostMapping("/getTableNames")
+    public List<String> getTableNames(@RequestBody String dataBase) throws SQLException {
         //Oracle
         //String sql = "SELECT table_name FROM all_tables where owner = (select user from dual)";
         //MySql
 
-        String sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'hurtownia'";
+        String sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = '" + dataBase + "'";
         RowMapper rowMapper = (ResultSet rs, int rowNum) -> rs.getString(1);
         List<String> answer = jdbcTemplate.query(sql, rowMapper);
         return answer;
@@ -164,9 +164,10 @@ public class Controller {
 
     @PostMapping("/saveDashboard")
     public void saveDashboard(@RequestBody String[] data) {
-        hibernateService.updateDashboard(data[0],data[1]);
+        hibernateService.updateDashboard(data[0], data[1]);
 
     }
+
     @PostMapping("/loadDashboard")
     public String loadDashboard(@RequestBody String mail) {
         return hibernateService.getDashboard(mail);
