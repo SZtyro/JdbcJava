@@ -16,8 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-//@CrossOrigin(origins = "https://angularjdbc2.azurewebsites.net","")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://angularjdbc2.azurewebsites.net")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class Controller {
 
