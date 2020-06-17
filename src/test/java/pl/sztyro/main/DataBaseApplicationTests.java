@@ -1,4 +1,4 @@
-package pl.sztyro.BazaDanych;
+package pl.sztyro.main;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,3 +1,4 @@
+/*
 package pl.patryk.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,8 +16,10 @@ import javax.validation.constraints.Size;
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
         })
-public class User extends BaseEntity {
+        */
 
+//public class User extends BaseEntity {
+/*
     @NotBlank
     @Size(max = 20)
     private String username;
@@ -103,3 +106,4 @@ public class User extends BaseEntity {
     }
 }
 
+*/

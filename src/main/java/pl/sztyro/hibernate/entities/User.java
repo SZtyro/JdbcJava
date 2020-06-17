@@ -1,9 +1,8 @@
-package pl.sztyro.hibernate;
+package pl.sztyro.hibernate.entities;
 
 import org.hibernate.annotations.Proxy;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
@@ -14,7 +13,16 @@ public class User {
     private String mail;
     private String pack;
     private String dashboard;
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "databaseId")
+    private UserDatabase database;
 
+    public UserDatabase getDatabase() {
+        return database;
+    }
+    public void setUserDatabase(UserDatabase database) {
+        this.database = database;
+    }
 
     public String getDashboard() {
         return dashboard;
@@ -41,4 +49,6 @@ public class User {
     public void setMail(String mail) {
         this.mail = mail;
     }
+
+
 }

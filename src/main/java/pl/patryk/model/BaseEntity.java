@@ -1,3 +1,4 @@
+/*
 package pl.patryk.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -75,17 +76,21 @@ public abstract class BaseEntity {
         return name;
     }
 
-    /**
+    */
+/**
      * Sets createdAt before insert
-     */
+     *//*
+
     @PrePersist
     public void setCreationDate() {
         this.createdAt = new Date();
     }
 
-    /**
+    */
+/**
      * Sets updatedAt before update
-     */
+     *//*
+
     @PreUpdate
     public void setChangeDate() {
         this.updatedAt = new Date();
@@ -127,3 +132,4 @@ public abstract class BaseEntity {
         }
     }
 }
+*/

@@ -1,4 +1,4 @@
-package pl.sztyro.BazaDanych;
+package pl.sztyro.main.services;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
