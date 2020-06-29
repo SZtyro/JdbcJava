@@ -92,7 +92,7 @@ public class HibernateService {
         } catch (Exception ex) {
             transaction.rollback();
         } finally {
-            session.close();
+            //session.close();
         }
         return dashboard;
 
