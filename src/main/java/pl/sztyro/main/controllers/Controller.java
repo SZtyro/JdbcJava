@@ -16,8 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-@CrossOrigin(origins = "https://nwtafront.herokuapp.com")
-//@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "https://nwtafront.herokuapp.com")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class Controller {
 
@@ -141,6 +141,7 @@ public class Controller {
         /*Connection connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/hurtownia?user=root&password=&autoReconnect=false"
         );*/
+
         List<Map<String, Object>> answer = null;
         String sql = "Select * FROM " + tableName;
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -195,13 +196,13 @@ public class Controller {
     public List<String> getDataType(@RequestBody String table, @RequestHeader("Authorization") String token) throws SQLException {
         //oracle String sql = "select data_type from user_tab_columns where table_name = '" + table + "'";
         //jdbcTemplateObject.setDataSource(mainService.getDBSource(token));
-        String sql = "SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" + table + "'";
+        String sql = "SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" + table + "' order by ORDINAL_POSITION";
         Connection connection = mainService.prepareConnection(token);
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.execute();
         ResultSet resultSet = statement.getResultSet();
 
-        List<String> answer = new ArrayList<>();
+        List<String> answer = new LinkedList<>();
         while (resultSet.next()) {
             answer.add(resultSet.getString(1));
         }

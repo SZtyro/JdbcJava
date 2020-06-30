@@ -27,22 +27,22 @@ public class GoogleService {
                             "36592518046-t5s49f4c057do8ru7evf35dmb9tg1ur8.apps.googleusercontent.com"))
                     .build();
             GoogleIdToken idToken = verifier.verify(token);
-            System.out.println("weryfikacja: " + idToken.verify(verifier));
+            //System.out.println("weryfikacja: " + idToken.verify(verifier));
             if (idToken != null) {
                 GoogleIdToken.Payload payload = idToken.getPayload();
 
                 // Print user identifier
                 String userId = payload.getSubject();
-                System.out.println("User ID: " + userId);
+                //System.out.println("User ID: " + userId);
                 long issued = (long) payload.get("iat");
                 long expiration = (long) payload.get("exp");
 
 
-                System.out.println("Aktualna data: " + new Date().getTime()/1000);
+                /*System.out.println("Aktualna data: " + new Date().getTime()/1000);
                 System.out.println("issued: " + issued);
                 System.out.println("nadanie: " + new Date(issued * 1000));
                 System.out.println("zostalo: " + (new Date((expiration * 1000)-(new Date().getTime() )).getTime())  );
-                System.out.println("Wygasa: " + new Date((expiration)*1000) );
+                System.out.println("Wygasa: " + new Date((expiration)*1000) );*/
                 // Get profile information from payload
                 String email = payload.getEmail();
                 boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());

@@ -39,7 +39,7 @@ public class MainService {
                                 + "/" + database.getDatabase()
                                 + "?user=" + database.getLogin()
                                 + "&password=" + decodePassword(database.getPassword())
-                                + "&autoReconnect=true"
+
                 );
 
 
