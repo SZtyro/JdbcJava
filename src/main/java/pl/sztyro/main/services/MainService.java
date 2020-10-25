@@ -2,12 +2,9 @@ package pl.sztyro.main.services;
 
 import org.jasypt.util.text.AES256TextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.stereotype.Service;
-import pl.sztyro.hibernate.HibernateService;
-import pl.sztyro.hibernate.entities.UserDatabase;
+import pl.sztyro.main.model.Database;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -31,7 +28,8 @@ public class MainService {
         userMail = GService.verifyToken(token);
 
         if (userMail != null) {
-            UserDatabase database = hibernateService.getUserByMail(userMail).getDatabase();
+            //UserDatabase database = hibernateService.getUserByMail(userMail).getDatabase();
+            Database database = null;
             try {
                 return DriverManager.getConnection(
                         "jdbc:mysql://" + database.getUrl()

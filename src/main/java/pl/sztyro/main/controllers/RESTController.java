@@ -3,13 +3,11 @@ package pl.sztyro.main.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
-import pl.sztyro.hibernate.HibernateService;
-import pl.sztyro.hibernate.entities.User;
-import pl.sztyro.hibernate.entities.UserDatabase;
+import pl.sztyro.main.services.HibernateService;
+import pl.sztyro.main.model.Database;
 import pl.sztyro.main.services.GoogleService;
 import pl.sztyro.main.services.MainService;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,9 +15,9 @@ import java.sql.SQLException;
 import java.util.*;
 
 //@CrossOrigin(origins = "https://nwtafront.herokuapp.com")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://localhost:4200")
 @RestController
-public class Controller {
+public class RESTController {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -30,8 +28,8 @@ public class Controller {
     @Autowired
     HibernateService hibernateService;
 
-    @RequestMapping("/databaseLogin")
-    public String login(@RequestBody String[] loginData, @RequestHeader("Authorization") String token) throws IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
+    /*@PostMapping("/databaseLogin")
+    public Object login(@RequestBody String[] loginData, @RequestHeader("Authorization") String token) throws IllegalAccessException, InstantiationException, InvocationTargetException, SQLException {
 
         try {
             //BEZPIECZENSTWO///////////////////////////////////////////////////////////////////////////////////////
@@ -48,9 +46,26 @@ public class Controller {
 
             } else {
                 System.out.println("Mail is empty!");
-            }
 
-            return "acces";
+            }
+            UserDatabase database = hibernateService.getUserByMail(userMail).getDatabase();
+            String sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = '" + database.getDatabase() + "'";
+
+
+            Connection connection = mainService.prepareConnection(token);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.execute();
+            ResultSet resultSet = statement.getResultSet();
+            List<String> answer = new ArrayList<>();
+            while (resultSet.next()) {
+                answer.add(resultSet.getString(1));
+            }
+            resultSet.close();
+            statement.close();
+
+            connection.close();
+
+            return answer;
 
         } catch (Exception ex) {
             return ex.toString();
@@ -59,9 +74,9 @@ public class Controller {
         }
 
     }
+*/
 
-
-    @GetMapping("/databases")
+    /*@GetMapping("/databases")
     public String isConnectedToDb(@RequestHeader("Authorization") String token) throws SQLException {
 
         try {
@@ -74,7 +89,7 @@ public class Controller {
             return null;
         }
     }
-
+*/
 
     @RequestMapping("/getForeignKeyColumns")
     public List<String> getForeignKeysColumns(@RequestBody String table, @RequestHeader("Authorization") String token) throws SQLException {
@@ -252,25 +267,25 @@ public class Controller {
     //@Qualifier("jdbcCustom")
     //private JdbcTemplate jdbcTemplateObject;
 
-    @GetMapping("/getTableNames")
+    /**
+     *
+     * @param token
+     * @return
+     * @throws SQLException
+     */
+    /*@GetMapping("/getTableNames")
     public List<String> getTableNames(@RequestHeader("Authorization") String token) throws SQLException {
         //Oracle
         //String sql = "SELECT table_name FROM all_tables where owner = (select user from dual)";
         //MySql
         //JdbcTemplate template = null;
         try {
-            UserDatabase database = hibernateService.getUserByMail(GService.verifyToken(token)).getDatabase();
-            //System.out.println(mainService.decodePassword(database.getPassword()));
-            //System.out.println(jdbcTemplate.getDataSource().getConnection());
-            //jdbcTemplateObject = mainService.getTemplate(token);
-
-            //jdbcTemplateObject.setDataSource(mainService.getDBSource(token));
-
-            String sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = '" + database.getDatabase() + "'";
+            //UserDatabase database = hibernateService.getUserByMail(GService.verifyToken(token)).getDatabase();
+            //String sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = '" + database.getDatabase() + "'";
 
 
             Connection connection = mainService.prepareConnection(token);
-            PreparedStatement statement = connection.prepareStatement(sql);
+            //PreparedStatement statement = connection.prepareStatement(sql);
             statement.execute();
             ResultSet resultSet = statement.getResultSet();
             List<String> answer = new ArrayList<>();
@@ -287,17 +302,7 @@ public class Controller {
             System.out.println(e);
             return null;
         }
-    }
-
-    @PostMapping("/saveDashboard")
-    public void saveDashboard(@RequestBody String dashboard, @RequestHeader("Authorization") String token) {
-        hibernateService.updateDashboard(GService.verifyToken(token), dashboard);
-    }
-
-    @GetMapping("/loadDashboard")
-    public String loadDashboard(@RequestHeader("Authorization") String token) {
-        return hibernateService.getDashboard(GService.verifyToken(token));
-    }
+    }*/
 
     @RequestMapping("/aaa")
     public String tryLogin(@RequestHeader("Authorization") String token) {
@@ -326,19 +331,20 @@ public class Controller {
         return "ttt completed";
     }
 
-    @GetMapping("/loginUser")
+    /*@GetMapping("/loginUser")
     public boolean loginUser(@RequestHeader("Authorization") String token) {
         String email = GService.verifyToken(token);
+        System.out.println(email);
         User user = null;
         if (email != null) {
             try {
-                user = hibernateService.getUserByMail(email);
+                //user = hibernateService.getUserByMail(email);
             } catch (Exception e) {
                 System.out.println("nie ma uzytkownika");
                 return false;
             } finally {
                 if (user == null)
-                    hibernateService.addUser(email, "DEMO");
+                    //hibernateService.addUser(email, "DEMO");
 
                 return true;
             }
@@ -346,5 +352,25 @@ public class Controller {
 
         } else
             return false;
+    }*/
+
+    @GetMapping("/currentDatabase")
+    public Object getCurrentDatabase(@RequestHeader("Authorization") String token){
+        //UserDatabase db = hibernateService.getUserByMail(GService.verifyToken(token)).getDatabase();
+        Database db = null;
+        Map<String,String> answer = new LinkedHashMap<>();
+        answer.put("url",db.getUrl());
+        answer.put("user",db.getLogin());
+        answer.put("port",db.getPort());
+        answer.put("database",db.getDatabase());
+        return answer;
+    }
+
+    @GetMapping("/randomNumber")
+    public Object getRandomNumber(){
+        Map<String,Object> answer = new LinkedHashMap<>();
+        answer.put("value", Math.random());
+        answer.put("time", new Date().getTime() );
+        return answer;
     }
 }

@@ -1,4 +1,4 @@
-package pl.sztyro.hibernate.entities;
+package pl.sztyro.main.model;
 
 import org.hibernate.annotations.Proxy;
 
@@ -7,24 +7,26 @@ import javax.persistence.*;
 @Entity
 @Proxy(lazy = false)
 @Table(name = "UserDatabase")
-public class UserDatabase {
+public class Database {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "database_id")
     private int databaseId;
-    @Column(name = "DB_url")
+    @Column(name = "database_host")
     private String url;
-    @Column(name = "DB_port")
+    @Column(name = "database_port")
     private String port;
-    @Column(name = "DB_database")
+    @Column(name = "database_name")
     private String database;
-    @Column(name = "DB_login")
+    @Column(name = "database_login")
     private String login;
-    @Column(name = "DB_password")
+    @Column(name = "database_password")
     private String password;
 
-    public UserDatabase(){}
+    public Database(){}
 
-    public UserDatabase(String url, String port, String database, String login, String password) {
+    public Database(String url, String port, String database, String login, String password) {
         this.url = url;
         this.port = port;
         this.database = database;
@@ -44,7 +46,7 @@ public class UserDatabase {
                 '}';
     }
 
-    public UserDatabase(int id, String url, String port, String database, String login, String password) {
+    public Database(int id, String url, String port, String database, String login, String password) {
         this.databaseId = id;
         this.url = url;
         this.port = port;

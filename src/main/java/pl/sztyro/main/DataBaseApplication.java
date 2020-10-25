@@ -1,6 +1,7 @@
 package pl.sztyro.main;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -12,10 +13,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 //@EnableEncryptableProperties
 @SpringBootApplication
-@ComponentScan(basePackages = {"pl.sztyro.hibernate", "pl.sztyro.main"})
-@EntityScan("pl.sztyro.hibernate")
+//@EntityScan("pl.sztyro.hibernate")
 public class DataBaseApplication implements CommandLineRunner {
 
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DataBaseApplication.class, args);

@@ -1,28 +1,29 @@
-package pl.sztyro.hibernate;
+package pl.sztyro.main.services;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.jasypt.util.text.AES256TextEncryptor;
 import org.springframework.stereotype.Service;
-import pl.sztyro.hibernate.entities.User;
-import pl.sztyro.hibernate.entities.UserDatabase;
+import pl.sztyro.main.controllers.HibernateConf;
+import pl.sztyro.main.model.User;
+import pl.sztyro.main.model.Database;
 
 
 @Service
 public class HibernateService {
 
-    private HibernateFactory hibernateFactory;
+    private HibernateConf hibernateFactory;
     private Session session;
     private SessionFactory factory;
 
     public HibernateService() {
-        hibernateFactory = new HibernateFactory();
+        //hibernateFactory = new HibernateFactory();
         //factory = hibernateFactory.getSessionFactory();
         //session = factory.openSession();
     }
 
-    public User getUserByMail(String mail) {
+    /*public User getUserByMail(String mail) {
         Session session = hibernateFactory.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -43,11 +44,11 @@ public class HibernateService {
     public void addUser(String mail, String pack) {
         Session session = hibernateFactory.getSessionFactory().openSession();
 
-        /*try {
+        *//*try {
             session = factory.getCurrentSession();
         } catch (Exception e) {
             session = factory.openSession();
-        }*/
+        }*//*
         Transaction transaction = session.beginTransaction();
         try {
             session.save(new User(mail, pack));
@@ -57,46 +58,10 @@ public class HibernateService {
         } finally {
             session.close();
         }
-    }
-
-    public void updateDashboard(String mail, String dashboard) {
-        Session session = hibernateFactory.getSessionFactory().openSession();
-
-        System.out.println(dashboard);
-        Transaction transaction = session.beginTransaction();
-        try {
-            User user = (User) session.load(User.class, mail);
-            user.setDashboard(dashboard);
-            session.update(user);
-            session.getTransaction().commit();
-        } catch (Exception ex) {
-            transaction.rollback();
-        } finally {
-            session.close();
-        }
-
-    }
-
-    public String getDashboard(String mail) {
-        Session session = hibernateFactory.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        String dashboard = "";
-        try {
-            User user = (User) session.load(User.class, mail);
-            dashboard = user.getDashboard();
-
-            session.getTransaction().commit();
-        } catch (Exception ex) {
-            transaction.rollback();
-        } finally {
-            session.close();
-        }
-        return dashboard;
-
-    }
+    }*/
 
     public User setDatabase(int id, String mail, String url, String port, String database, String login, String password) {
-        Session session = hibernateFactory.getSessionFactory().openSession();
+        //Session session = hibernateFactory.getSessionFactory().openSession();
 
         Transaction transaction = session.beginTransaction();
         User user = null;
@@ -108,7 +73,7 @@ public class HibernateService {
             System.out.println("zaszyfrowane haslo: " + encryptedPassword);
             System.out.println("odszyfrowane haslo: " + textEncryptor.decrypt(encryptedPassword));
             if (id >= 0) {
-                UserDatabase base = session.load(UserDatabase.class, id);
+                Database base = session.load(Database.class, id);
                 base.setUrl(url);
                 base.setPort(port);
                 base.setDatabase(database);
@@ -116,7 +81,7 @@ public class HibernateService {
                 base.setPassword(encryptedPassword);
                 //user.setUserDatabase(new UserDatabase(id,url,port,database,login,encryptedText));
             } else
-                user.setUserDatabase(new UserDatabase(url, port, database, login, encryptedPassword));
+                user.setUserDatabase(new Database(url, port, database, login, encryptedPassword));
 
             session.getTransaction().commit();
         } catch (Exception ex) {

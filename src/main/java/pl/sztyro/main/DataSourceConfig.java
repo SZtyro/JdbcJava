@@ -11,8 +11,8 @@ import javax.sql.DataSource;
 
 @Configuration
 public class DataSourceConfig {
-    @Bean(name = "dsCustom")
-    public DataSource dataSource() {
+    //@Bean(name = "dsCustom")
+    /*public DataSource dataSource() {
         return DataSourceBuilder
                 .create()
                 .username("root")
@@ -21,17 +21,17 @@ public class DataSourceConfig {
                 .driverClassName("com.mysql.cj.jdbc.Driver")
                 .build();
 
-        /*.create()
+        *//*.create()
                 .username("rfamro")
                 .password("")
                 .url("jdbc:mysql://mysql-rfam-public.ebi.ac.uk:4497/Rfam")
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .build();*/
+                .build();*//*
     }
 
     @Bean(name = "jdbcCustom")
     @Autowired
     public JdbcTemplate jdbcTemplate(@Qualifier("dsCustom") DataSource dsCustom) {
         return new JdbcTemplate(dsCustom);
-    }
+    }*/
 }
