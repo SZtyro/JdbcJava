@@ -1,0 +1,78 @@
+table {
+  width: 90%;
+  margin: auto;
+}
+
+.test {
+  width: 90%;
+  margin: auto;
+}
+
+.a {
+  font-size: 8vw;
+  margin: auto;
+  width: 90%;
+  margin-bottom: 0px;
+}
+
+.rows button {
+  visibility: hidden;
+}
+.rows:hover button {
+  visibility: visible;
+}
+.lightSwitch {
+  display: block;
+  float: right;
+  height: 100%;
+}
+button {
+  background-color: rgb(34, 34, 34);
+  border-radius: 2px;
+  color: white;
+  margin: 0;
+  font-size: 10px;
+}
+
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: #f5f5f5;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+.material-icons{
+  font-size: 20px;
+}

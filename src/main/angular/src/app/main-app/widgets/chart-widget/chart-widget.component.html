@@ -1,0 +1,26 @@
+<gridster-item GridElem id="item" [item]="this" #mainScreen>
+
+    <div *ngIf="shared.editGrid == true"
+        style="font-weight: 600; text-align: center;display: flex; justify-content: space-between;">
+        <button mat-raised-button color="primary" (click)="openDialog()">Edit</button>
+        <button mat-raised-button color="primary" (click)="toSave()">Save</button>
+
+        <button mat-raised-button color="warn" (click)="delete()">Delete</button>
+    </div>
+    <!-- 
+    <mat-divider style="margin: 10px;"></mat-divider> -->
+
+    <!-- <google-chart [width]="width" [height]="height" [type]="myType" [data]="myData" [columnNames]="colss" #chart>
+    </google-chart> -->
+    <div *ngIf="chartData != null">
+        <div *ngIf="chartData.showTitle" style="text-align: center;">
+            <h3>{{chartData.chartTitle}}</h3>
+        </div>
+    </div>
+
+    <div #chart>
+
+    </div>
+
+
+</gridster-item>

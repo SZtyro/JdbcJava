@@ -1,0 +1,131 @@
+<div style="height:100vh; font-family: Roboto, 'Helvetica Neue', sans-serif; ">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: fixed !important; width: 100%; z-index: 99999; background-color: #343a40c9 !important;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item text-center">
+          <button class="nav-link" (click)="scrollToElement(aboutApp)" mat-button style="color: whitesmoke; outline: 0;">About app</button>
+        </li>
+        <li class="nav-item text-center">
+          <button class="nav-link" (click)="scrollToElement(pricing)" mat-button style="color: whitesmoke; outline: 0;">Pricing</button>
+        </li>
+        <li class="nav-item text-center">
+          <button class="nav-link" (click)="scrollToElement(aboutUs)" mat-button style="color: whitesmoke; outline: 0;">About us</button>
+        </li>
+      </ul>
+
+
+      <span class="navbar-text" style="float: right;">
+        <!-- <button (click)="tryLogin()" mat-raised-button style="color: whitesmoke; outline: 0;">About us</button>
+        <a href="http://localhost:8080/login"><button  mat-raised-button style="color: whitesmoke; outline: 0;" color="primary">log</button></a>
+        <button (click)="tryLogin()" mat-raised-button style="color: whitesmoke; outline: 0;"color="primary">trrylogin</button> -->
+          <button mat-button [matMenuTriggerFor]="langMenu"
+                  style=" color: whitesmoke;  outline: 0;">{{translate.currentLang | uppercase }}</button>
+          <mat-menu #langMenu="matMenu">
+            <button mat-menu-item *ngFor="let lang of translate.getLangs()"
+                    (click)="translate.use(lang)">{{lang | uppercase}}</button>
+          </mat-menu>
+
+          <div *ngIf="isSignedIn ;else signInBlock">
+            <a routerLink="home" style="color: inherit;"><button mat-button>Home</button></a>
+            <button mat-button (click)="auth.signOut()">Log out</button>
+            <img src="{{userPhoto}}" style="border-radius: 4px;max-height: 36px">
+          </div>
+          <ng-template #signInBlock>
+            <button mat-raised-button style=" background-color: #EA4335;"
+                    (click)="auth.signIn()">{{'WELCOME_PAGE.GOOGLE_LOGIN'| translate}}</button>
+          </ng-template>
+        </span>
+    </div>
+  </nav>
+
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
+    style="height: 100vh;overflow: hidden;">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      </ol>
+
+    <div class="carousel-inner">
+
+      <div class="carousel-item active ">
+        <div class="container" style="color: whitesmoke;">
+          <div class="row">
+            <div class="col-6" style="top:300px; position: absolute;z-index: 10">
+              <h1 style="font-size: 50px; font-weight: 600; ">{{'WELCOME_PAGE.SLIDE_1.HEADER' | translate}}</h1>
+              <p>{{'WELCOME_PAGE.SLIDE_1.TEXT' | translate}}</p>
+            </div>
+          </div>
+
+
+        </div>
+        <img src="assets/images/boss.jpg" class="d-block" class="carouselImg">
+
+      </div>
+
+
+      <div class="carousel-item">
+        <div style="color: whitesmoke;">
+          <div class="container">
+            <div class="row">
+              <div class="col-6" style="top:300px; position: absolute;z-index: 10">
+                <h1 style="font-size: 50px; font-weight: 600; ">{{'WELCOME_PAGE.SLIDE_2.HEADER' | translate}}</h1>
+                <p>{{'WELCOME_PAGE.SLIDE_2.TEXT' | translate}}</p>
+              </div>
+            </div>
+          </div>
+          <img src="assets/images/teamwork.jpg" class="d-block " class="carouselImg">
+        </div>
+      </div>
+    </div>
+
+
+
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+</div>
+<div #aboutApp class="textBlock">
+  <h1 style="font-weight: 700;">About app</h1>
+  <br>
+  <p>
+    {{'WELCOME_PAGE.ABOUT_APP'| translate}}
+  </p>
+</div>
+<div #pricing class="textBlock">
+  <h1 style="font-weight: 700;">Pricing</h1>
+  <div>
+    <div class="col-md-4 accountType">
+      <div id="bronze">Bronze</div>
+    </div>
+    <div class="col-md-4 accountType">
+      <div id="silver">Silver</div>
+    </div>
+    <div class="col-md-4 accountType">
+      <div id="gold">Gold</div>
+    </div>
+  </div>
+</div>
+<div #aboutUs class="textBlock">
+  <h1 style="font-weight: 700;">About us</h1>
+  <p>
+    {{'WELCOME_PAGE.ABOUT_US'| translate}}
+  </p>
+</div>
+<!--
+<button id="googleBtn">Google</button>
+<button (click)="auth.signIn()">login</button>
+<button (click)="aaa()">Zwykly get zwracajacy aaa</button>
+<button (click)="ttt()">Zwykly get zwracajacy ttt</button>
+<button (click)="auth.validate()">Validate</button>
+<button (click)="auth.signOut()">SignOut</button> -->

@@ -321,11 +321,11 @@ public class RESTController {
         return "token is: " + token;
     }
 
-    @GetMapping("/")
+    /*@GetMapping("/")
     public String welcome() {
         return "app working";
     }
-
+*/
     @GetMapping("/ttt")
     public String test() {
         return "ttt completed";

@@ -1,0 +1,17 @@
+<mat-sidenav-container>
+
+
+</mat-sidenav-container>
+<div style="display: flex;height: 100vh; " >
+        <!-- <button (click)="auth.signOut()">signout</button> -->
+       <!-- <button (click)="auth.sendToken()">Send token</button> -->
+        <gridster [options]="options" style="overflow: initial; background-color:unset;">
+
+                <app-widget-loader  *ngFor="let item of items, let i = index" [type]="item" [index]="i"></app-widget-loader>
+
+
+
+        </gridster>
+
+       
+</div>

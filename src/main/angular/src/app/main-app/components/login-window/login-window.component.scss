@@ -1,0 +1,29 @@
+.editButton {
+  float: right;
+  height: 120px;
+  border: none;
+  justify-content: flex-end;
+  background-color: rgb(14, 195, 250);
+  width: 70px;
+  outline: none;
+}
+
+.database {
+  flex-direction: column;
+  margin: 10px;
+  width: 300px;
+  border-left: 5px rgb(34, 34, 34) solid;
+  box-shadow: 0px 2px 5px;
+  display: flex;
+}
+
+.tableButton {
+  box-shadow: 0px 2px 5px;
+  //width: 200px;
+  height: 60px;
+  width: 100%;
+  border: none;
+  border-left: solid rgb(34, 34, 34);
+  outline: none;
+  background-color: white;
+}

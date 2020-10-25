@@ -1,0 +1,61 @@
+<div *ngFor="let item of father.keys let i = index">
+    <div *ngIf="item != father.primaryKeyColumn || father.foreignKeyColumns.includes(item)">
+        <!--<label>{{item}}</label>-->
+
+        <!--DROPDOWN SECTION-->
+        <div *ngIf="father.foreignKeyColumns.includes(item); else notDropdownBlock">
+
+
+
+            <mat-form-field style="border: 0px;width: 100%;">
+
+                <mat-select placeholder="{{item}}" (click)='father.getAvaiableRows([father.tableName,father.keys[i]])'
+                    [(ngModel)]="father.newRowContainer[i]">
+
+                    <mat-option *ngFor="let foreignKey of father.foreignKeyElems"
+                        (click)="father.newRowContainer[i]=foreignKey">{{foreignKey}}
+                    </mat-option>
+                </mat-select>
+                <div style="padding-top: 7px;">
+                    {{father.newRowContainer[i]}}
+                </div>
+
+
+            </mat-form-field>
+
+
+        </div>
+        <!--DATE SECTION-->
+        <ng-template #notDropdownBlock>
+            <div *ngIf="father.type[i]=='DATE';else notDateBlock">
+
+                <mat-form-field >
+                    <input matInput [matDatepicker]="picker" placeholder="{{item}}"
+                        [(ngModel)]="date[i].value" disabled (dateInput)="saveDate(i, $event)" >
+                    <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                    <mat-datepicker #picker disabled="false" ></mat-datepicker>
+                </mat-form-field>
+
+
+
+            </div>
+            <!--DEFAULT SECTION-->
+            <ng-template #notDateBlock>
+                <mat-form-field style="width: 100%;">
+                    <input matInput (keyup)="father.inputToContainer(i,$event)" placeholder="{{item}}"
+                        [(value)]="father.newRowContainer[i]">
+                </mat-form-field>
+            </ng-template>
+
+
+
+        </ng-template>
+    </div>
+</div>
+<div [hidden]="father.allertHidden" style="background-color: rgb(212, 67, 67); border-radius: 3px;padding:5px;">
+    {{messageToUser}}
+</div>
+<div mat-dialog-actions style="float: right;">
+    <button mat-button style="background-color:rgb(212, 67, 67);" (click)="closeDialog()">Cancel</button>
+    <button mat-button style="background-color:rgb(67, 212, 127);" (click)="updateElem(index)">Update!</button>
+</div>
