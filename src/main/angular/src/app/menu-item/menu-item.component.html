@@ -1,0 +1,38 @@
+<div *ngFor="let item of menuItems" [style.background]="'rgb(0,0,0,'+ opacity +')'" style="line-height: 45px;">
+  <a [routerLink]="item.routerLink" (click)="mouseEnter(item)">
+    <button mat-button [style.marginLeft.px]="offset">
+
+      <div class="item-content-wrapper">
+        <span style="display: flex;align-items: center;">
+          <span class="material-icons">
+            {{item.icon}}
+          </span>
+          <span *ngIf="isTitleVisible">
+            {{item.menuTitle |translate}}
+          </span>
+        </span>
+
+        <span *ngIf="item.childs != null && item.childs.length > 0 && isTitleVisible"
+          style="display: flex;align-items: center;">
+          <span *ngIf="item.isOpen;else less" class="material-icons">
+            expand_more
+          </span>
+          <ng-template #less>
+            <span class="material-icons">
+              expand_less
+            </span>
+          </ng-template>
+        </span>
+      </div>
+
+    </button>
+  </a>
+
+  <div [@openClose]="item.isOpen ? 'open' : 'closed'">
+    <app-menu-item [menuItems]="item.childs" [offset]="offset + 10" [isTitleVisible]="true" [opacity]="opacity + 0.09"
+      [parent]="this">
+    </app-menu-item>
+  </div>
+
+
+</div>

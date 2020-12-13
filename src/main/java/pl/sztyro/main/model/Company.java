@@ -32,6 +32,10 @@ public class Company {
     @OneToMany
     private List<Institution> institution;
 
+    @Column(name = "company_news")
+    @OneToMany
+    private List<Institution> news;
+
 
 
 

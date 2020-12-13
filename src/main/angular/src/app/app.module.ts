@@ -39,10 +39,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WidgetListModalComponent } from './main-app/modals/widget-list-modal/widget-list-modal.component';
 import { WelcomeModule } from './welcome/welcome.module';
-import { AuthService } from './services/Auth/auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ChartComponentComponent } from './chart-component/chart-component.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { MenuItemComponent } from './menu-item/menu-item.component';
 
 
 
@@ -76,7 +76,8 @@ export function provideConfig() {
     LoginWindowComponent,
     ChartSettingsModalComponent,
     WidgetListModalComponent,
-    ChartComponentComponent
+    ChartComponentComponent,
+    MenuItemComponent
 
   ],
   imports: [
@@ -134,7 +135,6 @@ export function provideConfig() {
     ChartSettingsModalComponent
   ],
   providers: [
-    AuthService
 
   ],
   bootstrap: [AppComponent]

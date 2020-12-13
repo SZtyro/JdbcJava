@@ -1,13 +1,20 @@
 package pl.sztyro.main.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
-import pl.sztyro.main.services.HibernateService;
+import org.springframework.web.server.ResponseStatusException;
 import pl.sztyro.main.model.Database;
 import pl.sztyro.main.services.GoogleService;
+import pl.sztyro.main.services.HibernateService;
 import pl.sztyro.main.services.MainService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.security.Principal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -167,7 +174,7 @@ public class RESTController {
             int columnCount = resultSet.getMetaData().getColumnCount();
             while (resultSet.next()) {
                 Map<String, Object> map = new LinkedHashMap<>();
-                    System.out.println(resultSet.getMetaData().getColumnName(1) + " " + resultSet.getObject(1));
+                System.out.println(resultSet.getMetaData().getColumnName(1) + " " + resultSet.getObject(1));
                 for (int i = 1; i <= columnCount; i++) {
 
 
@@ -188,7 +195,6 @@ public class RESTController {
         } finally {
 
         }
-
 
 
     }
@@ -268,7 +274,6 @@ public class RESTController {
     //private JdbcTemplate jdbcTemplateObject;
 
     /**
-     *
      * @param token
      * @return
      * @throws SQLException
@@ -303,7 +308,6 @@ public class RESTController {
             return null;
         }
     }*/
-
     @RequestMapping("/aaa")
     public String tryLogin(@RequestHeader("Authorization") String token) {
         //jwt.validateJwtToken(session);
@@ -331,6 +335,10 @@ public class RESTController {
         return "ttt completed";
     }
 
+
+
+
+
     /*@GetMapping("/loginUser")
     public boolean loginUser(@RequestHeader("Authorization") String token) {
         String email = GService.verifyToken(token);
@@ -355,22 +363,28 @@ public class RESTController {
     }*/
 
     @GetMapping("/currentDatabase")
-    public Object getCurrentDatabase(@RequestHeader("Authorization") String token){
+    public Object getCurrentDatabase(@RequestHeader("Authorization") String token) {
         //UserDatabase db = hibernateService.getUserByMail(GService.verifyToken(token)).getDatabase();
         Database db = null;
-        Map<String,String> answer = new LinkedHashMap<>();
-        answer.put("url",db.getUrl());
-        answer.put("user",db.getLogin());
-        answer.put("port",db.getPort());
-        answer.put("database",db.getDatabase());
+        Map<String, String> answer = new LinkedHashMap<>();
+        answer.put("url", db.getUrl());
+        answer.put("user", db.getLogin());
+        answer.put("port", db.getPort());
+        answer.put("database", db.getDatabase());
         return answer;
     }
 
     @GetMapping("/randomNumber")
-    public Object getRandomNumber(){
-        Map<String,Object> answer = new LinkedHashMap<>();
+    public Object getRandomNumber() {
+        Map<String, Object> answer = new LinkedHashMap<>();
         answer.put("value", Math.random());
-        answer.put("time", new Date().getTime() );
+        answer.put("time", new Date().getTime());
         return answer;
+    }
+
+    @RequestMapping("/login")
+    public Object redirect(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect("/home");
+        return null;
     }
 }

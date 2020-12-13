@@ -17,3 +17,6 @@ body {
     display: flex;
 }
 
+a{
+  color:white !important;
+}

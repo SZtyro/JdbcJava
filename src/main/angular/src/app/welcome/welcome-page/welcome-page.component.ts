@@ -1,7 +1,6 @@
 import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/http-client.service';
-import { AuthService } from 'src/app/services/Auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { SharedService } from 'src/app/services/Shared/shared.service';
@@ -14,14 +13,11 @@ import { SharedService } from 'src/app/services/Shared/shared.service';
 })
 export class WelcomePageComponent implements OnInit, OnDestroy {
 
-  //isSignedIn: boolean = false;
-  isSignedIn: boolean;
-  userPhoto;
+  user;
 
   constructor(
     private router: Router,
     private http: HttpClientService,
-    public auth: AuthService,
     public translate: TranslateService,
     public shared: SharedService
   ) {
@@ -38,16 +34,18 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     //window.addEventListener('scroll', this.scrollFunction, true);
     this.shared.setShowNavBar(false);
-    await this.auth.checkIfUserLogged().then(isLogged => {
-        this.auth.isSigned.subscribe((isSigned)=> {
-          this.isSignedIn = isSigned;
-          if (isSigned) {
-            this.userPhoto = this.auth.user.getBasicProfile().getImageUrl();  
-          }
-        })
-      
-      
-    })
+
+    this.http.getUser().subscribe(
+      user => {
+        this.user = user;
+        console.log(user)
+      },
+      err => {
+        this.user = null;
+        console.log(err)
+
+      }
+    )
 
     console.log('welcome')
   }

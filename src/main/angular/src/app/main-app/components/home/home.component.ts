@@ -7,8 +7,6 @@ import { ChartWidgetComponent } from '../../widgets/chart-widget/chart-widget.co
 import { ScriptLoaderService } from 'angular-google-charts';
 import { HomeWidget } from '../../interfaces/homeWidget';
 import { SharedService } from '../../../services/Shared/shared.service';
-import { trigger, state, transition, animate, style } from '@angular/animations';
-import { AuthService } from 'src/app/services/Auth/auth.service';
 
 export interface item {
   typeName: string,
@@ -79,22 +77,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private httpClientService: HttpClientService,
     private router: Router,
-    private shared: SharedService,
-    private auth: AuthService
+    private shared: SharedService
   ) {
-    // try{
-    //   if(!auth.isSignedIn())
-    //   this.auth.signIn();
-    // }catch(Excepiton){
-    //   router.navigate([''])
-    // }
 
-    // this.auth.getUserData().subscribe((data)=>{
-    //   //auth.getAuthInstance().current;
-    //   //console.log(auth.getAuthInstance().isSignedIn.ie);
-
-
-    // })
     shared.homeRef = this;
     //this.items = [GmailWidgetComponent]
     this.items = [];
@@ -130,22 +115,7 @@ export class HomeComponent implements OnInit {
 
   loadWidgets() {
     this.items = [];
-    //let acc = [];
-    //this.items = JSON.parse(localStorage.getItem('desktopWidgets'));
-    console.log()
-    var userMail;
-    this.auth.getCurrentUser().then(user => {
-      userMail = user.getBasicProfile().getEmail();
-      this.httpClientService.getDashboard().subscribe((dashboard) => {
-        try {
-          this.items = JSON.parse(dashboard);
-        } catch{
 
-        }
-
-
-      })
-    })
 
   }
   save() {
@@ -159,13 +129,8 @@ export class HomeComponent implements OnInit {
 
       elem.componentRef = null;
     })
-    let jsonStorage = JSON.stringify(this.items);
-    let mail;
-    this.auth.getCurrentUser().then(user => {
-      mail = user.getBasicProfile().getEmail();
-      console.log(mail)
-      this.httpClientService.setDashboard(jsonStorage).subscribe((d) => { console.log(d) });
-    });
+
+
 
     console.log("Storage save")
 

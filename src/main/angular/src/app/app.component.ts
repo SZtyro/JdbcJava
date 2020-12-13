@@ -7,9 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { WidgetListModalComponent } from './main-app/modals/widget-list-modal/widget-list-modal.component';
 import { MatDialog } from '@angular/material';
 import { SharedService } from './services/Shared/shared.service';
-import { AuthService } from './services/Auth/auth.service';
 import { Observable } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { FunctionBase } from './modules/functionModules/functionBase';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +35,40 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class AppComponent implements OnInit, AfterContentInit {
 
-  title = 'AngularJDBC';
+  menuItems: FunctionBase[] = [
+    { icon: 'home', menuTitle: 'NAVBAR.HOME', routerLink: 'home' },
+    {
+      icon: 'storage', menuTitle: 'Database', routerLink: 'databases', childs: [
+        {
+          icon: 'settings', menuTitle: 'Settings', routerLink: 'databases', childs: []
+        },
+        { icon: 'table_rows', menuTitle: 'Tables', routerLink: 'databases', childs: [] }
+      ]
+    },
+    {
+      icon: 'email', menuTitle: 'E-mail', routerLink: 'mail', childs: []
+    },
+    {
+      icon: 'business', menuTitle: 'Company', routerLink: 'mail', childs: [
+        { icon: 'store', menuTitle: 'Stores' },
+        {
+          icon: 'person', menuTitle: 'Employees', childs: [
+            { icon: 'groups', menuTitle: 'Groups' },
+            { icon: 'event_note', menuTitle: 'Shifts' },
+            { icon: 'fact_check', menuTitle: 'Works' }
+          ]
+        },
+        {
+          icon: 'local_shipping', menuTitle: 'Vehicles', childs: []
+        }
+      ]
+    },
+    {
+      icon: 'settings', menuTitle: 'NAVBAR.SETTINGS', childs: [
+
+      ]
+    }
+  ];
   tableNames: String[] = [];
   dbConnection: boolean = false;
   opened: boolean = false;
@@ -52,8 +85,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     //private authService: AuthService,
     public translate: TranslateService,
     public dialog: MatDialog,
-    public shared: SharedService,
-    public auth: AuthService
+    public shared: SharedService
   ) {
     translate.addLangs(['en', 'pl']);
     translate.setDefaultLang('en');
@@ -62,15 +94,14 @@ export class AppComponent implements OnInit, AfterContentInit {
     //console.log(this.auth.auth2.currentUser)
 
 
-    console.log(this.router.url);
-    console.log(window.location.href.split(window.location.host));
+    console.log(this.menuItems);
 
   }
 
   signOut() {
     //this.auth.getUserData().subscribe().unsubscribe();
-    //this.router.navigate([''])
-    this.auth.signOut();
+    this.router.navigate([''])
+    //this.auth.signOut();
   }
 
 
@@ -79,8 +110,8 @@ export class AppComponent implements OnInit, AfterContentInit {
     //Add 'implements AfterContentInit' to the class.
     this.subscribeDBConnection();
     this.subscribeLoggedUser();
-    this.shared.getShowNavBar().subscribe((data)=>{
-      setTimeout(()=>{this.opened = data});
+    this.shared.getShowNavBar().subscribe((data) => {
+      setTimeout(() => { this.opened = data });
     })
   }
 
@@ -91,25 +122,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   async ngOnInit() {
-    await this.auth.checkIfUserLogged()
-    this.auth.isSigned.subscribe((loginStatus)=> {
-      if(!loginStatus){
-        this.router.navigate([''])
-        console.log('przenoszenie na glowna')
-      }
-    })
 
-    // console.log('subskrybuje')
-    // this.isSignedIn$ = this.auth.isSignedIn();
-    // this.isSignedIn$.subscribe((isSignedIn) => {
-
-    //   setTimeout(() => {
-    //     console.log('informacja o zalogowaniu: ' + isSignedIn)
-    //     if (this.router.url != "/")
-    //       this.opened = isSignedIn
-
-    //   }, 1000)
-    // })
   }
 
   subscribeLoggedUser() {
@@ -139,7 +152,15 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   sideNavExtend() {
-    //this.sideNavExtension = !this.sideNavExtension;
+    this.sideNavExtension = !this.sideNavExtension;
+
+    if (!this.sideNavExtension) {
+      this.menuItems.forEach(item => {
+        setTimeout(() => {
+          item.isOpen = false;
+        }, 10);
+      });
+    }
   }
 
   setTableNames(data) {

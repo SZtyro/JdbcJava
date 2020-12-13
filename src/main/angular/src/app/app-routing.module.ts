@@ -1,3 +1,4 @@
+import { IsLoggedService } from './services/guards/canActivate/is-logged.service';
 import { ChartComponentComponent } from './chart-component/chart-component.component';
 
 import { CurrentDatabaseResolverService } from './services/guards/resolvers/current-database-resolver.service';
@@ -10,11 +11,18 @@ import { WelcomePageComponent } from './welcome/welcome-page/welcome-page.compon
 
 const routes: Routes = [
   { path: 'table/:tableName', component: TableComponent },
-  { path: 'home', component: HomeComponent },
+  {
+    path: 'home', component: HomeComponent,
+    canActivate: [IsLoggedService]
+  },
+  { path: 'login', redirectTo: '' },
   { path: 'chart', component: ChartComponentComponent },
-  { path: 'databases', component: LoginWindowComponent, resolve:{
-    database: CurrentDatabaseResolverService
-  } },
+  {
+    path: 'databases', component: LoginWindowComponent,
+    // resolve: {
+    //   database: CurrentDatabaseResolverService
+    // }
+  },
   { path: '', component: WelcomePageComponent },
 ];
 

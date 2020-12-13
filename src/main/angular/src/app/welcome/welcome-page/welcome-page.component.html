@@ -1,19 +1,23 @@
 <div style="height:100vh; font-family: Roboto, 'Helvetica Neue', sans-serif; ">
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: fixed !important; width: 100%; z-index: 99999; background-color: #343a40c9 !important;">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark"
+    style="position: fixed !important; width: 100%; z-index: 99999; background-color: #343a40c9 !important;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item text-center">
-          <button class="nav-link" (click)="scrollToElement(aboutApp)" mat-button style="color: whitesmoke; outline: 0;">About app</button>
+          <button class="nav-link" (click)="scrollToElement(aboutApp)" mat-button
+            style="color: whitesmoke; outline: 0;">About app</button>
         </li>
         <li class="nav-item text-center">
-          <button class="nav-link" (click)="scrollToElement(pricing)" mat-button style="color: whitesmoke; outline: 0;">Pricing</button>
+          <button class="nav-link" (click)="scrollToElement(pricing)" mat-button
+            style="color: whitesmoke; outline: 0;">Pricing</button>
         </li>
         <li class="nav-item text-center">
-          <button class="nav-link" (click)="scrollToElement(aboutUs)" mat-button style="color: whitesmoke; outline: 0;">About us</button>
+          <button class="nav-link" (click)="scrollToElement(aboutUs)" mat-button
+            style="color: whitesmoke; outline: 0;">About us</button>
         </li>
       </ul>
 
@@ -22,32 +26,32 @@
         <!-- <button (click)="tryLogin()" mat-raised-button style="color: whitesmoke; outline: 0;">About us</button>
         <a href="http://localhost:8080/login"><button  mat-raised-button style="color: whitesmoke; outline: 0;" color="primary">log</button></a>
         <button (click)="tryLogin()" mat-raised-button style="color: whitesmoke; outline: 0;"color="primary">trrylogin</button> -->
-          <button mat-button [matMenuTriggerFor]="langMenu"
-                  style=" color: whitesmoke;  outline: 0;">{{translate.currentLang | uppercase }}</button>
-          <mat-menu #langMenu="matMenu">
-            <button mat-menu-item *ngFor="let lang of translate.getLangs()"
-                    (click)="translate.use(lang)">{{lang | uppercase}}</button>
-          </mat-menu>
+        <button mat-button [matMenuTriggerFor]="langMenu"
+          style=" color: whitesmoke;  outline: 0;">{{translate.currentLang | uppercase }}</button>
+        <mat-menu #langMenu="matMenu">
+          <button mat-menu-item *ngFor="let lang of translate.getLangs()"
+            (click)="translate.use(lang)">{{lang | uppercase}}</button>
+        </mat-menu>
 
-          <div *ngIf="isSignedIn ;else signInBlock">
-            <a routerLink="home" style="color: inherit;"><button mat-button>Home</button></a>
-            <button mat-button (click)="auth.signOut()">Log out</button>
-            <img src="{{userPhoto}}" style="border-radius: 4px;max-height: 36px">
-          </div>
-          <ng-template #signInBlock>
-            <button mat-raised-button style=" background-color: #EA4335;"
-                    (click)="auth.signIn()">{{'WELCOME_PAGE.GOOGLE_LOGIN'| translate}}</button>
-          </ng-template>
-        </span>
+        <div *ngIf="user ;else signInBlock">
+          <a routerLink="home" style="color: inherit;"><button mat-button>Home</button></a>
+
+          <img [src]="user.picture" style="border-radius: 4px;max-height: 36px">
+        </div>
+        <ng-template #signInBlock>
+          <a href="/api/google/auth"><button mat-raised-button
+              style=" background-color: #EA4335;">{{'WELCOME_PAGE.GOOGLE_LOGIN'| translate}}</button></a>
+        </ng-template>
+      </span>
     </div>
   </nav>
 
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
     style="height: 100vh;overflow: hidden;">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      </ol>
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    </ol>
 
     <div class="carousel-inner">
 

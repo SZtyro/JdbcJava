@@ -1,0 +1,30 @@
+.mat_button-wrapper {
+  // display: flex;
+  // align-items: center;
+}
+
+.item-content-wrapper{
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  width: 100%;
+  text-align: left;
+  outline: none;
+  font-weight: 300;
+  line-height: 45px;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.material-icons{
+  font-size: 17px;
+}
+
+.arrows{
+  margin-right: 5px;
+  margin-left: 5px;
+}

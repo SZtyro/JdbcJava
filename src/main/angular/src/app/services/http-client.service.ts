@@ -11,18 +11,15 @@ export class HttpClientService {
 
   ) { }
 
+  url = '';
 
-  //url = "https://nwtaback.herokuapp.com";
-  url = 'https://localhost:8080';
-  //urlAllowed = "https://nwtafront.herokuapp.com"
-  urlAllowed = "https://localhost:4200";
 
   loginUser(data) {
     return this.httpClient.post(this.url + '/databaseLogin', data,
       {
         headers: {
           "Authorization": sessionStorage.getItem('token'),
-          'Access-Control-Allow-Origin': this.urlAllowed
+
         }
       });
   }
@@ -31,7 +28,7 @@ export class HttpClientService {
       {
         headers: {
           "Authorization": sessionStorage.getItem('token'),
-          'Access-Control-Allow-Origin': this.urlAllowed
+
         }
       });
   }
@@ -42,7 +39,7 @@ export class HttpClientService {
         headers:
         {
           "Authorization": sessionStorage.getItem('token'),
-          'Access-Control-Allow-Origin': this.urlAllowed
+
         }
       });
   }
@@ -53,7 +50,7 @@ export class HttpClientService {
         headers:
         {
           "Authorization": sessionStorage.getItem('token'),
-          'Access-Control-Allow-Origin': this.urlAllowed
+
         }
       });
   }
@@ -64,7 +61,7 @@ export class HttpClientService {
         headers:
         {
           "Authorization": sessionStorage.getItem('token'),
-          'Access-Control-Allow-Origin': this.urlAllowed
+
         }
       });
   }
@@ -75,7 +72,7 @@ export class HttpClientService {
         headers:
         {
           "Authorization": sessionStorage.getItem('token'),
-          'Access-Control-Allow-Origin': this.urlAllowed
+
         }
       });
   }
@@ -86,7 +83,7 @@ export class HttpClientService {
         headers:
         {
           "Authorization": sessionStorage.getItem('token'),
-          'Access-Control-Allow-Origin': this.urlAllowed
+
         }
       });
   }
@@ -97,7 +94,7 @@ export class HttpClientService {
         headers:
         {
           "Authorization": sessionStorage.getItem('token'),
-          'Access-Control-Allow-Origin': this.urlAllowed
+
         }
       });
   }
@@ -108,7 +105,7 @@ export class HttpClientService {
         headers:
         {
           "Authorization": sessionStorage.getItem('token'),
-          'Access-Control-Allow-Origin': this.urlAllowed
+
         }
       });
   }
@@ -119,7 +116,7 @@ export class HttpClientService {
         headers:
         {
           "Authorization": sessionStorage.getItem('token'),
-          'Access-Control-Allow-Origin': this.urlAllowed
+
         }
       });
   }
@@ -131,7 +128,7 @@ export class HttpClientService {
         headers:
         {
           "Authorization": sessionStorage.getItem('token'),
-          'Access-Control-Allow-Origin': this.urlAllowed
+
         }
       });
   }
@@ -143,7 +140,7 @@ export class HttpClientService {
         headers:
         {
           "Authorization": sessionStorage.getItem('token'),
-          'Access-Control-Allow-Origin': this.urlAllowed
+
         }
       });
   }
@@ -155,18 +152,22 @@ export class HttpClientService {
         headers:
         {
           "Authorization": sessionStorage.getItem('token'),
-          'Access-Control-Allow-Origin': this.urlAllowed
+
         }
       });
   }
   checkToken(token) {
-    return this.httpClient.get(this.url + "/token", { responseType: "text", headers: { "Authorization": token, 'Access-Control-Allow-Origin': this.urlAllowed } });
+    return this.httpClient.get(this.url + "/token", { responseType: "text", headers: { "Authorization": token, } });
   }
 
   getRandom() {
     return this.httpClient.get(this.url + "/randomNumber");
   }
 
+
+  getUser() {
+    return this.httpClient.get(this.url + "/api/google/user", { responseType: 'text' })
+  }
 
 }
 
