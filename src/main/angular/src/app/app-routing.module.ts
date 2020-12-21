@@ -1,3 +1,6 @@
+import { CompanySettingsComponent } from './main-app/forms/settings/company-settings/company-settings.component';
+import { RegisterCompanyComponent } from './main-app/forms/register-company/register-company.component';
+import { CompaniesResolverService } from './services/guards/resolvers/companies-resolver.service';
 import { IsLoggedService } from './services/guards/canActivate/is-logged.service';
 import { ChartComponentComponent } from './chart-component/chart-component.component';
 
@@ -8,11 +11,14 @@ import { TableComponent } from './data-base/table/table.component';
 import { HomeComponent } from './main-app/components/home/home.component';
 import { LoginWindowComponent } from './main-app/components/login-window/login-window.component';
 import { WelcomePageComponent } from './welcome/welcome-page/welcome-page.component';
+import { UserSettingsComponent } from './main-app/forms/settings/user-settings/user-settings.component';
 
 const routes: Routes = [
   { path: 'table/:tableName', component: TableComponent },
   {
-    path: 'home', component: HomeComponent,
+    path: 'home', component: HomeComponent, resolve: {
+      companies: CompaniesResolverService
+    },
     canActivate: [IsLoggedService]
   },
   { path: 'login', redirectTo: '' },
@@ -22,6 +28,12 @@ const routes: Routes = [
     // resolve: {
     //   database: CurrentDatabaseResolverService
     // }
+  },
+  {
+    path: 'settings', component: RegisterCompanyComponent, children: [
+      {path: 'user', component: UserSettingsComponent},
+      {path: 'company', component: CompanySettingsComponent}
+    ]
   },
   { path: '', component: WelcomePageComponent },
 ];

@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, Injector, Inject, ViewContainerRef, ViewChild, ComponentFactoryResolver, AfterViewInit, Type, ComponentRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClientService } from '../../../services/http-client.service';
 import { GridsterConfig, GridsterItemComponent, GridsterItemComponentInterface } from 'angular-gridster2';
 import { GmailWidgetComponent } from '../../widgets/gmail-widget/gmail-widget.component';
@@ -31,26 +31,6 @@ export class HomeComponent implements OnInit {
 
   num: number = 0;
 
-  public options: GridsterConfig = {
-    pushItems: true,
-    displayGrid: 'none',
-    minCols: 14,
-    maxCols: 14,
-    minRows: 7,
-    fixedRowHeight: 100,
-    fixedColWidth: 100,
-    itemResizeCallback: this.resize.bind(this),
-    itemChangeCallback: this.changed.bind(this),
-    setGridSize: true,
-    mobileBreakpoint: 0,
-    gridType: 'scrollVertical',
-    resizable: {
-      enabled: false
-    },
-    draggable: {
-      enabled: false
-    }
-  }
   public items: item[] = [];
 
   resize(x: HomeWidget) {
@@ -67,94 +47,26 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('desktopWidgets');
   }
 
-
-  appWidgets = {
-    'GmailWidgetComponent': GmailWidgetComponent,
-    'ChartWidgetComponent': ChartWidgetComponent
-  }
-
-
   constructor(
     private httpClientService: HttpClientService,
     private router: Router,
-    private shared: SharedService
+    private shared: SharedService,
+    private route: ActivatedRoute
   ) {
 
     shared.homeRef = this;
-    //this.items = [GmailWidgetComponent]
-    this.items = [];
-    this.loadWidgets();
-
-    this.shared.getEditGrid().subscribe(isEditing => {
-      if (!isEditing)
-        this.save();
-    })
-
-
-  }
-
-  deleteWidget(i) {
-    //this.loaderRef.remove(this.widgetNumber);
-    //this.shared.homeRef.items.splice(this.widgetNumber, 1);
-    //this.subscription.unsubscribe();
-    this.shared.homeRef.items.splice(i, 1);
-    //localStorage.removeItem('ChartWidget' + this.widgetNumber);
-    this.shared.homeRef.items.forEach((elem, index) => {
-      elem.index = index;
-      elem.componentRef.instance["widgetNumber"] = index;
-      //ref.instance["widgetNumber"] = index
-      //elem.data.widgetNumber = index;
-      //console.log(index)
-    })
-    //console.log("Usunieto: ChartWidget" + this.widgetNumber);
-    //console.log(this.shared.homeRef.items);
-
-    //this.shared.homeRef.save();
-    //this.shared.homeRef.loadWidgets();
-  }
-
-  loadWidgets() {
-    this.items = [];
-
-
-  }
-  save() {
-    this.items.forEach(elem => {
-      try{
-        console.log(this.items)
-        elem.componentRef.instance.toSave();
-      }catch{
-
-      }
-
-      elem.componentRef = null;
-    })
-
-
-
-    console.log("Storage save")
 
   }
 
 
   ngOnInit() {
-    // this.httpClientService.getTableNames().subscribe(
-    //   data => {
+    this.route.data.subscribe(data => {
+      console.log(data.companies)
 
-    //     this.setTableNames(data);
-    //     console.log("Table names fetched! ", data);
-
-
-    //   },
-
-    //   error => {
-
-    //     console.log("Error", error);
-
-    //   }
-    // )
-
-
+      if(data.companies.length == 0){
+        this.router.navigate(['/settings/company']);
+      }
+    })
   }
 
   setTableNames(data) {

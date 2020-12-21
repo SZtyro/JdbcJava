@@ -50,7 +50,6 @@ export class WidgetListModalComponent implements OnInit {
 
     }
 
-    this.shared.homeRef.save();
 
   }
 

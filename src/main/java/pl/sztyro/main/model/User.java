@@ -5,6 +5,7 @@ import pl.sztyro.main.model.enums.UserType;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -18,6 +19,10 @@ public class User {
     @Id
     @Column(name = "user_mail")
     private String mail;
+
+    @JoinColumn(name = "user_selected_company")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Company selectedCompany;
 
     /**
      * Pakiety
@@ -33,6 +38,9 @@ public class User {
     @JoinColumn(name = "user_database")
     private Database database;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Column(name = "user_companies")
+    private List<Company> companies;
 
     @Column(name = "user_created")
     private Date created;
@@ -68,6 +76,30 @@ public class User {
 
     public void setType(UserType t) {
         this.type = t;
+    }
+
+    public List<Company> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(List<Company> companies) {
+        this.companies = companies;
+    }
+
+    public Company getSelectedCompany() {
+        return selectedCompany;
+    }
+
+    public void setSelectedCompany(Company selectedCompany) {
+        this.selectedCompany = selectedCompany;
+    }
+
+    public void addCompany(Company company){
+        this.companies.add(company);
+    }
+
+    public String getMail() {
+        return mail;
     }
 }
 

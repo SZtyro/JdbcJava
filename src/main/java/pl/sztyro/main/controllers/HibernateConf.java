@@ -2,7 +2,8 @@ package pl.sztyro.main.controllers;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-//import org.hibernate.cfg.Configuration;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -13,6 +14,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+/**
+ * Konfiguracja Hibernate
+ */
 @Configuration
 @EnableTransactionManagement
 public class HibernateConf {
@@ -24,6 +28,7 @@ public class HibernateConf {
         sessionFactory.setPackagesToScan(
                 new String[]{"pl.sztyro.main.model"});
         sessionFactory.setHibernateProperties(hibernateProperties());
+
 
         return sessionFactory;
     }
@@ -57,6 +62,18 @@ public class HibernateConf {
                 "hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
 
         return hibernateProperties;
+    }
+
+    /**
+     * Zwraca otwartą sesję hibernate
+     *
+     * @return Session
+     */
+    public Session getSession() {
+        SessionFactory sessionFactory = this.sessionFactory().getObject();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        return session;
     }
 }
 

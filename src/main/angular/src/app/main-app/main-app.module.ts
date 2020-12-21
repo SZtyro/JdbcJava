@@ -25,14 +25,17 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { FilesUploadDirective } from './directives/FilesUpload/files-upload.directive'
-import {FileUploadModule} from 'ng2-file-upload';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { FileUploadModule } from 'ng2-file-upload';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { WidgetListModalComponent } from './modals/widget-list-modal/widget-list-modal.component';
 import { WidgetDirective } from '../main-app/directives/WidgetDirective/widget.directive';
 import { MatInputModule } from '@angular/material/input';
-import {MatBadgeModule} from '@angular/material/badge';
-
-
+import { MatBadgeModule } from '@angular/material/badge';
+import { RegisterCompanyComponent } from './forms/register-company/register-company.component';
+import { FormsModule } from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
+import { CompanySettingsComponent } from './forms/settings/company-settings/company-settings.component';
+import { UserSettingsComponent } from './forms/settings/user-settings/user-settings.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -51,7 +54,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     WidgetLoaderComponent,
     GmailSenderPipe,
     FilesUploadDirective,
-    WidgetDirective
+    WidgetDirective,
+    RegisterCompanyComponent,
+    CompanySettingsComponent,
+    UserSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -79,7 +85,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     FileUploadModule,
     MatProgressBarModule,
     MatInputModule,
-    MatBadgeModule
+    MatBadgeModule,
+    FormsModule,
+    MatTabsModule
   ],
   providers: []
 })

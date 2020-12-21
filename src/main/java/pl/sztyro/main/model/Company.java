@@ -1,9 +1,11 @@
 package pl.sztyro.main.model;
 
 import org.hibernate.annotations.Proxy;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Entity
@@ -15,10 +17,23 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "company_id")
     /**Id firmy*/
-    private int id;
+    private long id;
+
+    @JoinColumn(name = "company_owner")
+    @NotNull
+    @ManyToOne
+    private User owner;
 
     @Column(name = "company_name")
+    @NotNull
+    @NotBlank
     private String name;
+
+    @Column(name = "company_NIP")
+    @NotNull
+    //@Pattern(regexp = "^\\d{10}$")
+    @Range(min = 1000000000, max = 9999999999L, message = "Number not in range {min} - {max}")
+    private long nip;
 
     @Column(name = "company_employee")
     @OneToMany
@@ -36,35 +51,34 @@ public class Company {
     @OneToMany
     private List<Institution> news;
 
+    public Company(){
 
-
-
-    //Getters
-
-    public int getCompanyId() {
-        return id;
     }
+
+    public Company(@NotNull User owner,@NotNull String name, @NotNull long nip) {
+        this.owner = owner;
+        this.name = name;
+        this.nip = nip;
+    }
+
 
     public String getName() {
         return name;
-    }
-
-    public List<User> getEmployees() {
-        return employee;
-    }
-
-    //Setters
-
-
-    public void setCompanyId(int companyId) {
-        this.id = companyId;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setEmployees(List<User> employees) {
-        this.employee = employees;
+    public long getNip() {
+        return nip;
+    }
+
+    public void setNip(int nip) {
+        this.nip = nip;
+    }
+
+    public long getId() {
+        return id;
     }
 }

@@ -25,12 +25,6 @@ export class WidgetLoaderComponent implements OnInit {
   ngOnInit() {
     if (this.type != null) {
       //console.log('nastepny komponent bedzie mial nr: ' + this.index)
-      let childComponent = this.componentFactoryResolver.resolveComponentFactory<HomeWidget>(this.shared.homeRef.appWidgets[this.type.typeName]);
-
-      let ref = this.viewContainerRef.createComponent<HomeWidget>(childComponent);
-      this.shared.homeRef.items[this.index].componentRef = ref;
-      ref.instance["widgetData"] = this.type.data;
-      ref.instance["widgetNumber"] = this.index;
       //this.shared.homeRef.items[this.index].index = this.index;
       //console.log(this.shared.homeRef.items)
       // if (this.type.index == null) {
@@ -49,7 +43,7 @@ export class WidgetLoaderComponent implements OnInit {
         }catch(e){
 
         }
-        
+
         //ref.instance["widgetNumber"] = index
         //elem.data.widgetNumber = index;
         //console.log(index)
@@ -63,8 +57,6 @@ export class WidgetLoaderComponent implements OnInit {
       //console.log(ref.instance["widgetNumber"])
       //this.shared.homeRef.save();
 
-
-      ref.instance["loaderRef"] = this.viewContainerRef;
       //console.log(this.childs)
     }
 

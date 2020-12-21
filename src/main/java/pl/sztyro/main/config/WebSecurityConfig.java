@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -18,7 +19,7 @@ import java.io.IOException;
 
 @Configuration
 @EnableOAuth2Sso
-//@EnableWebSecurity
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -28,15 +29,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
 
-
-                .antMatchers("/api/google/auth","/api/redirectHome").authenticated()
+                .antMatchers("/api/**").authenticated()
+                //.antMatchers("/api/google/auth","/api/redirectHome").authenticated()
 
                 //.anyRequest().permitAll()
                 .and()
                 .exceptionHandling()
-                .accessDeniedHandler(accessDeniedHandler)
-                .and()
-                .httpBasic().disable();
+                //.accessDeniedHandler(accessDeniedHandler)
+
+                .and().csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+                //.httpBasic().disable();
 
 
     }

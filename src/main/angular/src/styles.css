@@ -2,21 +2,25 @@
 
 @import "~@fortawesome/fontawesome-free/css/all.css";
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
-
 html, body {
-    height: 100%;
-    scroll-behavior: smooth;
+  height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .mat-drawer-inner-container {
-    display: flex;
+  display: flex;
 }
 
-a{
-  color:white !important;
+a {
+  color: white !important;
+}
+
+.main-header {
+  font-size: 9rem;
+  font-weight: 400;
 }

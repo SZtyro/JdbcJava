@@ -169,5 +169,13 @@ export class HttpClientService {
     return this.httpClient.get(this.url + "/api/google/user", { responseType: 'text' })
   }
 
+  getCompany() {
+    return this.httpClient.get(this.url + "/api/company")
+  }
+
+  saveCompany(body) {
+    return this.httpClient.post(this.url + "/api/company", body)
+  }
+
 }
 

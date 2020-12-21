@@ -1,0 +1,6 @@
+<h1 class="main-header" translate>Settings</h1>
+
+<nav mat-tab-nav-bar>
+  <a mat-tab-link *ngFor="let link of links" (click)="setActiveType(link)" [active]="activeLink == link"> {{link}} </a>
+</nav>
+<router-outlet></router-outlet>

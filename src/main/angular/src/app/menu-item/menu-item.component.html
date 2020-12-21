@@ -14,7 +14,7 @@
 
         <span *ngIf="item.childs != null && item.childs.length > 0 && isTitleVisible"
           style="display: flex;align-items: center;">
-          <span *ngIf="item.isOpen;else less" class="material-icons">
+          <span *ngIf="item.isOpen;else less" class="material-icons" style="margin-right: 5px;">
             expand_more
           </span>
           <ng-template #less>

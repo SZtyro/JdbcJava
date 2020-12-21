@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./chart-widget.component.scss'],
 
 })
-export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, AfterViewInit {
+export class ChartWidgetComponent implements OnInit, GridsterItem, AfterViewInit {
 
   @ViewChild('mainScreen', { read: ElementRef }) elementView: ElementRef;
   @ViewChild('chart', { read: ElementRef }) chartElem: ElementRef;
@@ -261,9 +261,6 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
 
   }
 
-  delete() {
-    this.shared.homeRef.deleteWidget(this.widgetNumber);
-  }
 
 
 
