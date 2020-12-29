@@ -1,3 +1,4 @@
+import { CompanyResolverService } from './services/guards/resolvers/company-resolver.service';
 import { CompanySettingsComponent } from './main-app/forms/settings/company-settings/company-settings.component';
 import { RegisterCompanyComponent } from './main-app/forms/register-company/register-company.component';
 import { CompaniesResolverService } from './services/guards/resolvers/companies-resolver.service';
@@ -19,7 +20,7 @@ const routes: Routes = [
     path: 'home', component: HomeComponent, resolve: {
       companies: CompaniesResolverService
     },
-    canActivate: [IsLoggedService]
+    //canActivate: [IsLoggedService]
   },
   { path: 'login', redirectTo: '' },
   { path: 'chart', component: ChartComponentComponent },
@@ -31,8 +32,12 @@ const routes: Routes = [
   },
   {
     path: 'settings', component: RegisterCompanyComponent, children: [
-      {path: 'user', component: UserSettingsComponent},
-      {path: 'company', component: CompanySettingsComponent}
+      { path: 'user', component: UserSettingsComponent },
+      {
+        path: 'company', component: CompanySettingsComponent, resolve: {
+          company: CompanyResolverService
+        }
+      }
     ]
   },
   { path: '', component: WelcomePageComponent },

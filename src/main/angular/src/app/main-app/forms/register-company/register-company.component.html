@@ -1,6 +1,12 @@
-<h1 class="main-header" translate>Settings</h1>
+<div class="container-fluid">
+  <h1 class="main-header" translate>settings</h1>
 
-<nav mat-tab-nav-bar>
-  <a mat-tab-link *ngFor="let link of links" (click)="setActiveType(link)" [active]="activeLink == link"> {{link}} </a>
-</nav>
-<router-outlet></router-outlet>
+  <nav mat-tab-nav-bar>
+
+    <a mat-tab-link *ngFor="let link of links" (click)="setActiveType(link.name)" [active]="activeLink == link.name"
+      style="color: var(--textColor) !important;">
+      <span class="material-icons" style="margin-right: 5px;">{{link.icon}}</span>{{link.name | translate}}
+    </a>
+  </nav>
+  <router-outlet></router-outlet>
+</div>

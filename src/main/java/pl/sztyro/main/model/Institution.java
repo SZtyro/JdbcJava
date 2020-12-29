@@ -19,5 +19,30 @@ public class Institution {
     @OneToMany
     private List<User> employee;
 
+    @ManyToOne
+    private Company company;
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<User> getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(List<User> employee) {
+        this.employee = employee;
+    }
 }

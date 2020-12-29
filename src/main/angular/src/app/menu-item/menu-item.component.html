@@ -1,10 +1,11 @@
-<div *ngFor="let item of menuItems" [style.background]="'rgb(0,0,0,'+ opacity +')'" style="line-height: 45px;">
-  <a [routerLink]="item.routerLink" (click)="mouseEnter(item)">
-    <button mat-button [style.marginLeft.px]="offset">
+<div *ngFor="let item of menuItems" [style.background]="'rgb(0,0,0,'+ opacity +')'" style="cursor: pointer;">
+
+  <div matRipple (click)="mouseEnter(item)" [routerLink]="item.routerLink" style="outline: none;">
+    <div [style.marginLeft.px]="offset" style="margin-right: 10px; margin-left: 10px;">
 
       <div class="item-content-wrapper">
         <span style="display: flex;align-items: center;">
-          <span class="material-icons">
+          <span class="material-icons" style="margin-right: 5px;">
             {{item.icon}}
           </span>
           <span *ngIf="isTitleVisible">
@@ -18,15 +19,16 @@
             expand_more
           </span>
           <ng-template #less>
-            <span class="material-icons">
+            <span class="material-icons" style="margin-right: 5px;">
               expand_less
             </span>
           </ng-template>
         </span>
       </div>
 
-    </button>
-  </a>
+    </div>
+  </div>
+
 
   <div [@openClose]="item.isOpen ? 'open' : 'closed'">
     <app-menu-item [menuItems]="item.childs" [offset]="offset + 10" [isTitleVisible]="true" [opacity]="opacity + 0.09"

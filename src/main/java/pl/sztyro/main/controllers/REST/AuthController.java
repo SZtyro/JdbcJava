@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,6 +56,7 @@ public class AuthController {
     /**
      * Odwołanie do tej ścieżki powoduje wysłanie formularza logowania dla niezalogowanych u zytkowników
      */
+    @CrossOrigin("https://accounts.google.com")
     @GetMapping("/google/auth")
     public void googleLogin(HttpServletResponse response) throws IOException {
         _logger.info("Autoryzacja");

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableComponent } from './data-base/table/table.component';
-import { HttpClientModule, HttpClient, HttpClientJsonpModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpClientJsonpModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -43,7 +43,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ChartComponentComponent } from './chart-component/chart-component.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { MenuItemComponent } from './menu-item/menu-item.component';
-
+import { MatRippleModule } from '@angular/material/core';
+import { AuthInterceptor } from './services/interceptors/auth-interceptor.service';
 
 
 
@@ -121,7 +122,8 @@ export function provideConfig() {
     WelcomeModule,
     HttpClientJsonpModule,
     MatProgressSpinnerModule,
-    GoogleChartsModule
+    GoogleChartsModule,
+    MatRippleModule
 
 
   ],
@@ -135,7 +137,7 @@ export function provideConfig() {
     ChartSettingsModalComponent
   ],
   providers: [
-
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

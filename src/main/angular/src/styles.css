@@ -2,6 +2,12 @@
 
 @import "~@fortawesome/fontawesome-free/css/all.css";
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
+:root {
+  --textColor: #000;
+  --textColorBright: #fff;
+  --mainColor: rgb(54, 73, 83);
+}
+
 html, body {
   height: 100%;
   scroll-behavior: smooth;
@@ -23,4 +29,13 @@ a {
 .main-header {
   font-size: 9rem;
   font-weight: 400;
+}
+
+.mat-raised-button, .mat-button-base {
+  background-color: var(--mainColor);
+  color: var(--textColorBright);
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: var(--mainColor);
 }

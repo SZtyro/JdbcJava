@@ -35,27 +35,27 @@ public class Company {
     @Range(min = 1000000000, max = 9999999999L, message = "Number not in range {min} - {max}")
     private long nip;
 
-    @Column(name = "company_employee")
-    @OneToMany
-    private List<User> employee;
-
     @Column(name = "company_administration")
     @OneToMany
     private List<User> administration;
 
-    @Column(name = "company_institution")
     @OneToMany
     private List<Institution> institution;
 
     @Column(name = "company_news")
     @OneToMany
-    private List<Institution> news;
+    private List<Information> news;
 
-    public Company(){
+    public void merge(Company company) {
+        this.setName(company.getName());
+        this.setNip(company.getNip());
+    }
+
+    public Company() {
 
     }
 
-    public Company(@NotNull User owner,@NotNull String name, @NotNull long nip) {
+    public Company(@NotNull User owner, @NotNull String name, @NotNull long nip) {
         this.owner = owner;
         this.name = name;
         this.nip = nip;
@@ -74,11 +74,23 @@ public class Company {
         return nip;
     }
 
-    public void setNip(int nip) {
+    public void setNip(long nip) {
         this.nip = nip;
     }
 
     public long getId() {
         return id;
+    }
+
+    public List<Institution> getInstitution() {
+        return institution;
+    }
+
+    public void setInstitution(List<Institution> institution) {
+        this.institution = institution;
+    }
+
+    public void addInstitution(Institution institution){
+        this.institution.add(institution);
     }
 }

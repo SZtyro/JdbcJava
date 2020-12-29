@@ -14,7 +14,13 @@ export class RegisterCompanyComponent implements OnInit {
   content;
 
   links = [
-    'company', 'user'
+    {
+      name: 'company',
+      icon: 'business'
+    }, {
+      name: 'user',
+      icon: 'person'
+    }
   ]
 
   constructor(

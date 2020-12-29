@@ -1,4 +1,8 @@
 {
+    "settings":"Ustawienia",
+    "save": "Zapisz",
+    "company": "Firma",
+    "user": "Użytkownik",
     "NAVBAR": {
         "GOOGLE_LOGIN": "Zaloguj się przez Google!",
         "HOME": "Strona główna",
@@ -6,7 +10,7 @@
             "CONNECTION": "Baza danych",
             "NO_CONNECTION": "Nie jesteś połączony do bazy danych!"
         },
-        "USERS" : "Użytkownicy",
+        "USERS": "Użytkownicy",
         "WIDGETS": "Widżety",
         "EDIT": "Edytuj siatkę",
         "SETTINGS": "Ustawienia",
@@ -14,18 +18,18 @@
         "SIGN_OUT": "Wyloguj",
         "BUG_REPORT": "Zgłoś błąd"
     },
-    "WELCOME_PAGE":{
-        "GOOGLE_LOGIN":"Zaloguj się przez Google!",
+    "WELCOME_PAGE": {
+        "GOOGLE_LOGIN": "Zaloguj się przez Google!",
         "SLIDE_1": {
             "HEADER": "Szef, gdziekolwiek jesteś.",
             "TEXT": "Dom, pociąg, biuro? Zarządzaj swoją firmą gdziekolwiek jesteś i zawsze bądz poinformowany! Wszystko czego potrzebujesz to konto Google i dostęp do internetu."
-        } ,
+        },
         "SLIDE_2": {
             "HEADER": "Współpraca.",
             "TEXT": "ABC"
-        }  ,
-		"ABOUT_APP": "Aplikacja ta ma za zadanie zebrać wszystkie funkcje aplikacji do zarządzania firmą w jedną całość w formie edytowalnego pulpitu widgetów, dzięki czemu nie potrzeba do zarządzania firmą wykorzystywać żadnych innych aplikacji. Aplikacja jest dostępna na każdym urządzeniu w firmie podłączonym do internetu i zmniejsza koszty utrzymania technicznej strony firmy.",
-		"ABOUT_US": "Jesteśmy nowatorską firmą specjalizującą się w tworzeniu rozwiązań zarówno dla małych, i dużych firm. Na rynku IT zadebiutowaliśmy 2 lata temu z inicjatywy prezesa Fabiana Trubica i od tego czasu nasza wartość stale zwiększała się dzięki szybkiemu tworzeniu tanich, wydajnych aplikacji dla naszych klientów. Naszym celem na przyszłość jest dalsze wypuszczanie na rynek nowatorskich rozwiązań wraz z jednoczesnym dostosowywaniem się do potrzeb naszych klientów."
+        },
+        "ABOUT_APP": "Aplikacja ta ma za zadanie zebrać wszystkie funkcje aplikacji do zarządzania firmą w jedną całość w formie edytowalnego pulpitu widgetów, dzięki czemu nie potrzeba do zarządzania firmą wykorzystywać żadnych innych aplikacji. Aplikacja jest dostępna na każdym urządzeniu w firmie podłączonym do internetu i zmniejsza koszty utrzymania technicznej strony firmy.",
+        "ABOUT_US": "Jesteśmy nowatorską firmą specjalizującą się w tworzeniu rozwiązań zarówno dla małych, i dużych firm. Na rynku IT zadebiutowaliśmy 2 lata temu z inicjatywy prezesa Fabiana Trubica i od tego czasu nasza wartość stale zwiększała się dzięki szybkiemu tworzeniu tanich, wydajnych aplikacji dla naszych klientów. Naszym celem na przyszłość jest dalsze wypuszczanie na rynek nowatorskich rozwiązań wraz z jednoczesnym dostosowywaniem się do potrzeb naszych klientów."
     },
     "GMAIL_WIDGET": {
         "SENDER": "Nadawca",

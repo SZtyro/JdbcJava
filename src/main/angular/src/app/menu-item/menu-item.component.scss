@@ -3,7 +3,8 @@
   // align-items: center;
 }
 
-.item-content-wrapper{
+.item-content-wrapper {
+  height: 49px;
   display: flex;
   justify-content: space-between;
 }
@@ -20,12 +21,11 @@ button {
   margin-right: 10px;
 }
 
-.material-icons{
+.material-icons {
   font-size: 17px;
-
 }
 
-.arrows{
+.arrows {
   margin-right: 5px;
   margin-left: 5px;
 }

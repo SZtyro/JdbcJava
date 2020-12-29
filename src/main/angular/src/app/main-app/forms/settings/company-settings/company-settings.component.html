@@ -1,12 +1,19 @@
-<mat-form-field class="example-form-field">
-  <mat-label>Name</mat-label>
-  <input matInput type="text" [(ngModel)]="name">
-</mat-form-field>
+<div class="container-fluid" style="padding-top: 15px;">
+  <mat-form-field class="example-form-field col-12 col-md-6">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" [(ngModel)]="company.name">
+  </mat-form-field>
 
-<mat-form-field class="example-form-field">
-  <mat-label>Nip</mat-label>
-  <input matInput type="text" [(ngModel)]="nip">
-</mat-form-field>
+  <mat-form-field class="example-form-field col-12 col-md-3">
+    <mat-label>Nip</mat-label>
+    <input matInput type="text" [(ngModel)]="company.nip">
+  </mat-form-field>
 
+  <div class="row justify-content-end">
+    <div class="col-12 col-md-6 col-lg-2 col-xl-1">
+      <button mat-raised-button style="min-width: 100%;" (click)="saveCompany()" translate>save</button>
+    </div>
+  </div>
+  
 
-<button matButton (click)="saveCompany()">send</button>
+</div>

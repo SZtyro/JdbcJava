@@ -6,9 +6,12 @@ import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import pl.sztyro.main.exceptions.NotFoundException;
 import pl.sztyro.main.model.Company;
+import pl.sztyro.main.model.Institution;
 import pl.sztyro.main.model.User;
 import pl.sztyro.main.services.AuthService;
 import pl.sztyro.main.services.CompanyService;
@@ -66,20 +69,82 @@ public class CompanyController {
     }
 
     @GetMapping()
-    public Object getCompanies(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public Object getCompanies(HttpServletRequest request, HttpServletResponse response) {
         try {
-            List<Company> companies = userService.getUserCompanies(authService.getLoggedUserMail(request));
-            //if (companies == null || companies.isEmpty()) {
-
-            //throw new ResponseStatusException(
-            //       HttpStatus.NOT_FOUND, "User has no companies.");
-            //} else {
+            List<Company> companies = companyService.getUserCompanies(authService.getLoggedUserMail(request));
             return companies;
-            //}
+
         } catch (NotFoundException e) {
-            e.printStackTrace();
-            response.sendError(404, e.getMessage());
+            _logger.error(e.getMessage());
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, e.getMessage());
         }
-        return null;
+
     }
+
+    @GetMapping("/current")
+    public Company getCurrentCompany(HttpServletRequest request) {
+        Company company = companyService.getCurrentCompany(authService.getLoggedUserMail(request));
+
+        if (company == null)
+            return new Company();
+        else
+            return company;
+    }
+
+    @PutMapping
+    public void updateCompany(HttpServletRequest request, @RequestBody Object companyJson) throws Exception {
+
+        //Zalogowany użytkownik
+        User owner = userService.getUser(authService.getLoggedUserMail(request));
+        Gson gson = new Gson();
+        Company obj = gson.fromJson(gson.toJson(companyJson), Company.class);
+        _logger.info("Aktualizacja firmy o id: " + obj.getId());
+        try {
+            companyService.updateCompany(obj);
+
+        } catch (ConstraintViolationException e) {
+            String message = "";
+            for (Object s : e.getConstraintViolations().toArray()) {
+                ConstraintViolationImpl a = (ConstraintViolationImpl) s;
+                message += a.getMessage();
+            }
+            _logger.error(message);
+            throw new Exception(message);
+        }
+    }
+
+
+    @GetMapping("/institution")
+    public Object getInstitutions(HttpServletRequest request) {
+        try {
+            //Zalogowany użytkownik
+            User owner = userService.getUser(authService.getLoggedUserMail(request));
+            _logger.info("Pobieranie placówek użytkownika: " + owner.getMail());
+            return owner.getSelectedCompany().getInstitution();
+
+        } catch (NotFoundException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "User not found");
+        }
+    }
+
+    @PostMapping("/institution")
+    public void addInstitution(HttpServletRequest request, @RequestBody Object institutionJson) {
+        try {
+            //Zalogowany użytkownik
+            String mail = authService.getLoggedUserMail(request);
+            Gson gson = new Gson();
+            Institution obj = gson.fromJson(gson.toJson(institutionJson), Institution.class);
+            companyService.addInstitution(mail, obj);
+            _logger.info("Dodawanie placówki użytkownika: " + mail + ", o nazwie: " + obj.getName());
+
+
+        } catch (NotFoundException e) {
+            _logger.error(e.getMessage());
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, e.getMessage());
+        }
+    }
+
 }

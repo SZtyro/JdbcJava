@@ -1,5 +1,7 @@
+import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,13 @@ export class HttpClientService {
 
   url = '';
 
+  errorHandler(err) {
+    console.log('handler')
+    if (err.status == 401)
+      window.location.href = '/api/google/auth'
+    console.log(err)
+    return of(err)
+  }
 
   loginUser(data) {
     return this.httpClient.post(this.url + '/databaseLogin', data,
@@ -170,11 +179,27 @@ export class HttpClientService {
   }
 
   getCompany() {
-    return this.httpClient.get(this.url + "/api/company")
+    return this.httpClient.get(this.url + "/api/company", {
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      }
+    })
+      .pipe(catchError(err => this.errorHandler(err)))
   }
+
+  getCurrentCompany() {
+    return this.httpClient.get(this.url + "/api/company/current")
+      .pipe(catchError(err => this.errorHandler(err)))
+  }
+
+
 
   saveCompany(body) {
     return this.httpClient.post(this.url + "/api/company", body)
+  }
+
+  updateCompany(company) {
+    return this.httpClient.put(this.url + "/api/company", company)
   }
 
 }

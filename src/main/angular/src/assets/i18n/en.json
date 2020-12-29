@@ -1,4 +1,8 @@
 {
+    "settings":"Settings",
+    "save": "Save",
+    "company": "Company",
+    "user": "User",
     "NAVBAR": {
         "GOOGLE_LOGIN": "Sign in with Google!",
         "HOME": "Home",
@@ -6,7 +10,7 @@
             "CONNECTION": "Database",
             "NO_CONNECTION": "You are not connected to database!"
         },
-        "USERS" : "Users",
+        "USERS": "Users",
         "WIDGETS": "Widgets",
         "EDIT": "Edit grid",
         "SETTINGS": "Settings",
@@ -14,18 +18,18 @@
         "SIGN_OUT": "Sign out",
         "BUG_REPORT": "Report bug"
     },
-    "WELCOME_PAGE":{
-        "GOOGLE_LOGIN":"Sign in with Google!",
+    "WELCOME_PAGE": {
+        "GOOGLE_LOGIN": "Sign in with Google!",
         "SLIDE_1": {
             "HEADER": "Boss, wherever you want.",
             "TEXT": "Home, train, office? Manage your buisness from anywhere and always be informed! All you need is a Google account and Internet connection."
-        } ,
+        },
         "SLIDE_2": {
             "HEADER": "Teamwork",
             "TEXT": "ABC"
-        }  ,
-		"ABOUT_APP": "The purpose of this application is to combine functions of many different company management applications into one, in the form of editable desktop of widgets. Thanks to this, the company doesn't need to make use of any other applications. This application is available on every Internet-connected device in the company and reduces the costs of maintenance of the technical side of the company.",
-		"ABOUT_US": "We are an innovative company specializing in creation of solutions for both large and small companies. We appeared on the IT market 2 years ago thanks to the initiative of our chairman Fabian Trubic and since then our value has been steadily increasing thanks to our rapid creation of cheap and efficient applications for our clients. Our goal for the future is the continued release of innovative solutions coupled with simultaneous adaptation to the needs of our clients."
+        },
+        "ABOUT_APP": "The purpose of this application is to combine functions of many different company management applications into one, in the form of editable desktop of widgets. Thanks to this, the company doesn't need to make use of any other applications. This application is available on every Internet-connected device in the company and reduces the costs of maintenance of the technical side of the company.",
+        "ABOUT_US": "We are an innovative company specializing in creation of solutions for both large and small companies. We appeared on the IT market 2 years ago thanks to the initiative of our chairman Fabian Trubic and since then our value has been steadily increasing thanks to our rapid creation of cheap and efficient applications for our clients. Our goal for the future is the continued release of innovative solutions coupled with simultaneous adaptation to the needs of our clients."
     },
     "GMAIL_WIDGET": {
         "SENDER": "Sender",

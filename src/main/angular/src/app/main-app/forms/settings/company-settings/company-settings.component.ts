@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HttpClientService } from 'src/app/services/http-client.service';
 
@@ -7,22 +8,44 @@ import { HttpClientService } from 'src/app/services/http-client.service';
   styleUrls: ['./company-settings.component.scss']
 })
 export class CompanySettingsComponent implements OnInit {
-  name;
-  nip;
+
+  company;
 
   constructor(
-    private http: HttpClientService
+    private http: HttpClientService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.route.data.subscribe(data => {
+      if (data.company) {
+        this.company = data.company;
+        if(this.company.id == 0)
+          this.company.id = null;
+      }
+    })
   }
 
   saveCompany() {
-    this.http.saveCompany({
-      name: this.name,
-      nip: this.nip
-    }).subscribe(success => {
-      console.log(success)
-    })
+    if (this.company.id == null || this.company.id == 0) {
+      this.http.saveCompany(this.company).subscribe(
+        success => {
+          console.log(success)
+          alert('Pomyślnie zapisano firmę')
+        },
+        err => {
+          alert(err.error.message);
+        })
+    } else {
+      this.http.updateCompany(this.company).subscribe(
+        success => {
+          console.log(success)
+          alert('Pomyślnie zapisano firmę')
+        },
+        err => {
+          alert(err.error.message);
+        })
+    }
   }
+
 }

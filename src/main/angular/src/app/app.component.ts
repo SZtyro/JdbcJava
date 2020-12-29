@@ -64,7 +64,7 @@ export class AppComponent implements OnInit, AfterContentInit {
       ]
     },
     {
-      icon: 'settings', menuTitle: 'NAVBAR.SETTINGS', childs: [
+      icon: 'settings', menuTitle: 'NAVBAR.SETTINGS', routerLink: 'settings/company', childs: [
 
       ]
     }

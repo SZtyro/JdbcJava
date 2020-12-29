@@ -49,8 +49,4 @@ public class UserService {
         }
     }
 
-    public java.util.List<pl.sztyro.main.model.Company> getUserCompanies(String mail) throws NotFoundException {
-        User user = getUser(mail);
-        return user.getCompanies();
-    }
 }

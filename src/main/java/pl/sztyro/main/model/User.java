@@ -1,5 +1,8 @@
 package pl.sztyro.main.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Proxy;
 import pl.sztyro.main.model.enums.UserType;
 
@@ -30,17 +33,15 @@ public class User {
     @Column(name = "user_pack")
     private String pack;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "user_type")
-    private UserType type = UserType.Boss;
-
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_database")
     private Database database;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
+    @OneToMany
+    @Fetch(FetchMode.JOIN)
     @Column(name = "user_companies")
-    private List<Company> companies;
+    private List<Company> companies = null;
 
     @Column(name = "user_created")
     private Date created;
@@ -67,15 +68,6 @@ public class User {
 
     public void setMail(String mail) {
         this.mail = mail;
-    }
-
-
-    public UserType getType() {
-        return type;
-    }
-
-    public void setType(UserType t) {
-        this.type = t;
     }
 
     public List<Company> getCompanies() {

@@ -1,6 +1,6 @@
 <body class="mat-app-background">
   <mat-sidenav-container class="example-container" style="height: 100%; ">
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened" style="width: 50px; background-color: rgb(34, 34, 34);"
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" style="width: 50px; background-color: var(--mainColor)"
       (mouseenter)="sideNavExtend()" (mouseleave)=" sideNavExtend()"
       [@openClose]="sideNavExtension ? 'open' : 'closed'">
       <div *ngIf="sideNavExtension">
@@ -10,7 +10,7 @@
         style="display: flex ; flex-direction: column; justify-content: space-between ; align-items: flex-end;overflow: hidden;width: 100%; ">
         <div style="color: white; display: flex; flex-direction: column; width: 100%;">
 
-          <app-menu-item [menuItems]="menuItems" [isTitleVisible]="sideNavExtension" ></app-menu-item>
+          <app-menu-item [menuItems]="menuItems" [isTitleVisible]="sideNavExtension" [offset]="15" ></app-menu-item>
         </div>
 
 

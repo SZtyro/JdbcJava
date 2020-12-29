@@ -382,9 +382,9 @@ public class RESTController {
         return answer;
     }
 
-    @RequestMapping("/login")
-    public Object redirect(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect("/home");
-        return null;
-    }
+//    @RequestMapping("/login")
+//    public Object redirect(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        response.sendRedirect("/home");
+//        return null;
+//    }
 }
