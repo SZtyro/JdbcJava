@@ -1,6 +1,6 @@
 export abstract class FunctionBase {
   icon;
-  menuTitle;
+  name;
   childs?:FunctionBase[];
   routerLink?:String;
   isOpen?:boolean = false;

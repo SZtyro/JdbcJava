@@ -39,9 +39,6 @@ public class Company {
     @OneToMany
     private List<User> administration;
 
-    @OneToMany
-    private List<Institution> institution;
-
     @Column(name = "company_news")
     @OneToMany
     private List<Information> news;
@@ -82,15 +79,4 @@ public class Company {
         return id;
     }
 
-    public List<Institution> getInstitution() {
-        return institution;
-    }
-
-    public void setInstitution(List<Institution> institution) {
-        this.institution = institution;
-    }
-
-    public void addInstitution(Institution institution){
-        this.institution.add(institution);
-    }
 }

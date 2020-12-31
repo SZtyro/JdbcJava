@@ -5,8 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.sztyro.main.controllers.HibernateConf;
+import pl.sztyro.main.config.HibernateConf;
 import pl.sztyro.main.exceptions.NotFoundException;
+import pl.sztyro.main.model.Company;
 import pl.sztyro.main.model.User;
 
 @Service
@@ -47,6 +48,36 @@ public class UserService {
         } finally {
             session.close();
         }
+    }
+
+    public Company selectCompany(String mail, Long id) throws NotFoundException {
+        _logger.info("Wybór firmy: " + mail);
+
+        Session session = conf.getSession();
+
+
+        User user = session.get(User.class, mail);
+        Company company = session.get(Company.class, id);
+        if (user == null) {
+            session.getTransaction().rollback();
+            session.close();
+
+            throw new NotFoundException("User not found");
+        } else {
+            if (company == null) {
+                session.getTransaction().rollback();
+                session.close();
+
+                throw new NotFoundException("Company not found");
+            } else {
+                session.getTransaction().commit();
+                session.close();
+
+                return company;
+            }
+        }
+
+
     }
 
 }

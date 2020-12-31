@@ -1,3 +1,5 @@
+import { InstitutionResolverService } from './services/guards/resolvers/institution-resolver.service';
+import { InstitutionRegisterComponent } from './main-app/forms/institution-register/institution-register.component';
 import { CompanyResolverService } from './services/guards/resolvers/company-resolver.service';
 import { CompanySettingsComponent } from './main-app/forms/settings/company-settings/company-settings.component';
 import { RegisterCompanyComponent } from './main-app/forms/register-company/register-company.component';
@@ -29,6 +31,11 @@ const routes: Routes = [
     // resolve: {
     //   database: CurrentDatabaseResolverService
     // }
+  },
+  {
+    path: 'structures/:id', component: InstitutionRegisterComponent, resolve: {
+      institution: InstitutionResolverService
+    }
   },
   {
     path: 'settings', component: RegisterCompanyComponent, children: [

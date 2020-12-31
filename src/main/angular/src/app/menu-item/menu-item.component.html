@@ -1,5 +1,15 @@
 <div *ngFor="let item of menuItems" [style.background]="'rgb(0,0,0,'+ opacity +')'" style="cursor: pointer;">
 
+
+
+  <div *ngIf="direction == 'up'">
+    <div [@openClose]="item.isOpen ? 'open' : 'closed'">
+      <app-menu-item [direction]="'up'" [menuItems]="item.childs" [offset]="offset + 10" [isTitleVisible]="true" [opacity]="opacity + 0.09"
+        [parent]="this">
+      </app-menu-item>
+    </div>
+  </div>
+
   <div matRipple (click)="mouseEnter(item)" [routerLink]="item.routerLink" style="outline: none;">
     <div [style.marginLeft.px]="offset" style="margin-right: 10px; margin-left: 10px;">
 
@@ -9,7 +19,7 @@
             {{item.icon}}
           </span>
           <span *ngIf="isTitleVisible">
-            {{item.menuTitle |translate}}
+            {{item.name |translate}}
           </span>
         </span>
 
@@ -29,12 +39,14 @@
     </div>
   </div>
 
-
-  <div [@openClose]="item.isOpen ? 'open' : 'closed'">
-    <app-menu-item [menuItems]="item.childs" [offset]="offset + 10" [isTitleVisible]="true" [opacity]="opacity + 0.09"
-      [parent]="this">
-    </app-menu-item>
+  <div *ngIf="direction == 'down'">
+    <div [@openClose]="item.isOpen ? 'open' : 'closed'">
+      <app-menu-item (itemClicked)="mouseEnter($event)" [direction]="'down'" [menuItems]="item.childs" [offset]="offset + 10" [isTitleVisible]="true"
+        [opacity]="opacity + 0.09" [parent]="this">
+      </app-menu-item>
+    </div>
   </div>
+
 
 
 </div>

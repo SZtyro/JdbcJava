@@ -37,11 +37,11 @@ public class User {
     @JoinColumn(name = "user_database")
     private Database database;
 
-
-    @OneToMany
-    @Fetch(FetchMode.JOIN)
-    @Column(name = "user_companies")
-    private List<Company> companies = null;
+//
+//    @OneToMany
+//    @Fetch(FetchMode.JOIN)
+//    @Column(name = "user_companies")
+//    private List<Company> companies = null;
 
     @Column(name = "user_created")
     private Date created;
@@ -70,13 +70,13 @@ public class User {
         this.mail = mail;
     }
 
-    public List<Company> getCompanies() {
-        return companies;
-    }
+//    public List<Company> getCompanies() {
+//        return companies;
+//    }
 
-    public void setCompanies(List<Company> companies) {
-        this.companies = companies;
-    }
+//    public void setCompanies(List<Company> companies) {
+//        this.companies = companies;
+//    }
 
     public Company getSelectedCompany() {
         return selectedCompany;
@@ -85,10 +85,10 @@ public class User {
     public void setSelectedCompany(Company selectedCompany) {
         this.selectedCompany = selectedCompany;
     }
-
-    public void addCompany(Company company){
-        this.companies.add(company);
-    }
+//
+//    public void addCompany(Company company){
+//        this.companies.add(company);
+//    }
 
     public String getMail() {
         return mail;

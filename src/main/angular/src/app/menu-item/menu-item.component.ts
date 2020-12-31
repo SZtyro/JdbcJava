@@ -1,5 +1,5 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component, Input, OnInit, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, Output, EventEmitter } from '@angular/core';
 import { FunctionBase } from '../modules/functionModules/functionBase';
 
 @Component({
@@ -31,6 +31,9 @@ import { FunctionBase } from '../modules/functionModules/functionBase';
 export class MenuItemComponent implements OnInit {
 
   @Input()
+  direction: 'up' | 'down'
+
+  @Input()
   menuItems: FunctionBase[];
 
   @Input()
@@ -45,7 +48,10 @@ export class MenuItemComponent implements OnInit {
   @Input()
   opacity: number = 0.0;
 
-  isMouseOver:boolean = false;
+  @Output()
+  itemClicked = new EventEmitter<FunctionBase>();
+
+  isMouseOver: boolean = false;
 
   constructor() { }
 
@@ -70,17 +76,27 @@ export class MenuItemComponent implements OnInit {
 
   }
 
-  mouseEnter(item: FunctionBase){
-
-    item.isOpen = !item.isOpen;
-  }
-
-  mouseLeave(item: FunctionBase){
+  mouseLeave(item: FunctionBase) {
     this.isMouseOver = false;
-    if(!item.childs){
+    if (!item.childs) {
       item.isOpen = false;
     }
   }
 
+  mouseEnter(item: FunctionBase) {
+    if (this.parent)
+      this.getMaster(this.parent).itemClicked.emit(item);
+    else
+      this.itemClicked.emit(item);
+
+    item.isOpen = !item.isOpen;
+  }
+
+  getMaster(parent: MenuItemComponent) {
+    if (parent.parent)
+      this.getMaster(parent.parent)
+    else
+      return parent;
+  }
 
 }

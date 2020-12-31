@@ -179,17 +179,17 @@ export class HttpClientService {
   }
 
   getCompany() {
-    return this.httpClient.get(this.url + "/api/company", {
-      headers: {
-        "Access-Control-Allow-Origin": "*"
-      }
-    })
+    return this.httpClient.get(this.url + "/api/company")
       .pipe(catchError(err => this.errorHandler(err)))
   }
 
   getCurrentCompany() {
     return this.httpClient.get(this.url + "/api/company/current")
       .pipe(catchError(err => this.errorHandler(err)))
+  }
+
+  setCurrentCompany(id) {
+    return this.httpClient.put(this.url + '/api/company/current', null, { params: { id: id } })
   }
 
 
@@ -201,6 +201,18 @@ export class HttpClientService {
   updateCompany(company) {
     return this.httpClient.put(this.url + "/api/company", company)
   }
+
+  getInstitution(id) {
+    return this.httpClient.get(this.url + "/api/institution", {
+      params: {
+        id: id
+      }, headers: {
+        "Content-Type": "application/json"
+      }
+    })
+  }
+
+
 
 }
 

@@ -1,4 +1,4 @@
-package pl.sztyro.main.controllers;
+package pl.sztyro.main.config;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
@@ -57,7 +57,7 @@ public class HibernateConf {
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty(
-                "hibernate.hbm2ddl.auto", "update");
+                "hibernate.hbm2ddl.auto", "create-drop");
         hibernateProperties.setProperty(
                 "hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
 

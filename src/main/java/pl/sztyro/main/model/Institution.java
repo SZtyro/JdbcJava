@@ -22,6 +22,14 @@ public class Institution {
     @ManyToOne
     private Company company;
 
+    public Institution(Company company) {
+        this.company = company;
+    }
+
+    public Institution() {
+
+    }
+
     public Company getCompany() {
         return company;
     }

@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.jasypt.util.text.AES256TextEncryptor;
 import org.springframework.stereotype.Service;
-import pl.sztyro.main.controllers.HibernateConf;
+import pl.sztyro.main.config.HibernateConf;
 import pl.sztyro.main.model.User;
 import pl.sztyro.main.model.Database;
 

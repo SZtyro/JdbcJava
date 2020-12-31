@@ -20,6 +20,7 @@ import pl.sztyro.main.services.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +53,8 @@ public class CompanyController {
         try {
             companyService.createCompany(owner, obj.get("name").getAsString(), obj.get("nip").getAsLong());
             if (owner.getSelectedCompany() == null) {
-                List<Company> company = owner.getCompanies();
-                companyService.selectCompany(owner.getMail(), companyService.getCompany(company.get(0).getId()).getId());
+                //List<Company> company = owner.getCompanies();
+                //companyService.selectCompany(owner.getMail(), companyService.getCompany(company.get(0).getId()).getId());
             }
         } catch (ConstraintViolationException e) {
             String message = "";
@@ -114,37 +115,17 @@ public class CompanyController {
         }
     }
 
+    @PutMapping("/current")
+    public Company setSelectedCompany(HttpServletRequest request, @NotNull @RequestParam Long id) {
 
-    @GetMapping("/institution")
-    public Object getInstitutions(HttpServletRequest request) {
         try {
-            //Zalogowany użytkownik
-            User owner = userService.getUser(authService.getLoggedUserMail(request));
-            _logger.info("Pobieranie placówek użytkownika: " + owner.getMail());
-            return owner.getSelectedCompany().getInstitution();
-
+            return userService.selectCompany(authService.getLoggedUserMail(request), id);
         } catch (NotFoundException e) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "User not found");
-        }
-    }
-
-    @PostMapping("/institution")
-    public void addInstitution(HttpServletRequest request, @RequestBody Object institutionJson) {
-        try {
-            //Zalogowany użytkownik
-            String mail = authService.getLoggedUserMail(request);
-            Gson gson = new Gson();
-            Institution obj = gson.fromJson(gson.toJson(institutionJson), Institution.class);
-            companyService.addInstitution(mail, obj);
-            _logger.info("Dodawanie placówki użytkownika: " + mail + ", o nazwie: " + obj.getName());
-
-
-        } catch (NotFoundException e) {
-            _logger.error(e.getMessage());
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, e.getMessage());
         }
+
     }
+
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewChecked, AfterContentChecked, AfterContentInit } from '@angular/core';
-import { Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { Router, RouterEvent, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { HttpClientService } from './services/http-client.service';
 //import { AuthService, SocialUser } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
@@ -36,39 +36,55 @@ import { FunctionBase } from './modules/functionModules/functionBase';
 export class AppComponent implements OnInit, AfterContentInit {
 
   menuItems: FunctionBase[] = [
-    { icon: 'home', menuTitle: 'NAVBAR.HOME', routerLink: 'home' },
+    { icon: 'home', name: 'NAVBAR.HOME', routerLink: 'home' },
     {
-      icon: 'storage', menuTitle: 'Database', routerLink: 'databases', childs: [
+      icon: 'storage', name: 'Database', routerLink: 'databases', childs: [
         {
-          icon: 'settings', menuTitle: 'Settings', routerLink: 'databases', childs: []
+          icon: 'settings', name: 'Settings', routerLink: 'databases', childs: []
         },
-        { icon: 'table_rows', menuTitle: 'Tables', routerLink: 'databases', childs: [] }
+        { icon: 'table_rows', name: 'Tables', routerLink: 'databases', childs: [] }
       ]
     },
     {
-      icon: 'email', menuTitle: 'E-mail', routerLink: 'mail', childs: []
+      icon: 'email', name: 'E-mail', childs: []
     },
     {
-      icon: 'business', menuTitle: 'Company', routerLink: 'mail', childs: [
-        { icon: 'store', menuTitle: 'Stores' },
+      icon: 'business', name: 'Company', routerLink: 'mail', childs: [
         {
-          icon: 'person', menuTitle: 'Employees', childs: [
-            { icon: 'groups', menuTitle: 'Groups' },
-            { icon: 'event_note', menuTitle: 'Shifts' },
-            { icon: 'fact_check', menuTitle: 'Works' }
+          icon: 'account_balance', name: 'Structures', childs: [
+            { icon: 'store', name: 'Stores' },
+            { icon: 'corporate_fare', name: 'Offices' },
+            { icon: 'add_business', name: 'Add', routerLink: 'structures/0' }
           ]
         },
         {
-          icon: 'local_shipping', menuTitle: 'Vehicles', childs: []
+          icon: 'person', name: 'Employees', childs: [
+            { icon: 'groups', name: 'Groups' },
+            { icon: 'event_note', name: 'Shifts' },
+            { icon: 'fact_check', name: 'Works' }
+          ]
+        },
+        {
+          icon: 'local_shipping', name: 'Vehicles', childs: []
         }
       ]
     },
     {
-      icon: 'settings', menuTitle: 'NAVBAR.SETTINGS', routerLink: 'settings/company', childs: [
+      icon: 'settings', name: 'NAVBAR.SETTINGS', routerLink: 'settings/company', childs: [
 
       ]
     }
   ];
+  companies: FunctionBase[] = [
+    {
+      icon: 'business', name: 'pick_company', childs: [
+        {
+          icon: 'add', name: 'add_company', childs: []
+        }
+      ]
+    },
+
+  ]
   tableNames: String[] = [];
   dbConnection: boolean = false;
   opened: boolean = false;
@@ -82,7 +98,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   constructor(
     private httpClientService: HttpClientService,
     private router: Router,
-    //private authService: AuthService,
+    private route: ActivatedRoute,
     public translate: TranslateService,
     public dialog: MatDialog,
     public shared: SharedService
@@ -94,7 +110,16 @@ export class AppComponent implements OnInit, AfterContentInit {
     //console.log(this.auth.auth2.currentUser)
 
 
-    console.log(this.menuItems);
+    this.httpClientService.getCompany().subscribe(companies => {
+      companies.forEach(element => {
+        this.companies[0].childs.push(element)
+      });
+
+    })
+    this.httpClientService.getCurrentCompany().subscribe(current => {
+      console.log(current)
+      this.companies[0].name = current.name;
+    })
 
   }
 
@@ -160,6 +185,11 @@ export class AppComponent implements OnInit, AfterContentInit {
           item.isOpen = false;
         }, 10);
       });
+      this.companies.forEach(item => {
+        setTimeout(() => {
+          item.isOpen = false;
+        }, 10);
+      });
     }
   }
 
@@ -168,6 +198,12 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   }
 
+  selectCompany(item) {
+    if (item.id)
+      this.httpClientService.setCurrentCompany(item.id).subscribe(current => {
+        this.companies[0].name = current['name'];
+      })
+  }
 
 
   openTable(name) {

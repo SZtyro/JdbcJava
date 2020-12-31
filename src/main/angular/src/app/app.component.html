@@ -10,13 +10,17 @@
         style="display: flex ; flex-direction: column; justify-content: space-between ; align-items: flex-end;overflow: hidden;width: 100%; ">
         <div style="color: white; display: flex; flex-direction: column; width: 100%;">
 
-          <app-menu-item [menuItems]="menuItems" [isTitleVisible]="sideNavExtension" [offset]="15" ></app-menu-item>
+          <app-menu-item [direction]="'down'" [menuItems]="menuItems" [isTitleVisible]="sideNavExtension" [offset]="15">
+          </app-menu-item>
         </div>
 
 
         <!-- <div style="align-self: flex-end; display: flex; justify-content: end; align-items: flex-end; flex-direction: column;"> -->
         <div style="width: 100%; color: white;">
-
+          <div>
+            <app-menu-item (itemClicked)="selectCompany($event)" [direction]="'up'" [menuItems]="companies"
+              [isTitleVisible]="sideNavExtension" [offset]="15"></app-menu-item>
+          </div>
 
           <button mat-button matTooltip="{{'NAVBAR.LANGUAGE' | translate}}" [matMenuTriggerFor]="langMenu"
             class="sideNavContent">

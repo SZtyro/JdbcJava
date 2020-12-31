@@ -36,6 +36,7 @@ import { FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CompanySettingsComponent } from './forms/settings/company-settings/company-settings.component';
 import { UserSettingsComponent } from './forms/settings/user-settings/user-settings.component';
+import { InstitutionRegisterComponent } from './forms/institution-register/institution-register.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -57,7 +58,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     WidgetDirective,
     RegisterCompanyComponent,
     CompanySettingsComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    InstitutionRegisterComponent
   ],
   imports: [
     CommonModule,
