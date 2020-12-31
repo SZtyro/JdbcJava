@@ -21,7 +21,7 @@ a {
   // justify-content: center;
   // align-items: center;
   // color: inherit;
-  margin-left: 0px;;
+  margin-left: 0px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -47,7 +47,9 @@ button {
 }
 
 button:hover {
-  border-left: solid #fff 3px;;
+  border-left: solid #fff 3px;
   background-color: rgb(77, 77, 77);
   //transform: scale(1.07);
 }
+
+

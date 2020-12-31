@@ -130,41 +130,8 @@ export class HttpClientService {
       });
   }
 
-  setDashboard(dashboard: String) {
-    return this.httpClient.post(this.url + "/saveDashboard", dashboard,
-      {
 
-        headers:
-        {
-          "Authorization": sessionStorage.getItem('token'),
 
-        }
-      });
-  }
-
-  getDashboard() {
-    return this.httpClient.get(this.url + "/loadDashboard",
-      {
-        responseType: 'text',
-        headers:
-        {
-          "Authorization": sessionStorage.getItem('token'),
-
-        }
-      });
-  }
-
-  tryLogin() {
-
-    return this.httpClient.get(this.url + "/loginUser",
-      {
-        headers:
-        {
-          "Authorization": sessionStorage.getItem('token'),
-
-        }
-      });
-  }
   checkToken(token) {
     return this.httpClient.get(this.url + "/token", { responseType: "text", headers: { "Authorization": token, } });
   }
@@ -213,6 +180,9 @@ export class HttpClientService {
   }
 
 
+  logout() {
+    return this.httpClient.get(this.url + "/api/google/logout")
+  }
 
 }
 

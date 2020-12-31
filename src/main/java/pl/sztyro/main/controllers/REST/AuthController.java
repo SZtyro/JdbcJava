@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import pl.sztyro.main.exceptions.NotFoundException;
+import pl.sztyro.main.services.AuthService;
 import pl.sztyro.main.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,9 @@ public class AuthController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    AuthService authService;
 
     @GetMapping("/google/user")
     /**Pobiera zalogowanego użytkownika*/
@@ -63,4 +67,9 @@ public class AuthController {
         response.sendRedirect("/home");
     }
 
+    @GetMapping("/google/logout")
+    public void googleLogout(HttpServletRequest request) {
+        _logger.info("Wylogowywanie użytkownika: " + authService.getLoggedUserMail(request));
+        request.getSession().invalidate();
+    }
 }

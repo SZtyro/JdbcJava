@@ -5,4 +5,5 @@ export abstract class FunctionBase {
   routerLink?:String;
   isOpen?:boolean = false;
   isMouseOver?:boolean = false;
+  extras?;
 }

@@ -85,6 +85,18 @@ export class AppComponent implements OnInit, AfterContentInit {
     },
 
   ]
+  languages: FunctionBase[] = [
+    {
+      icon: '<span class="text-icon">EN</span>', name: 'English', childs: [
+        {
+          icon: '<span class="text-icon">EN</span>', name: 'English', extras: { code: 'en' }
+        },
+        {
+          icon: '<span class="text-icon">PL</span>', name: 'Polski', extras: { code: 'pl' }
+        },
+      ]
+    }
+  ]
   tableNames: String[] = [];
   dbConnection: boolean = false;
   opened: boolean = false;
@@ -124,9 +136,10 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   signOut() {
-    //this.auth.getUserData().subscribe().unsubscribe();
-    this.router.navigate([''])
-    //this.auth.signOut();
+    this.httpClientService.logout().subscribe(() => {
+      this.router.navigate([''])
+    }, err => console.log(err))
+
   }
 
 
@@ -190,6 +203,11 @@ export class AppComponent implements OnInit, AfterContentInit {
           item.isOpen = false;
         }, 10);
       });
+      this.languages.forEach(item => {
+        setTimeout(() => {
+          item.isOpen = false;
+        }, 10);
+      });
     }
   }
 
@@ -203,6 +221,12 @@ export class AppComponent implements OnInit, AfterContentInit {
       this.httpClientService.setCurrentCompany(item.id).subscribe(current => {
         this.companies[0].name = current['name'];
       })
+  }
+
+  selectLanguage(language: FunctionBase) {
+    this.languages[0].name = language.name;
+    this.languages[0].icon = '<span class="text-icon">' + language.extras.code.toUpperCase() + '</span>';
+    this.translate.use(language.extras.code)
   }
 
 

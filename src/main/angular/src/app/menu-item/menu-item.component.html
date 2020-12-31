@@ -4,8 +4,8 @@
 
   <div *ngIf="direction == 'up'">
     <div [@openClose]="item.isOpen ? 'open' : 'closed'">
-      <app-menu-item [direction]="'up'" [menuItems]="item.childs" [offset]="offset + 10" [isTitleVisible]="true" [opacity]="opacity + 0.09"
-        [parent]="this">
+      <app-menu-item [direction]="'up'" [menuItems]="item.childs" [offset]="offset + 10" [isTitleVisible]="true"
+        [opacity]="opacity + 0.09" [parent]="this">
       </app-menu-item>
     </div>
   </div>
@@ -15,9 +15,7 @@
 
       <div class="item-content-wrapper">
         <span style="display: flex;align-items: center;">
-          <span class="material-icons" style="margin-right: 5px;">
-            {{item.icon}}
-          </span>
+          <span class="material-icons" style="margin-right: 10px;" [innerHTML]="item.icon"></span>
           <span *ngIf="isTitleVisible">
             {{item.name |translate}}
           </span>
@@ -41,8 +39,8 @@
 
   <div *ngIf="direction == 'down'">
     <div [@openClose]="item.isOpen ? 'open' : 'closed'">
-      <app-menu-item (itemClicked)="mouseEnter($event)" [direction]="'down'" [menuItems]="item.childs" [offset]="offset + 10" [isTitleVisible]="true"
-        [opacity]="opacity + 0.09" [parent]="this">
+      <app-menu-item (itemClicked)="mouseEnter($event)" [direction]="'down'" [menuItems]="item.childs"
+        [offset]="offset + 10" [isTitleVisible]="true" [opacity]="opacity + 0.09" [parent]="this">
       </app-menu-item>
     </div>
   </div>

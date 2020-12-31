@@ -39,3 +39,15 @@ a {
 .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
   background-color: var(--mainColor);
 }
+
+.text-icon {
+  font-weight: 500;
+  font-family: "Roboto";
+  margin-right: inherit;
+}
+
+.item-content-wrapper {
+  height: 49px;
+  display: flex;
+  justify-content: space-between;
+}
