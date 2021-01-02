@@ -1,3 +1,4 @@
+import { NotificationResolverService } from './services/guards/resolvers/notification-resolver.service';
 import { InstitutionResolverService } from './services/guards/resolvers/institution-resolver.service';
 import { InstitutionRegisterComponent } from './main-app/forms/institution-register/institution-register.component';
 import { CompanyResolverService } from './services/guards/resolvers/company-resolver.service';
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'table/:tableName', component: TableComponent },
   {
     path: 'home', component: HomeComponent, resolve: {
-      companies: CompaniesResolverService
+      companies: CompaniesResolverService,
+      notifications: NotificationResolverService
     },
     //canActivate: [IsLoggedService]
   },

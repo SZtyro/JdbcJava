@@ -1,5 +1,6 @@
 package pl.sztyro.main.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
@@ -20,6 +21,8 @@ public class Institution {
     private List<User> employee;
 
     @ManyToOne
+    @JoinColumn(name = "company_id")
+    @JsonIgnore
     private Company company;
 
     public Institution(Company company) {
@@ -28,6 +31,12 @@ public class Institution {
 
     public Institution() {
 
+    }
+
+    public void merge(Institution newInstitution){
+        setName(newInstitution.getName());
+        setCompany(newInstitution.getCompany());
+        setEmployee(newInstitution.getEmployee());
     }
 
     public Company getCompany() {
@@ -52,5 +61,9 @@ public class Institution {
 
     public void setEmployee(List<User> employee) {
         this.employee = employee;
+    }
+
+    public int getId() {
+        return id;
     }
 }

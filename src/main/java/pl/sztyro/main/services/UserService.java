@@ -24,10 +24,15 @@ public class UserService {
 
         User u = session.get(User.class, mail);
         if (u == null) {
-            session.getTransaction().rollback();
-            session.close();
+            //session.getTransaction().rollback();
 
-            throw new NotFoundException("User not found");
+
+            //throw new NotFoundException("User not found");
+            addUser(mail);
+            u = session.get(User.class, mail);
+            session.getTransaction().commit();
+            session.close();
+            return u;
         } else {
             session.getTransaction().commit();
             session.close();

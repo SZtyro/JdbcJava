@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import pl.sztyro.main.exceptions.NoPermissionException;
 import pl.sztyro.main.exceptions.NotFoundException;
 import pl.sztyro.main.model.Institution;
 import pl.sztyro.main.model.User;
@@ -56,21 +57,18 @@ public class InstitutionController {
 //        }
 //    }
 
-//    @PostMapping()
-//    public void addInstitution(HttpServletRequest request, @RequestBody Object institutionJson) {
-//        try {
-//            //Zalogowany użytkownik
-//            String mail = authService.getLoggedUserMail(request);
-//            Gson gson = new Gson();
-//            Institution obj = gson.fromJson(gson.toJson(institutionJson), Institution.class);
-//            ins.addInstitution(mail, obj);
-//            _logger.info("Dodawanie placówki użytkownika: " + mail + ", o nazwie: " + obj.getName());
-//
-//
-//        } catch (NotFoundException e) {
-//            _logger.error(e.getMessage());
-//            throw new ResponseStatusException(
-//                    HttpStatus.NOT_FOUND, e.getMessage());
-//        }
-//    }
+    @PutMapping()
+    public void updateInstitution(HttpServletRequest request, @RequestBody Object institutionJson) {
+        try {
+            //Zalogowany użytkownik
+            String mail = authService.getLoggedUserMail(request);
+            Gson gson = new Gson();
+            Institution obj = gson.fromJson(gson.toJson(institutionJson), Institution.class);
+            institutionService.updateInstitution(mail, obj);
+            _logger.info("Dodawanie placówki użytkownika: " + mail + ", o nazwie: " + obj.getName());
+        } catch (NoPermissionException e) {
+            _logger.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
+        }
+    }
 }

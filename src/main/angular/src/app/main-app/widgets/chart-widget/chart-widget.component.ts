@@ -199,21 +199,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, AfterViewInit
 
 
   widgetNumber: number = null;
-  toSave() {
-    console.log('sejw charta')
-    let saveData = {
-      chartData: this.chartData,
-      widgetNumber: this.widgetNumber,
-      x: this.x,
-      y: this.y,
-      cols: this.cols,
-      rows: this.rows,
-      rawTable: this.rawTable
-    }
 
-    this.shared.homeRef.items[this.widgetNumber].data = saveData;
-
-  }
 
   load(index) {
     //let acc = JSON.parse(localStorage.getItem('ChartWidget' + this.widgetNumber));
@@ -255,7 +241,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, AfterViewInit
         rows: this.rows,
         rawTable: this.rawTable
       }
-      this.shared.homeRef.items[index].data = saveData;
+      
       this.widgetData = saveData;
     }
 

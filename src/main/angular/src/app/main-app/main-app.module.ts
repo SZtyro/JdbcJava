@@ -27,7 +27,6 @@ import { HttpClient } from '@angular/common/http';
 import { FilesUploadDirective } from './directives/FilesUpload/files-upload.directive'
 import { FileUploadModule } from 'ng2-file-upload';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { WidgetListModalComponent } from './modals/widget-list-modal/widget-list-modal.component';
 import { WidgetDirective } from '../main-app/directives/WidgetDirective/widget.directive';
 import { MatInputModule } from '@angular/material/input';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -44,8 +43,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 @NgModule({
   entryComponents: [
     GmailWidgetComponent,
-    ChartWidgetComponent,
-    WidgetListModalComponent
+    ChartWidgetComponent
   ],
   declarations: [
     HomeComponent,

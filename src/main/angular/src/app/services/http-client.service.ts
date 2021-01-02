@@ -184,5 +184,15 @@ export class HttpClientService {
     return this.httpClient.get(this.url + "/api/google/logout")
   }
 
+
+  getNotification(id, offset, limit) {
+    return this.httpClient.get(this.url + '/api/notification', {
+      params: {
+        id: id,
+        offset: offset,
+        limit: limit
+      }
+    })
+  }
 }
 

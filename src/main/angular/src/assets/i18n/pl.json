@@ -1,5 +1,5 @@
 {
-    "settings":"Ustawienia",
+    "settings": "Ustawienia",
     "save": "Zapisz",
     "company": "Firma",
     "user": "Użytkownik",
@@ -34,5 +34,10 @@
     "GMAIL_WIDGET": {
         "SENDER": "Nadawca",
         "SNIPPET": "Wiadomość"
+    },
+    "notification": {
+        "company": {
+            "created": "Firma <b>{{name}}</b> została utworzona."
+        }
     }
 }

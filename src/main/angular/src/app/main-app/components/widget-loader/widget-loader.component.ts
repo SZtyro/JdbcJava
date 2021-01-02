@@ -36,18 +36,7 @@ export class WidgetLoaderComponent implements OnInit {
       //   //ref.instance["widgetNumber"] = this.type.index
       //   ref.instance["widgetNumber"] = this.index
       // }
-      this.shared.homeRef.items.forEach((elem,index)=>{
-        elem.index = index;
-        try{
-          elem.componentRef.instance.widgetNumber = index;
-        }catch(e){
-
-        }
-
-        //ref.instance["widgetNumber"] = index
-        //elem.data.widgetNumber = index;
-        //console.log(index)
-      })
+      
       // setTimeout(()=>{
       //   this.shared.homeRef.items[this.index].index = this.index;
 

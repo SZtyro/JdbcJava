@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.sztyro.main.config.HibernateConf;
+import pl.sztyro.main.exceptions.NoPermissionException;
 import pl.sztyro.main.exceptions.NotFoundException;
 import pl.sztyro.main.model.Company;
 import pl.sztyro.main.model.Institution;
@@ -119,5 +120,26 @@ public class InstitutionService {
         } finally {
             session.close();
         }
+    }
+
+    public void updateInstitution(String mail, Institution newInstitution) throws NoPermissionException {
+        Session session = conf.getSession();
+
+
+
+            User user = session.load(User.class, mail);
+
+            Institution institution = session.load(Institution.class, newInstitution.getId());
+            if(user.getMail().equals(institution.getCompany().getOwner().getMail())){
+                institution.merge(newInstitution);
+                session.update(institution);
+                session.getTransaction().commit();
+                session.close();
+            }else{
+                session.getTransaction().rollback();
+                session.close();
+                throw new NoPermissionException("User is not owner of company");
+            }
+
     }
 }

@@ -7,6 +7,7 @@ import { ChartWidgetComponent } from '../../widgets/chart-widget/chart-widget.co
 import { ScriptLoaderService } from 'angular-google-charts';
 import { HomeWidget } from '../../interfaces/homeWidget';
 import { SharedService } from '../../../services/Shared/shared.service';
+import { MatTableDataSource } from '@angular/material';
 
 export interface item {
   typeName: string,
@@ -25,27 +26,16 @@ export interface item {
 
 export class HomeComponent implements OnInit {
 
+  notifications;
+  notificationsDataSource;
 
   tableNames: String[] = [];
   opened: boolean = false;
 
   num: number = 0;
 
-  public items: item[] = [];
 
-  resize(x: HomeWidget) {
-    x.onResize();
-  }
 
-  changed(x: HomeWidget) {
-    // console.log(itemComponent);
-    x.onChange();
-  }
-
-  deleteAllWidgets() {
-    this.items = [];
-    localStorage.removeItem('desktopWidgets');
-  }
 
   constructor(
     private httpClientService: HttpClientService,
@@ -66,6 +56,10 @@ export class HomeComponent implements OnInit {
       if(data.companies.length == 0){
         this.router.navigate(['/settings/company']);
       }
+
+      this.notifications = data.notifications;
+      this.notificationsDataSource = new MatTableDataSource(this.notifications);
+      console.log(this.notificationsDataSource)
     })
   }
 

@@ -37,7 +37,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ChartSettingsModalComponent } from './main-app/modals/chart-settings-modal/chart-settings-modal.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { WidgetListModalComponent } from './main-app/modals/widget-list-modal/widget-list-modal.component';
 import { WelcomeModule } from './welcome/welcome.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ChartComponentComponent } from './chart-component/chart-component.component';
@@ -76,7 +75,6 @@ export function provideConfig() {
     AddModalComponent,
     LoginWindowComponent,
     ChartSettingsModalComponent,
-    WidgetListModalComponent,
     ChartComponentComponent,
     MenuItemComponent
 

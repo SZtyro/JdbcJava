@@ -38,7 +38,6 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
 
   saveChart(){
     this.father.drawChart(this.father.chartElem.nativeElement);
-    this.father.toSave();
   }
 
   drawChart(ref) {
@@ -111,7 +110,6 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
       showTitle: false
     }
     this.father.rawTable = [];
-    this.father.toSave();
 
 
   }

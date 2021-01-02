@@ -2,7 +2,7 @@
     "add_company": "Add company",
     "pick_company": "Pick company",
     "new_institution": "New institution",
-    "settings":"Settings",
+    "settings": "Settings",
     "save": "Save",
     "company": "Company",
     "user": "User",
@@ -37,5 +37,10 @@
     "GMAIL_WIDGET": {
         "SENDER": "Sender",
         "SNIPPET": "Snippet"
+    },
+    "notification": {
+        "company": {
+            "created": "Company <b>{{name}}</b> has been created."
+        }
     }
 }

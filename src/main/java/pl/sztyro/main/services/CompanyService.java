@@ -1,5 +1,8 @@
 package pl.sztyro.main.services;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
@@ -13,9 +16,7 @@ import pl.sztyro.main.model.Institution;
 import pl.sztyro.main.model.User;
 
 import javax.validation.constraints.NotNull;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class CompanyService {
@@ -25,19 +26,22 @@ public class CompanyService {
     @Autowired
     HibernateConf conf;
 
-    /**
-     * @param owner
-     * @param name
-     * @param nip
-     */
-    public void createCompany(@NotNull User owner, String name, long nip) {
+    @Autowired
+    NotificationService notificationService;
+
+    public Company createCompany(String mail) {
         Session session = conf.getSession();
+        Company company = null;
         try {
-            Company company = new Company(owner, name, nip);
-            //.addCompany(company);
+            User user = session.load(User.class, mail);
+            company = new Company(user);
+            if (user.getSelectedCompany() == null)
+                user.setSelectedCompany(company);
             session.save(company);
+            session.update(user);
             //session.update(owner);
             session.getTransaction().commit();
+
 
         } catch (Exception e) {
             _logger.error(e.getMessage());
@@ -45,6 +49,7 @@ public class CompanyService {
             throw e;
         } finally {
             session.close();
+            return company;
         }
 
     }
@@ -152,16 +157,22 @@ public class CompanyService {
             session.update(company);
             session.getTransaction().commit();
 
+            Gson gson = new Gson();
+            JsonObject params = new JsonObject();
+            params.addProperty("name", company.getName());
+            notificationService.createNotification("BOT", "notification.company.created", gson.toJson(params), new ArrayList<User>(Arrays.asList(company.getOwner())));
+            //notificationService.createNotification("BOT","Company <b>" + company.getName() + "</b> has been created2.",new ArrayList<User>(Arrays.asList(company.getOwner())));
         } catch (Exception e) {
             _logger.error(e.getMessage());
             session.getTransaction().rollback();
             throw e;
         } finally {
             session.close();
+
+
         }
 
     }
-
 
 
     public List<Company> getUserCompanies(String mail) throws NotFoundException {

@@ -1,6 +1,7 @@
 package pl.sztyro.main.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Proxy;
@@ -23,15 +24,10 @@ public class User {
     @Column(name = "user_mail")
     private String mail;
 
-    @JoinColumn(name = "user_selected_company")
+    @JoinColumn(name = "user_selected_company_id")
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("company_owner")
     private Company selectedCompany;
-
-    /**
-     * Pakiety
-     */
-    @Column(name = "user_pack")
-    private String pack;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_database")
@@ -62,21 +58,10 @@ public class User {
         this.created = new Date();
     }
 
-    public String getPack() {
-        return pack;
-    }
-
     public void setMail(String mail) {
         this.mail = mail;
     }
 
-//    public List<Company> getCompanies() {
-//        return companies;
-//    }
-
-//    public void setCompanies(List<Company> companies) {
-//        this.companies = companies;
-//    }
 
     public Company getSelectedCompany() {
         return selectedCompany;
@@ -85,10 +70,7 @@ public class User {
     public void setSelectedCompany(Company selectedCompany) {
         this.selectedCompany = selectedCompany;
     }
-//
-//    public void addCompany(Company company){
-//        this.companies.add(company);
-//    }
+
 
     public String getMail() {
         return mail;

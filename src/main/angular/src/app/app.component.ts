@@ -4,7 +4,6 @@ import { HttpClientService } from './services/http-client.service';
 //import { AuthService, SocialUser } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { TranslateService } from '@ngx-translate/core';
-import { WidgetListModalComponent } from './main-app/modals/widget-list-modal/widget-list-modal.component';
 import { MatDialog } from '@angular/material';
 import { SharedService } from './services/Shared/shared.service';
 import { Observable } from 'rxjs';
@@ -237,16 +236,5 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.router.onSameUrlNavigation = 'reload';
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(WidgetListModalComponent, {
-      width: '80%',
-      height: '80%',
-      data: { father: this }
-
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-
-    });
-  }
+  
 }

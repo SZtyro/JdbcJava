@@ -48,11 +48,13 @@ public class CompanyController {
         //Zalogowany użytkownik
         User owner = userService.getUser(authService.getLoggedUserMail(request));
         Gson gson = new Gson();
-        JsonObject obj = gson.fromJson(gson.toJson(companyJson), JsonObject.class);
-        _logger.info("Tworzenie firmy: " + obj.get("name").getAsString());
+        Company obj = gson.fromJson(gson.toJson(companyJson), Company.class);
+        _logger.info("Tworzenie firmy: " + obj.getName());
         try {
-            companyService.createCompany(owner, obj.get("name").getAsString(), obj.get("nip").getAsLong());
+            //companyService.createCompany(owner, obj.get("name").getAsString(), obj.get("nip").getAsLong());
+            companyService.updateCompany(obj);
             if (owner.getSelectedCompany() == null) {
+                userService.selectCompany(owner.getMail(), obj.getId());
                 //List<Company> company = owner.getCompanies();
                 //companyService.selectCompany(owner.getMail(), companyService.getCompany(company.get(0).getId()).getId());
             }
@@ -85,10 +87,11 @@ public class CompanyController {
 
     @GetMapping("/current")
     public Company getCurrentCompany(HttpServletRequest request) {
-        Company company = companyService.getCurrentCompany(authService.getLoggedUserMail(request));
+        String mail = authService.getLoggedUserMail(request);
+        Company company = companyService.getCurrentCompany(mail);
 
         if (company == null)
-            return new Company();
+            return companyService.createCompany(mail);
         else
             return company;
     }

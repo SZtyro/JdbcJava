@@ -36,7 +36,7 @@ public class AuthController {
     /**Pobiera zalogowanego użytkownika*/
     public Object getCurrentUser(HttpServletRequest request, HttpServletResponse response) {
 
-
+        _logger.info("Pobieranie aktualnego użytkownika Google");
         Principal principal = request.getUserPrincipal();
 
         if (principal == null) {
@@ -50,6 +50,7 @@ public class AuthController {
             try {
                 userService.getUser(details.get("email"));
             } catch (NotFoundException e) {
+                _logger.error("Użytkownik nie istnieje.");
                 userService.addUser(details.get("email"));
             }
 
@@ -62,8 +63,16 @@ public class AuthController {
      */
     @CrossOrigin("https://accounts.google.com")
     @GetMapping("/google/auth")
-    public void googleLogin(HttpServletResponse response) throws IOException {
+    public void googleLogin(HttpServletRequest request,HttpServletResponse response) throws IOException {
         _logger.info("Autoryzacja");
+        String mail = authService.getLoggedUserMail(request);
+        try{
+            userService.getUser(mail);
+        } catch (NotFoundException e) {
+            _logger.error(e.getMessage());
+            e.printStackTrace();
+            userService.addUser(mail);
+        }
         response.sendRedirect("/home");
     }
 

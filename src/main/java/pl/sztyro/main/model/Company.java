@@ -1,8 +1,7 @@
 package pl.sztyro.main.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Proxy;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -22,26 +21,21 @@ public class Company {
     @JoinColumn(name = "company_owner")
     @NotNull
     @ManyToOne
+    @JsonIgnore
     private User owner;
 
     @Column(name = "company_name")
-    @NotNull
-    @NotBlank
     private String name;
 
     @Column(name = "company_NIP")
-    @NotNull
+    //@NotNull
     //@Pattern(regexp = "^\\d{10}$")
-    @Range(min = 1000000000, max = 9999999999L, message = "Number not in range {min} - {max}")
+    //@Range(min = 1000000000, max = 9999999999L, message = "Number not in range {min} - {max}")
     private long nip;
-
-    @Column(name = "company_administration")
-    @OneToMany
-    private List<User> administration;
 
     @Column(name = "company_news")
     @OneToMany
-    private List<Information> news;
+    private List<Notification> news;
 
     public void merge(Company company) {
         this.setName(company.getName());
@@ -52,10 +46,8 @@ public class Company {
 
     }
 
-    public Company(@NotNull User owner, @NotNull String name, @NotNull long nip) {
+    public Company(@NotNull User owner) {
         this.owner = owner;
-        this.name = name;
-        this.nip = nip;
     }
 
 
@@ -79,4 +71,11 @@ public class Company {
         return id;
     }
 
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
 }
