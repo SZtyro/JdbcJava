@@ -13,7 +13,7 @@ public class Institution {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private int id;
+    private long id;
 
     private String name;
 
@@ -64,7 +64,7 @@ public class Institution {
         this.employee = employee;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

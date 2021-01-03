@@ -38,6 +38,7 @@ import { UserSettingsComponent } from './forms/settings/user-settings/user-setti
 import { InstitutionRegisterComponent } from './forms/institution-register/institution-register.component';
 import { EmployeeComponent } from './forms/employee/employee.component';
 import {MatSelectModule} from '@angular/material/select';
+import { EmployeesListComponent } from './components/lists/employees-list/employees-list.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -60,7 +61,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CompanySettingsComponent,
     UserSettingsComponent,
     InstitutionRegisterComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    EmployeesListComponent
   ],
   imports: [
     CommonModule,

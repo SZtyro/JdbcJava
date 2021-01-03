@@ -206,5 +206,9 @@ export class HttpClientService {
   inviteUser(body) {
     return this.httpClient.post(this.url + "/api/user/invite", body)
   }
+
+  getCompanyUsers() {
+    return this.httpClient.get(this.url + "/api/institution/employee")
+  }
 }
 

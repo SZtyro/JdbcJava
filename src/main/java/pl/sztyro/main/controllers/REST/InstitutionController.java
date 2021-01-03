@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import pl.sztyro.main.services.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/institution")
@@ -46,7 +48,7 @@ public class InstitutionController {
         _logger.info("id: " + id);
         if (id == null) {
             return institutionService.getInstitutions(userService.getUser(authService.getLoggedUserMail(request)).getSelectedCompany());
-        }else if (id == 0) {
+        } else if (id == 0) {
             return new Institution(userService.getUser(authService.getLoggedUserMail(request)).getSelectedCompany());
             //return institutionService.createInstitution(authService.getLoggedUserMail(request));
         } else {
@@ -84,5 +86,13 @@ public class InstitutionController {
             _logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
         }
+    }
+
+    @GetMapping("/employee")
+    public List<User> getInstitutionEmployee(HttpServletRequest request) throws NotFoundException {
+        String mail = authService.getLoggedUserMail(request);
+
+        return companyService.getCompanyEmployees(mail);
+
     }
 }

@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Service;
 import pl.sztyro.main.config.HibernateConf;
 import pl.sztyro.main.exceptions.NotFoundException;
@@ -198,6 +199,32 @@ public class CompanyService {
         }
 
 
+    }
+
+    public List<User> getCompanyEmployees(String mail) throws NotFoundException {
+        Session session = conf.getSession();
+        List<User> employees = null;
+
+
+        try {
+            User user = session.load(User.class, mail);
+            _logger.info("Pobieranie pracowników firmy: " + user.getSelectedCompany().getName());
+
+            Query query = session.createQuery("select user from Institution i join i.employee as user");
+            employees = query.list();
+            session.getTransaction().commit();
+            _logger.info("Pobrano pracowników firmy: " + employees);
+        } catch (Exception e) {
+            _logger.error(e.getMessage());
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+            if (employees == null) {
+                throw new NotFoundException("Company has no employees");
+            } else {
+                return employees;
+            }
+        }
     }
 
 }
