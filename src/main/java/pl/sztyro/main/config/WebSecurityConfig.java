@@ -1,5 +1,7 @@
 package pl.sztyro.main.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -33,24 +35,31 @@ import java.io.IOException;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static final Logger _logger = LoggerFactory.getLogger(WebSecurityConfig.class);
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
 
                 .antMatchers("/api/**").authenticated()
+                .antMatchers("/login").permitAll()
                 //.antMatchers("/api/google/auth","/api/redirectHome").authenticated()
 
                 .anyRequest().permitAll()
-//                .and().exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
-//                    if (authException != null) {
-//                        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//                        //response.getWriter().print("Unauthorizated");
-//                        //response.sendRedirect("/api/google/auth");
-//                        //response.sendRedirect("/login");
-//                        response.setContentType("application/json");
-//                    }
-//                })
+                .and().exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
+
+            _logger.warn(authException.getMessage());
+
+
+            if (authException != null) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().print("Unauthorizated");
+                //response.sendRedirect("/api/google/auth");
+                //response.sendRedirect("/login");
+
+            }
+        })
 
                 .and().csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());

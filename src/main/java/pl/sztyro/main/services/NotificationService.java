@@ -52,7 +52,7 @@ public class NotificationService {
 
             //Query query = session.createQuery("FROM \'notification\' n INNER JOIN notification_user u ON n.id = u.Notification_id WHERE u.involved_user_mail = 'fabixd123@gmail.com' ORDER BY created");
 
-            Query query = session.createQuery("FROM Notification as n where \'" + mail + "\' in elements(n.involved)");
+            Query query = session.createQuery("FROM Notification as n where \'" + mail + "\' in elements(n.involved) order by n.created desc ");
             notifications = query.list();
 
             session.getTransaction().commit();

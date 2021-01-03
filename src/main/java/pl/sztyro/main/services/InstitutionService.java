@@ -1,5 +1,7 @@
 package pl.sztyro.main.services;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
@@ -13,6 +15,8 @@ import pl.sztyro.main.model.Company;
 import pl.sztyro.main.model.Institution;
 import pl.sztyro.main.model.User;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -22,6 +26,12 @@ public class InstitutionService {
 
     @Autowired
     HibernateConf conf;
+
+    @Autowired
+    NotificationService notificationService;
+
+    @Autowired
+    UserService userService;
 
     public Institution createInstitution(String mail) throws NotFoundException {
 
@@ -78,7 +88,7 @@ public class InstitutionService {
 
         try {
 
-            Query query = session.createQuery("from Institution where company=" + company);
+            Query query = session.createQuery("from Institution i where i.company.id=" + company.getId());
             institutions = query.list();
             session.getTransaction().commit();
 
@@ -100,16 +110,19 @@ public class InstitutionService {
     public void addInstitution(String mail, Institution institution) throws NotFoundException {
         Session session = conf.getSession();
 
+        _logger.info("Dodawanie placówki: " + institution.getName());
 
         try {
             User user = session.load(User.class, mail);
             Company selectedCompany = user.getSelectedCompany();
             if (selectedCompany == null) {
+                _logger.error("Użytkownik nie ma wybranej firmy");
                 throw new NotFoundException("User has no selected company");
             } else {
                 institution.setCompany(selectedCompany);
                 //selectedCompany.addInstitution(institution);
             }
+            System.out.println("cmp: " + institution.getCompany());
             session.update(selectedCompany);
             session.update(institution);
             session.getTransaction().commit();
@@ -122,24 +135,71 @@ public class InstitutionService {
         }
     }
 
-    public void updateInstitution(String mail, Institution newInstitution) throws NoPermissionException {
+    public void updateInstitution(String mail, Institution newInstitution) throws NoPermissionException, NotFoundException {
         Session session = conf.getSession();
 
 
+        User user = session.load(User.class, mail);
+        Institution institution;
 
-            User user = session.load(User.class, mail);
+        Gson obj = new Gson();
+        JsonObject params = new JsonObject();
+        params.addProperty("name", newInstitution.getName());
 
-            Institution institution = session.load(Institution.class, newInstitution.getId());
-            if(user.getMail().equals(institution.getCompany().getOwner().getMail())){
+
+        if (newInstitution.getId() == 0) {
+            if (newInstitution.getCompany() == null) {
+                Company selectedCompany = user.getSelectedCompany();
+                if (selectedCompany == null) {
+                    _logger.error("Użytkownik nie ma wybranej firmy");
+                    throw new NotFoundException("User has no selected company");
+                } else {
+                    newInstitution.setCompany(selectedCompany);
+                }
+            }
+            session.save(newInstitution);
+            session.getTransaction().commit();
+            session.close();
+
+            notificationService.createNotification("BOT", "notification.institution.created", obj.toJson(params), new ArrayList<User>(Arrays.asList(userService.getUser(mail))));
+        } else {
+            institution = session.load(Institution.class, newInstitution.getId());
+
+            if (user.getMail().equals(institution.getCompany().getOwner().getMail())) {
                 institution.merge(newInstitution);
                 session.update(institution);
                 session.getTransaction().commit();
                 session.close();
-            }else{
+
+                notificationService.createNotification("BOT", "notification.institution.updated", obj.toJson(params), new ArrayList<User>(Arrays.asList(userService.getUser(mail))));
+            } else {
                 session.getTransaction().rollback();
                 session.close();
                 throw new NoPermissionException("User is not owner of company");
             }
+        }
 
+
+    }
+
+    public void addUserToInstitution(String mail, Long id) {
+        Session session = conf.getSession();
+
+        _logger.info("Dodawanie użytkownika: " + mail + " do placówki.");
+
+        try {
+            User user = session.load(User.class, mail);
+            Institution institution = session.load(Institution.class, id);
+            institution.addEmployee(user);
+
+            session.update(institution);
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            _logger.error(e.getMessage());
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
     }
 }

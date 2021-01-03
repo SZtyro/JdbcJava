@@ -38,6 +38,15 @@
     "notification": {
         "company": {
             "created": "Firma <b>{{name}}</b> została utworzona."
+        },
+        "institution": {
+            "created": "Placówka <b>{{name}}</b> została stworzona.",
+            "updated": "Placówka <b>{{name}}</b> została zaktualizowana."
+        },
+        "user":{
+            "invite":{
+                "success": "Pomyślnie dodano użytkownika <b>{{mail}}</b>."
+            }
         }
     }
 }

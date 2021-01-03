@@ -76,4 +76,12 @@ public class Notification {
     public void setParams(String params) {
         this.params = params;
     }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 }

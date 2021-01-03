@@ -26,13 +26,13 @@ export class AuthInterceptor implements HttpInterceptor {
       (err: any) => {
         console.log(err)
 
-        // if (err.status !== 0) {
-        //   console.log("zalogowany")
-        //   return;
-        // } else {
-        //   console.log("niezalogowany")
-        //   window.location.href = "login"
-        // }
+        if (err.status !== 401) {
+          console.log("zalogowany")
+          return;
+        } else {
+          console.log("niezalogowany")
+          window.location.href = "login"
+        }
 
       }));
   }

@@ -41,6 +41,15 @@
     "notification": {
         "company": {
             "created": "Company <b>{{name}}</b> has been created."
+        },
+        "institution": {
+            "created": "Institution <b>{{name}}</b> has been created.",
+            "updated": "Institution <b>{{name}}</b> has been updated."
+        },
+        "user": {
+            "invite": {
+                "success": "User <b>{{mail}}</b> has been succesfully created."
+            }
         }
     }
 }

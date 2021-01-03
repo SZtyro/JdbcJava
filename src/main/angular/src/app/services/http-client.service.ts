@@ -169,14 +169,22 @@ export class HttpClientService {
     return this.httpClient.put(this.url + "/api/company", company)
   }
 
-  getInstitution(id) {
+  getInstitution(id?) {
+    let params;
+    if (id) {
+      params = { id: id }
+    }
+
     return this.httpClient.get(this.url + "/api/institution", {
-      params: {
-        id: id
-      }, headers: {
+      params: params,
+      headers: {
         "Content-Type": "application/json"
       }
     })
+  }
+
+  updateInstitution(body) {
+    return this.httpClient.put(this.url + "/api/institution", body)
   }
 
 
@@ -193,6 +201,10 @@ export class HttpClientService {
         limit: limit
       }
     })
+  }
+
+  inviteUser(body) {
+    return this.httpClient.post(this.url + "/api/user/invite", body)
   }
 }
 

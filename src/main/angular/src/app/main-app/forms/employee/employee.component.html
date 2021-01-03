@@ -1,0 +1,20 @@
+<h1 class="main-header" translate>user_invite</h1>
+<div class="container-fluid" style="padding-top: 15px;">
+    <mat-form-field class="example-form-field col-12 col-md-6">
+        <mat-label>E-mail</mat-label>
+        <input matInput type="text" [(ngModel)]="form.mail">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Favorite food</mat-label>
+        <mat-select [(value)]="form.institution_id">
+            <mat-option *ngFor="let institution of institutions" [value]="institution.id">
+                {{institution.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="row">
+        <button mat-raised-button (click)="inviteUser()" translate>invite</button>
+    </div>
+</div>

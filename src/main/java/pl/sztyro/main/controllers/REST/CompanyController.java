@@ -71,6 +71,7 @@ public class CompanyController {
 
     }
 
+    
     @GetMapping()
     public Object getCompanies(HttpServletRequest request, HttpServletResponse response) {
         try {

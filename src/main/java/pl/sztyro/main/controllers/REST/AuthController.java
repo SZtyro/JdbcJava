@@ -61,7 +61,7 @@ public class AuthController {
     /**
      * Odwołanie do tej ścieżki powoduje wysłanie formularza logowania dla niezalogowanych u zytkowników
      */
-    @CrossOrigin("https://accounts.google.com")
+    @CrossOrigin()
     @GetMapping("/google/auth")
     public void googleLogin(HttpServletRequest request,HttpServletResponse response) throws IOException {
         _logger.info("Autoryzacja");

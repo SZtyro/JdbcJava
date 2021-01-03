@@ -1,3 +1,5 @@
+import { InstitutionsResolverService } from './services/guards/resolvers/institutions-resolver.service';
+import { EmployeeComponent } from './main-app/forms/employee/employee.component';
 import { NotificationResolverService } from './services/guards/resolvers/notification-resolver.service';
 import { InstitutionResolverService } from './services/guards/resolvers/institution-resolver.service';
 import { InstitutionRegisterComponent } from './main-app/forms/institution-register/institution-register.component';
@@ -37,6 +39,11 @@ const routes: Routes = [
   {
     path: 'structures/:id', component: InstitutionRegisterComponent, resolve: {
       institution: InstitutionResolverService
+    }
+  },
+  {
+    path: 'employees/:id', component: EmployeeComponent, resolve: {
+      institutions: InstitutionsResolverService
     }
   },
   {

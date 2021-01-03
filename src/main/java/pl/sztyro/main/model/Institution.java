@@ -18,6 +18,7 @@ public class Institution {
     private String name;
 
     @OneToMany
+    @JsonIgnore
     private List<User> employee;
 
     @ManyToOne
@@ -65,5 +66,9 @@ public class Institution {
 
     public int getId() {
         return id;
+    }
+
+    public void addEmployee(User employee){
+        this.employee.add(employee);
     }
 }
