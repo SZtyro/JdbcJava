@@ -11,11 +11,12 @@ import { BasicTable } from 'src/app/main-app/ts/basicTable';
 export class EmployeesListComponent extends BasicTable implements OnInit {
 
   ngOnInit(): void {
-    this.columns = ['mail']
+    this.columns = ['mail', 'institution'];
+    this.name = "employees"
     this.route.data.subscribe(data => {
       console.log(data)
       this.dataSource = new MatTableDataSource(data.employees);
-      
+
     })
   }
 

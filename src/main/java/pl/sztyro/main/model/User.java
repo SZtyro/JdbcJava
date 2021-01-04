@@ -31,13 +31,8 @@ public class User {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_database")
+    @JsonIgnore
     private Database database;
-
-//
-//    @OneToMany
-//    @Fetch(FetchMode.JOIN)
-//    @Column(name = "user_companies")
-//    private List<Company> companies = null;
 
     @Column(name = "user_created")
     private Date created;

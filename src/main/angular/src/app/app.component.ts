@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   menuItems: FunctionBase[] = [
     { icon: 'home', name: 'NAVBAR.HOME', routerLink: 'home' },
     {
-      icon: 'storage', name: 'Database', routerLink: 'databases', childs: [
+      icon: 'storage', name: 'Database', childs: [
         {
           icon: 'settings', name: 'Settings', routerLink: 'databases', childs: []
         },
@@ -48,7 +48,7 @@ export class AppComponent implements OnInit, AfterContentInit {
       icon: 'email', name: 'E-mail', childs: []
     },
     {
-      icon: 'business', name: 'Company', routerLink: 'mail', childs: [
+      icon: 'business', name: 'Company', childs: [
         {
           icon: 'account_balance', name: 'Structures', childs: [
             { icon: 'store', name: 'Stores' },
@@ -58,8 +58,8 @@ export class AppComponent implements OnInit, AfterContentInit {
         },
         {
           icon: 'person', name: 'Employees', childs: [
-            { icon: 'list', name: 'employee_list', routerLink: 'employees/list'},
-            { icon: 'person_add', name: 'employee_add', routerLink: 'employees/0'},
+            { icon: 'list', name: 'employee_list', routerLink: 'employees/list' },
+            { icon: 'person_add', name: 'employee_add', routerLink: 'employees/0' },
             { icon: 'groups', name: 'Groups' },
             { icon: 'event_note', name: 'Shifts' },
             { icon: 'fact_check', name: 'Tasks' }
@@ -226,7 +226,8 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   selectLanguage(language: FunctionBase) {
     this.languages[0].name = language.name;
-    this.languages[0].icon = '<span class="text-icon">' + language.extras.code.toUpperCase() + '</span>';
+    if (language.extras.code)
+      this.languages[0].icon = '<span class="text-icon">' + language.extras.code.toUpperCase() + '</span>';
     this.translate.use(language.extras.code)
   }
 
@@ -238,5 +239,5 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.router.onSameUrlNavigation = 'reload';
   }
 
-  
+
 }

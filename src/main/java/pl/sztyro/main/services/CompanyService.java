@@ -1,23 +1,23 @@
 package pl.sztyro.main.services;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Service;
 import pl.sztyro.main.config.HibernateConf;
 import pl.sztyro.main.exceptions.NotFoundException;
 import pl.sztyro.main.model.Company;
-import pl.sztyro.main.model.Institution;
 import pl.sztyro.main.model.User;
 
-import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class CompanyService {
@@ -201,17 +201,27 @@ public class CompanyService {
 
     }
 
-    public List<User> getCompanyEmployees(String mail) throws NotFoundException {
+    public Object getCompanyEmployees(String mail) throws NotFoundException {
         Session session = conf.getSession();
-        List<User> employees = null;
+        List<Object[]> employees = null;
 
-
+        JSONArray json = new JSONArray();
         try {
             User user = session.load(User.class, mail);
             _logger.info("Pobieranie pracowników firmy: " + user.getSelectedCompany().getName());
 
-            Query query = session.createQuery("select user from Institution i join i.employee as user");
+            Query query = session.createQuery("select user.mail as mail, i.name as institution from Institution i join i.employee as user");
             employees = query.list();
+
+
+
+            for (Object[] row: employees) {
+                JSONObject obj = new JSONObject();
+                obj.put("mail", row[0]);
+                obj.put("institution", row[1]);
+                json.put(obj);
+            }
+
             session.getTransaction().commit();
             _logger.info("Pobrano pracowników firmy: " + employees);
         } catch (Exception e) {
@@ -222,7 +232,7 @@ public class CompanyService {
             if (employees == null) {
                 throw new NotFoundException("Company has no employees");
             } else {
-                return employees;
+                return json.toList();
             }
         }
     }

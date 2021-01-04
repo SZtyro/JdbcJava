@@ -89,7 +89,7 @@ public class InstitutionController {
     }
 
     @GetMapping("/employee")
-    public List<User> getInstitutionEmployee(HttpServletRequest request) throws NotFoundException {
+    public Object getInstitutionEmployee(HttpServletRequest request) throws NotFoundException {
         String mail = authService.getLoggedUserMail(request);
 
         return companyService.getCompanyEmployees(mail);

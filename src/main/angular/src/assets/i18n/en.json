@@ -1,6 +1,11 @@
 {
+    "mail": "E-mail",
+    "institution": "Institution",
     "add_company": "Add company",
     "pick_company": "Pick company",
+    "employees": "Employees",
+    "employee_list": "List",
+    "employee_add": "Add",
     "new_institution": "New institution",
     "settings": "Settings",
     "save": "Save",

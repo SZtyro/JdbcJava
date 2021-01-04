@@ -1,7 +1,12 @@
 {
+    "mail": "E-mail",
+    "institution": "Placówka",
     "settings": "Ustawienia",
     "save": "Zapisz",
     "company": "Firma",
+    "employees": "Pracownicy",
+    "employee_list": "Lista",
+    "employee_add": "Dodaj",
     "user": "Użytkownik",
     "NAVBAR": {
         "GOOGLE_LOGIN": "Zaloguj się przez Google!",
