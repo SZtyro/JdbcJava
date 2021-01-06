@@ -1,3 +1,4 @@
+import { detailExpand } from './../../main-app/ts/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClientService } from '../../services/http-client.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,19 +13,15 @@ import { AddModalComponent } from '../add-modal/add-modal.component';
 import { ActivatedRoute } from '@angular/router';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable'
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
   animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+    detailExpand
+  ]
 })
 
 export class TableComponent implements OnInit {

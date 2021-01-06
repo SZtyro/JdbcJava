@@ -51,8 +51,7 @@ export class AppComponent implements OnInit, AfterContentInit {
       icon: 'business', name: 'Company', childs: [
         {
           icon: 'account_balance', name: 'Structures', childs: [
-            { icon: 'store', name: 'Stores' },
-            { icon: 'corporate_fare', name: 'Offices' },
+            { icon: 'store', name: 'institutions', routerLink: 'institutions/list' },
             { icon: 'add_business', name: 'Add', routerLink: 'structures/0' }
           ]
         },

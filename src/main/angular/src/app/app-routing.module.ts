@@ -1,5 +1,6 @@
+import { InstitutionsListComponent } from './main-app/components/lists/institutions-list.component';
 import { EmployeesResolverService } from './services/guards/resolvers/employees-resolver.service';
-import { EmployeesListComponent } from './main-app/components/lists/employees-list/employees-list.component';
+import { EmployeesListComponent } from './main-app/components/lists/employees-list.component';
 import { InstitutionsResolverService } from './services/guards/resolvers/institutions-resolver.service';
 import { EmployeeComponent } from './main-app/forms/employee/employee.component';
 import { NotificationResolverService } from './services/guards/resolvers/notification-resolver.service';
@@ -51,8 +52,22 @@ const routes: Routes = [
         }
       },
       {
-        path: ':id', "component": EmployeeComponent, resolve: {
+        path: ':id', component: EmployeeComponent, resolve: {
           institutions: InstitutionsResolverService
+        }
+      }
+    ],
+  },
+  {
+    path: 'institutions', children: [
+      {
+        path: 'list', component: InstitutionsListComponent, resolve: {
+          institutions: InstitutionsResolverService
+        }
+      },
+      {
+        path: ':id', component: EmployeeComponent, resolve: {
+          
         }
       }
     ],

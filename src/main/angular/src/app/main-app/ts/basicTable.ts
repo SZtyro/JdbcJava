@@ -1,15 +1,41 @@
+import { TableActionButton } from './../interfaces/tableActionButton';
+import { animate, AnimationBuilder, AnimationMetadata, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
-import { MatTableDataSource } from '@angular/material';
-import { Directive } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Component, Directive, ViewChild } from '@angular/core';
 
 @Directive()
 export abstract class BasicTable {
 
+    @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+    @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+    /**Referencja do otwartego elementu */
+    expandedElement;
+    /**Nazwa strony */
     name: String;
+    /**Dane do tabeli */
     dataSource: MatTableDataSource<Object>;
-    columns;
+    /**Wyświetlane kolumny */
+    columns: String[];
+    /**Tabela przycisków akcji*/
+    actions: TableActionButton[];
+    /**Ilośc wierszy na jednej stronie*/
+    pageSize: number = 10;
 
     constructor(
-        protected route: ActivatedRoute
+        protected route: ActivatedRoute,
+        private animation: AnimationBuilder
     ) { }
+  
+    //abstract onRowClick();
+
+    /**Funkcja wywoływana przy naciśnięciu przycisku akcji w rzędzie tabeli
+     * @param actionId id przycisku wywołanego
+    */
+    abstract onAction(actionId);
+
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
 }

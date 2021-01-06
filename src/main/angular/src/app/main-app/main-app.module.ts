@@ -37,8 +37,11 @@ import { CompanySettingsComponent } from './forms/settings/company-settings/comp
 import { UserSettingsComponent } from './forms/settings/user-settings/user-settings.component';
 import { InstitutionRegisterComponent } from './forms/institution-register/institution-register.component';
 import { EmployeeComponent } from './forms/employee/employee.component';
-import {MatSelectModule} from '@angular/material/select';
-import { EmployeesListComponent } from './components/lists/employees-list/employees-list.component';
+import { MatSelectModule } from '@angular/material/select';
+import { EmployeesListComponent } from './components/lists/employees-list.component';
+import { InstitutionsListComponent } from './components/lists/institutions-list.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -62,7 +65,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     UserSettingsComponent,
     InstitutionRegisterComponent,
     EmployeeComponent,
-    EmployeesListComponent
+    EmployeesListComponent,
+    InstitutionsListComponent
   ],
   imports: [
     CommonModule,
@@ -93,7 +97,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatBadgeModule,
     FormsModule,
     MatTabsModule,
-    MatSelectModule
+    MatSelectModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule
   ],
   providers: []
 })
