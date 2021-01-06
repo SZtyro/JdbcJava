@@ -39,11 +39,7 @@ const routes: Routes = [
     //   database: CurrentDatabaseResolverService
     // }
   },
-  {
-    path: 'structures/:id', component: InstitutionRegisterComponent, resolve: {
-      institution: InstitutionResolverService
-    }
-  },
+
   {
     path: 'employees', children: [
       {
@@ -66,8 +62,8 @@ const routes: Routes = [
         }
       },
       {
-        path: ':id', component: EmployeeComponent, resolve: {
-          
+        path: ':id', component: InstitutionRegisterComponent, resolve: {
+          institution: InstitutionResolverService
         }
       }
     ],

@@ -1,6 +1,6 @@
 import { TableActionButton } from './../interfaces/tableActionButton';
 import { animate, AnimationBuilder, AnimationMetadata, state, style, transition, trigger } from '@angular/animations';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Component, Directive, ViewChild } from '@angular/core';
 
@@ -25,15 +25,17 @@ export abstract class BasicTable {
 
     constructor(
         protected route: ActivatedRoute,
-        private animation: AnimationBuilder
+        private animation: AnimationBuilder,
+        protected router: Router
     ) { }
-  
+
     //abstract onRowClick();
 
     /**Funkcja wywoływana przy naciśnięciu przycisku akcji w rzędzie tabeli
      * @param actionId id przycisku wywołanego
+     * @param row obiekt przypisany do rzędu
     */
-    abstract onAction(actionId);
+    abstract onAction(actionId, row);
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();

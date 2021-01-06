@@ -23,9 +23,9 @@
                 <div class="example-element-detail" style="overflow: hidden;
                 display: flex;float: right;" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
-                    <button mat-button (click)="onAction(action.id)" *ngFor="let action of actions"
+                    <button mat-button (click)="onAction(action.id, element)" *ngFor="let action of actions"
                         [style.backgroundColor]="action.backgroundColor" style="margin: 10px; outline: none;">
-                        <span class="material-icons" [innerHTML]="action.icon"></span>
+                        <span class="material-icons" style="font-size: 19px;" [innerHTML]="action.icon"></span>
                     </button>
 
                 </div>

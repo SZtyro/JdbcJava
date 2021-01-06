@@ -23,7 +23,6 @@ public class Institution {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
-    @JsonIgnore
     private Company company;
 
     public Institution(Company company) {

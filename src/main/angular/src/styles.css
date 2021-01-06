@@ -6,6 +6,8 @@
   --textColor: #000;
   --textColorBright: #fff;
   --mainColor: rgb(54, 73, 83);
+  --deleteColor: #e53935;
+  
 }
 
 html, body {

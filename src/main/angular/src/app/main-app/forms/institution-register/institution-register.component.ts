@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClientService } from 'src/app/services/http-client.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,10 +13,14 @@ export class InstitutionRegisterComponent implements OnInit {
 
   constructor(
     private http: HttpClientService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.route.data.subscribe(data => {
+      this.institution = data.institution;
+    })
   }
 
   saveInstitution() {

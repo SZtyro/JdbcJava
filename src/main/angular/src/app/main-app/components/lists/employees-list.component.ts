@@ -31,7 +31,7 @@ export class EmployeesListComponent extends BasicTable implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  onAction(actionId: any) {
+  onAction(actionId: any, row) {
     console.log(actionId)
   }
 }

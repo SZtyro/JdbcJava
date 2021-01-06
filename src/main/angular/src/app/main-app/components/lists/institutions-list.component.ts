@@ -13,15 +13,15 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ],
 })
 export class InstitutionsListComponent extends BasicTable implements OnInit {
- 
+
 
 
   ngOnInit(): void {
     this.name = "institutions";
     this.columns = ['name'];
     this.actions = [
-      { id: "delete", icon: "delete", backgroundColor: "rgb(230,20,20)" },
-      { id: "add", icon: "add", backgroundColor: "#11FF20" }
+      { id: "edit", icon: "create" },
+      { id: "delete", icon: "delete", backgroundColor: "var(--deleteColor)" }
     ]
     this.route.data.subscribe(data => {
       this.dataSource = new MatTableDataSource(data.institutions);
@@ -32,7 +32,14 @@ export class InstitutionsListComponent extends BasicTable implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  onAction(actionId) {
-    console.log(actionId)
+  onAction(actionId, row) {
+    switch (actionId) {
+      case 'edit':
+        this.router.navigate(['institutions', row.id])
+        break;
+
+      default:
+        break;
+    }
   }
 }
