@@ -187,6 +187,10 @@ export class HttpClientService {
     return this.httpClient.put(this.url + "/api/institution", body)
   }
 
+  deleteInstitution(id) {
+    return this.httpClient.delete(this.url + '/api/institution', { params: { id: id } })
+  }
+
 
   logout() {
     return this.httpClient.get(this.url + "/api/google/logout")

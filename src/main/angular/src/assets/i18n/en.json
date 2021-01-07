@@ -1,4 +1,7 @@
 {
+    "modules": "Modules",
+    "finances": "Finances",
+    "name": "Name",
     "mail": "E-mail",
     "institution": "Institution",
     "add_company": "Add company",
@@ -49,7 +52,8 @@
         },
         "institution": {
             "created": "Institution <b>{{name}}</b> has been created.",
-            "updated": "Institution <b>{{name}}</b> has been updated."
+            "updated": "Institution <b>{{name}}</b> has been updated.",
+            "deleted": "Institution <b>{{name}}</b> has been deleted."
         },
         "user": {
             "invite": {

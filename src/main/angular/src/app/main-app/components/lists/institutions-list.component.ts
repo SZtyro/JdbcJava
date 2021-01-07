@@ -2,7 +2,6 @@ import { detailExpand } from '../../ts/animations';
 import { MatTableDataSource } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { BasicTable } from 'src/app/main-app/ts/basicTable';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 
 
 @Component({
@@ -37,7 +36,16 @@ export class InstitutionsListComponent extends BasicTable implements OnInit {
       case 'edit':
         this.router.navigate(['institutions', row.id])
         break;
-
+      case 'delete':
+        this.http.deleteInstitution(row.id).subscribe(
+          () => {
+            let i = this.dataSource.data.indexOf(row);
+            this.dataSource.data.splice(i,1)
+            this.dataSource._updateChangeSubscription();
+          },
+          err => console.log(err)
+        )
+        break;
       default:
         break;
     }

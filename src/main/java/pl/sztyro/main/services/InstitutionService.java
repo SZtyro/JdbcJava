@@ -203,5 +203,28 @@ public class InstitutionService {
         }
     }
 
+    public void deleteInstitution(String mail, Long id) {
+        Session session = conf.getSession();
+
+
+        try {
+
+            Institution institution = session.load(Institution.class, id);
+            session.delete(institution);
+            session.getTransaction().commit();
+
+            Gson obj = new Gson();
+            JsonObject params = new JsonObject();
+            params.addProperty("name", institution.getName());
+            _logger.info("Usunięto placówkę o nazwie: " + institution.getName());
+            notificationService.createNotification("BOT", "notification.institution.deleted", obj.toJson(params), new ArrayList<User>(Arrays.asList(userService.getUser(mail))));
+
+        } catch (Exception e) {
+            _logger.error(e.getMessage());
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+    }
 
 }

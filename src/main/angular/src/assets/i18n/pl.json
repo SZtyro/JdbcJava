@@ -1,4 +1,7 @@
 {
+    "modules": "Moduły",
+    "finances": "Finanse",
+    "name": "Nazwa",
     "mail": "E-mail",
     "institution": "Placówka",
     "settings": "Ustawienia",
@@ -46,7 +49,8 @@
         },
         "institution": {
             "created": "Placówka <b>{{name}}</b> została stworzona.",
-            "updated": "Placówka <b>{{name}}</b> została zaktualizowana."
+            "updated": "Placówka <b>{{name}}</b> została zaktualizowana.",
+            "deleted": "Placówka <b>{{name}}</b> została usunięta."
         },
         "user":{
             "invite":{

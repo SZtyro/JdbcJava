@@ -52,7 +52,7 @@ export class AppComponent implements OnInit, AfterContentInit {
         {
           icon: 'account_balance', name: 'Structures', childs: [
             { icon: 'store', name: 'institutions', routerLink: 'institutions/list' },
-            { icon: 'add_business', name: 'Add', routerLink: 'structures/0' }
+            { icon: 'add_business', name: 'Add', routerLink: 'institutions/0' }
           ]
         },
         {
@@ -73,7 +73,9 @@ export class AppComponent implements OnInit, AfterContentInit {
       icon: 'settings', name: 'NAVBAR.SETTINGS', routerLink: 'settings/company', childs: [
 
       ]
-    }
+    },
+    { icon: 'monetization_on', name: 'finances'},
+    { icon: 'view_module', name: 'modules'},
   ];
   companies: FunctionBase[] = [
     {

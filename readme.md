@@ -1,6 +1,6 @@
 #To do
 
-- [ ] Lista sklepów
+- [x] Lista sklepów
 - [ ] Zadania 
 - [ ] Grupy
 - [ ] Integracja z kalendarzem
@@ -10,3 +10,5 @@
 - [ ] Dostępność modułów
 - [ ] Popupy
 - [ ] Powiadomienia z boku
+- [ ] Zmiana serwisu http
+- [ ] Strona startowa

@@ -26,7 +26,7 @@ export class InstitutionRegisterComponent implements OnInit {
   saveInstitution() {
     this.http.updateInstitution(this.institution).subscribe(
       () => {
-        this.router.navigate(['home'])
+        this.router.navigate(['institutions','list'])
       },
       err => console.log(err))
   }

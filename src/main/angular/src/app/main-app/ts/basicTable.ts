@@ -1,3 +1,4 @@
+import { HttpClientService } from './../../services/http-client.service';
 import { TableActionButton } from './../interfaces/tableActionButton';
 import { animate, AnimationBuilder, AnimationMetadata, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,7 +27,8 @@ export abstract class BasicTable {
     constructor(
         protected route: ActivatedRoute,
         private animation: AnimationBuilder,
-        protected router: Router
+        protected router: Router,
+        protected http: HttpClientService
     ) { }
 
     //abstract onRowClick();

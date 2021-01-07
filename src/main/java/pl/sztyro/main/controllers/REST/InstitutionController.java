@@ -1,13 +1,10 @@
 package pl.sztyro.main.controllers.REST;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import pl.sztyro.main.exceptions.NoPermissionException;
@@ -17,9 +14,6 @@ import pl.sztyro.main.model.User;
 import pl.sztyro.main.services.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/institution")
@@ -86,6 +80,19 @@ public class InstitutionController {
             _logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
         }
+    }
+
+    @DeleteMapping()
+    public void deleteInstitution(HttpServletRequest request, @RequestParam Long id) throws NotFoundException, NoPermissionException {
+
+        String mail = authService.getLoggedUserMail(request);
+        User user = userService.getUser(mail);
+
+        Institution institution = institutionService.getInstitution(id);
+
+        if (!institution.getCompany().getOwner().getMail().equals(user.getMail()))
+            throw new NoPermissionException("Only owner can delete institution.");
+        institutionService.deleteInstitution(mail, id);
     }
 
     @GetMapping("/employee")
