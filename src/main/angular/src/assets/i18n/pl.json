@@ -58,10 +58,9 @@
             "updated": "Placówka <b>{{name}}</b> została zaktualizowana.",
             "deleted": "Placówka <b>{{name}}</b> została usunięta."
         },
-        "user":{
-            "invite":{
-                "success": "Pomyślnie dodano użytkownika <b>{{mail}}</b>."
-            }
+        "user": {
+            "created": "Pomyślnie dodano użytkownika <b>{{mail}}</b>.",
+            "updated": "Pomyślnie zakutalizowano użytkownika <b>{{mail}}</b>"
         }
     }
 }

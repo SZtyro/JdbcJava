@@ -16,7 +16,6 @@ import { GridsterModule } from 'angular-gridster2';
 import { GmailWidgetComponent } from './widgets/gmail-widget/gmail-widget.component';
 import { MatTableModule } from '@angular/material/table';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { ChartWidgetComponent } from './widgets/chart-widget/chart-widget.component';
 import { GridElemDirective } from './directives/grid-elem.directive';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { WidgetLoaderComponent } from './components/widget-loader/widget-loader.component';
@@ -50,13 +49,11 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 }
 @NgModule({
   entryComponents: [
-    GmailWidgetComponent,
-    ChartWidgetComponent
+    GmailWidgetComponent
   ],
   declarations: [
     HomeComponent,
     GmailWidgetComponent,
-    ChartWidgetComponent,
     GridElemDirective,
     WidgetLoaderComponent,
     GmailSenderPipe,

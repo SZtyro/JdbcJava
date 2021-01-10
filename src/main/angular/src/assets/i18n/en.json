@@ -62,9 +62,8 @@
             "deleted": "Institution <b>{{name}}</b> has been deleted."
         },
         "user": {
-            "invite": {
-                "success": "User <b>{{mail}}</b> has been succesfully created."
-            }
+            "created": "User <b>{{mail}}</b> has been succesfully created.",
+            "updated": "User <b>{{mail}}</b> has been succesfully updated."
         }
     }
 }

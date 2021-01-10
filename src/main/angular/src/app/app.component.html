@@ -1,11 +1,9 @@
 <body class="mat-app-background">
-  <mat-sidenav-container class="example-container" style="height: 100%; ">
+  <mat-sidenav-container style="height: 100%; ">
     <mat-sidenav #sidenav mode="side" [(opened)]="opened" style="width: 50px; background-color: var(--mainColor)"
-      (mouseenter)="sideNavExtend()" (mouseleave)=" sideNavExtend()"
-      [@openClose]="sideNavExtension ? 'open' : 'closed'">
-      <div *ngIf="sideNavExtension">
+      (mouseenter)="sideNavExtend()" (mouseleave)="sideNavExtend()" [@openClose]="sideNavExtension ? 'open' : 'closed'">
 
-      </div>
+
       <div
         style="display: flex ; flex-direction: column; justify-content: space-between ; align-items: flex-end;overflow: hidden;width: 100%; ">
         <div style="color: white; display: flex; flex-direction: column; width: 100%;">
@@ -37,7 +35,7 @@
 
             </div>
           </div>
-          
+
         </div>
       </div>
 
@@ -78,6 +76,17 @@
 
 
     </mat-sidenav-content>
+
+
   </mat-sidenav-container>
+
+  <div class="container-fluid toast-wrapper">
+    <div [class]="'col-12 col-md-7 col-lg-5 col-xl-2 toast-base ' + toast.type" *ngFor="let toast of shared.toasts"
+      @fadeIn>
+      <div [innerHTML]="toast.message | translate:toast.params" style="width: inherit;">
+
+      </div>
+    </div>
+  </div>
 
 </body>

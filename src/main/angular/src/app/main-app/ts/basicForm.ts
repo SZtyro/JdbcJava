@@ -1,3 +1,4 @@
+import { SharedService } from 'src/app/services/Shared/shared.service';
 import { Directive } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClientService } from "src/app/services/http-client.service";
@@ -19,7 +20,8 @@ export abstract class BasicForm {
     constructor(
         protected route: ActivatedRoute,
         protected router: Router,
-        protected http: HttpClientService
+        protected http: HttpClientService,
+        protected shared: SharedService
     ) { }
 
     //abstract onRowClick();

@@ -26,28 +26,12 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.shared.setShowNavBar(true);
 
   }
 
 
-  async ngOnInit() {
-    //window.addEventListener('scroll', this.scrollFunction, true);
-    this.shared.setShowNavBar(false);
+  ngOnInit() {
 
-    // this.http.getUser().subscribe(
-    //   user => {
-    //     this.user = user;
-    //     console.log(user)
-    //   },
-    //   err => {
-    //     this.user = null;
-    //     console.log(err)
-
-    //   }
-    // )
-
-    console.log('welcome')
   }
 
   ngAfterViewInit() {

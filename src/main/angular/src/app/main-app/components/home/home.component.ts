@@ -1,10 +1,6 @@
 import { Component, OnInit, ElementRef, Injector, Inject, ViewContainerRef, ViewChild, ComponentFactoryResolver, AfterViewInit, Type, ComponentRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClientService } from '../../../services/http-client.service';
-import { GridsterConfig, GridsterItemComponent, GridsterItemComponentInterface } from 'angular-gridster2';
-import { GmailWidgetComponent } from '../../widgets/gmail-widget/gmail-widget.component';
-import { ChartWidgetComponent } from '../../widgets/chart-widget/chart-widget.component';
-import { ScriptLoaderService } from 'angular-google-charts';
 import { HomeWidget } from '../../interfaces/homeWidget';
 import { SharedService } from '../../../services/Shared/shared.service';
 import { MatTableDataSource } from '@angular/material';
@@ -44,7 +40,6 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute
   ) {
 
-    shared.homeRef = this;
 
   }
 

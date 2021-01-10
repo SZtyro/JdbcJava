@@ -1,6 +1,8 @@
+import { SharedService } from 'src/app/services/Shared/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/http-client.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
+import { ToastType } from '../../components/enums/toastType';
 
 @Component({
   selector: 'app-employee',
@@ -12,30 +14,39 @@ export class EmployeeComponent implements OnInit {
   institutions;
   user;
 
+  institution: any;
+
   constructor(
     private http: HttpClientService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private shared: SharedService
   ) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.institutions = data.institutions;
       this.user = data.employee;
-
-      console.log(this.user)
     })
 
-    console.log(this.route.url)
   }
 
 
   inviteUser() {
     //if(this.route.fragment)
     this.http.updateUser(this.user).subscribe(success => {
-      console.log(success);
-      this.router.navigate(['employees','list'])
-    }, err => console.log(err))
+      this.shared.newToast({
+        message: "notification.user.updated",
+        params: { mail: this.user.mail }
+      })
+      this.router.navigate(['employees', 'list'])
+    }, err => {
+      console.log(err)
+      this.shared.newToast({
+        message: err.error.message,
+        type: ToastType.ERROR
+      })
+    })
 
   }
 

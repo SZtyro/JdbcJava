@@ -30,6 +30,16 @@ import { FunctionBase } from './modules/functionModules/functionBase';
         animate('500ms cubic-bezier(0.35, 0, 0.25, 1)')
       ]),
     ]),
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: '0' }),
+        animate('.5s ease-out', style({ opacity: '1' })),
+      ]),
+      transition(':leave', [
+        style({ opacity: '1' }),
+        animate('.5s ease-out', style({ opacity: '0' })),
+      ]),
+    ]),
   ]
 })
 export class AppComponent implements OnInit, AfterContentInit {
@@ -74,8 +84,8 @@ export class AppComponent implements OnInit, AfterContentInit {
 
       ]
     },
-    { icon: 'monetization_on', name: 'finances'},
-    { icon: 'view_module', name: 'modules'},
+    { icon: 'monetization_on', name: 'finances' },
+    { icon: 'view_module', name: 'modules' },
   ];
   companies: FunctionBase[] = [
     {
@@ -101,7 +111,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   ]
   tableNames: String[] = [];
   dbConnection: boolean = false;
-  opened: boolean = false;
+  opened: boolean = true;
   sideNavExtension: boolean = false;
   //photoUrl: String;
   //currentNavigation;
@@ -146,13 +156,7 @@ export class AppComponent implements OnInit, AfterContentInit {
 
 
   ngAfterContentInit(): void {
-    //Called after ngOnInit when the component's or directive's content has been initialized.
-    //Add 'implements AfterContentInit' to the class.
-    this.subscribeDBConnection();
-    this.subscribeLoggedUser();
-    this.shared.getShowNavBar().subscribe((data) => {
-      setTimeout(() => { this.opened = data });
-    })
+
   }
 
   ngAfterContentChecked(): void {
@@ -161,35 +165,10 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   }
 
-  async ngOnInit() {
+  ngOnInit() {
 
   }
 
-  subscribeLoggedUser() {
-    this.shared.getIsUserLogged().subscribe(data => {
-      this.isSignedIn = data;
-      this.opened = data;
-      console.log("opened: " + data)
-    });
-  }
-
-  subscribeDBConnection() {
-    this.shared.getdbConnnection().subscribe(data => {
-      if (data) {
-        //Fetching table names
-        this.httpClientService.getTableNames().subscribe(
-          data => {
-            this.setTableNames(data);
-            console.log("Home Table names fetched! ", data);
-          },
-          error => {
-            console.log("Error", error);
-          }
-        )
-      }
-      this.dbConnection = data
-    });
-  }
 
   sideNavExtend() {
     this.sideNavExtension = !this.sideNavExtension;

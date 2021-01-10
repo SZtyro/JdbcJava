@@ -34,7 +34,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ChartSettingsModalComponent } from './main-app/modals/chart-settings-modal/chart-settings-modal.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WelcomeModule } from './welcome/welcome.module';
@@ -75,7 +74,6 @@ export function provideConfig() {
     EditModalComponent,
     AddModalComponent,
     LoginWindowComponent,
-    ChartSettingsModalComponent,
     ChartComponentComponent,
     MenuItemComponent
 
@@ -132,8 +130,7 @@ export function provideConfig() {
   entryComponents: [
     DeleteModalComponent,
     EditModalComponent,
-    AddModalComponent,
-    ChartSettingsModalComponent
+    AddModalComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

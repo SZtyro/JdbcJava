@@ -9,7 +9,7 @@
 - [ ] Pojazdy
 - [ ] Dostępność modułów
 - [ ] Popupy
-- [ ] Powiadomienia z boku
+- [x] Powiadomienia z boku
 - [ ] Zmiana serwisu http
 - [ ] Strona startowa
 - [ ] Zmiana kluczy z maili na id

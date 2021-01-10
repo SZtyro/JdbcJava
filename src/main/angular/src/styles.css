@@ -7,7 +7,8 @@
   --textColorBright: #fff;
   --mainColor: rgb(54, 73, 83);
   --deleteColor: #e53935;
-  
+  --warningColor: #ffa000;
+  --errorColor: #b71c1c;
 }
 
 html, body {

@@ -52,4 +52,35 @@ button:hover {
   //transform: scale(1.07);
 }
 
+.toast-wrapper {
+  z-index: 50;
+  position: absolute;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 30px;
+  padding-left: 30px;
+}
 
+.toast-base {
+  background-color: var(--mainColor);
+  margin-bottom: 5px;
+  min-height: 60px;
+  height: fit-content;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  word-wrap: break-word;
+  padding: 15px;
+}
+
+.toast-error {
+  background-color: var(--errorColor) !important;
+}
+
+.toast-warning {
+  background-color: var(--warningColor) !important;
+}

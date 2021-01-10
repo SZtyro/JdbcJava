@@ -1,10 +1,10 @@
 import { HttpClientService } from './../../services/http-client.service';
 import { TableActionButton } from './../interfaces/tableActionButton';
-import { animate, AnimationBuilder, AnimationMetadata, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Component, Directive, ViewChild } from '@angular/core';
 import { Column } from '../interfaces/column';
+import { SharedService } from 'src/app/services/Shared/shared.service';
 
 @Directive()
 export abstract class BasicTable {
@@ -30,7 +30,8 @@ export abstract class BasicTable {
     constructor(
         protected route: ActivatedRoute,
         protected router: Router,
-        protected http: HttpClientService
+        protected http: HttpClientService,
+        protected shared: SharedService
     ) { }
 
     //abstract onRowClick();

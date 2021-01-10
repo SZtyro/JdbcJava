@@ -3,6 +3,7 @@ import { HttpClientService } from 'src/app/services/http-client.service';
 import { Component, OnInit } from '@angular/core';
 import { BasicForm } from '../ts/basicForm';
 import { FieldType } from '../components/enums/fieldType';
+import { ToastType } from '../components/enums/toastType';
 
 @Component({
   selector: 'app-institution-register',
@@ -31,9 +32,19 @@ export class InstitutionRegisterComponent extends BasicForm implements OnInit {
     this.institution.name = this.fields[0].value;
     this.http.updateInstitution(this.institution).subscribe(
       () => {
+        this.shared.newToast({
+          message: "notification.institution.updated",
+          params: { name: this.institution.name }
+        })
         this.router.navigate(['institutions', 'list'])
       },
-      err => console.log(err))
+      err => {
+        this.shared.newToast({
+          message: err.error.message,
+          type: ToastType.ERROR
+        })
+        console.log(err)
+      })
   }
 
   onAction(actionId: any) {
