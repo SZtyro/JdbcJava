@@ -222,6 +222,10 @@ export class HttpClientService {
     return this.httpClient.put(this.url + "/api/user", body)
   }
 
+  inviteUser(body) {
+    return this.httpClient.post(this.url + "/api/user", body)
+  }
+
   getCompanyUsers() {
     return this.httpClient.get(this.url + "/api/institution/employee")
   }

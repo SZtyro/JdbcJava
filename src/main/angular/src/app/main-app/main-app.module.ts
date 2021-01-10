@@ -36,13 +36,14 @@ import { FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CompanySettingsComponent } from './forms/settings/company-settings/company-settings.component';
 import { UserSettingsComponent } from './forms/settings/user-settings/user-settings.component';
-import { InstitutionRegisterComponent } from './forms/institution-register/institution-register.component';
+import { InstitutionRegisterComponent } from './forms/institution-register.component';
 import { EmployeeComponent } from './forms/employee/employee.component';
 import { MatSelectModule } from '@angular/material/select';
 import { EmployeesListComponent } from './components/lists/employees-list.component';
 import { InstitutionsListComponent } from './components/lists/institutions-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InviteUserComponent } from './forms/invite-user.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -67,7 +68,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     InstitutionRegisterComponent,
     EmployeeComponent,
     EmployeesListComponent,
-    InstitutionsListComponent
+    InstitutionsListComponent,
+    InviteUserComponent
   ],
   imports: [
     CommonModule,

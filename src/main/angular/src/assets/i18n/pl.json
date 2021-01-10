@@ -1,4 +1,10 @@
 {
+    "institutions": "Placówki",
+    "invite": "Zaproś",
+    "invite_user": "Zaproś użytkownika",
+    "create_institution": "Stwórz placówkę",
+    "firstname": "Imię",
+    "surname": "Nazwisko",
     "modules": "Moduły",
     "finances": "Finanse",
     "name": "Nazwa",

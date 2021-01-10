@@ -35,7 +35,7 @@ export class InstitutionsListComponent extends BasicTable implements OnInit {
 
   onAction(actionId, row) {
     switch (actionId) {
-      case buttonDelete.id:
+      case buttonEdit.id:
         this.router.navigate(['institutions', row.id])
         break;
       case buttonDelete.id:

@@ -50,21 +50,6 @@ public class InstitutionController {
         }
     }
 
-//    @GetMapping("/institution")
-//    public Object getInstitutions(HttpServletRequest request) {
-//        try {
-//            //Zalogowany użytkownik
-//            User owner = userService.getUser(authService.getLoggedUserMail(request));
-//            _logger.info("Pobieranie placówek użytkownika: " + owner.getMail());
-//            //return owner.getSelectedCompany().getInstitution();
-//            return null;
-//
-//        } catch (NotFoundException e) {
-//            throw new ResponseStatusException(
-//                    HttpStatus.NOT_FOUND, "User not found");
-//        }
-//    }
-
     @PutMapping()
     public void updateInstitution(HttpServletRequest request, @RequestBody Object institutionJson) throws NotFoundException {
         try {
@@ -73,7 +58,7 @@ public class InstitutionController {
             Gson gson = new Gson();
             Institution obj = gson.fromJson(gson.toJson(institutionJson), Institution.class);
             institutionService.updateInstitution(mail, obj);
-            _logger.info("Dodawanie placówki użytkownika: " + mail + ", o nazwie: " + obj.getName());
+            _logger.info("Aktualizacja placówki użytkownika: " + mail + ", o nazwie: " + obj.getName());
 
 
         } catch (NoPermissionException e) {
@@ -90,9 +75,9 @@ public class InstitutionController {
 
         Institution institution = institutionService.getInstitution(id);
 
-        if (!institution.getCompany().getOwner().getMail().equals(user.getMail()))
-            throw new NoPermissionException("Only owner can delete institution.");
-        institutionService.deleteInstitution(mail, id);
+        //if (!institution.getCompany().getOwner().getMail().equals(user.getMail()))
+        //    throw new NoPermissionException("Only owner can delete institution.");
+        institutionService.deleteInstitution(id);
     }
 
     @GetMapping("/employee")

@@ -1,3 +1,4 @@
+import { InviteUserComponent } from './main-app/forms/invite-user.component';
 import { EmployeeResolverService } from './services/guards/resolvers/employee-resolver.service';
 import { InstitutionsListComponent } from './main-app/components/lists/institutions-list.component';
 import { EmployeesResolverService } from './services/guards/resolvers/employees-resolver.service';
@@ -6,7 +7,7 @@ import { InstitutionsResolverService } from './services/guards/resolvers/institu
 import { EmployeeComponent } from './main-app/forms/employee/employee.component';
 import { NotificationResolverService } from './services/guards/resolvers/notification-resolver.service';
 import { InstitutionResolverService } from './services/guards/resolvers/institution-resolver.service';
-import { InstitutionRegisterComponent } from './main-app/forms/institution-register/institution-register.component';
+import { InstitutionRegisterComponent } from './main-app/forms/institution-register.component';
 import { CompanyResolverService } from './services/guards/resolvers/company-resolver.service';
 import { CompanySettingsComponent } from './main-app/forms/settings/company-settings/company-settings.component';
 import { RegisterCompanyComponent } from './main-app/forms/register-company/register-company.component';
@@ -49,7 +50,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'invite', component: EmployeeComponent, resolve: {
+        path: 'invite', component: InviteUserComponent, resolve: {
           institutions: InstitutionsResolverService,
         }
       },

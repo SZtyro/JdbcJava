@@ -7,12 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.sztyro.main.config.HibernateConf;
-import pl.sztyro.main.model.Company;
 import pl.sztyro.main.model.Notification;
 import pl.sztyro.main.model.User;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -54,6 +51,8 @@ public class NotificationService {
 
             Query query = session.createQuery("FROM Notification as n where \'" + mail + "\' in elements(n.involved) order by n.created desc ");
             notifications = query.list();
+
+            _logger.info("Pobrano: " + notifications.size() + " powiadomień użytkownika: " + mail);
 
             session.getTransaction().commit();
 

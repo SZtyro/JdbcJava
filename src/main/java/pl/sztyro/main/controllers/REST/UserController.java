@@ -1,7 +1,6 @@
 package pl.sztyro.main.controllers.REST;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.hibernate.Session;
 import org.json.JSONObject;
@@ -49,10 +48,9 @@ public class UserController {
         User user = userService.getUser(authService.getLoggedUserMail(request));
         Gson gson = new Gson();
 
-        JsonElement element = gson.fromJson(gson.toJson(body), JsonElement.class);
-        JsonObject jsonObj = element.getAsJsonObject();
+        JSONObject object = new JSONObject(gson.toJson(body));
 
-        String mail = jsonObj.get("user").getAsJsonObject().get("mail").getAsString();
+        String mail = object.getString("mail");
 
         JSONObject requestBody = new JSONObject(body);
 
@@ -61,11 +59,11 @@ public class UserController {
             _logger.info("Zapraszanie użytkownika: " + mail);
             userService.addUser(mail);
             userService.selectCompany(mail, user.getSelectedCompany().getId());
-            institutionService.addUserToInstitution(mail, jsonObj.get("institutionId").getAsLong());
+            institutionService.addUserToInstitution(mail, object.getLong("institutionId"));
 
             Gson params = new Gson();
             JsonObject obj = new JsonObject();
-            obj.addProperty("mail", jsonObj.get("mail").getAsString());
+            obj.addProperty("mail", object.getString("mail"));
             notificationService.createNotification("BOT", "notification.user.invite.success", params.toJson(obj), new ArrayList<User>(Arrays.asList(user)));
 
         }

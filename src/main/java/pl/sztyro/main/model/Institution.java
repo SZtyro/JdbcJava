@@ -1,11 +1,13 @@
 package pl.sztyro.main.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 @Entity
 //@Proxy(lazy = false)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Institution {
 
     @Id
@@ -33,8 +35,10 @@ public class Institution {
     }
 
     public void merge(Institution newInstitution) {
-        setName(newInstitution.getName());
-        setCompany(newInstitution.getCompany());
+        if (newInstitution.getName() != null)
+            setName(newInstitution.getName());
+        if (newInstitution.getCompany() != null)
+            setCompany(newInstitution.getCompany());
         //setEmployee(newInstitution.getEmployee());
     }
 

@@ -1,4 +1,10 @@
 {
+    "institutions": "Institutions",
+    "invite": "Invite",
+    "invite_user": "Invite user",
+    "create_institution": "Create institution",
+    "firstname": "Firstname",
+    "surname": "Surname",
     "modules": "Modules",
     "finances": "Finances",
     "name": "Name",

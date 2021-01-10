@@ -2,6 +2,7 @@ package pl.sztyro.main.services;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
@@ -70,8 +71,12 @@ public class InstitutionService {
         _logger.info("Pobieranie placówki o id: " + id);
 
         Session session = conf.getSession();
+        Institution institution = null;
         try {
-            return session.load(Institution.class, id);
+            institution = session.load(Institution.class, id);
+
+            Hibernate.initialize(institution.getCompany());
+            session.getTransaction().commit();
 
         } catch (Exception e) {
             _logger.error(e.getMessage());
@@ -79,6 +84,7 @@ public class InstitutionService {
             throw e;
         } finally {
             session.close();
+            return institution;
         }
     }
 
@@ -204,21 +210,24 @@ public class InstitutionService {
         }
     }
 
-    public void deleteInstitution(String mail, Long id) {
+    public void deleteInstitution(Long id) {
         Session session = conf.getSession();
 
 
         try {
 
             Institution institution = session.load(Institution.class, id);
-            session.delete(institution);
-            session.getTransaction().commit();
+            User u = institution.getCompany().getOwner();
 
             Gson obj = new Gson();
             JsonObject params = new JsonObject();
             params.addProperty("name", institution.getName());
+
+            session.delete(institution);
+            session.getTransaction().commit();
+
             _logger.info("Usunięto placówkę o nazwie: " + institution.getName());
-            notificationService.createNotification("BOT", "notification.institution.deleted", obj.toJson(params), new ArrayList<User>(Arrays.asList(userService.getUser(mail))));
+            notificationService.createNotification("BOT", "notification.institution.deleted", obj.toJson(params), new ArrayList<User>(Arrays.asList(u)));
 
         } catch (Exception e) {
             _logger.error(e.getMessage());
