@@ -1,13 +1,11 @@
 package pl.sztyro.main.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Proxy(lazy = false)
+//@Proxy(lazy = false)
 public class Institution {
 
     @Id
@@ -17,12 +15,13 @@ public class Institution {
 
     private String name;
 
-    @OneToMany
-    @JsonIgnore
-    private List<User> employee;
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    private List<User> employee;
 
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonIgnore
     private Company company;
 
     public Institution(Company company) {
@@ -33,10 +32,10 @@ public class Institution {
 
     }
 
-    public void merge(Institution newInstitution){
+    public void merge(Institution newInstitution) {
         setName(newInstitution.getName());
         setCompany(newInstitution.getCompany());
-        setEmployee(newInstitution.getEmployee());
+        //setEmployee(newInstitution.getEmployee());
     }
 
     public Company getCompany() {
@@ -55,19 +54,27 @@ public class Institution {
         this.name = name;
     }
 
-    public List<User> getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(List<User> employee) {
-        this.employee = employee;
-    }
+//    public List<User> getEmployee() {
+//        return employee;
+//    }
+//
+//    public void setEmployee(List<User> employee) {
+//        this.employee = employee;
+//    }
 
     public long getId() {
         return id;
     }
 
-    public void addEmployee(User employee){
-        this.employee.add(employee);
+//    public void addEmployee(User employee) {
+//        this.employee.add(employee);
+//    }
+//
+//    public void deleteEmployee(User employee){
+//        this.employee.remove(employee);
+//    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

@@ -1,14 +1,13 @@
 package pl.sztyro.main.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Proxy(lazy = false)
+//@Proxy(lazy = false)
 //@Table(name = "User_Company")
 public class Company {
 

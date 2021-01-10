@@ -1,3 +1,4 @@
+import { EmployeeResolverService } from './services/guards/resolvers/employee-resolver.service';
 import { InstitutionsListComponent } from './main-app/components/lists/institutions-list.component';
 import { EmployeesResolverService } from './services/guards/resolvers/employees-resolver.service';
 import { EmployeesListComponent } from './main-app/components/lists/employees-list.component';
@@ -48,8 +49,14 @@ const routes: Routes = [
         }
       },
       {
-        path: ':id', component: EmployeeComponent, resolve: {
-          institutions: InstitutionsResolverService
+        path: 'invite', component: EmployeeComponent, resolve: {
+          institutions: InstitutionsResolverService,
+        }
+      },
+      {
+        path: ':mail', component: EmployeeComponent, resolve: {
+          institutions: InstitutionsResolverService,
+          employee: EmployeeResolverService
         }
       }
     ],

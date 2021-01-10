@@ -190,9 +190,10 @@ public class InstitutionService {
         try {
             User user = session.load(User.class, mail);
             Institution institution = session.load(Institution.class, id);
-            institution.addEmployee(user);
+            //institution.addEmployee(user);
+            user.setInstitution(institution);
 
-            session.update(institution);
+            session.update(user);
             session.getTransaction().commit();
 
         } catch (Exception e) {
@@ -226,5 +227,32 @@ public class InstitutionService {
             session.close();
         }
     }
+
+    public Institution getUserInstitution(String mail) {
+        Session session = conf.getSession();
+        Institution institution = null;
+        try {
+
+            //Query query = session.createQuery("select i from Institution as i left join fetch i.employee where \'" + mail + "\' in elements(i.employee)");
+            //List<Institution> institutions = query.list();
+            //institution = (Institution) query.uniqueResult();
+
+            //Object[] result = (Object[]) query.list().get(0);
+
+            //institution = session.load(Institution.class, (Long) query.uniqueResult());
+            institution = session.load(User.class, mail).getInstitution();
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            _logger.error(e.getMessage());
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+
+        }
+        return institution;
+    }
+
 
 }

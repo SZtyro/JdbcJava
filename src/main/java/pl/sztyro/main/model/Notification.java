@@ -1,17 +1,13 @@
 package pl.sztyro.main.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.gson.JsonObject;
-import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Entity
-@Proxy(lazy = false)
+//@Proxy(lazy = false)
 public class Notification {
 
     @Id

@@ -1,3 +1,4 @@
+import { buttonDelete, buttonEdit } from './../../ts/buttons';
 import { detailExpand } from '../../ts/animations';
 import { MatTableDataSource } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
@@ -17,10 +18,11 @@ export class InstitutionsListComponent extends BasicTable implements OnInit {
 
   ngOnInit(): void {
     this.name = "institutions";
-    this.columns = ['name'];
+    this.columns = [{ name: 'name' }];
+    this.extractColumnNames();
     this.actions = [
-      { id: "edit", icon: "create" },
-      { id: "delete", icon: "delete", backgroundColor: "var(--deleteColor)" }
+      buttonEdit,
+      buttonDelete
     ]
     this.route.data.subscribe(data => {
       this.dataSource = new MatTableDataSource(data.institutions);
@@ -33,14 +35,14 @@ export class InstitutionsListComponent extends BasicTable implements OnInit {
 
   onAction(actionId, row) {
     switch (actionId) {
-      case 'edit':
+      case buttonDelete.id:
         this.router.navigate(['institutions', row.id])
         break;
-      case 'delete':
+      case buttonDelete.id:
         this.http.deleteInstitution(row.id).subscribe(
           () => {
             let i = this.dataSource.data.indexOf(row);
-            this.dataSource.data.splice(i,1)
+            this.dataSource.data.splice(i, 1)
             this.dataSource._updateChangeSubscription();
           },
           err => console.log(err)

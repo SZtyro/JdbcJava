@@ -1,11 +1,9 @@
 package pl.sztyro.main.model;
 
-import org.hibernate.annotations.Proxy;
-
 import javax.persistence.*;
 
 @Entity
-@Proxy(lazy = false)
+//@Proxy(lazy = false)
 @Table(name = "UserDatabase")
 public class Database {
 

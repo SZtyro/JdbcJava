@@ -141,8 +141,19 @@ export class HttpClientService {
   }
 
 
-  getUser() {
-    return this.httpClient.get(this.url + "/api/google/user", { responseType: 'text' })
+  getUser(mail?) {
+    //return this.httpClient.get(this.url + "/api/google/user", { responseType: 'text' })
+
+    let params = {
+      mail: mail
+    }
+    return this.httpClient.get(this.url + "/api/user", { params: mail != 0 ? params : null })
+  }
+
+
+
+  deleteUser(mail) {
+    return this.httpClient.delete(this.url + '/api/user', { params: { mail: mail } })
   }
 
   getCompany() {
@@ -207,8 +218,8 @@ export class HttpClientService {
     })
   }
 
-  inviteUser(body) {
-    return this.httpClient.post(this.url + "/api/user/invite", body)
+  updateUser(body) {
+    return this.httpClient.put(this.url + "/api/user", body)
   }
 
   getCompanyUsers() {

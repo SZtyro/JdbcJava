@@ -35,17 +35,17 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
     //window.addEventListener('scroll', this.scrollFunction, true);
     this.shared.setShowNavBar(false);
 
-    this.http.getUser().subscribe(
-      user => {
-        this.user = user;
-        console.log(user)
-      },
-      err => {
-        this.user = null;
-        console.log(err)
+    // this.http.getUser().subscribe(
+    //   user => {
+    //     this.user = user;
+    //     console.log(user)
+    //   },
+    //   err => {
+    //     this.user = null;
+    //     console.log(err)
 
-      }
-    )
+    //   }
+    // )
 
     console.log('welcome')
   }

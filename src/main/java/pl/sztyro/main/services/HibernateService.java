@@ -80,9 +80,9 @@ public class HibernateService {
                 base.setLogin(login);
                 base.setPassword(encryptedPassword);
                 //user.setUserDatabase(new UserDatabase(id,url,port,database,login,encryptedText));
-            } else
-                user.setUserDatabase(new Database(url, port, database, login, encryptedPassword));
-
+            } else {
+                //user.setUserDatabase(new Database(url, port, database, login, encryptedPassword));
+            }
             session.getTransaction().commit();
         } catch (Exception ex) {
             transaction.rollback();

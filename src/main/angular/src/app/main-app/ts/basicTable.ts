@@ -4,6 +4,7 @@ import { animate, AnimationBuilder, AnimationMetadata, state, style, transition,
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Component, Directive, ViewChild } from '@angular/core';
+import { Column } from '../interfaces/column';
 
 @Directive()
 export abstract class BasicTable {
@@ -18,7 +19,9 @@ export abstract class BasicTable {
     /**Dane do tabeli */
     dataSource: MatTableDataSource<Object>;
     /**Wyświetlane kolumny */
-    columns: String[];
+    columns: Column[];
+    /**Kolumny do wyświetlenia */
+    displayColumns: String[];
     /**Tabela przycisków akcji*/
     actions: TableActionButton[];
     /**Ilośc wierszy na jednej stronie*/
@@ -26,7 +29,6 @@ export abstract class BasicTable {
 
     constructor(
         protected route: ActivatedRoute,
-        private animation: AnimationBuilder,
         protected router: Router,
         protected http: HttpClientService
     ) { }
@@ -41,5 +43,9 @@ export abstract class BasicTable {
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+    extractColumnNames() {
+        this.displayColumns = this.columns.map(x => x.name);
     }
 }

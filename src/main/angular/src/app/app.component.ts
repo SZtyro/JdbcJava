@@ -58,7 +58,7 @@ export class AppComponent implements OnInit, AfterContentInit {
         {
           icon: 'person', name: 'Employees', childs: [
             { icon: 'list', name: 'employee_list', routerLink: 'employees/list' },
-            { icon: 'person_add', name: 'employee_add', routerLink: 'employees/0' },
+            { icon: 'person_add', name: 'employee_add', routerLink: 'employees/invite' },
             { icon: 'groups', name: 'Groups' },
             { icon: 'event_note', name: 'Shifts' },
             { icon: 'fact_check', name: 'Tasks' }

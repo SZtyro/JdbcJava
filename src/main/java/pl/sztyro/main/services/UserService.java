@@ -85,4 +85,24 @@ public class UserService {
 
     }
 
+    public void updateUser(String mail, User user) {
+        _logger.info("Zaktualizowano użytkownika: " + user.getMail());
+
+        Session session = conf.getSession();
+
+
+        try {
+            User u = session.load(User.class, mail);
+            u.merge(user);
+            session.update(u);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            _logger.error(e.getMessage());
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+
+    }
+
 }

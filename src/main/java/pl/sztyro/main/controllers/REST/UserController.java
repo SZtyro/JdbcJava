@@ -3,14 +3,13 @@ package pl.sztyro.main.controllers.REST;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import org.hibernate.Session;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.sztyro.main.config.HibernateConf;
 import pl.sztyro.main.exceptions.NotFoundException;
 import pl.sztyro.main.model.User;
 import pl.sztyro.main.services.AuthService;
@@ -40,26 +39,115 @@ public class UserController {
     @Autowired
     NotificationService notificationService;
 
-    @PostMapping("/invite")
-    public String inviteUser(HttpServletRequest request, @RequestBody Object body) throws NotFoundException {
+    @Autowired
+    HibernateConf conf;
+
+    @PostMapping()
+    public void inviteUser(HttpServletRequest request, @RequestBody Object body) throws NotFoundException {
 
 
         User user = userService.getUser(authService.getLoggedUserMail(request));
         Gson gson = new Gson();
 
-        JsonElement element = gson.fromJson(gson.toJson(body), JsonElement.class); //Converts the json string to JsonElement without POJO
-        JsonObject jsonObj = element.getAsJsonObject(); //Converting JsonElement to JsonObject
+        JsonElement element = gson.fromJson(gson.toJson(body), JsonElement.class);
+        JsonObject jsonObj = element.getAsJsonObject();
 
-        String mail = jsonObj.get("mail").getAsString();
-        _logger.info("Zapraszanie użytkownika: " + mail);
-        userService.addUser(mail);
-        userService.selectCompany(mail, user.getSelectedCompany().getId());
-        institutionService.addUserToInstitution(mail, jsonObj.get("institution_id").getAsLong());
+        String mail = jsonObj.get("user").getAsJsonObject().get("mail").getAsString();
 
-        Gson params = new Gson();
-        JsonObject obj = new JsonObject();
-        obj.addProperty("mail", jsonObj.get("mail").getAsString());
-        notificationService.createNotification("BOT", "notification.user.invite.success", params.toJson(obj), new ArrayList<User>(Arrays.asList(user)));
-        return "user.invite.success";
+        JSONObject requestBody = new JSONObject(body);
+
+        User oldUser = userService.getUser(mail);
+        if (oldUser == null) {
+            _logger.info("Zapraszanie użytkownika: " + mail);
+            userService.addUser(mail);
+            userService.selectCompany(mail, user.getSelectedCompany().getId());
+            institutionService.addUserToInstitution(mail, jsonObj.get("institutionId").getAsLong());
+
+            Gson params = new Gson();
+            JsonObject obj = new JsonObject();
+            obj.addProperty("mail", jsonObj.get("mail").getAsString());
+            notificationService.createNotification("BOT", "notification.user.invite.success", params.toJson(obj), new ArrayList<User>(Arrays.asList(user)));
+
+        }
+    }
+
+    @PutMapping()
+    public void updateUser(HttpServletRequest request, @RequestBody Object body) {
+
+        Gson gson = new Gson();
+        JSONObject requestBody = new JSONObject(gson.toJson(body));
+
+        //JSONObject user = requestBody.getJSONObject("user");
+        Session session = conf.getSession();
+        try {
+            System.out.println(requestBody.toString(2));
+
+            User u = session.load(User.class, requestBody.getString("mail"));
+            _logger.info("Aktualizacja użytkownika: " + u.getMail());
+
+            u.setInstitution(institutionService.getInstitution(requestBody.getJSONObject("institution").getLong("id")));
+            u.setFirstname(requestBody.has("firstname") ? requestBody.getString("firstname") : null);
+            u.setSurname(requestBody.has("surname") ? requestBody.getString("surname") : null);
+
+            session.save(u);
+            session.getTransaction().commit();
+
+
+            Gson params = new Gson();
+            JsonObject obj = new JsonObject();
+            obj.addProperty("mail", u.getMail());
+            notificationService.createNotification("BOT", "notification.user.update.success", params.toJson(obj), new ArrayList<User>(Arrays.asList(u)));
+
+        } catch (Exception e) {
+            _logger.error(e.getMessage());
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+
+    }
+
+//    @DeleteMapping()
+//    public void deleteUserFromInstitution(HttpServletRequest request, @RequestParam String mail) throws NotFoundException, NoPermissionException {
+//
+//        //String mail = authService.getLoggedUserMail(request);
+//
+//        User user = userService.getUser(mail);
+//        institutionService.get
+//
+//        Institution institution = institutionService.getInstitution(id);
+//
+//        if (!institution.getCompany().getOwner().getMail().equals(user.getMail()))
+//            throw new NoPermissionException("Only owner can delete institution.");
+//        institutionService.deleteInstitution(mail, id);
+//    }
+
+    @GetMapping()
+    public Object getUser(@RequestParam(required = false) String mail) throws NotFoundException {
+
+        if (mail == null) {
+            return new User();
+        } else {
+
+            _logger.info("Pobieranie użytkownika: " + mail);
+
+//            Gson gson = new Gson();
+//            JSONObject o = new JSONObject();
+//
+//            o.put("user", new JSONObject(gson.toJson(userService.getUser(mail), User.class)));
+//
+//            Institution in = institutionService.getUserInstitution(mail);
+//            if (in != null) {
+//                JSONObject ins = new JSONObject();
+//                ins.put("institutionId", in.getId());
+//                ins.put("name", in.getName());
+//                o.put("institution", ins);
+//            }
+//
+//
+//            return o.toString();
+            return userService.getUser(mail);
+        }
     }
 }

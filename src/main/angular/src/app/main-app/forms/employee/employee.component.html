@@ -2,12 +2,22 @@
 <div class="container-fluid" style="padding-top: 15px;">
     <mat-form-field class="example-form-field col-12 col-md-6">
         <mat-label>E-mail</mat-label>
-        <input matInput type="text" [(ngModel)]="form.mail">
+        <input matInput type="text" [(ngModel)]="user.mail">
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Favorite food</mat-label>
-        <mat-select [(value)]="form.institution_id">
+    <mat-form-field class="example-form-field col-12 col-md-3">
+        <mat-label translate>firstname</mat-label>
+        <input matInput type="text" [(ngModel)]="user.firstname">
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field col-12 col-md-3">
+        <mat-label translate>surname</mat-label>
+        <input matInput type="text" [(ngModel)]="user.surname">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="col-12 col-md-6">
+        <mat-label translate>institution</mat-label>
+        <mat-select [(value)]="user.institution.id" [compareWith]="compareId">
             <mat-option *ngFor="let institution of institutions" [value]="institution.id">
                 {{institution.name}}
             </mat-option>
@@ -15,6 +25,6 @@
     </mat-form-field>
 
     <div class="row">
-        <button mat-raised-button (click)="inviteUser()" translate>invite</button>
+        <button mat-raised-button (click)="inviteUser()" translate>save</button>
     </div>
 </div>
