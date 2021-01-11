@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 
 @Configuration
@@ -36,7 +37,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
             if (authException != null) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.getWriter().print("Unauthorizated");
+                response.setContentType("text/html");
+                PrintWriter writer = response.getWriter();
+                writer.print("<!DOCTYPE html>");
+                writer.print("<html>");
+                writer.print("<body>");
+                writer.print("<head>");
+                writer.print("<title>Title of the document</title>");
+                writer.print("</head>");
+                writer.print("<a href=\"/login\">Login page</a>");
+                writer.print("</body>");
+                writer.print("</html>");
                 //response.sendRedirect("/api/google/auth");
                 //response.sendRedirect("/login");
 

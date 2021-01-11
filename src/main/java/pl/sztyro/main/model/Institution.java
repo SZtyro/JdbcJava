@@ -17,14 +17,12 @@ public class Institution {
 
     private String name;
 
-//    @OneToMany(fetch = FetchType.LAZY)
-//    @JsonIgnore
-//    private List<User> employee;
-
     @ManyToOne
     @JoinColumn(name = "company_id")
     @JsonIgnore
     private Company company;
+
+
 
     public Institution(Company company) {
         this.company = company;
@@ -39,7 +37,6 @@ public class Institution {
             setName(newInstitution.getName());
         if (newInstitution.getCompany() != null)
             setCompany(newInstitution.getCompany());
-        //setEmployee(newInstitution.getEmployee());
     }
 
     public Company getCompany() {
@@ -58,25 +55,9 @@ public class Institution {
         this.name = name;
     }
 
-//    public List<User> getEmployee() {
-//        return employee;
-//    }
-//
-//    public void setEmployee(List<User> employee) {
-//        this.employee = employee;
-//    }
-
     public long getId() {
         return id;
     }
-
-//    public void addEmployee(User employee) {
-//        this.employee.add(employee);
-//    }
-//
-//    public void deleteEmployee(User employee){
-//        this.employee.remove(employee);
-//    }
 
     public void setId(long id) {
         this.id = id;

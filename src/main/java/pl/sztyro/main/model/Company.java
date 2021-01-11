@@ -27,14 +27,12 @@ public class Company {
     private String name;
 
     @Column(name = "company_NIP")
-    //@NotNull
-    //@Pattern(regexp = "^\\d{10}$")
-    //@Range(min = 1000000000, max = 9999999999L, message = "Number not in range {min} - {max}")
     private long nip;
 
-    @Column(name = "company_news")
     @OneToMany
-    private List<Notification> news;
+    @JsonIgnore
+    private List<Database> database;
+
 
     public void merge(Company company) {
         this.setName(company.getName());
@@ -76,5 +74,13 @@ public class Company {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public List<Database> getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(List<Database> database) {
+        this.database = database;
     }
 }

@@ -76,21 +76,21 @@ export class LoginWindowComponent implements OnInit {
     this.dataBase = JSON.parse(localStorage.getItem('dataBase'));
     this.port = JSON.parse(localStorage.getItem('port'));
 
-    this.route.data.subscribe(data => {
-      console.log(data)
-      if(data.database){
-        this.userName = data.database.user;
-        this.url = data.database.url;
-        this.dataBase = data.database.database;
-        this.port = data.database.port;
+    // this.route.data.subscribe(data => {
+    //   console.log(data)
+    //   if(data.database){
+    //     this.userName = data.database.user;
+    //     this.url = data.database.url;
+    //     this.dataBase = data.database.database;
+    //     this.port = data.database.port;
 
-        this.httpClientService.getTableNames().subscribe(tableNames => {
-          this.databaseTables = tableNames;
-          this.tablesLoading = false;
-        });
-      }
+    //     this.httpClientService.getTableNames().subscribe(tableNames => {
+    //       this.databaseTables = tableNames;
+    //       this.tablesLoading = false;
+    //     });
+    //   }
 
-    })
+    // })
   }
 
   login() {
@@ -131,8 +131,16 @@ export class LoginWindowComponent implements OnInit {
     })
   }
 
-  openTable(tableName){
+  openTable(tableName) {
     this.router.navigate(['/table', tableName]);
     this.router.onSameUrlNavigation = 'reload';
+  }
+
+  saveDB() {
+
+  }
+
+  download() {
+    this.httpClientService.getTables('test').subscribe(data => console.log(data))
   }
 }

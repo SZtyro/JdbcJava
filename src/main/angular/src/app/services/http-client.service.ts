@@ -229,5 +229,20 @@ export class HttpClientService {
   getCompanyUsers() {
     return this.httpClient.get(this.url + "/api/institution/employee")
   }
+
+
+  getTables(tableName?: string) {
+    let params = {
+      id: "0",
+    }
+    if (tableName)
+      params['tableName'] = tableName
+
+    return this.httpClient.get(this.url + "/api/database", { params: params })
+  }
+
+  getDatabases() {
+    return this.httpClient.get<Object[]>(this.url + "/api/database/list");
+  }
 }
 

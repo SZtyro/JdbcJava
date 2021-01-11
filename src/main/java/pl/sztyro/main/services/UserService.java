@@ -1,5 +1,6 @@
 package pl.sztyro.main.services;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,8 @@ public class UserService {
             //throw new NotFoundException("User not found");
             addUser(mail);
             u = session.get(User.class, mail);
+
+            Hibernate.initialize(u.getSelectedCompany());
             session.getTransaction().commit();
             session.close();
             return u;

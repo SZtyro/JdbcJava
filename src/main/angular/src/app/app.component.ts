@@ -9,6 +9,7 @@ import { SharedService } from './services/Shared/shared.service';
 import { Observable } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { FunctionBase } from './modules/functionModules/functionBase';
+import { ToastType } from './main-app/components/enums/toastType';
 
 @Component({
   selector: 'app-root',
@@ -48,10 +49,11 @@ export class AppComponent implements OnInit, AfterContentInit {
     { icon: 'home', name: 'NAVBAR.HOME', routerLink: 'home' },
     {
       icon: 'storage', name: 'Database', childs: [
-        {
-          icon: 'settings', name: 'Settings', routerLink: 'databases', childs: []
-        },
-        { icon: 'table_rows', name: 'Tables', routerLink: 'databases', childs: [] }
+        { icon: 'add', name: 'add', childs: [] }
+        // {
+        //   icon: 'settings', name: 'Settings', routerLink: 'databases', childs: []
+        // },
+        // { icon: 'table_rows', name: 'Tables', routerLink: 'databases', childs: [] }
       ]
     },
     {
@@ -134,23 +136,66 @@ export class AppComponent implements OnInit, AfterContentInit {
     //console.log(this.auth.auth2.currentUser)
 
 
-    this.httpClientService.getCompany().subscribe(companies => {
-      companies.forEach(element => {
-        this.companies[0].childs.push(element)
-      });
+    this.httpClientService.getCompany().subscribe(
+      companies => {
+        companies.forEach(element => {
+          this.companies[0].childs.push(element)
+        });
 
-    })
-    this.httpClientService.getCurrentCompany().subscribe(current => {
-      console.log(current)
-      this.companies[0].name = current.name;
-    })
+      },
+      err => {
+        console.error(err)
+        this.shared.newToast({
+          message: err.error.message, type: ToastType.ERROR
+        })
+      }
+    )
+    this.httpClientService.getCurrentCompany().subscribe(
+      current => {
+        console.log(current)
+        this.companies[0].name = current.name;
+      },
+      err => {
+        console.error(err)
+        this.shared.newToast({
+          message: err.error.message, type: ToastType.ERROR
+        })
+      })
+
+    this.httpClientService.getDatabases().subscribe(
+      databases => {
+        console.log(databases)
+        databases.forEach(element => {
+          this.menuItems[1].childs.push({
+            icon: 'table_rows', name: element['database'], childs: [
+              {
+                icon: 'settings', name: 'settings', routerLink: 'databases', childs: []
+              },
+              { icon: 'list', name: 'tables', routerLink: 'databases/' + element['database'], childs: [] }
+            ]
+          })
+        });
+
+      },
+      err => {
+        console.error(err)
+        this.shared.newToast({
+          message: err.error.message, type: ToastType.ERROR
+        })
+      }
+    )
 
   }
 
   signOut() {
     this.httpClientService.logout().subscribe(() => {
       this.router.navigate([''])
-    }, err => console.log(err))
+    }, err => {
+      console.error(err)
+      this.shared.newToast({
+        message: err.error.message, type: ToastType.ERROR
+      })
+    })
 
   }
 

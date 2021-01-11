@@ -2,6 +2,7 @@ package pl.sztyro.main.services;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.json.JSONArray;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import pl.sztyro.main.config.HibernateConf;
 import pl.sztyro.main.exceptions.NotFoundException;
 import pl.sztyro.main.model.Company;
+import pl.sztyro.main.model.Database;
 import pl.sztyro.main.model.User;
 
 import java.util.ArrayList;
@@ -213,18 +215,6 @@ public class CompanyService {
             Query query = session.createQuery("select u from User u join Institution i on u.institution.id = i.id where i.company.id = " + user.getSelectedCompany().getId());
             employees = query.list();
 
-
-//            for (Object[] row : employees) {
-//                JSONObject obj = new JSONObject();
-//                User u = (User) row[0];
-//                Institution i = (Institution) row[1];
-//
-//                obj.put("mail", u.getMail());
-//                obj.put("institution", i.getName());
-//                obj.put("institutionId", i.getId());
-//                json.put(obj);
-//            }
-
             session.getTransaction().commit();
             _logger.info("Pobrano pracowników firmy: " + employees);
         } catch (Exception e) {
@@ -239,6 +229,29 @@ public class CompanyService {
                 return employees;
             }
         }
+    }
+
+    public List<Database> getCompanyDatabase(Company company) {
+        Session session = conf.getSession();
+        List<Database> databases = null;
+        _logger.info("Pobieranie baz firmy: " + company.getName());
+
+        try {
+
+            Company c = session.load(Company.class, company.getId());
+            Hibernate.initialize(c.getDatabase());
+            databases = c.getDatabase();
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            _logger.error(e.getMessage());
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+
+            return databases;
+        }
+
     }
 
 }
