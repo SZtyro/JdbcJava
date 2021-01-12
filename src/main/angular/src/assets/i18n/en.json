@@ -1,4 +1,5 @@
 {
+    "export_pdf": "Export to PDF",
     "tables": "Tables",
     "add": "Add",
     "institutions": "Institutions",
@@ -64,8 +65,12 @@
             "deleted": "Institution <b>{{name}}</b> has been deleted."
         },
         "user": {
-            "created": "User <b>{{mail}}</b> has been succesfully created.",
-            "updated": "User <b>{{mail}}</b> has been succesfully updated."
+            "created": "User <b>{{mail}}</b> has been successfully created.",
+            "updated": "User <b>{{mail}}</b> has been successfully updated."
+        },
+        "database": {
+            "inserted": "Row has been successfully inserted",
+            "updated": "Row has been successfully updated."
         }
     }
 }

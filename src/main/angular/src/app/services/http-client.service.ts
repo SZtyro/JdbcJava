@@ -238,8 +238,29 @@ export class HttpClientService {
     if (tableName)
       params['tableName'] = tableName
 
-    return this.httpClient.get(this.url + "/api/database", { params: params })
+    return this.httpClient.get(this.url + "/api/database/table", { params: params })
   }
+
+  getTableContent(tableName?: string) {
+    let params = {
+      id: "0",
+    }
+    if (tableName)
+      params['tableName'] = tableName
+
+    return this.httpClient.get(this.url + "/api/database/content", { params: params })
+  }
+
+  saveRow(body, tableName) {
+
+    return this.httpClient.post(this.url + '/api/database/table', body, {
+      params: {
+        id: "0",
+        tableName: tableName
+      }
+    })
+  }
+
 
   getDatabases() {
     return this.httpClient.get<Object[]>(this.url + "/api/database/list");

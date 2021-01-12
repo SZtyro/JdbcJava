@@ -1,5 +1,6 @@
 package pl.sztyro.main.services;
 
+import com.google.gson.Gson;
 import org.hibernate.Session;
 import org.jasypt.util.text.AES256TextEncryptor;
 import org.json.JSONArray;
@@ -13,6 +14,7 @@ import pl.sztyro.main.model.Company;
 import pl.sztyro.main.model.Database;
 
 import java.sql.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,6 +92,107 @@ public class DatabaseService {
 
         System.out.println(array.toString(2));
         return array.toString();
+    }
+
+    public Object getTableContent(Database database, String tableName) throws SQLException {
+        _logger.info("Pobieranie zawartości tabeli: " + tableName);
+
+        Connection connection = prepareConnection(database);
+        //String sql = "SELECT * FROM all_tables where owner = (select user from dual)";
+        String sql = "SELECT * FROM " + tableName + ";";
+        Statement statement = connection.createStatement();
+
+        ResultSet result = statement.executeQuery(sql);
+
+        JSONArray array = new JSONArray();
+
+        ResultSetMetaData metaData = result.getMetaData();
+        int count = metaData.getColumnCount();
+
+        ArrayList<String> columnNames = new ArrayList<>();
+
+        for (int i = 1; i <= count; i++)
+            columnNames.add(metaData.getColumnName(i));
+
+        while (result.next()) {
+
+
+            JSONObject table = new JSONObject();
+
+            columnNames.forEach(name -> {
+                try {
+                    table.put(name, result.getObject(name));
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            });
+
+            array.put(table);
+        }
+        connection.close();
+
+        System.out.println(array.toString(2));
+        return array.toString();
+    }
+
+    public void insertRow(Database database, String tableName, JSONArray body) throws SQLException, ParseException {
+        _logger.info("Dodawanie rekordu do tabeli: " + tableName);
+
+        Connection connection = prepareConnection(database);
+
+        String values = "";
+        String columns = "";
+
+        List<Object> list = body.toList();
+        for (Object elem : list) {
+            JSONObject object = new JSONObject(new Gson().toJson(elem));
+            object.getString("name");
+            String dataType = object.getString("dataType");
+            switch (dataType) {
+                case "int":
+                    values += nullIfNotFound(object) + ",";
+                    columns += object.has("name") ? object.getString("name") + "," : "null,";
+                    ;
+                    break;
+                case "varchar":
+
+                case "text":
+                    values += object.has("value") ? "'" + object.getString("value") + "'," : "null,";
+                    columns += object.getString("name") + ",";
+                    break;
+                case "date":
+                    values += object.has("value") ? "'" + new Date(object.getLong("value")) + "'," : "null,";
+                    columns += object.getString("name") + ",";
+                    break;
+//                case "date":
+//                    values += "'" + nullIfNotFound(object) + "',";
+//                    columns += "'" + nullIfNotFound(object) + "',";
+//                    break;
+//                case "text":
+//                    values += "'" + nullIfNotFound(object) + "',";
+//                    columns += "'" + nullIfNotFound(object) + "',";
+//                    break;
+//                default:
+//                    values += "null,";
+//                    break;
+            }
+        }
+
+        values = values.substring(0, values.length() - 1);
+        columns = columns.substring(0, columns.length() - 1);
+
+        String sql = "INSERT INTO " + tableName + " (" + columns + ") VALUES(" + values + ")";
+
+        System.out.println(sql);
+        Statement statement = connection.createStatement();
+
+        statement.executeUpdate(sql);
+        connection.close();
+
+    }
+
+    private String nullIfNotFound(JSONObject object) {
+        return object.has("value") ? object.getString("value") : "null";
     }
 
     public void addCompanyDatabase(Company company, JSONObject object) {

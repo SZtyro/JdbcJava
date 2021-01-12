@@ -1,9 +1,10 @@
 import { SharedService } from 'src/app/services/Shared/shared.service';
-import { Directive } from "@angular/core";
+import { Directive, Inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClientService } from "src/app/services/http-client.service";
 import { Field } from "../interfaces/field";
 import { TableActionButton } from "../interfaces/tableActionButton";
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 
 @Directive()
@@ -21,7 +22,9 @@ export abstract class BasicForm {
         protected route: ActivatedRoute,
         protected router: Router,
         protected http: HttpClientService,
-        protected shared: SharedService
+        protected shared: SharedService,
+        @Inject(MAT_DIALOG_DATA) public data,
+        public dialogRef: MatDialogRef<any>
     ) { }
 
     //abstract onRowClick();

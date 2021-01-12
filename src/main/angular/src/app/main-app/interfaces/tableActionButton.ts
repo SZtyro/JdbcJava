@@ -1,5 +1,6 @@
 export interface TableActionButton {
-    id:String;
+    id: String;
     icon: String;
-    backgroundColor?:String;
+    backgroundColor?: String;
+    name?: String;
 }

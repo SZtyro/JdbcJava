@@ -12,14 +12,15 @@
             <span *ngSwitchCase="0">
                 <mat-form-field [class]="field.class">
                     <mat-label translate>{{field.name}}</mat-label>
-                    <input matInput type="text" [(ngModel)]="field.value">
+                    <input matInput type="text" [(ngModel)]="field.value" [disabled]="field.disabled"
+                        [required]="field.required">
                 </mat-form-field>
             </span>
 
             <span *ngSwitchCase="1">
                 <mat-form-field appearance="fill" [class]="field.class">
                     <mat-label translate>{{field.name}}</mat-label>
-                    <mat-select [(value)]="field.value" [compareWith]="field.compareWith">
+                    <mat-select [(value)]="field.value" [compareWith]="field.compareWith" [disabled]="field.disabled" [required]="field.required">
                         <mat-option *ngFor="let option of field.options" [value]="option.value">
                             {{option.name}}
                         </mat-option>
@@ -27,15 +28,32 @@
                 </mat-form-field>
             </span>
 
-            <div *ngSwitchDefault>
+            <span *ngSwitchCase="2">
+                <mat-form-field appearance="fill" [class]="field.class">
+                    <mat-label translate>{{field.name}}</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="field.value" [disabled]="field.disabled" [required]="field.required">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </span>
 
+            <span *ngSwitchCase="3">
+                <mat-form-field appearance="fill" [class]="field.class">
+                    <mat-label translate>{{field.name}}</mat-label>
+                    <textarea matInput [(ngModel)]="field.value" [disabled]="field.disabled" [required]="field.required"></textarea>
+                </mat-form-field>
+            </span>
+
+            <div *ngSwitchDefault>
+                Unsuported case
             </div>
         </span>
     </span>
 
     <div class="row" style="justify-content: flex-end;">
-        <span *ngFor="let button of actions" class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-1">
-            <button mat-raised-button style="width: 100%;" (click)="onAction(button.id)">{{button.icon | translate}}</button>
+        <span *ngFor="let button of actions" class="col-12 col-md-6 col-lg-3 col-xl-1">
+            <button mat-raised-button style="width: 100%;" (click)="onAction(button.id)">{{button.icon |
+                translate}}</button>
         </span>
     </div>
 </div>

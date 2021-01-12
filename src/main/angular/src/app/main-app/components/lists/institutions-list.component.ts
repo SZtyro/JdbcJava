@@ -33,7 +33,7 @@ export class InstitutionsListComponent extends BasicTable implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  onAction(actionId, row) {
+  onRowAction(actionId, row) {
     switch (actionId) {
       case buttonEdit.id:
         this.router.navigate(['institutions', row.id])
@@ -51,5 +51,9 @@ export class InstitutionsListComponent extends BasicTable implements OnInit {
       default:
         break;
     }
+  }
+
+  onUnderAction(actionId: any) {
+    throw new Error('Method not implemented.');
   }
 }

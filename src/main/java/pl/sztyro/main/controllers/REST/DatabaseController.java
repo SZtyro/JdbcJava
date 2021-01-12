@@ -1,6 +1,7 @@
 package pl.sztyro.main.controllers.REST;
 
 import com.google.gson.Gson;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import pl.sztyro.main.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 @RestController()
 @RequestMapping("api/database")
@@ -32,7 +34,7 @@ public class DatabaseController {
     @Autowired
     DatabaseService databaseService;
 
-    @GetMapping()
+    @GetMapping("/table")
     public Object getTables(HttpServletRequest request, @RequestParam Long id, @RequestParam(required = false) String tableName) throws NotFoundException, SQLException {
 
         User user = userService.getUser(authService.getLoggedUserMail(request));
@@ -43,6 +45,32 @@ public class DatabaseController {
             return databaseService.getTableDetails(database, tableName);
         else
             return databaseService.getTables(database);
+
+    }
+
+    @PostMapping("/table")
+    public void insert(HttpServletRequest request, @RequestBody Object body, @RequestParam Long id, String tableName) throws NotFoundException, SQLException, ParseException {
+
+        Gson gson = new Gson();
+        JSONArray obj = new JSONArray(gson.toJson(body));
+
+        User user = userService.getUser(authService.getLoggedUserMail(request));
+        Company company = user.getSelectedCompany();
+        Database database = databaseService.getCompanyDatabase(company);
+
+        databaseService.insertRow(database, tableName, obj);
+
+
+    }
+
+    @GetMapping("/content")
+    public Object getTableContent(HttpServletRequest request, @RequestParam Long id, @RequestParam String tableName) throws NotFoundException, SQLException {
+
+        User user = userService.getUser(authService.getLoggedUserMail(request));
+        Company company = user.getSelectedCompany();
+        Database database = databaseService.getCompanyDatabase(company);
+
+        return databaseService.getTableContent(database, tableName);
 
     }
 

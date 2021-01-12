@@ -15,7 +15,8 @@
         style="width: 100%; border-collapse: inherit;">
         <ng-container *ngFor="let column of columns" [matColumnDef]="column.name">
             <th mat-header-cell *matHeaderCellDef> {{column.name | translate}} </th>
-            <td mat-cell *matCellDef="let row"> {{column.assignValue ? column.assignValue(row) : row[column.name]}} </td>
+            <td mat-cell *matCellDef="let row"> {{column.assignValue ? column.assignValue(row) : row[column.name]}}
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="expandedDetail" *ngIf="actions">
@@ -23,7 +24,7 @@
                 <div class="example-element-detail" style="overflow: hidden;
                 display: flex;float: right;" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
-                    <button mat-button (click)="onAction(action.id, element)" *ngFor="let action of actions"
+                    <button mat-button (click)="onRowAction(action.id, element)" *ngFor="let action of actions"
                         [style.backgroundColor]="action.backgroundColor" style="margin: 10px; outline: none;">
                         <span class="material-icons" style="font-size: 19px;" [innerHTML]="action.icon"></span>
                     </button>
@@ -42,4 +43,13 @@
     </table>
     <mat-paginator *ngIf="dataSource.data.length > pageSize" [length]="dataSource.data.length" [pageSize]="pageSize"
         [pageSizeOptions]="[10, 20, 50]"></mat-paginator>
+
+    <div class="row" style="justify-content: flex-end;">
+        <span *ngFor="let button of underActions" class="col-12 col-sm-6 col-md-3 col-xl-2" style="margin-top: 10px;">
+            <button mat-raised-button style="width: 100%;" [style.background]="button.backgroundColor" (click)="onUnderAction(button.id)">
+                <span class="material-icons" style="margin-right: 5px;" [innerHTML]="button.icon"></span>
+                <span>{{button.name | translate}}</span>
+            </button>
+        </span>
+    </div>
 </div>

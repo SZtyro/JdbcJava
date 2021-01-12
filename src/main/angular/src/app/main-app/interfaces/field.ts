@@ -13,4 +13,6 @@ export interface Field {
     options?: { name: String, value }
     /**Funckja porównywania w przypadku selecta */
     compareWith?;
+    disabled?: boolean;
+    required?: boolean;
 }

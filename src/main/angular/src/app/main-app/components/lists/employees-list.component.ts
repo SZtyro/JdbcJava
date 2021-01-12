@@ -44,7 +44,7 @@ export class EmployeesListComponent extends BasicTable implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  onAction(actionId: any, row) {
+  onRowAction(actionId: any, row) {
     switch (actionId) {
       case buttonEdit.id:
         this.router.navigate(['employees', row.mail])
@@ -62,5 +62,9 @@ export class EmployeesListComponent extends BasicTable implements OnInit {
       default:
         break;
     }
+  }
+
+  onUnderAction(actionId: any) {
+    throw new Error('Method not implemented.');
   }
 }

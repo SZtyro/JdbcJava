@@ -1,3 +1,4 @@
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -99,7 +100,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatTabsModule,
     MatSelectModule,
     BrowserAnimationsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDatepickerModule
   ],
   providers: []
 })

@@ -10,6 +10,7 @@ import { buttonDelete } from 'src/app/main-app/ts/buttons';
   animations: [detailExpand]
 })
 export class TableListComponent extends BasicTable implements OnInit {
+  
 
 
   ngOnInit(): void {
@@ -28,7 +29,7 @@ export class TableListComponent extends BasicTable implements OnInit {
     ]
   }
 
-  onAction(actionId: any, row: any) {
+  onRowAction(actionId: any, row: any) {
     switch (actionId) {
       case 'list':
         this.router.navigate(['table', row.name],{relativeTo: this.route})
@@ -37,5 +38,9 @@ export class TableListComponent extends BasicTable implements OnInit {
       default:
         break;
     }
+  }
+
+  onUnderAction(actionId: any) {
+    throw new Error('Method not implemented.');
   }
 }

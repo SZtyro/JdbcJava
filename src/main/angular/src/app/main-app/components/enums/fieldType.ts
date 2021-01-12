@@ -1,4 +1,7 @@
 export enum FieldType {
     INPUT,
-    SELECT
+    SELECT,
+    DATE,
+    TEXTAREA
 }
+
