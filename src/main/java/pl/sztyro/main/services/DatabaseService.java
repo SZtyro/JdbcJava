@@ -82,7 +82,7 @@ public class DatabaseService {
 
             JSONObject table = new JSONObject();
             table.put("name", result.getString("COLUMN_NAME"));
-            table.put("nullable", result.getString("IS_NULLABLE") == "YES");
+            table.put("nullable", result.getString("IS_NULLABLE").equals("YES"));
             table.put("dataType", result.getString("DATA_TYPE"));
             table.put("autoIncrement", result.getString("EXTRA").contains("auto_increment"));
 

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FieldType } from 'src/app/main-app/components/enums/fieldType';
 import { ToastType } from 'src/app/main-app/components/enums/toastType';
-import { BasicForm } from 'src/app/main-app/ts/basicForm';
+import { BasicFormDialog } from 'src/app/main-app/ts/basicFormDialog';
 
 @Component({
   selector: 'app-table-content',
   templateUrl: './../../main-app/html/BasicForm.html'
 })
-export class TableContentComponent extends BasicForm implements OnInit {
+export class TableContentComponent extends BasicFormDialog implements OnInit {
 
   ngOnInit(): void {
     this.fields = []

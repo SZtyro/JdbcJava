@@ -8,7 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 
 @Directive()
-export abstract class BasicForm {
+export abstract class BasicFormDialog {
 
 
     /**Pola formularza */
@@ -22,7 +22,9 @@ export abstract class BasicForm {
         protected route: ActivatedRoute,
         protected router: Router,
         protected http: HttpClientService,
-        protected shared: SharedService
+        protected shared: SharedService,
+        @Inject(MAT_DIALOG_DATA) public data,
+        public dialogRef: MatDialogRef<any>
     ) { }
 
     //abstract onRowClick();
