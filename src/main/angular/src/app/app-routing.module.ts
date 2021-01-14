@@ -1,3 +1,4 @@
+import { TableConstraintResolverService } from './data-base/services/guards/resolvers/table-constraint-resolver.service';
 import { TableContentResolverService } from './data-base/services/guards/resolvers/table-content-resolver.service';
 
 import { TablesResolverService } from './data-base/services/guards/resolvers/tables-resolver.service';
@@ -41,7 +42,8 @@ const routes: Routes = [
         path: ':database/table/:tableName', component: TableComponent, pathMatch: 'full', runGuardsAndResolvers: "always",
         resolve: {
           columns: TablesResolverService,
-          content: TableContentResolverService
+          content: TableContentResolverService,
+          constraints: TableConstraintResolverService
         }
       },
       {

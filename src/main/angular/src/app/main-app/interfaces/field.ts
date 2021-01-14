@@ -10,7 +10,7 @@ export interface Field {
     /**Wartość pola */
     value?;
     /**Opcje w przypadku selecta */
-    options?: { name: String, value }
+    options?: { name?: String, value }[]
     /**Funckja porównywania w przypadku selecta */
     compareWith?;
     disabled?: boolean;

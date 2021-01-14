@@ -71,9 +71,12 @@ public class DatabaseService {
         Connection connection = prepareConnection(database);
         //String sql = "SELECT * FROM all_tables where owner = (select user from dual)";
         String sql = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = \'" + database.getDatabase() + "\' AND TABLE_NAME = \'" + tableName + "\';";
+
+
         Statement statement = connection.createStatement();
 
         ResultSet result = statement.executeQuery(sql);
+
 
         JSONArray array = new JSONArray();
 
@@ -85,12 +88,69 @@ public class DatabaseService {
             table.put("nullable", result.getString("IS_NULLABLE").equals("YES"));
             table.put("dataType", result.getString("DATA_TYPE"));
             table.put("autoIncrement", result.getString("EXTRA").contains("auto_increment"));
+            table.put("primary", result.getString("COLUMN_KEY").contains("PRI"));
+
+            array.put(table);
+        }
+
+        connection.close();
+
+        System.out.println(array.toString(2));
+        return array.toString();
+    }
+
+    public Object getTableReferences(Database database, String tableName) throws SQLException {
+        _logger.info("Pobieranie referencji tabeli: " + tableName);
+
+        Connection connection = prepareConnection(database);
+
+        String sql = "select COLUMN_NAME, CONSTRAINT_NAME, REFERENCED_COLUMN_NAME, REFERENCED_TABLE_NAME " +
+                "from information_schema.KEY_COLUMN_USAGE " +
+                "where TABLE_NAME = '" + tableName + "' AND REFERENCED_COLUMN_NAME is NOT null";
+
+        System.out.println(sql);
+
+        Statement statement = connection.createStatement();
+
+        ResultSet result = statement.executeQuery(sql);
+
+        JSONArray array = new JSONArray();
+
+
+        while (result.next()) {
+
+            JSONObject table = new JSONObject();
+            table.put("name", result.getString("COLUMN_NAME"));
+            table.put("constraintName", result.getString("CONSTRAINT_NAME"));
+            table.put("referencedColumnName", result.getString("REFERENCED_COLUMN_NAME"));
+            table.put("referencedTableName", result.getString("REFERENCED_TABLE_NAME"));
 
             array.put(table);
         }
         connection.close();
 
-        System.out.println(array.toString(2));
+        return array.toString();
+    }
+
+    public Object getTableForeignKeys(Database database, String tableName, String column) throws SQLException {
+        _logger.info("Pobieranie kluczy tabeli: " + tableName);
+
+        Connection connection = prepareConnection(database);
+
+        String sql = "SELECT " + column + " FROM " + tableName;
+
+        Statement statement = connection.createStatement();
+        ResultSet result = statement.executeQuery(sql);
+
+        JSONArray array = new JSONArray();
+
+
+        while (result.next()) {
+
+            array.put(result.getObject(1));
+        }
+        connection.close();
+
         return array.toString();
     }
 
@@ -164,17 +224,6 @@ public class DatabaseService {
                     values += object.has("value") ? "'" + new Date(object.getLong("value")) + "'," : "null,";
                     columns += object.getString("name") + ",";
                     break;
-//                case "date":
-//                    values += "'" + nullIfNotFound(object) + "',";
-//                    columns += "'" + nullIfNotFound(object) + "',";
-//                    break;
-//                case "text":
-//                    values += "'" + nullIfNotFound(object) + "',";
-//                    columns += "'" + nullIfNotFound(object) + "',";
-//                    break;
-//                default:
-//                    values += "null,";
-//                    break;
             }
         }
 
@@ -191,8 +240,53 @@ public class DatabaseService {
 
     }
 
+    public void updateRow(Database database, String tableName, JSONArray body) throws SQLException, ParseException {
+        _logger.info("Aktualizacja rekordu w tabeli: " + tableName);
+
+        Connection connection = prepareConnection(database);
+
+        String set = "";
+        String where = null;
+
+        List<Object> list = body.toList();
+        for (Object elem : list) {
+            JSONObject object = new JSONObject(new Gson().toJson(elem));
+            object.getString("name");
+            String dataType = object.getString("dataType");
+            Boolean isPrimary = object.getBoolean("primary");
+
+            if (!isPrimary)
+                switch (dataType) {
+                    case "int":
+                        set += object.getString("name") + "=" + nullIfNotFound(object) + ",";
+                        break;
+                    case "varchar":
+                    case "text":
+                        set += object.getString("name") + "=" + (object.has("value") ? ("'" + object.getString("value") + "',") : "null,");
+                        break;
+                    case "date":
+                        set += object.getString("name") + "=" + (object.has("value") ? "'" + new Date(object.getLong("value")) + "'," : "null,");
+                        break;
+                }
+            else {
+                where = object.getString("name") + "=" + object.get("value").toString();
+            }
+        }
+
+        set = set.substring(0, set.length() - 1);
+
+        String sql = "UPDATE " + tableName + " SET " + set + " WHERE " + where;
+
+        System.out.println(sql);
+        Statement statement = connection.createStatement();
+
+        statement.executeUpdate(sql);
+        connection.close();
+
+    }
+
     private String nullIfNotFound(JSONObject object) {
-        return object.has("value") ? object.getString("value") : "null";
+        return object.has("value") ? object.get("value").toString() : "null";
     }
 
     public void addCompanyDatabase(Company company, JSONObject object) {

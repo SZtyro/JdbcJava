@@ -48,6 +48,28 @@ public class DatabaseController {
 
     }
 
+    @GetMapping("/table/reference")
+    public Object getReference(HttpServletRequest request, @RequestParam Long id, @RequestParam String tableName) throws NotFoundException, SQLException {
+
+        User user = userService.getUser(authService.getLoggedUserMail(request));
+        Company company = user.getSelectedCompany();
+        Database database = databaseService.getCompanyDatabase(company);
+
+        return databaseService.getTableReferences(database, tableName);
+
+    }
+
+    @GetMapping("/table/columnKeys")
+    public Object getForeignKeys(HttpServletRequest request, @RequestParam Long id, @RequestParam String tableName, @RequestParam String column) throws NotFoundException, SQLException {
+
+        User user = userService.getUser(authService.getLoggedUserMail(request));
+        Company company = user.getSelectedCompany();
+        Database database = databaseService.getCompanyDatabase(company);
+
+        return databaseService.getTableForeignKeys(database, tableName, column);
+
+    }
+
     @PostMapping("/table")
     public void insert(HttpServletRequest request, @RequestBody Object body, @RequestParam Long id, String tableName) throws NotFoundException, SQLException, ParseException {
 
@@ -59,6 +81,21 @@ public class DatabaseController {
         Database database = databaseService.getCompanyDatabase(company);
 
         databaseService.insertRow(database, tableName, obj);
+
+
+    }
+
+    @PutMapping("/table")
+    public void update(HttpServletRequest request, @RequestBody Object body, @RequestParam Long id,@RequestParam String tableName) throws NotFoundException, SQLException, ParseException {
+
+        Gson gson = new Gson();
+        JSONArray obj = new JSONArray(gson.toJson(body));
+
+        User user = userService.getUser(authService.getLoggedUserMail(request));
+        Company company = user.getSelectedCompany();
+        Database database = databaseService.getCompanyDatabase(company);
+
+        databaseService.updateRow(database, tableName, obj);
 
 
     }

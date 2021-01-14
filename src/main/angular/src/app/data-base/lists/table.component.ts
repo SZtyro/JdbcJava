@@ -1,3 +1,4 @@
+import { FieldType } from './../../main-app/components/enums/fieldType';
 import { buttonPDFExport } from './../../main-app/ts/buttons';
 import { BasicTable } from 'src/app/main-app/ts/basicTable';
 import { Component, OnInit } from '@angular/core';
@@ -14,6 +15,7 @@ import { TableContentComponent } from '../forms/table-content.component';
 export class TableComponent extends BasicTable implements OnInit {
 
   metadata: Object[];
+  constraints;
 
   ngOnInit(): void {
 
@@ -22,6 +24,8 @@ export class TableComponent extends BasicTable implements OnInit {
       this.dataSource = new MatTableDataSource(data.content);
       this.metadata = data.columns;
       this.columns = this.metadata.map(el => { return { name: el['name'] } })
+      this.constraints = data.constraints;
+      this.assingConstraints()
     })
     this.underActions = [
       { icon: 'add', id: 'add', name: 'add' },
@@ -35,9 +39,32 @@ export class TableComponent extends BasicTable implements OnInit {
     ]
   }
 
+  assingConstraints() {
+    this.constraints.forEach(element => {
+      let metaElem = this.metadata.find(meta => meta['name'] == element.name)
+      //metaElem['dataType'] = FieldType.SELECT;
+      this.http.getIds(element['referencedTableName'], element['referencedColumnName']).subscribe(ids => {
+        metaElem['options'] = ids.map(id => { return { value: id } });
+        
+      })
+
+
+    });
+  }
+
   onRowAction(actionId: any, row?: any) {
     switch (actionId) {
       case buttonEdit.id:
+        this.dialog.open(TableContentComponent, {
+          height: '80%',
+          width: '80%',
+          data: {
+            metadata: this.metadata,
+            name: this.name,
+            tableName: this.name,
+            row: row
+          }
+        });
 
         break;
 
@@ -55,12 +82,12 @@ export class TableComponent extends BasicTable implements OnInit {
           data: {
             metadata: this.metadata,
             name: this.name,
-            tableName: this.name,
-            exist: false
+            tableName: this.name
           }
         });
 
         break;
+
 
       default:
         break;

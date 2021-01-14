@@ -74,17 +74,17 @@ export class HttpClientService {
         }
       });
   }
-  getIds(table) {
-    return this.httpClient.post<String>(this.url + '/getIdList', table,
-      {
+  // getIds(table) {
+  //   return this.httpClient.post<String>(this.url + '/getIdList', table,
+  //     {
 
-        headers:
-        {
-          "Authorization": sessionStorage.getItem('token'),
+  //       headers:
+  //       {
+  //         "Authorization": sessionStorage.getItem('token'),
 
-        }
-      });
-  }
+  //       }
+  //     });
+  // }
   getType(table) {
     return this.httpClient.post<String>(this.url + '/getDataType', table,
       {
@@ -261,9 +261,40 @@ export class HttpClientService {
     })
   }
 
+  updateRow(body, tableName) {
+
+    return this.httpClient.put(this.url + '/api/database/table', body, {
+      params: {
+        id: "0",
+        tableName: tableName
+      }
+    })
+  }
+
 
   getDatabases() {
     return this.httpClient.get<Object[]>(this.url + "/api/database/list");
   }
+
+  getConstraints(tableName) {
+    return this.httpClient.get(this.url + "/api/database/table/reference", {
+      params: {
+        id: "0",
+        tableName: tableName
+      }
+    });
+  }
+
+  getIds(tableName, column) {
+    return this.httpClient.get<Object[]>(this.url + "/api/database/table/columnKeys", {
+      params: {
+        id: "0",
+        tableName: tableName,
+        column: column
+      }
+    });
+  }
+
+
 }
 
