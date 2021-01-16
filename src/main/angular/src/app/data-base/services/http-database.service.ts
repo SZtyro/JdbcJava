@@ -30,7 +30,7 @@ export class HttpDatabaseService extends HttpCoreService {
     if (tableName)
       params['tableName'] = tableName
 
-    return this.http.get(this.prefix + "/api/database/table", { params: params })
+    return this.http.get(this.prefix + "/database/table", { params: params })
   }
 
   getTableContent(tableName?: string) {
@@ -40,12 +40,12 @@ export class HttpDatabaseService extends HttpCoreService {
     if (tableName)
       params['tableName'] = tableName
 
-    return this.http.get(this.prefix + "/api/database/content", { params: params })
+    return this.http.get(this.prefix + "/database/content", { params: params })
   }
 
   saveRow(body, tableName) {
 
-    return this.http.post(this.prefix + '/api/database/table/row', body, {
+    return this.http.post(this.prefix + '/database/table/row', body, {
       params: {
         id: "0",
         tableName: tableName
@@ -55,7 +55,7 @@ export class HttpDatabaseService extends HttpCoreService {
 
   updateRow(body, tableName) {
 
-    return this.http.put(this.prefix + '/api/database/table/row', body, {
+    return this.http.put(this.prefix + '/database/table/row', body, {
       params: {
         id: "0",
         tableName: tableName
@@ -65,11 +65,11 @@ export class HttpDatabaseService extends HttpCoreService {
 
 
   getDatabases() {
-    return this.http.get<Object[]>(this.prefix + "/api/database/list");
+    return this.http.get<Object[]>(this.prefix + "/database/list");
   }
 
   getConstraints(tableName) {
-    return this.http.get(this.prefix + "/api/database/table/reference", {
+    return this.http.get(this.prefix + "/database/table/reference", {
       params: {
         id: "0",
         tableName: tableName
@@ -78,7 +78,7 @@ export class HttpDatabaseService extends HttpCoreService {
   }
 
   getIds(tableName, column) {
-    return this.http.get<Object[]>(this.prefix + "/api/database/table/columnKeys", {
+    return this.http.get<Object[]>(this.prefix + "/database/table/columnKeys", {
       params: {
         id: "0",
         tableName: tableName,

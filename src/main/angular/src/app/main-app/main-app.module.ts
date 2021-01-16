@@ -44,6 +44,7 @@ import { InstitutionsListComponent } from './components/lists/institutions-list.
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InviteUserComponent } from './forms/invite-user.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -67,7 +68,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     EmployeeComponent,
     EmployeesListComponent,
     InstitutionsListComponent,
-    InviteUserComponent
+    InviteUserComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,

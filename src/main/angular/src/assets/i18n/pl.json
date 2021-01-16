@@ -1,4 +1,6 @@
 {
+    "cancel": "Anuluj",
+    "delete": "Usuń",
     "export_pdf": "Wyeksportuj do PDF",
     "tables": "Tabele",
     "add": "Dodaj",
@@ -71,6 +73,14 @@
             "inserted": "Pomyślnie dodano rekord.",
             "updated": "Pomyślnie zaktualizowano rekord.",
             "deleted": "Pomyślnie usunięto rekord."
+        }
+    },
+    "dialog": {
+        "title": {
+            "sure": "Czy jesteś pewien?"
+        },
+        "message": {
+            "delete": "Czy na pewno chcesz usunąć rekord: <b>{{row}}</b>?"
         }
     }
 }

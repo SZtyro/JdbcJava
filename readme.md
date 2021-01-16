@@ -8,7 +8,7 @@
 - [ ] Poprawa modułu bazy
 - [ ] Pojazdy
 - [ ] Dostępność modułów
-- [ ] Popupy
+- [x] Popupy
 - [x] Powiadomienia z boku
 - [ ] Zmiana serwisu http
 - [ ] Strona startowa

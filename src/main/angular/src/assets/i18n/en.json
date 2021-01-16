@@ -1,4 +1,6 @@
 {
+    "cancel": "Cancel",
+    "delete": "Delete",
     "export_pdf": "Export to PDF",
     "tables": "Tables",
     "add": "Add",
@@ -73,6 +75,15 @@
         "database": {
             "inserted": "Row has been successfully inserted.",
             "updated": "Row has been successfully updated.",
-            "deleted": "Row has been successfully deleted."        }
+            "deleted": "Row has been successfully deleted."
+        }
+    },
+    "dialog": {
+        "title": {
+            "sure": "Are you sure?"
+        },
+        "message": {
+            "delete": "Are you sure you want to delete row: <b>{{row}}</b>?"
+        }
     }
 }

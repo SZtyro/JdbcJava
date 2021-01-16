@@ -70,20 +70,36 @@ export class TableComponent extends BasicTable implements OnInit {
 
       case buttonDelete.id:
         let column = this.metadata.find(elem => elem['primary']);
-        this.http.database.deleteRow(this.route.snapshot.params['tableName'], column['name'], row[column['name']]).subscribe(
-          () => {
-            this.shared.newToast({
-              message: 'toasts.database.deleted'
-            })
-          },
-          err => {
-            this.shared.newToast({
-              message: err.error.message,
-              duration: 10000,
-              type: ToastType.ERROR
-            })
+        let d = this.shared.newDialog({
+          title: 'dialog.title.sure',
+          message: 'dialog.message.delete',
+          buttons: [
+            {
+              name: 'delete', id: 'delete', action: () => {
+                this.http.database.deleteRow(this.route.snapshot.params['tableName'], column['name'], row[column['name']]).subscribe(
+                  () => {
+                    this.shared.newToast({
+                      message: 'toasts.database.deleted'
+                    })
+                    d.close();
+                    this.router.navigateByUrl(this.router.url);
+                  },
+                  err => {
+                    this.shared.newToast({
+                      message: err.error.message,
+                      duration: 10000,
+                      type: ToastType.ERROR
+                    })
+                  }
+                )
+              }
+            }
+          ],
+          params: {
+            row: row[column['name']]
           }
-        )
+        })
+
         break;
 
 
