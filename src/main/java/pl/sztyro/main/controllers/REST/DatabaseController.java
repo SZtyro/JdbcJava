@@ -70,7 +70,7 @@ public class DatabaseController {
 
     }
 
-    @PostMapping("/table")
+    @PostMapping("/table/row")
     public void insert(HttpServletRequest request, @RequestBody Object body, @RequestParam Long id, String tableName) throws NotFoundException, SQLException, ParseException {
 
         Gson gson = new Gson();
@@ -85,8 +85,8 @@ public class DatabaseController {
 
     }
 
-    @PutMapping("/table")
-    public void update(HttpServletRequest request, @RequestBody Object body, @RequestParam Long id,@RequestParam String tableName) throws NotFoundException, SQLException, ParseException {
+    @PutMapping("/table/row")
+    public void update(HttpServletRequest request, @RequestBody Object body, @RequestParam Long id, @RequestParam String tableName) throws NotFoundException, SQLException, ParseException {
 
         Gson gson = new Gson();
         JSONArray obj = new JSONArray(gson.toJson(body));
@@ -98,6 +98,16 @@ public class DatabaseController {
         databaseService.updateRow(database, tableName, obj);
 
 
+    }
+
+    @DeleteMapping("/table/row")
+    public void deleteRow(HttpServletRequest request, @RequestParam Long id, @RequestParam String tableName, @RequestParam String columnName, @RequestParam Object rowId) throws NotFoundException, SQLException, ParseException {
+
+        User user = userService.getUser(authService.getLoggedUserMail(request));
+        Company company = user.getSelectedCompany();
+        Database database = databaseService.getCompanyDatabase(company);
+
+        databaseService.deleteRow(database, tableName, columnName, rowId);
     }
 
     @GetMapping("/content")

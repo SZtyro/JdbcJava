@@ -285,6 +285,24 @@ public class DatabaseService {
 
     }
 
+    public void deleteRow(Database database, String tableName, String columnName, Object rowId) throws SQLException, ParseException {
+        _logger.info("Usuwanie rekordu z tabeli: " + tableName);
+
+        Connection connection = prepareConnection(database);
+
+        if (!(rowId instanceof Number))
+            rowId = "'" + rowId + "'";
+
+        String sql = "DELETE FROM " + tableName + " WHERE " + columnName + "=" + rowId;
+
+        System.out.println(sql);
+        Statement statement = connection.createStatement();
+
+        statement.executeUpdate(sql);
+        connection.close();
+
+    }
+
     private String nullIfNotFound(JSONObject object) {
         return object.has("value") ? object.get("value").toString() : "null";
     }

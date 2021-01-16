@@ -12,7 +12,6 @@ export class TablesResolverService implements Resolve<Object>{
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Object | Observable<Object> | Promise<Object> {
     
-    return this.http.getTables(route.params['tableName'])
-    //return this.http.getTables(route.params['database'])
+    return this.http.database.getTables(route.params['tableName'])
   }
 }

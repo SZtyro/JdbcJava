@@ -81,7 +81,7 @@
   </mat-sidenav-container>
 
   <div class="container-fluid toast-wrapper">
-    <div [class]="'col-12 col-md-7 col-lg-5 col-xl-2 toast-base ' + toast.type" *ngFor="let toast of shared.toasts"
+    <div [class]="'col-12 col-md-7 col-lg-5 col-xl-2 toast-base mat-elevation-z6 ' + toast.type" *ngFor="let toast of shared.toasts"
       @fadeIn>
       <div [innerHTML]="toast.message | translate:toast.params" style="width: inherit;">
 

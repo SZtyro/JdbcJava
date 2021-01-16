@@ -12,7 +12,7 @@ export class TableContentResolverService implements Resolve<Object>{
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Object | Observable<Object> | Promise<Object> {
 
-    return this.http.getTableContent(route.params['tableName'])
+    return this.http.database.getTableContent(route.params['tableName'])
 
   }
 }

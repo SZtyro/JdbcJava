@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, Output, EventEmitter, ComponentRef, Type } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
 import { item } from '../home/home.component';
-import { SharedService } from 'src/app/services/Shared/shared.service';
+import { SharedService } from 'src/app/services/shared.service';
 import { HomeWidget } from '../../interfaces/homeWidget';
 
 @Component({

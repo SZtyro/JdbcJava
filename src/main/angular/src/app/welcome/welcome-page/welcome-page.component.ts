@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/http-client.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { SharedService } from 'src/app/services/Shared/shared.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 
 @Component({

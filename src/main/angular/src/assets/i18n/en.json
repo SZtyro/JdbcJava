@@ -67,10 +67,12 @@
         "user": {
             "created": "User <b>{{mail}}</b> has been successfully created.",
             "updated": "User <b>{{mail}}</b> has been successfully updated."
-        },
-        "database": {
-            "inserted": "Row has been successfully inserted",
-            "updated": "Row has been successfully updated."
         }
+    },
+    "toasts": {
+        "database": {
+            "inserted": "Row has been successfully inserted.",
+            "updated": "Row has been successfully updated.",
+            "deleted": "Row has been successfully deleted."        }
     }
 }

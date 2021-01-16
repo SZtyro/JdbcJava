@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Component, Directive, ViewChild } from '@angular/core';
 import { Column } from '../interfaces/column';
-import { SharedService } from 'src/app/services/Shared/shared.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Directive()
 export abstract class BasicTable {

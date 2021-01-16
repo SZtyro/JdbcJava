@@ -68,7 +68,7 @@ export class TableContentComponent extends BasicFormDialog implements OnInit {
     switch (actionId) {
       case 'save':
         if (!this.data.row)
-          this.http.saveRow(this.wrapBody(), this.data.tableName).subscribe(
+          this.http.database.saveRow(this.wrapBody(), this.data.tableName).subscribe(
             () => {
               this.shared.newToast({
                 message: "notification.database.inserted"
@@ -83,7 +83,7 @@ export class TableContentComponent extends BasicFormDialog implements OnInit {
             }
           )
         else
-          this.http.updateRow(this.wrapBody(), this.data.tableName).subscribe(
+          this.http.database.updateRow(this.wrapBody(), this.data.tableName).subscribe(
             () => {
               this.shared.newToast({
                 message: "notification.database.inserted"

@@ -1,6 +1,6 @@
 import { Directive, ElementRef, OnInit, Renderer2, Input, ViewContainerRef, ComponentFactoryResolver, ComponentRef, ViewChild, HostListener } from '@angular/core';
 import { AnimationBuilder, style, animate, transition, keyframes } from '@angular/animations';
-import { SharedService } from 'src/app/services/Shared/shared.service';
+import { SharedService } from 'src/app/services/shared.service';
 import { GridsterItemComponent } from 'angular-gridster2';
 
 

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientService } from 'src/app/services/http-client.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SharedService } from 'src/app/services/Shared/shared.service';
+import { SharedService } from 'src/app/services/shared.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { DatabaseService } from 'src/app/services/database/database.service';
 
 @Component({
   selector: 'app-login-window',
@@ -66,7 +65,6 @@ export class LoginWindowComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private shared: SharedService,
-    private db: DatabaseService
   ) { }
 
 
@@ -95,24 +93,7 @@ export class LoginWindowComponent implements OnInit {
 
   login() {
     this.baseConnecting = true;
-    this.httpClientService.loginUser([this.url, this.port, this.dataBase, this.userName, this.password]).subscribe(
-      tables => {
-        this.baseConnecting = false;
-        this.tablesLoading = false;
-        // if (data === "acces") {
-        //   // localStorage.setItem('url', JSON.stringify(this.url));
-        //   // localStorage.setItem('userName', JSON.stringify(this.userName));
-        //   // localStorage.setItem('dataBase', JSON.stringify(this.dataBase));
-        //   // localStorage.setItem('port', JSON.stringify(this.port));
-        //   //this.router.navigate(['/home'])
-        //   this.shared.setdbConnnection();
-        //   this.databaseNames[0] = this.dataBase;
-        //   this.editingDetails = false;
-        // }
-
-        this.databaseTables = tables;
-      }
-    );
+    
   }
 
   setEditing(hover: boolean) {
@@ -125,10 +106,7 @@ export class LoginWindowComponent implements OnInit {
 
   fetchTables() {
     console.log('fetching tables')
-    this.httpClientService.getTableNames().subscribe(tables => {
-      console.log(tables)
-      this.databaseTables = tables
-    })
+    
   }
 
   openTable(tableName) {
@@ -141,6 +119,6 @@ export class LoginWindowComponent implements OnInit {
   }
 
   download() {
-    this.httpClientService.getTables('test').subscribe(data => console.log(data))
+    this.httpClientService.database.getTables('test').subscribe(data => console.log(data))
   }
 }

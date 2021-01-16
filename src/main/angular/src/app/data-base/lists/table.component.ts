@@ -6,6 +6,7 @@ import { detailExpand } from 'src/app/main-app/ts/animations';
 import { MatTableDataSource } from '@angular/material';
 import { buttonDelete, buttonEdit } from 'src/app/main-app/ts/buttons';
 import { TableContentComponent } from '../forms/table-content.component';
+import { ToastType } from 'src/app/main-app/components/enums/toastType';
 
 @Component({
   selector: 'app-table',
@@ -43,9 +44,9 @@ export class TableComponent extends BasicTable implements OnInit {
     this.constraints.forEach(element => {
       let metaElem = this.metadata.find(meta => meta['name'] == element.name)
       //metaElem['dataType'] = FieldType.SELECT;
-      this.http.getIds(element['referencedTableName'], element['referencedColumnName']).subscribe(ids => {
+      this.http.database.getIds(element['referencedTableName'], element['referencedColumnName']).subscribe(ids => {
         metaElem['options'] = ids.map(id => { return { value: id } });
-        
+
       })
 
 
@@ -65,8 +66,26 @@ export class TableComponent extends BasicTable implements OnInit {
             row: row
           }
         });
-
         break;
+
+      case buttonDelete.id:
+        let column = this.metadata.find(elem => elem['primary']);
+        this.http.database.deleteRow(this.route.snapshot.params['tableName'], column['name'], row[column['name']]).subscribe(
+          () => {
+            this.shared.newToast({
+              message: 'toasts.database.deleted'
+            })
+          },
+          err => {
+            this.shared.newToast({
+              message: err.error.message,
+              duration: 10000,
+              type: ToastType.ERROR
+            })
+          }
+        )
+        break;
+
 
       default:
         break;

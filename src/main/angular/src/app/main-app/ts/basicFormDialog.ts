@@ -1,4 +1,4 @@
-import { SharedService } from 'src/app/services/Shared/shared.service';
+import { SharedService } from 'src/app/services/shared.service';
 import { Directive, Inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClientService } from "src/app/services/http-client.service";

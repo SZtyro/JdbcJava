@@ -64,10 +64,13 @@
         "user": {
             "created": "Pomyślnie dodano użytkownika <b>{{mail}}</b>.",
             "updated": "Pomyślnie zakutalizowano użytkownika <b>{{mail}}</b>"
-        },
+        }
+    },
+    "toasts": {
         "database": {
             "inserted": "Pomyślnie dodano rekord.",
-            "updated": "Pomyślnie zaktualizowano rekord."
+            "updated": "Pomyślnie zaktualizowano rekord.",
+            "deleted": "Pomyślnie usunięto rekord."
         }
     }
 }

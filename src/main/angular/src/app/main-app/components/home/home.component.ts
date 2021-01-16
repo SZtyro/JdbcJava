@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, Injector, Inject, ViewContainerRef, View
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClientService } from '../../../services/http-client.service';
 import { HomeWidget } from '../../interfaces/homeWidget';
-import { SharedService } from '../../../services/Shared/shared.service';
+import { SharedService } from '../../../services/shared.service';
 import { MatTableDataSource } from '@angular/material';
 
 export interface item {

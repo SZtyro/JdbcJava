@@ -15,7 +15,7 @@ export class SharedService {
 
     setTimeout(() => {
       this.toasts.splice(this.toasts.indexOf(toast), 1)
-    }, toast.duration ? toast.duration : 4000);
+    }, toast.duration ? toast.duration : 8000);
   }
 
 }

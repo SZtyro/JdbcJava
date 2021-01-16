@@ -5,7 +5,7 @@ import { HttpClientService } from './services/http-client.service';
 import { GoogleLoginProvider } from "angularx-social-login";
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material';
-import { SharedService } from './services/Shared/shared.service';
+import { SharedService } from './services/shared.service';
 import { Observable } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { FunctionBase } from './modules/functionModules/functionBase';
@@ -162,7 +162,7 @@ export class AppComponent implements OnInit, AfterContentInit {
         })
       })
 
-    this.httpClientService.getDatabases().subscribe(
+    this.httpClientService.database.getDatabases().subscribe(
       databases => {
         console.log(databases)
         databases.forEach(element => {

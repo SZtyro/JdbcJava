@@ -5,7 +5,7 @@ import { GmailService, GMailContent } from 'src/app/services/Gmail/gmail.service
 import { MatTableDataSource } from '@angular/material';
 import { HomeWidget } from '../../interfaces/homeWidget';
 import { TranslateService } from '@ngx-translate/core';
-import { SharedService } from 'src/app/services/Shared/shared.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 
 interface GThread {
