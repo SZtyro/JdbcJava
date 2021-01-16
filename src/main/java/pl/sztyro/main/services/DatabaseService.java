@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pl.sztyro.main.config.HibernateConf;
 import pl.sztyro.main.model.Company;
@@ -22,14 +23,33 @@ import java.util.List;
 public class DatabaseService {
 
     private static final Logger _logger = LoggerFactory.getLogger(DatabaseService.class);
+    AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
 
     @Autowired
     HibernateConf conf;
 
-    public String decodePassword(String password) {
-        AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
-        textEncryptor.setPassword("dev-env-secret");
+    @Autowired
+    CompanyService companyService;
+
+    @Value("${ENCRYPTOR_PASSWORD}")
+    private String encryptorPassword;
+
+    private String decryptPassword(String password) {
+        //Dotenv dotenv = Dotenv.load();
+        System.out.println(encryptorPassword);
+
+        textEncryptor.setPassword(encryptorPassword);
+
         return textEncryptor.decrypt(password);
+    }
+
+    private String encryptPassword(String password) {
+        //Dotenv dotenv = Dotenv.load();
+        System.out.println(encryptorPassword);
+
+        textEncryptor.setPassword(encryptorPassword);
+
+        return textEncryptor.encrypt(password);
     }
 
     public Connection prepareConnection(Database database) throws SQLException {
@@ -39,7 +59,7 @@ public class DatabaseService {
                         + ":" + database.getPort()
                         + "/" + database.getDatabase()
                         + "?user=" + database.getLogin()
-                        + (database.getPassword() != null ? ("&password=" + decodePassword(database.getPassword())) : "")
+                        + (database.getPassword() != null ? ("&password=" + decryptPassword(database.getPassword())) : "")
 
         );
 
@@ -312,22 +332,31 @@ public class DatabaseService {
         Session session = conf.getSession();
 
         _logger.info("Dodawanie bazy firmy: " + company.getName());
-
+        Database database;
         try {
 
-            Database database = new Database(
-                    object.getString("url"),
-                    object.getString("port"),
-                    object.getString("database"),
-                    object.getString("login"),
-                    object.getString("password")
-            );
+            if (object.has("password")) {
+                database = new Database(
+                        object.getString("host"),
+                        object.getString("port"),
+                        object.getString("database"),
+                        object.getString("user"),
+                        encryptPassword(object.getString("password"))
+                );
+            } else {
+                database = new Database(
+                        object.getString("host"),
+                        object.getString("port"),
+                        object.getString("database"),
+                        object.getString("user")
+                );
+            }
 
-            List<Database> li = new ArrayList<Database>();
-            li.add(database);
-            company.setDatabase(li);
+            Company c = session.load(Company.class, company.getId());
+            c.addDatabase(database);
 
             session.save(database);
+            session.save(c);
             session.getTransaction().commit();
 
 
@@ -350,6 +379,54 @@ public class DatabaseService {
             Company c = session.load(Company.class, company.getId());
             database = c.getDatabase().get(0);
 
+            session.getTransaction().commit();
+
+
+        } catch (Exception e) {
+            _logger.error(e.getMessage());
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+
+        }
+        return database;
+    }
+
+    public void updateCompanyDatabase(JSONObject body) {
+        Session session = conf.getSession();
+
+        _logger.info("Aktualizacja bazy o id: " + body.getLong("id"));
+
+        try {
+
+            Database database = session.load(Database.class, body.getLong("id"));
+
+            database.setDatabase(body.getString("database"));
+            database.setPassword(encryptPassword(body.getString("password")));
+            database.setLogin(body.getString("login"));
+            database.setPort(body.getString("port"));
+            database.setUrl(body.getString("url"));
+
+            session.save(database);
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            _logger.error(e.getMessage());
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+    }
+
+    public Database getDatabase(Long id) {
+        Session session = conf.getSession();
+
+        _logger.info("Pobieranie bazy o id: " + id);
+        Database database = null;
+        try {
+
+            database = session.load(Database.class, id);
             session.getTransaction().commit();
 
 

@@ -73,9 +73,14 @@
     },
     "toasts": {
         "database": {
-            "inserted": "Row has been successfully inserted.",
-            "updated": "Row has been successfully updated.",
-            "deleted": "Row has been successfully deleted."
+            "created": "Database has been successfully created.",
+            "updated": "Database has been successfully updated.",
+            "row": {
+                "inserted": "Row has been successfully inserted.",
+                "updated": "Row has been successfully updated.",
+                "deleted": "Row has been successfully deleted.",
+                "notfound": "Database not found"
+            }
         }
     },
     "dialog": {

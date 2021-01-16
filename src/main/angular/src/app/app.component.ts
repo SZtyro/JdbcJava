@@ -1,3 +1,4 @@
+import { openClose, fadeIn } from './main-app/ts/animations';
 import { Component, OnInit, AfterViewChecked, AfterContentChecked, AfterContentInit } from '@angular/core';
 import { Router, RouterEvent, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { HttpClientService } from './services/http-client.service';
@@ -16,31 +17,8 @@ import { ToastType } from './main-app/components/enums/toastType';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [
-    trigger('openClose', [
-      // ...
-      state('open', style({
-        width: '200px',
-      })),
-      state('closed', style({
-        width: '50px',
-      })),
-      transition('open => closed', [
-        animate('500ms cubic-bezier(0.35, 0, 0.25, 1)')
-      ]),
-      transition('closed => open', [
-        animate('500ms cubic-bezier(0.35, 0, 0.25, 1)')
-      ]),
-    ]),
-    trigger('fadeIn', [
-      transition(':enter', [
-        style({ opacity: '0' }),
-        animate('.5s ease-out', style({ opacity: '1' })),
-      ]),
-      transition(':leave', [
-        style({ opacity: '1' }),
-        animate('.5s ease-out', style({ opacity: '0' })),
-      ]),
-    ]),
+    openClose,
+    fadeIn
   ]
 })
 export class AppComponent implements OnInit, AfterContentInit {
@@ -49,11 +27,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     { icon: 'home', name: 'NAVBAR.HOME', routerLink: 'home' },
     {
       icon: 'storage', name: 'Database', childs: [
-        { icon: 'add', name: 'add', childs: [] }
-        // {
-        //   icon: 'settings', name: 'Settings', routerLink: 'databases', childs: []
-        // },
-        // { icon: 'table_rows', name: 'Tables', routerLink: 'databases', childs: [] }
+        { icon: 'add', name: 'add', routerLink: 'databases/0/settings', childs: [] }
       ]
     },
     {
@@ -169,9 +143,9 @@ export class AppComponent implements OnInit, AfterContentInit {
           this.menuItems[1].childs.push({
             icon: 'table_rows', name: element['database'], childs: [
               {
-                icon: 'settings', name: 'settings', routerLink: 'databases', childs: []
+                icon: 'settings', name: 'settings', routerLink: 'databases/' + (element['id'] ? element['id'] : element['databaseId']) + '/settings', childs: []
               },
-              { icon: 'list', name: 'tables', routerLink: 'databases/' + element['database'], childs: [] }
+              { icon: 'list', name: 'tables', routerLink: 'databases/' + (element['id'] ? element['id'] : element['databaseId']), childs: [] }
             ]
           })
         });

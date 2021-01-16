@@ -11,6 +11,6 @@ export class TableConstraintResolverService implements Resolve<Object>{
   constructor(private http: HttpClientService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Object | Observable<Object> | Promise<Object> {
-    return this.http.database.getConstraints(route.params['tableName']);
+    return this.http.database.getConstraints(route.params['id'], route.params['tableName']);
   }
 }

@@ -119,6 +119,6 @@ export class LoginWindowComponent implements OnInit {
   }
 
   download() {
-    this.httpClientService.database.getTables('test').subscribe(data => console.log(data))
+    //this.httpClientService.database.getTables('test').subscribe(data => console.log(data))
   }
 }

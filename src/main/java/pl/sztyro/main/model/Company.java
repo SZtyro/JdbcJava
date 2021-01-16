@@ -1,12 +1,15 @@
 package pl.sztyro.main.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import pl.sztyro.main.exceptions.NotFoundException;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
+@Transactional
 //@Proxy(lazy = false)
 //@Table(name = "User_Company")
 public class Company {
@@ -29,7 +32,7 @@ public class Company {
     @Column(name = "company_NIP")
     private long nip;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Database> database;
 
@@ -47,6 +50,16 @@ public class Company {
         this.owner = owner;
     }
 
+    public Database getDatabaseByName(String name) throws NotFoundException {
+        return database.stream()
+                .filter(db -> name.equals(db.getDatabase()))
+                .findAny()
+                .orElseThrow(() -> new NotFoundException("toasts.database.notfound"));
+    }
+
+    public void addDatabase(Database db) {
+        this.database.add(db);
+    }
 
     public String getName() {
         return name;

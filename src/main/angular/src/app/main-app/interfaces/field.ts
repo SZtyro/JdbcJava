@@ -2,11 +2,11 @@ import { FieldType } from "../components/enums/fieldType";
 
 export interface Field {
     /**Nazwa pola */
-    name: String;
+    name: string;
     /**Typ pola */
     type: FieldType;
     /**Klasy pola */
-    class?: String;
+    class?: string;
     /**Wartość pola */
     value?;
     /**Opcje w przypadku selecta */

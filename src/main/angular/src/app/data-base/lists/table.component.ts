@@ -17,10 +17,12 @@ export class TableComponent extends BasicTable implements OnInit {
 
   metadata: Object[];
   constraints;
+  databaseId;
 
   ngOnInit(): void {
 
     this.name = this.route.snapshot.params['tableName'];
+    this.databaseId = this.route.snapshot.params['id'];
     this.route.data.subscribe(data => {
       this.dataSource = new MatTableDataSource(data.content);
       this.metadata = data.columns;
@@ -44,7 +46,7 @@ export class TableComponent extends BasicTable implements OnInit {
     this.constraints.forEach(element => {
       let metaElem = this.metadata.find(meta => meta['name'] == element.name)
       //metaElem['dataType'] = FieldType.SELECT;
-      this.http.database.getIds(element['referencedTableName'], element['referencedColumnName']).subscribe(ids => {
+      this.http.database.getIds(this.route.snapshot.params['id'], element['referencedTableName'], element['referencedColumnName']).subscribe(ids => {
         metaElem['options'] = ids.map(id => { return { value: id } });
 
       })
@@ -63,7 +65,8 @@ export class TableComponent extends BasicTable implements OnInit {
             metadata: this.metadata,
             name: this.name,
             tableName: this.name,
-            row: row
+            row: row,
+            databaseId: this.databaseId
           }
         });
         break;
@@ -76,10 +79,10 @@ export class TableComponent extends BasicTable implements OnInit {
           buttons: [
             {
               name: 'delete', id: 'delete', action: () => {
-                this.http.database.deleteRow(this.route.snapshot.params['tableName'], column['name'], row[column['name']]).subscribe(
+                this.http.database.deleteRow(this.route.snapshot.params['id'], this.route.snapshot.params['tableName'], column['name'], row[column['name']]).subscribe(
                   () => {
                     this.shared.newToast({
-                      message: 'toasts.database.deleted'
+                      message: 'toasts.database.row.deleted'
                     })
                     d.close();
                     this.router.navigateByUrl(this.router.url);
@@ -117,7 +120,8 @@ export class TableComponent extends BasicTable implements OnInit {
           data: {
             metadata: this.metadata,
             name: this.name,
-            tableName: this.name
+            tableName: this.name,
+            databaseId: this.databaseId
           }
         });
 

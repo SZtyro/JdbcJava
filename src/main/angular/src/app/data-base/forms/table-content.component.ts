@@ -22,26 +22,13 @@ export class TableContentComponent extends BasicFormDialog implements OnInit {
       };
 
       if (this.data.row) {
-        console.log(this.data.row)
-        console.log(element.name)
-        console.log('wartosć ' + this.data.row[element.name])
-
         e.value = this.data.row[element.name];
       }
       if (element.options) {
         e.options = element.options;
         e.type = FieldType.SELECT;
       }
-      //if (element.compareWith) {
-      // e.compareWith = (el1, el2) => {
-      //   console.log(el1)
-      //   console.log(el2)
-      //   return el1['value'] === el2
-      // };
-      //}
 
-      console.log("calosc")
-      console.log(e)
       this.fields.push(e);
     });
 
@@ -68,10 +55,10 @@ export class TableContentComponent extends BasicFormDialog implements OnInit {
     switch (actionId) {
       case 'save':
         if (!this.data.row)
-          this.http.database.saveRow(this.wrapBody(), this.data.tableName).subscribe(
+          this.http.database.saveRow(this.wrapBody(), this.data.tableName, this.data.databaseId).subscribe(
             () => {
               this.shared.newToast({
-                message: "notification.database.inserted"
+                message: "toasts.database.row.inserted"
               })
               this.dialogRef.close();
               this.router.navigateByUrl(this.router.url);
@@ -83,10 +70,10 @@ export class TableContentComponent extends BasicFormDialog implements OnInit {
             }
           )
         else
-          this.http.database.updateRow(this.wrapBody(), this.data.tableName).subscribe(
+          this.http.database.updateRow(this.wrapBody(), this.data.tableName,this.data.databaseId).subscribe(
             () => {
               this.shared.newToast({
-                message: "notification.database.inserted"
+                message: "toasts.database.row.updated"
               })
               this.dialogRef.close();
               this.router.navigateByUrl(this.router.url);

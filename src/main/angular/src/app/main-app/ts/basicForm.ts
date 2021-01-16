@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClientService } from "src/app/services/http-client.service";
 import { Field } from "../interfaces/field";
 import { TableActionButton } from "../interfaces/tableActionButton";
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 
 @Directive()
@@ -32,5 +31,12 @@ export abstract class BasicForm {
      * @param row obiekt przypisany do rzędu
     */
     abstract onAction(actionId);
+
+    createBodyFromFields(body) {
+        this.fields.forEach(elem => {
+            body[elem.name] = elem.value;
+        })
+        return body;
+    }
 
 }

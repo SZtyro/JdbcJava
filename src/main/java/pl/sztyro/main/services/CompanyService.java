@@ -19,6 +19,7 @@ import pl.sztyro.main.model.User;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyService {
@@ -66,6 +67,7 @@ public class CompanyService {
         try {
 
             company = session.load(Company.class, id);
+
             session.getTransaction().commit();
 
         } catch (Exception e) {
@@ -234,11 +236,13 @@ public class CompanyService {
     public List<Database> getCompanyDatabase(Company company) {
         Session session = conf.getSession();
         List<Database> databases = null;
-        _logger.info("Pobieranie baz firmy: " + company.getName());
+
 
         try {
 
             Company c = session.load(Company.class, company.getId());
+            _logger.info("Pobieranie baz firmy: " + company.getName());
+
             Hibernate.initialize(c.getDatabase());
             databases = c.getDatabase();
             session.getTransaction().commit();
@@ -250,6 +254,35 @@ public class CompanyService {
             session.close();
 
             return databases;
+        }
+
+    }
+
+    public Optional<Database> getCompanyDatabaseByName(Company company, String name) {
+        Session session = conf.getSession();
+        List<Database> databases = null;
+        Optional<Database> answer = null;
+
+        try {
+
+            Company c = session.load(Company.class, company.getId());
+            _logger.info("Pobieranie bazy firmy: " + c.getName() + " o nazwie: " + name);
+
+            Hibernate.initialize(c.getDatabase());
+            databases = c.getDatabase();
+            answer = databases.stream()
+                    .filter(db -> name.equals(db.getDatabase()))
+                    .findAny();
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            _logger.error(e.getMessage());
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+
+            return answer;
         }
 
     }

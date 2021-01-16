@@ -12,9 +12,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableComponent } from './lists/table.component';
 import { TableContentComponent } from './forms/table-content.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DatabaseSettingsComponent } from './forms/database-settings.component';
 
 @NgModule({
-  declarations: [TableListComponent, TableComponent, TableContentComponent],
+  declarations: [
+    TableListComponent,
+    TableComponent,
+    TableContentComponent,
+    DatabaseSettingsComponent
+  ],
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
@@ -32,6 +38,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule
+  ],
+  exports: [
+    DatabaseSettingsComponent
   ]
 })
 export class DataBaseModule { }

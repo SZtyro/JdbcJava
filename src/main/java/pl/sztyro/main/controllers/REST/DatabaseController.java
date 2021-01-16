@@ -39,7 +39,7 @@ public class DatabaseController {
 
         User user = userService.getUser(authService.getLoggedUserMail(request));
         Company company = user.getSelectedCompany();
-        Database database = databaseService.getCompanyDatabase(company);
+        Database database = databaseService.getDatabase(id);
 
         if (tableName != null)
             return databaseService.getTableDetails(database, tableName);
@@ -105,7 +105,7 @@ public class DatabaseController {
 
         User user = userService.getUser(authService.getLoggedUserMail(request));
         Company company = user.getSelectedCompany();
-        Database database = databaseService.getCompanyDatabase(company);
+        Database database = databaseService.getDatabase(id);
 
         databaseService.deleteRow(database, tableName, columnName, rowId);
     }
@@ -115,7 +115,7 @@ public class DatabaseController {
 
         User user = userService.getUser(authService.getLoggedUserMail(request));
         Company company = user.getSelectedCompany();
-        Database database = databaseService.getCompanyDatabase(company);
+        Database database = databaseService.getDatabase(id);
 
         return databaseService.getTableContent(database, tableName);
 
@@ -138,9 +138,38 @@ public class DatabaseController {
 
         User user = userService.getUser(authService.getLoggedUserMail(request));
         Company company = user.getSelectedCompany();
-        if (company.getDatabase().size() == 0)
-            databaseService.addCompanyDatabase(company, object);
+
+        databaseService.addCompanyDatabase(company, object);
 
     }
 
+    @PutMapping()
+    public void updateCompanyDatabase(HttpServletRequest request, @RequestBody Object body) throws NotFoundException {
+
+        Gson gson = new Gson();
+        JSONObject object = new JSONObject(gson.toJson(body));
+
+        User user = userService.getUser(authService.getLoggedUserMail(request));
+        Company company = user.getSelectedCompany();
+
+        databaseService.updateCompanyDatabase(object);
+
+    }
+
+    @GetMapping()
+    public Object getDatabase(HttpServletRequest request, @RequestParam Long id) throws NotFoundException {
+        User user = userService.getUser(authService.getLoggedUserMail(request));
+
+        if(id == 0)
+            return new Database();
+
+        Company company = companyService.getCompany(user.getSelectedCompany().getId());
+        Database db = null;
+        db = databaseService.getDatabase(id);
+        if (db == null)
+            throw new NotFoundException("toasts.database.notfound");
+        else
+            return db;
+
+    }
 }

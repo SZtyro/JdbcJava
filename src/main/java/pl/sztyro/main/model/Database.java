@@ -1,16 +1,19 @@
 package pl.sztyro.main.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Proxy;
+
 import javax.persistence.*;
 
 @Entity
-//@Proxy(lazy = false)
+@Proxy(lazy = false)
 @Table(name = "UserDatabase")
 public class Database {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "database_id")
-    private int databaseId;
+    private long id;
     @Column(name = "database_host")
     private String url;
     @Column(name = "database_port")
@@ -20,9 +23,11 @@ public class Database {
     @Column(name = "database_login")
     private String login;
     @Column(name = "database_password")
+    @JsonIgnore
     private String password;
 
-    public Database(){}
+    public Database() {
+    }
 
     public Database(String url, String port, String database, String login, String password) {
         this.url = url;
@@ -32,10 +37,17 @@ public class Database {
         this.password = password;
     }
 
+    public Database(String url, String port, String database, String login) {
+        this.url = url;
+        this.port = port;
+        this.database = database;
+        this.login = login;
+    }
+
     @Override
     public String toString() {
         return "UserDatabase{" +
-                "databaseId=" + databaseId +
+                "databaseId=" + id +
                 ", url='" + url + '\'' +
                 ", port='" + port + '\'' +
                 ", database='" + database + '\'' +
@@ -44,8 +56,8 @@ public class Database {
                 '}';
     }
 
-    public Database(int id, String url, String port, String database, String login, String password) {
-        this.databaseId = id;
+    public Database(long id, String url, String port, String database, String login, String password) {
+        this.id = id;
         this.url = url;
         this.port = port;
         this.database = database;
@@ -77,8 +89,8 @@ public class Database {
         this.password = password;
     }
 
-    public int getDatabaseId() {
-        return databaseId;
+    public long getDatabaseId() {
+        return id;
     }
 
     public String getUrl() {
@@ -99,5 +111,9 @@ public class Database {
 
     public String getPassword() {
         return password;
+    }
+
+    public long getId() {
+        return id;
     }
 }

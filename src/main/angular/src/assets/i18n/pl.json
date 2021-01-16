@@ -70,9 +70,14 @@
     },
     "toasts": {
         "database": {
-            "inserted": "Pomyślnie dodano rekord.",
-            "updated": "Pomyślnie zaktualizowano rekord.",
-            "deleted": "Pomyślnie usunięto rekord."
+            "created": "Pomyślnie utworzono bazę",
+            "updated": "Pomyślnie zaaktualizowano bazę",
+            "row": {
+                "inserted": "Pomyślnie dodano rekord.",
+                "updated": "Pomyślnie zaktualizowano rekord.",
+                "deleted": "Pomyślnie usunięto rekord.",
+                "notfound": "Nie znaleziono bazy danych"
+            }
         }
     },
     "dialog": {

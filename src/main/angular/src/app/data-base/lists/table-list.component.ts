@@ -15,9 +15,10 @@ export class TableListComponent extends BasicTable implements OnInit {
 
   ngOnInit(): void {
 
-    this.name = this.route.snapshot.params['database'];
+    
     this.route.data.subscribe(data => {
       this.dataSource = new MatTableDataSource(data.tables)
+      this.name = data.database['database'];
     })
     this.columns = [
       { name: 'name' }

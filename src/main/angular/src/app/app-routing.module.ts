@@ -1,3 +1,4 @@
+import { DatabaseResolverService } from './data-base/services/guards/resolvers/database-resolver.service';
 import { TableConstraintResolverService } from './data-base/services/guards/resolvers/table-constraint-resolver.service';
 import { TableContentResolverService } from './data-base/services/guards/resolvers/table-content-resolver.service';
 
@@ -24,6 +25,7 @@ import { HomeComponent } from './main-app/components/home/home.component';
 import { WelcomePageComponent } from './welcome/welcome-page/welcome-page.component';
 import { UserSettingsComponent } from './main-app/forms/settings/user-settings/user-settings.component';
 import { TableComponent } from './data-base/lists/table.component';
+import { DatabaseSettingsComponent } from './data-base/forms/database-settings.component';
 
 const routes: Routes = [
   { path: 'table/:tableName', component: TableComponent },
@@ -38,8 +40,9 @@ const routes: Routes = [
   { path: 'chart', component: ChartComponentComponent },
   {
     path: 'databases', children: [
+      
       {
-        path: ':database/table/:tableName', component: TableComponent, pathMatch: 'full', runGuardsAndResolvers: "always",
+        path: ':id/table/:tableName', component: TableComponent, pathMatch: 'full', runGuardsAndResolvers: "always",
         resolve: {
           columns: TablesResolverService,
           content: TableContentResolverService,
@@ -47,9 +50,16 @@ const routes: Routes = [
         }
       },
       {
-        path: ':database', component: TableListComponent,
+        path: ':id/settings', component: DatabaseSettingsComponent,
         resolve: {
-          tables: TablesResolverService
+          database: DatabaseResolverService
+        },
+      },
+      {
+        path: ':id', component: TableListComponent,
+        resolve: {
+          tables: TablesResolverService,
+          database: DatabaseResolverService
         },
       }
 
