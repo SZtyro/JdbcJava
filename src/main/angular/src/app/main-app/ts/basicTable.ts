@@ -1,9 +1,9 @@
 import { HttpClientService } from './../../services/http-client.service';
-import { TableActionButton } from './../interfaces/tableActionButton';
+import { TableActionButton } from './interfaces/tableActionButton';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Component, Directive, ViewChild } from '@angular/core';
-import { Column } from '../interfaces/column';
+import { Column } from './interfaces/column';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Directive()

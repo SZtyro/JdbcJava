@@ -19,7 +19,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MainAppModule } from './main-app/main-app.module';
 import { DataBaseModule } from './data-base/data-base.module';
-import { LoginWindowComponent } from './main-app/components/login-window/login-window.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -36,7 +35,7 @@ import { WelcomeModule } from './welcome/welcome.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ChartComponentComponent } from './chart-component/chart-component.component';
 import { GoogleChartsModule } from 'angular-google-charts';
-import { MenuItemComponent } from './menu-item/menu-item.component';
+import { MenuItemComponent } from './main-app/components/custom/menu-item/menu-item.component';
 import { MatRippleModule } from '@angular/material/core';
 import { AuthInterceptor } from './services/interceptors/auth-interceptor.service';
 import { TableComponent } from './data-base/lists/table.component';
@@ -66,7 +65,6 @@ export function provideConfig() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginWindowComponent,
     ChartComponentComponent,
     MenuItemComponent
 

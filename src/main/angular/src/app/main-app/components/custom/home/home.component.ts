@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef, Injector, Inject, ViewContainerRef, ViewChild, ComponentFactoryResolver, AfterViewInit, Type, ComponentRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClientService } from '../../../services/http-client.service';
-import { HomeWidget } from '../../interfaces/homeWidget';
-import { SharedService } from '../../../services/shared.service';
+import { HttpClientService } from '../../../../services/http-client.service';
+import { HomeWidget } from '../../../ts/interfaces/homeWidget';
+import { SharedService } from '../../../../services/shared.service';
 import { MatTableDataSource } from '@angular/material';
 
 export interface item {

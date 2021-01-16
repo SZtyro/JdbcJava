@@ -1,4 +1,4 @@
-import { FieldType } from "../components/enums/fieldType";
+import { FieldType } from "../enums/fieldType";
 
 export interface Field {
     /**Nazwa pola */

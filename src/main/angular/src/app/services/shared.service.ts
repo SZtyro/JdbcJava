@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { Toast } from 'src/app/main-app/interfaces/toast';
-import { DialogComponent, DialogData } from '../main-app/components/dialog/dialog.component';
+import { Toast } from 'src/app/main-app/ts/interfaces/toast';
+import { DialogComponent, DialogData } from '../main-app/components/custom/dialog/dialog.component';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FieldType } from 'src/app/main-app/components/enums/fieldType';
-import { ToastType } from 'src/app/main-app/components/enums/toastType';
-import { Field } from 'src/app/main-app/interfaces/field';
+import { FieldType } from 'src/app/main-app/ts/enums/fieldType';
+import { ToastType } from 'src/app/main-app/ts/enums/toastType';
+import { Field } from 'src/app/main-app/ts/interfaces/field';
 import { BasicFormDialog } from 'src/app/main-app/ts/basicFormDialog';
 
 @Component({
@@ -33,7 +33,7 @@ export class TableContentComponent extends BasicFormDialog implements OnInit {
     });
 
     this.actions = [
-      { name: 'save', id: 'save', icon: 'save' }
+      { name: 'save', id: 'save' }
     ]
   }
 
@@ -94,15 +94,19 @@ export class TableContentComponent extends BasicFormDialog implements OnInit {
   mapType(type) {
     switch (type) {
       case 'int':
-        return FieldType.INPUT;
-
       case 'varchar':
+      case 'tinytext':
+      case 'double':
+      case 'bigint':
+      case 'mediumint':
         return FieldType.INPUT
 
       case 'text':
         return FieldType.TEXTAREA
 
       case 'date':
+      case 'datetime':
+      case 'timestamp':
         return FieldType.DATE
 
       default:

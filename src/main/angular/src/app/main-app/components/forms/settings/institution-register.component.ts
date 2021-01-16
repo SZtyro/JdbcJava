@@ -1,13 +1,13 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClientService } from 'src/app/services/http-client.service';
 import { Component, OnInit } from '@angular/core';
-import { BasicForm } from '../ts/basicForm';
-import { FieldType } from '../components/enums/fieldType';
-import { ToastType } from '../components/enums/toastType';
+import { BasicForm } from '../../../ts/basicForm';
+import { FieldType } from '../../../ts/enums/fieldType';
+import { ToastType } from '../../../ts/enums/toastType';
 
 @Component({
   selector: 'app-institution-register',
-  templateUrl: './../html/basicForm.html'
+  templateUrl: './../../../html/basicForm.html'
 })
 export class InstitutionRegisterComponent extends BasicForm implements OnInit {
 

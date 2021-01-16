@@ -77,8 +77,7 @@ public class DatabaseController {
         JSONArray obj = new JSONArray(gson.toJson(body));
 
         User user = userService.getUser(authService.getLoggedUserMail(request));
-        Company company = user.getSelectedCompany();
-        Database database = databaseService.getCompanyDatabase(company);
+        Database database = databaseService.getDatabase(id);
 
         databaseService.insertRow(database, tableName, obj);
 
@@ -92,8 +91,7 @@ public class DatabaseController {
         JSONArray obj = new JSONArray(gson.toJson(body));
 
         User user = userService.getUser(authService.getLoggedUserMail(request));
-        Company company = user.getSelectedCompany();
-        Database database = databaseService.getCompanyDatabase(company);
+        Database database = databaseService.getDatabase(id);
 
         databaseService.updateRow(database, tableName, obj);
 

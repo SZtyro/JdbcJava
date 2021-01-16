@@ -1,4 +1,4 @@
-import { FieldType } from './../../main-app/components/enums/fieldType';
+import { FieldType } from '../../main-app/ts/enums/fieldType';
 import { buttonPDFExport } from './../../main-app/ts/buttons';
 import { BasicTable } from 'src/app/main-app/ts/basicTable';
 import { Component, OnInit } from '@angular/core';
@@ -6,7 +6,7 @@ import { detailExpand } from 'src/app/main-app/ts/animations';
 import { MatTableDataSource } from '@angular/material';
 import { buttonDelete, buttonEdit } from 'src/app/main-app/ts/buttons';
 import { TableContentComponent } from '../forms/table-content.component';
-import { ToastType } from 'src/app/main-app/components/enums/toastType';
+import { ToastType } from 'src/app/main-app/ts/enums/toastType';
 
 @Component({
   selector: 'app-table',

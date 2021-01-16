@@ -2,7 +2,7 @@ import { SharedService } from 'src/app/services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/http-client.service';
 import { Component, OnInit, Type } from '@angular/core';
-import { ToastType } from '../../components/enums/toastType';
+import { ToastType } from '../../../ts/enums/toastType';
 
 @Component({
   selector: 'app-employee',

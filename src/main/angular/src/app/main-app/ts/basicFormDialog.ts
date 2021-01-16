@@ -2,8 +2,8 @@ import { SharedService } from 'src/app/services/shared.service';
 import { Directive, Inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClientService } from "src/app/services/http-client.service";
-import { Field } from "../interfaces/field";
-import { TableActionButton } from "../interfaces/tableActionButton";
+import { Field } from "./interfaces/field";
+import { TableActionButton } from "./interfaces/tableActionButton";
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 

@@ -4,26 +4,26 @@ import { TableContentResolverService } from './data-base/services/guards/resolve
 
 import { TablesResolverService } from './data-base/services/guards/resolvers/tables-resolver.service';
 import { TableListComponent } from './data-base/lists/table-list.component';
-import { InviteUserComponent } from './main-app/forms/invite-user.component';
+import { InviteUserComponent } from './main-app/components/forms/settings/invite-user.component';
 import { EmployeeResolverService } from './services/guards/resolvers/employee-resolver.service';
 import { InstitutionsListComponent } from './main-app/components/lists/institutions-list.component';
 import { EmployeesResolverService } from './services/guards/resolvers/employees-resolver.service';
 import { EmployeesListComponent } from './main-app/components/lists/employees-list.component';
 import { InstitutionsResolverService } from './services/guards/resolvers/institutions-resolver.service';
-import { EmployeeComponent } from './main-app/forms/employee/employee.component';
+import { EmployeeComponent } from './main-app/components/forms/employee/employee.component';
 import { NotificationResolverService } from './services/guards/resolvers/notification-resolver.service';
 import { InstitutionResolverService } from './services/guards/resolvers/institution-resolver.service';
-import { InstitutionRegisterComponent } from './main-app/forms/institution-register.component';
+import { InstitutionRegisterComponent } from './main-app/components/forms/settings/institution-register.component';
 import { CompanyResolverService } from './services/guards/resolvers/company-resolver.service';
-import { CompanySettingsComponent } from './main-app/forms/settings/company-settings/company-settings.component';
-import { RegisterCompanyComponent } from './main-app/forms/register-company/register-company.component';
+import { CompanySettingsComponent } from './main-app/components/forms/settings/company-settings/company-settings.component';
+import { RegisterCompanyComponent } from './main-app/components/forms/register-company/register-company.component';
 import { CompaniesResolverService } from './services/guards/resolvers/companies-resolver.service';
 import { ChartComponentComponent } from './chart-component/chart-component.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './main-app/components/home/home.component';
+import { HomeComponent } from './main-app/components/custom/home/home.component';
 import { WelcomePageComponent } from './welcome/welcome-page/welcome-page.component';
-import { UserSettingsComponent } from './main-app/forms/settings/user-settings/user-settings.component';
+import { UserSettingsComponent } from './main-app/components/forms/settings/user-settings/user-settings.component';
 import { TableComponent } from './data-base/lists/table.component';
 import { DatabaseSettingsComponent } from './data-base/forms/database-settings.component';
 

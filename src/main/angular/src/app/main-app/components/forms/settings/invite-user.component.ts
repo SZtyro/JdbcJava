@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FieldType } from '../components/enums/fieldType';
-import { BasicForm } from '../ts/basicForm';
+import { FieldType } from '../../../ts/enums/fieldType';
+import { BasicForm } from '../../../ts/basicForm';
 
 @Component({
   selector: 'app-invite-user',
-  templateUrl: './../html/basicForm.html'
+  templateUrl: './../../../html/basicForm.html'
 })
 export class InviteUserComponent extends BasicForm implements OnInit {
 

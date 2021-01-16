@@ -2,7 +2,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './components/custom/home/home.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -14,53 +14,41 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { GridsterModule } from 'angular-gridster2';
 
-import { GmailWidgetComponent } from './widgets/gmail-widget/gmail-widget.component';
+
 import { MatTableModule } from '@angular/material/table';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { GridElemDirective } from './directives/grid-elem.directive';
 import { GoogleChartsModule } from 'angular-google-charts';
-import { WidgetLoaderComponent } from './components/widget-loader/widget-loader.component';
-import { GmailSenderPipe } from '../pipes/gmail-sender.pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
-import { FilesUploadDirective } from './directives/FilesUpload/files-upload.directive'
 import { FileUploadModule } from 'ng2-file-upload';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { WidgetDirective } from '../main-app/directives/WidgetDirective/widget.directive';
 import { MatInputModule } from '@angular/material/input';
 import { MatBadgeModule } from '@angular/material/badge';
-import { RegisterCompanyComponent } from './forms/register-company/register-company.component';
+import { RegisterCompanyComponent } from './components/forms/register-company/register-company.component';
 import { FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
-import { CompanySettingsComponent } from './forms/settings/company-settings/company-settings.component';
-import { UserSettingsComponent } from './forms/settings/user-settings/user-settings.component';
-import { InstitutionRegisterComponent } from './forms/institution-register.component';
-import { EmployeeComponent } from './forms/employee/employee.component';
+import { CompanySettingsComponent } from './components/forms/settings/company-settings/company-settings.component';
+import { UserSettingsComponent } from './components/forms/settings/user-settings/user-settings.component';
+import { InstitutionRegisterComponent } from './components/forms/settings/institution-register.component';
+import { EmployeeComponent } from './components/forms/employee/employee.component';
 import { MatSelectModule } from '@angular/material/select';
 import { EmployeesListComponent } from './components/lists/employees-list.component';
 import { InstitutionsListComponent } from './components/lists/institutions-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InviteUserComponent } from './forms/invite-user.component';
-import { DialogComponent } from './components/dialog/dialog.component';
+import { InviteUserComponent } from './components/forms/settings/invite-user.component';
+import { DialogComponent } from './components/custom/dialog/dialog.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 @NgModule({
   entryComponents: [
-    GmailWidgetComponent
   ],
   declarations: [
     HomeComponent,
-    GmailWidgetComponent,
-    GridElemDirective,
-    WidgetLoaderComponent,
-    GmailSenderPipe,
-    FilesUploadDirective,
-    WidgetDirective,
     RegisterCompanyComponent,
     CompanySettingsComponent,
     UserSettingsComponent,
