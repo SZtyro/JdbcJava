@@ -33,39 +33,23 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WelcomeModule } from './welcome/welcome.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ChartComponentComponent } from './chart-component/chart-component.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { MenuItemComponent } from './main-app/components/custom/menu-item/menu-item.component';
 import { MatRippleModule } from '@angular/material/core';
 import { AuthInterceptor } from './services/interceptors/auth-interceptor.service';
-import { TableComponent } from './data-base/lists/table.component';
 
-
-
-
-
-
-// const config = new AuthServiceConfig([
-//   {
-//     id: GoogleLoginProvider.PROVIDER_ID,
-//     provider: new GoogleLoginProvider("36592518046-vna364b979556f9d5o8g2bav1vnms4pi.apps.googleusercontent.com")
-//   }
-
-// ]);
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 export function provideConfig() {
 
-  //return config;
 }
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChartComponentComponent,
     MenuItemComponent
 
   ],

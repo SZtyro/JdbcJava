@@ -1,3 +1,4 @@
+import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { NgModule } from '@angular/core';
@@ -8,11 +9,39 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule, MatDialogModule, MatNativeDateModule, MatInputModule, MatButtonModule, MatOptionModule } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableComponent } from './lists/table.component';
 import { TableContentComponent } from './forms/table-content.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DatabaseSettingsComponent } from './forms/database-settings.component';
+import { DatabaseResolverService } from './services/guards/resolvers/database-resolver.service';
+import { TableConstraintResolverService } from './services/guards/resolvers/table-constraint-resolver.service';
+import { TableContentResolverService } from './services/guards/resolvers/table-content-resolver.service';
+import { TablesResolverService } from './services/guards/resolvers/tables-resolver.service';
+
+const routes: Routes = [
+
+  {
+    path: ':id/table/:tableName', component: TableComponent, pathMatch: 'full', runGuardsAndResolvers: "always",
+    resolve: {
+      columns: TablesResolverService,
+      content: TableContentResolverService,
+      constraints: TableConstraintResolverService
+    }
+  },
+  {
+    path: ':id/settings', component: DatabaseSettingsComponent,
+    resolve: {
+      database: DatabaseResolverService
+    },
+  },
+  {
+    path: ':id', component: TableListComponent,
+    resolve: {
+      tables: TablesResolverService,
+      database: DatabaseResolverService
+    },
+  }
+]
 
 @NgModule({
   declarations: [
@@ -31,13 +60,13 @@ import { DatabaseSettingsComponent } from './forms/database-settings.component';
     MatTableModule,
     TranslateModule,
     MatInputModule,
-    BrowserAnimationsModule,
     MatButtonModule,
     MatOptionModule,
     MatSelectModule,
     FormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    RouterModule.forChild(routes)
   ],
   exports: [
     DatabaseSettingsComponent
