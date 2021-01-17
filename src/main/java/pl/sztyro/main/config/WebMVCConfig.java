@@ -1,5 +1,6 @@
 package pl.sztyro.main.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -13,6 +14,9 @@ import java.io.IOException;
 
 @Configuration
 public class WebMVCConfig implements WebMvcConfigurer {
+
+    @Autowired
+    DatabaseInterceptor databaseInterceptor;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -30,6 +34,6 @@ public class WebMVCConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new DatabaseInterceptor()).addPathPatterns("/api/database");
+        registry.addInterceptor(databaseInterceptor).addPathPatterns("/api/database");
     }
 }

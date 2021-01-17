@@ -74,6 +74,7 @@ const routes: Routes = [
     ]
   },
   { path: '', component: WelcomePageComponent },
+  { path: 'plan', loadChildren: () => import('./modules/plan/plan.module').then(m => m.PlanModule) },
 ];
 
 @NgModule({

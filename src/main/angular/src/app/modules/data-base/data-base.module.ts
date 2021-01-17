@@ -67,9 +67,6 @@ const routes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     RouterModule.forChild(routes)
-  ],
-  exports: [
-    DatabaseSettingsComponent
   ]
 })
 export class DataBaseModule { }

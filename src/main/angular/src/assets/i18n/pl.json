@@ -1,5 +1,14 @@
 {
+    "employees_count": "Ilość pracowników:",
+    "extensions_summary": "Cena rozszerzeń:",
     "cancel": "Anuluj",
+    "plan": "Plan",
+    "summary": "Podsumowanie",
+    "available_extensions": "Dostępne rozszerzenia",
+    "your_extensions": "Twoje rozszerzenia",
+    "cancel_subscription": "Anuluj subskrypcję",
+    "add_to_plan": "Dodaj do planu",
+    "cost_per_user": "koszt na użytkownika: ",
     "delete": "Usuń",
     "export_pdf": "Wyeksportuj do PDF",
     "tables": "Tabele",
@@ -10,7 +19,6 @@
     "create_institution": "Stwórz placówkę",
     "firstname": "Imię",
     "surname": "Nazwisko",
-    "modules": "Moduły",
     "finances": "Finanse",
     "name": "Nazwa",
     "mail": "E-mail",
@@ -69,7 +77,7 @@
         }
     },
     "toasts": {
-        "modules":{
+        "modules": {
             "forbidden": "Nie masz dostępu do tego modułu."
         },
         "database": {
@@ -90,5 +98,16 @@
         "message": {
             "delete": "Czy na pewno chcesz usunąć rekord: <b>{{row}}</b>?"
         }
+    },
+    "modules": {
+        "title": {
+            "database": "Moduł bazy danych"
+        },
+        "description": {
+            "database": "To rozszerzenie pozwala na połącznie i zarządzanie dowolną bazą danych wspieraną przez aplikację."
+        }
+    },
+    "currency": {
+        "pln": "zł"
     }
 }

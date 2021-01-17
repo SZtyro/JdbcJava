@@ -1,0 +1,104 @@
+<div style="height: 100%;display: flex; justify-content: space-between; flex-direction: column;">
+    <div>
+        <div class="container-fluid" style="display: flex; justify-content: space-between;">
+            <h1 class="main-header" translate>plan</h1>
+        </div>
+
+        <div class="container-fluid row">
+            <div class="col-12 col-lg-4">
+                <div class="header">
+                    <h4 translate>available_extensions</h4>
+                </div>
+                <div *ngFor="let extension of extensions" class="col-12 mat-elevation-z2"
+                    style="display: flex; justify-content: space-between; padding: 20px; flex-direction: column;">
+
+                    <span style="display: flex; flex-direction: column;padding-right: 10px;">
+                        <span style="display: flex; flex-direction: row;">
+                            <span class="material-icons" style="margin-right: 10px;">
+                                {{extension.icon}}
+                            </span>
+                            <span>
+                                <h5>{{extension.name | translate}}</h5>
+                            </span>
+                        </span>
+
+                        <div>
+                            <p>{{extension.description | translate}}</p>
+                        </div>
+                        <span style="float: right;">
+                            {{'cost_per_user' | translate}}<b>{{extension.cost}}</b> {{'currency.pln' | translate}}
+                        </span>
+                    </span>
+
+                    <span style="float: right;display: flex;justify-content: flex-end;" class="p-2">
+                        <button mat-raised-button (click)="buy(extension)">{{'add_to_plan' |
+                            translate}}</button>
+                    </span>
+
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4">
+                <div class="header">
+                    <h4 translate>your_extensions</h4>
+                </div>
+                <div *ngFor="let extension of plan" class="col-12 mat-elevation-z2"
+                    style="display: flex; justify-content: space-between;padding: 20px;flex-direction: column;">
+
+                    <span style="display: flex; flex-direction: column;">
+                        <span style="display: flex; flex-direction: row;">
+                            <span class="material-icons" style="margin-right: 10px;">
+                                {{extension.icon}}
+                            </span>
+                            <span>
+                                <h5>{{extension.name | translate}}</h5>
+                            </span>
+                        </span>
+
+                        <div>
+                            <p>{{extension.description | translate}}</p>
+                        </div>
+                        <span style="float: right;">
+                            {{'cost_per_user' | translate}}<b>{{extension.cost}}</b> {{'currency.pln' | translate}}
+                        </span>
+                    </span>
+
+                    <span style="float: right;display: flex;justify-content: flex-end;" class="p-2">
+                        <button mat-raised-button (click)="cancelSubscription(extension)">{{'cancel_subscription' |
+                            translate}}</button>
+                    </span>
+
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4">
+                <div class="header">
+                    <h4 translate>summary</h4>
+                </div>
+                <div>
+                    <p>{{'employees_count' | translate}} <b>{{employeesCount}}</b></p>
+                    <p>{{'extensions_summary' | translate}} <b>{{summaryCount}}</b></p>
+
+                    <mat-divider></mat-divider>
+                    <div style="float: right;">
+                        <h3>{{employeesCount * summaryCount}} {{'currency.pln' | translate}}</h3>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <div class="row m-0" style="justify-content: flex-end;padding-bottom: 20px; padding-top: 20px;">
+        <span class="col-12 col-md-6 col-lg-3 col-xl-1">
+            <button mat-raised-button style="width: 100%;line-height: 45px; margin-top: 10px;" (click)="save()">
+                {{'save'| translate}}
+            </button>
+        </span>
+    </div>
+</div>

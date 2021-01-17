@@ -61,7 +61,7 @@ export class AppComponent implements OnInit, AfterContentInit {
       ]
     },
     { icon: 'monetization_on', name: 'finances' },
-    { icon: 'view_module', name: 'modules' },
+    { icon: 'view_module', name: 'plan', routerLink: 'plan' },
   ];
   companies: FunctionBase[] = [
     {
@@ -75,7 +75,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   ]
   languages: FunctionBase[] = [
     {
-      icon: '<span class="text-icon">EN</span>', name: 'English', childs: [
+      icon: '<span class="text-icon">PL</span>', name: 'Polski', childs: [
         {
           icon: '<span class="text-icon">EN</span>', name: 'English', extras: { code: 'en' }
         },
@@ -104,8 +104,8 @@ export class AppComponent implements OnInit, AfterContentInit {
     public shared: SharedService
   ) {
     translate.addLangs(['en', 'pl']);
-    translate.setDefaultLang('en');
-    translate.use('en')
+    translate.setDefaultLang('pl');
+    translate.use('pl')
     //this.auth.getUserData().subscribe(userData => {this.photoUrl = userData.imageUrl})
     //console.log(this.auth.auth2.currentUser)
 

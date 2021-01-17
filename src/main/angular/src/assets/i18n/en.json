@@ -1,5 +1,14 @@
 {
+    "employees_count": "Employees count:",
+    "extensions_summary": "Extensions cost:",
     "cancel": "Cancel",
+    "plan": "Plan",
+    "summary": "Summary",
+    "available_extensions": "Avaiable extensions",
+    "your_extensions": "Your extensions",
+    "cancel_subscription": "Cancel",
+    "add_to_plan": "Add to plan",
+    "cost_per_user": "cost per user: ",
     "delete": "Delete",
     "export_pdf": "Export to PDF",
     "tables": "Tables",
@@ -10,7 +19,6 @@
     "create_institution": "Create institution",
     "firstname": "Firstname",
     "surname": "Surname",
-    "modules": "Modules",
     "finances": "Finances",
     "name": "Name",
     "mail": "E-mail",
@@ -72,7 +80,7 @@
         }
     },
     "toasts": {
-        "modules":{
+        "modules": {
             "forbidden": "You does not have access to this module."
         },
         "database": {
@@ -93,5 +101,16 @@
         "message": {
             "delete": "Are you sure you want to delete row: <b>{{row}}</b>?"
         }
+    },
+    "modules": {
+        "title":{
+            "database": "Database Module"
+        },
+        "description":{
+            "database": "This extension allows to operate on any database supported by app."
+        }
+    },
+    "currency":{
+        "pln": "zł"
     }
 }

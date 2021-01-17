@@ -22,22 +22,23 @@ public class UserService {
     public User getUser(String mail) throws NotFoundException {
         Session session = conf.getSession();
 
+        _logger.info("Pobieranie użytkownika: " + mail);
+        User u = null;
+        try {
 
-        User u = session.get(User.class, mail);
-        if (u == null) {
-            //session.getTransaction().rollback();
-
-
-            //throw new NotFoundException("User not found");
-            addUser(mail);
             u = session.get(User.class, mail);
+            if (u == null) {
+                addUser(mail);
+            }
 
             Hibernate.initialize(u.getSelectedCompany());
             session.getTransaction().commit();
-            session.close();
-            return u;
-        } else {
-            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            _logger.error(e.getMessage());
+            session.getTransaction().rollback();
+
+        }finally {
             session.close();
             return u;
         }
