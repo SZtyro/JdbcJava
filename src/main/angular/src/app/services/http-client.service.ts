@@ -1,4 +1,4 @@
-import { HttpDatabaseService } from './../data-base/services/http-database.service';
+import { HttpDatabaseService } from './../modules/data-base/services/http-database.service';
 import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';

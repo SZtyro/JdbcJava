@@ -1,6 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, Input, OnInit, ElementRef, Output, EventEmitter } from '@angular/core';
-import { FunctionBase } from '../../../../modules/functionModules/functionBase';
+import { FunctionBase } from '../../../ts/interfaces/functionBase';
 
 @Component({
   selector: 'app-menu-item',

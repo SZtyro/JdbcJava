@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material';
 import { SharedService } from './services/shared.service';
 import { Observable } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { FunctionBase } from './modules/functionModules/functionBase';
+import { FunctionBase } from './main-app/ts/interfaces/functionBase';
 import { ToastType } from './main-app/ts/enums/toastType';
 
 @Component({

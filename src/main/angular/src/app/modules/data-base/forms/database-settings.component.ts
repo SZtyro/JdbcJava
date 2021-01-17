@@ -5,7 +5,7 @@ import { BasicForm } from 'src/app/main-app/ts/basicForm';
 
 @Component({
   selector: 'app-database-settings',
-  templateUrl: './../../main-app/html/BasicForm.html'
+  templateUrl: './../../../main-app/html/BasicForm.html'
 })
 export class DatabaseSettingsComponent extends BasicForm implements OnInit {
 

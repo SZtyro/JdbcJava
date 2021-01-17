@@ -1,5 +1,5 @@
-import { FieldType } from '../../main-app/ts/enums/fieldType';
-import { buttonPDFExport } from './../../main-app/ts/buttons';
+import { FieldType } from '../../../main-app/ts/enums/fieldType';
+import { buttonPDFExport } from './../../../main-app/ts/buttons';
 import { BasicTable } from 'src/app/main-app/ts/basicTable';
 import { Component, OnInit } from '@angular/core';
 import { detailExpand } from 'src/app/main-app/ts/animations';
@@ -10,7 +10,7 @@ import { ToastType } from 'src/app/main-app/ts/enums/toastType';
 
 @Component({
   selector: 'app-table',
-  templateUrl: './../../main-app/html/basicTable.html',
+  templateUrl: './../../../main-app/html/basicTable.html',
   animations: [detailExpand]
 })
 export class TableComponent extends BasicTable implements OnInit {

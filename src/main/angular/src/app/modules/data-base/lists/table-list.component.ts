@@ -1,4 +1,4 @@
-import { detailExpand } from './../../main-app/ts/animations';
+import { detailExpand } from './../../../main-app/ts/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { BasicTable } from 'src/app/main-app/ts/basicTable';
@@ -6,7 +6,7 @@ import { buttonDelete } from 'src/app/main-app/ts/buttons';
 
 @Component({
   selector: 'app-table-list',
-  templateUrl: './../../main-app/html/basicTable.html',
+  templateUrl: './../../../main-app/html/basicTable.html',
   animations: [detailExpand]
 })
 export class TableListComponent extends BasicTable implements OnInit {

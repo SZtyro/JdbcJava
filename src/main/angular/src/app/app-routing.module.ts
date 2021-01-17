@@ -27,7 +27,7 @@ const routes: Routes = [
   },
   { path: 'login', redirectTo: '' },
   {
-    path: 'databases', loadChildren: () => import('./data-base/data-base.module').then(m => m.DataBaseModule)
+    path: 'databases', loadChildren: () => import('./modules/data-base/data-base.module').then(m => m.DataBaseModule)
   },
   {
     path: 'employees', children: [

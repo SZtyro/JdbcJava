@@ -5,7 +5,7 @@
 - [ ] Grupy
 - [ ] Integracja z kalendarzem
 - [ ] Integracja ze skrzynką
-- [ ] Poprawa modułu bazy
+- [x] Poprawa modułu bazy
 - [ ] Pojazdy
 - [ ] Dostępność modułów
 - [x] Popupy

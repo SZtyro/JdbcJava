@@ -18,7 +18,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MainAppModule } from './main-app/main-app.module';
-import { DataBaseModule } from './data-base/data-base.module';
+import { DataBaseModule } from './modules/data-base/data-base.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';

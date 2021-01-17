@@ -6,7 +6,7 @@ import { BasicFormDialog } from 'src/app/main-app/ts/basicFormDialog';
 
 @Component({
   selector: 'app-table-content',
-  templateUrl: './../../main-app/html/BasicForm.html'
+  templateUrl: './../../../main-app/html/BasicForm.html'
 })
 export class TableContentComponent extends BasicFormDialog implements OnInit {
 
