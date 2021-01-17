@@ -72,6 +72,9 @@
         }
     },
     "toasts": {
+        "modules":{
+            "forbidden": "You does not have access to this module."
+        },
         "database": {
             "created": "Database has been successfully created.",
             "updated": "Database has been successfully updated.",

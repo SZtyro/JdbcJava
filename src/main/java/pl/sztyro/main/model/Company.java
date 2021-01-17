@@ -36,10 +36,15 @@ public class Company {
     @JsonIgnore
     private List<Database> database;
 
+    @Column(name = "company_modules")
+    @JsonIgnore
+    private String modules;
+
 
     public void merge(Company company) {
         this.setName(company.getName());
         this.setNip(company.getNip());
+
     }
 
     public Company() {
@@ -95,5 +100,13 @@ public class Company {
 
     public void setDatabase(List<Database> database) {
         this.database = database;
+    }
+
+    public String getModules() {
+        return modules;
+    }
+
+    public void setModules(String modules) {
+        this.modules = modules;
     }
 }

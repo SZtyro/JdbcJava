@@ -3,24 +3,28 @@ package pl.sztyro.main.controllers.REST;
 import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
+import pl.sztyro.main.exceptions.NoModuleException;
 import pl.sztyro.main.exceptions.NotFoundException;
 import pl.sztyro.main.model.Company;
 import pl.sztyro.main.model.Database;
 import pl.sztyro.main.model.User;
-import pl.sztyro.main.services.AuthService;
-import pl.sztyro.main.services.CompanyService;
-import pl.sztyro.main.services.DatabaseService;
-import pl.sztyro.main.services.UserService;
+import pl.sztyro.main.services.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.text.ParseException;
 
 @RestController()
+@Component
 @RequestMapping("api/database")
 public class DatabaseController {
+
+    private static final Logger _logger = LoggerFactory.getLogger(DatabaseController.class);
 
     @Autowired
     AuthService authService;
@@ -34,11 +38,13 @@ public class DatabaseController {
     @Autowired
     DatabaseService databaseService;
 
-    @GetMapping("/table")
-    public Object getTables(HttpServletRequest request, @RequestParam Long id, @RequestParam(required = false) String tableName) throws NotFoundException, SQLException {
+    @Autowired
+    ModuleService moduleService;
 
-        User user = userService.getUser(authService.getLoggedUserMail(request));
-        Company company = user.getSelectedCompany();
+
+    @GetMapping("/table")
+    public Object getTables(HttpServletRequest request, @RequestParam Long id, @RequestParam(required = false) String tableName) throws NotFoundException, SQLException, NoModuleException {
+
         Database database = databaseService.getDatabase(id);
 
         if (tableName != null)
@@ -158,7 +164,7 @@ public class DatabaseController {
     public Object getDatabase(HttpServletRequest request, @RequestParam Long id) throws NotFoundException {
         User user = userService.getUser(authService.getLoggedUserMail(request));
 
-        if(id == 0)
+        if (id == 0)
             return new Database();
 
         Company company = companyService.getCompany(user.getSelectedCompany().getId());

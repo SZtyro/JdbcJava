@@ -3,9 +3,11 @@ package pl.sztyro.main.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
+import pl.sztyro.main.interceptors.DatabaseInterceptor;
 
 import java.io.IOException;
 
@@ -24,5 +26,10 @@ public class WebMVCConfig implements WebMvcConfigurer {
                         return requestedResource.exists() && requestedResource.isReadable() ? requestedResource : new ClassPathResource("/static/index.html");
                     }
                 });
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new DatabaseInterceptor()).addPathPatterns("/api/database");
     }
 }

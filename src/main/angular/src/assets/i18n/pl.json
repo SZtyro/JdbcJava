@@ -69,6 +69,9 @@
         }
     },
     "toasts": {
+        "modules":{
+            "forbidden": "Nie masz dostępu do tego modułu."
+        },
         "database": {
             "created": "Pomyślnie utworzono bazę",
             "updated": "Pomyślnie zaaktualizowano bazę",
