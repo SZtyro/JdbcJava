@@ -1,8 +1,8 @@
-import { buttonDelete, buttonEdit } from './../../ts/buttons';
+import { buttonDelete, buttonEdit } from '../../ts/buttons';
 import { detailExpand } from '../../ts/animations';
 import { MatTableDataSource } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
-import { BasicTable } from 'src/app/main-app/ts/basicTable';
+import { BasicTable } from 'src/app/ts/basicTable';
 
 
 @Component({

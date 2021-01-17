@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -7,7 +8,7 @@ import { HttpClientModule, HttpClient, HttpClientJsonpModule, HTTP_INTERCEPTORS 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatPaginatorModule, MatDialogModule, MatNativeDateModule } from '@angular/material';
+import { MatPaginatorModule, MatDialogModule, MatNativeDateModule, MatBadgeModule, MatGridListModule, MatProgressBarModule, MatTabsModule } from '@angular/material';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
@@ -17,7 +18,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MainAppModule } from './main-app/main-app.module';
 import { DataBaseModule } from './modules/data-base/data-base.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
@@ -31,12 +31,24 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { WelcomeModule } from './welcome/welcome.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { GoogleChartsModule } from 'angular-google-charts';
-import { MenuItemComponent } from './main-app/components/custom/menu-item/menu-item.component';
+import { MenuItemComponent } from './components/custom/menu-item/menu-item.component';
 import { MatRippleModule } from '@angular/material/core';
 import { AuthInterceptor } from './services/interceptors/auth-interceptor.service';
+import { DialogComponent } from './components/custom/dialog/dialog.component';
+import { HomeComponent } from './components/custom/home/home.component';
+import { EmployeeComponent } from './components/forms/employee/employee.component';
+import { RegisterCompanyComponent } from './components/forms/register-company/register-company.component';
+import { CompanySettingsComponent } from './components/forms/settings/company-settings/company-settings.component';
+import { InstitutionRegisterComponent } from './components/forms/settings/institution-register.component';
+import { InviteUserComponent } from './components/forms/settings/invite-user.component';
+import { UserSettingsComponent } from './components/forms/settings/user-settings/user-settings.component';
+import { EmployeesListComponent } from './components/lists/employees-list.component';
+import { InstitutionsListComponent } from './components/lists/institutions-list.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { FileUploadModule } from 'ng2-file-upload';
+import { WelcomePageComponent } from './components/custom/welcome-page/welcome-page.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -50,8 +62,18 @@ export function provideConfig() {
 @NgModule({
   declarations: [
     AppComponent,
-    MenuItemComponent
-
+    MenuItemComponent,
+    HomeComponent,
+    RegisterCompanyComponent,
+    CompanySettingsComponent,
+    UserSettingsComponent,
+    InstitutionRegisterComponent,
+    EmployeeComponent,
+    EmployeesListComponent,
+    InstitutionsListComponent,
+    InviteUserComponent,
+    DialogComponent,
+    WelcomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -72,13 +94,11 @@ export function provideConfig() {
     ReactiveFormsModule,
     MatSnackBarModule,
     NgbModule,
-    MainAppModule,
     DataBaseModule,
     MatSidenavModule,
     MatCardModule,
     MatListModule,
     MatExpansionModule,
-    //SocialLoginModule,
     GridsterModule,
     MatMenuModule,
     MatTooltipModule,
@@ -91,11 +111,20 @@ export function provideConfig() {
     }),
     MatCheckboxModule,
     DragDropModule,
-    WelcomeModule,
     HttpClientJsonpModule,
     MatProgressSpinnerModule,
     GoogleChartsModule,
-    MatRippleModule
+    MatRippleModule,
+
+
+    //RouterModule,
+    MatGridListModule,
+    ScrollingModule,
+    FileUploadModule,
+    MatProgressBarModule,
+    MatBadgeModule,
+    MatTabsModule,
+
 
 
   ],

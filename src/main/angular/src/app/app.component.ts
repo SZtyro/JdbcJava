@@ -1,4 +1,4 @@
-import { openClose, fadeIn } from './main-app/ts/animations';
+import { openClose, fadeIn } from './ts/animations';
 import { Component, OnInit, AfterViewChecked, AfterContentChecked, AfterContentInit } from '@angular/core';
 import { Router, RouterEvent, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { HttpClientService } from './services/http-client.service';
@@ -9,8 +9,8 @@ import { MatDialog } from '@angular/material';
 import { SharedService } from './services/shared.service';
 import { Observable } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { FunctionBase } from './main-app/ts/interfaces/functionBase';
-import { ToastType } from './main-app/ts/enums/toastType';
+import { FunctionBase } from './ts/interfaces/functionBase';
+import { ToastType } from './ts/enums/toastType';
 
 @Component({
   selector: 'app-root',

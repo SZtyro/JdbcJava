@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FieldType } from 'src/app/main-app/ts/enums/fieldType';
-import { ToastType } from 'src/app/main-app/ts/enums/toastType';
-import { BasicForm } from 'src/app/main-app/ts/basicForm';
+import { FieldType } from 'src/app/ts/enums/fieldType';
+import { ToastType } from 'src/app/ts/enums/toastType';
+import { BasicForm } from 'src/app/ts/basicForm';
 
 @Component({
   selector: 'app-database-settings',
-  templateUrl: './../../../main-app/html/BasicForm.html'
+  templateUrl: './../../../html/BasicForm.html'
 })
 export class DatabaseSettingsComponent extends BasicForm implements OnInit {
 

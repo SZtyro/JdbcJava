@@ -4,7 +4,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { DataSource } from '@angular/cdk/table';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-import { BasicTable } from 'src/app/main-app/ts/basicTable';
+import { BasicTable } from 'src/app/ts/basicTable';
 import { buttonEdit, buttonDelete } from '../../ts/buttons';
 
 @Component({

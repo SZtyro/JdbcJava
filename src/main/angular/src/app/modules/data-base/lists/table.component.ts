@@ -1,16 +1,16 @@
-import { FieldType } from '../../../main-app/ts/enums/fieldType';
-import { buttonPDFExport } from './../../../main-app/ts/buttons';
-import { BasicTable } from 'src/app/main-app/ts/basicTable';
+import { FieldType } from '../../../ts/enums/fieldType';
+import { buttonPDFExport } from '../../../ts/buttons';
+import { BasicTable } from 'src/app/ts/basicTable';
 import { Component, OnInit } from '@angular/core';
-import { detailExpand } from 'src/app/main-app/ts/animations';
+import { detailExpand } from 'src/app/ts/animations';
 import { MatTableDataSource } from '@angular/material';
-import { buttonDelete, buttonEdit } from 'src/app/main-app/ts/buttons';
+import { buttonDelete, buttonEdit } from 'src/app/ts/buttons';
 import { TableContentComponent } from '../forms/table-content.component';
-import { ToastType } from 'src/app/main-app/ts/enums/toastType';
+import { ToastType } from 'src/app/ts/enums/toastType';
 
 @Component({
   selector: 'app-table',
-  templateUrl: './../../../main-app/html/basicTable.html',
+  templateUrl: './../../../html/basicTable.html',
   animations: [detailExpand]
 })
 export class TableComponent extends BasicTable implements OnInit {

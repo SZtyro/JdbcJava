@@ -1,4 +1,4 @@
-import { HttpClientService } from './../../services/http-client.service';
+import { HttpClientService } from '../services/http-client.service';
 import { TableActionButton } from './interfaces/tableActionButton';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
