@@ -9,7 +9,7 @@
                 <div class="header">
                     <h4 translate>available_extensions</h4>
                 </div>
-                <div *ngFor="let extension of extensions" class="col-12 mat-elevation-z2"
+                <div *ngFor="let extension of extensions" class="col-12 mat-elevation-z2" [hidden]="isHidden(extension)"
                     style="display: flex; justify-content: space-between; padding: 20px; flex-direction: column;">
 
                     <span style="display: flex; flex-direction: column;padding-right: 10px;">
@@ -26,7 +26,7 @@
                             <p>{{extension.description | translate}}</p>
                         </div>
                         <span style="float: right;">
-                            {{'cost_per_user' | translate}}<b>{{extension.cost}}</b> {{'currency.pln' | translate}}
+                            {{'cost_per_user' | translate}}<b>{{extension.price}}</b> {{'currency.pln' | translate}}
                         </span>
                     </span>
 
@@ -59,7 +59,7 @@
                             <p>{{extension.description | translate}}</p>
                         </div>
                         <span style="float: right;">
-                            {{'cost_per_user' | translate}}<b>{{extension.cost}}</b> {{'currency.pln' | translate}}
+                            {{'cost_per_user' | translate}}<b>{{extension.price}}</b> {{'currency.pln' | translate}}
                         </span>
                     </span>
 
@@ -77,11 +77,11 @@
                 </div>
                 <div>
                     <p>{{'employees_count' | translate}} <b>{{employeesCount}}</b></p>
-                    <p>{{'extensions_summary' | translate}} <b>{{summaryCount}}</b></p>
+                    <p>{{'extensions_summary' | translate}} <b>{{summaryCost()}}</b></p>
 
                     <mat-divider></mat-divider>
                     <div style="float: right;">
-                        <h3>{{employeesCount * summaryCount}} {{'currency.pln' | translate}}</h3>
+                        <h3>{{employeesCount * summaryCost()}} {{'currency.pln' | translate}}</h3>
                     </div>
 
                 </div>

@@ -1,0 +1,21 @@
+[
+  {
+    "icon": "storage",
+    "name": "modules.title.database",
+    "description": "modules.description.database",
+    "price": 1,
+    "permission": "DatabaseModule",
+    "menu": {
+      "icon": "storage",
+      "name": "database",
+      "childs": [
+        {
+          "icon": "add",
+          "name": "add",
+          "routerLink": "databases/0/settings",
+          "childs": []
+        }
+      ]
+    }
+  }
+]

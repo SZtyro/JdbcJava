@@ -1,3 +1,4 @@
+import { fadeIn } from './../../../ts/animations';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, Input, OnInit, ElementRef, Output, EventEmitter } from '@angular/core';
 import { FunctionBase } from '../../../ts/interfaces/functionBase';
@@ -26,6 +27,7 @@ import { FunctionBase } from '../../../ts/interfaces/functionBase';
         animate('500ms cubic-bezier(0.35, 0, 0.25, 1)')
       ]),
     ]),
+    fadeIn
   ]
 })
 export class MenuItemComponent implements OnInit {
@@ -56,6 +58,7 @@ export class MenuItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.menuItems)
   }
 
   openList(item: FunctionBase) {

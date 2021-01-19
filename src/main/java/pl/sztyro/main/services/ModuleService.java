@@ -1,15 +1,23 @@
 package pl.sztyro.main.services;
 
+import org.apache.commons.io.IOUtils;
 import org.hibernate.Session;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import pl.sztyro.main.config.HibernateConf;
 import pl.sztyro.main.enums.Permission;
 import pl.sztyro.main.model.Company;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
 
 @Service
 public class ModuleService {
@@ -19,7 +27,14 @@ public class ModuleService {
     @Autowired
     HibernateConf conf;
 
-    private EnumSet<Permission> decodeModules(String modules) {
+    @Autowired
+    ResourceLoader resourceLoader;
+
+    private JSONArray getExtensions() throws IOException {
+        return new JSONArray(IOUtils.toString(resourceLoader.getResource("classpath:Extensions.json").getURI(), StandardCharsets.UTF_8));
+    }
+
+    public EnumSet<Permission> decodeModules(String modules) {
         EnumSet<Permission> permissions = EnumSet.allOf(Permission.class);
         permissions.removeIf(myVal -> !modules.contains(myVal.name()));
 
@@ -35,7 +50,9 @@ public class ModuleService {
             return false;
     }
 
-    public void grantAccess(Permission permission, Company company) {
+    public void grantAccess(JSONArray permission, Company company) throws IOException {
+        _logger.info("Aktualizacja rozszerzeń firmy: " + company.getName());
+
 
         Session session = conf.getSession();
 
@@ -45,12 +62,16 @@ public class ModuleService {
 
             EnumSet<Permission> set = decodeModules(modules);
 
-            if(set.isEmpty()){
-                set.add(permission);
-            }else{
-                if(!set.contains(permission))
-                    set.add(permission);
-            }
+            List<Permission> li = new ArrayList<>();
+            permission.forEach(o -> {
+                JSONObject jsonObject = new JSONObject(o.toString());
+                li.add(Permission.valueOf(jsonObject.getString("permission")));
+
+            });
+            c.setModules(li.toString());
+
+            session.update(c);
+            session.getTransaction().commit();
 
         } catch (Exception e) {
             _logger.error(e.getMessage());
@@ -61,4 +82,24 @@ public class ModuleService {
         }
 
     }
+
+    public JSONArray getCompanyExtensions(Company company) throws IOException {
+        EnumSet<Permission> companyPermisssions = decodeModules(company.getModules());
+        JSONArray array = getExtensions();
+
+        //set.forEach(e -> System.out.println(e.toString()));
+
+        JSONArray answer = new JSONArray();
+
+
+        array.forEach(o -> {
+            JSONObject jsonObject = new JSONObject(o.toString());
+            if (companyPermisssions.contains(Permission.valueOf(jsonObject.getString("permission")))) {
+                answer.put(jsonObject);
+            }
+        });
+
+        return answer;
+    }
+
 }

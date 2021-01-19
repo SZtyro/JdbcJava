@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class HttpCoreService {
 
-  prefix = "/api"
+  protected prefix = "/api"
 
   constructor(protected http: HttpClient) { }
 }

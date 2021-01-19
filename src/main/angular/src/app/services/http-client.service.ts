@@ -120,6 +120,10 @@ export class HttpClientService {
   }
 
 
+
+  getCompanyExtensions() {
+    return this.httpClient.get<Object[]>(this.url + '/api/extensions/company')
+  }
   
 
 

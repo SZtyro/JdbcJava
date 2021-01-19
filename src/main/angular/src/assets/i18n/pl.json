@@ -78,7 +78,8 @@
     },
     "toasts": {
         "modules": {
-            "forbidden": "Nie masz dostępu do tego modułu."
+            "forbidden": "Nie masz dostępu do tego modułu.",
+            "updated": "Pomyślnie zaktualizowano plan."
         },
         "database": {
             "created": "Pomyślnie utworzono bazę",
