@@ -53,7 +53,7 @@ export class MenuService {
     {
       icon: 'business', name: 'pick_company', childs: [
         {
-          icon: 'add', name: 'add_company', childs: []
+          icon: 'add', name: 'add_company', routerLink: 'company/0'
         }
       ]
     },
@@ -124,14 +124,10 @@ export class MenuService {
         if (this.menuItems.find(el => el.name == 'database'))
           this.httpClientService.database.getDatabases().subscribe(
             databases => {
-              console.log(databases)
+
               databases.forEach(element => {
 
                 let i = this.menuItems.findIndex(el => el.name == 'database');
-                if (i != null)
-                  console.log(this.menuItems[i])
-                // if (!this.menuItems[i].childs)
-                //   this.menuItems[i].childs = [];
 
                 this.menuItems[i].childs.push({
                   icon: 'table_rows', name: element['database'], childs: [
@@ -184,8 +180,13 @@ export class MenuService {
 
   selectCompany(item) {
     if (item.id)
-      this.httpClientService.setCurrentCompany(item.id).subscribe(current => {
-        this.companies[0].name = current['name'];
+      this.httpClientService.setCurrentCompany(item.id).subscribe(current => {      
+
+        console.log(window.location.href)
+        if (window.location.href != '/home')
+          window.location.href = '/home'
+        else
+          window.location.reload()
       })
   }
 

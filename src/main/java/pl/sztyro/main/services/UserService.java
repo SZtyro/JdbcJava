@@ -38,7 +38,7 @@ public class UserService {
             _logger.error(e.getMessage());
             session.getTransaction().rollback();
 
-        }finally {
+        } finally {
             session.close();
             return u;
         }
@@ -59,31 +59,25 @@ public class UserService {
         }
     }
 
-    public Company selectCompany(String mail, Long id) throws NotFoundException {
+    public void selectCompany(String mail, Long id) throws NotFoundException {
         _logger.info("Wybór firmy: " + mail);
 
         Session session = conf.getSession();
+        Company company = null;
+        try {
+            User user = session.load(User.class, mail);
+            company = session.load(Company.class, id);
 
+            user.setSelectedCompany(company);
+            session.update(user);
+            session.getTransaction().commit();
 
-        User user = session.get(User.class, mail);
-        Company company = session.get(Company.class, id);
-        if (user == null) {
+        } catch (Exception e) {
+            _logger.error(e.getMessage());
             session.getTransaction().rollback();
+        } finally {
             session.close();
-
-            throw new NotFoundException("User not found");
-        } else {
-            if (company == null) {
-                session.getTransaction().rollback();
-                session.close();
-
-                throw new NotFoundException("Company not found");
-            } else {
-                session.getTransaction().commit();
-                session.close();
-
-                return company;
-            }
+            //return company;
         }
 
 

@@ -93,6 +93,10 @@
                 "deleted": "Row has been successfully deleted.",
                 "notfound": "Database not found"
             }
+        },
+        "company": {
+            "saved": "Company has been successfully saved.",
+            "nip": "Please enter correct NIP."
         }
     },
     "dialog": {
@@ -104,14 +108,14 @@
         }
     },
     "modules": {
-        "title":{
+        "title": {
             "database": "Database Module"
         },
-        "description":{
+        "description": {
             "database": "This extension allows to operate on any database supported by app."
         }
     },
-    "currency":{
+    "currency": {
         "pln": "zł"
     }
 }

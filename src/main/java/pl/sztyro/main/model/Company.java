@@ -1,6 +1,7 @@
 package pl.sztyro.main.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Range;
 import pl.sztyro.main.exceptions.NotFoundException;
 
 import javax.persistence.*;
@@ -29,8 +30,16 @@ public class Company {
     @Column(name = "company_name")
     private String name;
 
-    @Column(name = "company_NIP")
+    @Column(name = "company_NIP", unique = true, nullable = false, length = 10)
+    @Range(min = 1000000000, max = 9999999999L, message = "toasts.company.nip")
+    @NotNull
     private long nip;
+
+    @Column(name = "company_address")
+    String address;
+
+    @Column(name = "company_city")
+    String city;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JsonIgnore
@@ -44,7 +53,8 @@ public class Company {
     public void merge(Company company) {
         this.setName(company.getName());
         this.setNip(company.getNip());
-
+        this.setName(company.getName());
+        this.setAddress(company.getAddress());
     }
 
     public Company() {
@@ -108,5 +118,21 @@ public class Company {
 
     public void setModules(String modules) {
         this.modules = modules;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

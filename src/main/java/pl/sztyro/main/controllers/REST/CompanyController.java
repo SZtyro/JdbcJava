@@ -1,7 +1,6 @@
 package pl.sztyro.main.controllers.REST;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,18 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import pl.sztyro.main.exceptions.NotFoundException;
 import pl.sztyro.main.model.Company;
-import pl.sztyro.main.model.Institution;
 import pl.sztyro.main.model.User;
 import pl.sztyro.main.services.AuthService;
 import pl.sztyro.main.services.CompanyService;
 import pl.sztyro.main.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 import javax.validation.constraints.NotNull;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -51,12 +46,11 @@ public class CompanyController {
         Company obj = gson.fromJson(gson.toJson(companyJson), Company.class);
         _logger.info("Tworzenie firmy: " + obj.getName());
         try {
-            //companyService.createCompany(owner, obj.get("name").getAsString(), obj.get("nip").getAsLong());
-            companyService.updateCompany(obj);
+
+            companyService.updateCompany(obj, owner);
             if (owner.getSelectedCompany() == null) {
                 userService.selectCompany(owner.getMail(), obj.getId());
-                //List<Company> company = owner.getCompanies();
-                //companyService.selectCompany(owner.getMail(), companyService.getCompany(company.get(0).getId()).getId());
+
             }
         } catch (ConstraintViolationException e) {
             String message = "";
@@ -71,19 +65,28 @@ public class CompanyController {
 
     }
 
-    
+
     @GetMapping()
-    public Object getCompanies(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            List<Company> companies = companyService.getUserCompanies(authService.getLoggedUserMail(request));
-            return companies;
+    public Object getCompanies(HttpServletRequest request, @RequestParam(required = false) Long id) throws NotFoundException {
 
-        } catch (NotFoundException e) {
-            _logger.error(e.getMessage());
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, e.getMessage());
+        String mail = authService.getLoggedUserMail(request);
+
+        if (id == null)
+            try {
+                List<Company> companies = companyService.getUserCompanies(mail);
+                return companies;
+
+            } catch (NotFoundException e) {
+                _logger.error(e.getMessage());
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, e.getMessage());
+            }
+        else if (id == 0) {
+            Company c = new Company();
+            return c;
+        } else {
+            return companyService.getCompany(id);
         }
-
     }
 
     @GetMapping("/current")
@@ -106,7 +109,8 @@ public class CompanyController {
         Company obj = gson.fromJson(gson.toJson(companyJson), Company.class);
         _logger.info("Aktualizacja firmy o id: " + obj.getId());
         try {
-            companyService.updateCompany(obj);
+
+            companyService.updateCompany(obj, owner);
 
         } catch (ConstraintViolationException e) {
             String message = "";
@@ -120,10 +124,10 @@ public class CompanyController {
     }
 
     @PutMapping("/current")
-    public Company setSelectedCompany(HttpServletRequest request, @NotNull @RequestParam Long id) {
+    public void setSelectedCompany(HttpServletRequest request, @NotNull @RequestParam Long id) {
 
         try {
-            return userService.selectCompany(authService.getLoggedUserMail(request), id);
+            userService.selectCompany(authService.getLoggedUserMail(request), id);
         } catch (NotFoundException e) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, e.getMessage());

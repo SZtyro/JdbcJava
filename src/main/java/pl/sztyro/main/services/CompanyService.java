@@ -150,15 +150,20 @@ public class CompanyService {
         return c;
     }
 
-    public void updateCompany(Company obj) {
+    public void updateCompany(Company obj, User user) {
         Session session = conf.getSession();
 
         try {
-            //User user = session.load(User.class, owner.getMail());
-            Company company = session.load(Company.class, obj.getId());
+            Company company;
+            if (obj.getId() == 0) {
+                company = new Company();
+                company.setOwner(user);
+            } else
+                company = session.load(Company.class, obj.getId());
+
             company.merge(obj);
 
-            session.update(company);
+            session.saveOrUpdate(company);
             session.getTransaction().commit();
 
             Gson gson = new Gson();

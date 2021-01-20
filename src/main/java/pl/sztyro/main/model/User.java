@@ -1,7 +1,6 @@
 package pl.sztyro.main.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,14 +20,8 @@ public class User {
 
     @JoinColumn(name = "user_selected_company")
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("company_owner")
     @JsonIgnore
     private Company selectedCompany;
-
-//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "user_database")
-//    @JsonIgnore
-//    private Database database;
 
     @Column(name = "user_created")
     private Date created;
@@ -42,15 +35,6 @@ public class User {
     @ManyToOne()
     @JoinColumn(name = "user_institution")
     Institution institution;
-
-
-//    public Database getDatabase() {
-//        return database;
-//    }
-//
-//    public void setUserDatabase(Database database) {
-//        this.database = database;
-//    }
 
     public User() {
     }

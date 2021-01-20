@@ -45,8 +45,12 @@ export class HttpClientService {
     return this.httpClient.delete(this.url + '/api/user', { params: { mail: mail } })
   }
 
-  getCompany() {
-    return this.httpClient.get(this.url + "/api/company")
+  getCompany(id?) {
+    let params = {};
+    if (id)
+      params['id'] = id;
+
+    return this.httpClient.get(this.url + "/api/company", { params: params })
       .pipe(catchError(err => this.errorHandler(err)))
   }
 
@@ -124,7 +128,7 @@ export class HttpClientService {
   getCompanyExtensions() {
     return this.httpClient.get<Object[]>(this.url + '/api/extensions/company')
   }
-  
+
 
 
 }

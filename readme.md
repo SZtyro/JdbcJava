@@ -7,7 +7,7 @@
 - [ ] Integracja ze skrzynką
 - [x] Poprawa modułu bazy
 - [ ] Pojazdy
-- [ ] Dostępność modułów
+- [x] Dostępność modułów
 - [x] Popupy
 - [x] Powiadomienia z boku
 - [ ] Zmiana serwisu http

@@ -36,9 +36,12 @@ public class ModuleService {
 
     public EnumSet<Permission> decodeModules(String modules) {
         EnumSet<Permission> permissions = EnumSet.allOf(Permission.class);
-        permissions.removeIf(myVal -> !modules.contains(myVal.name()));
+        if (modules != null) {
+            permissions.removeIf(myVal -> !modules.contains(myVal.name()));
 
-        return permissions;
+            return permissions;
+        } else
+            return null;
     }
 
     public boolean hasAccess(Permission permission, Company company) {
@@ -85,21 +88,25 @@ public class ModuleService {
 
     public JSONArray getCompanyExtensions(Company company) throws IOException {
         EnumSet<Permission> companyPermisssions = decodeModules(company.getModules());
-        JSONArray array = getExtensions();
 
-        //set.forEach(e -> System.out.println(e.toString()));
-
-        JSONArray answer = new JSONArray();
+        if (companyPermisssions != null) {
+            JSONArray array = getExtensions();
 
 
-        array.forEach(o -> {
-            JSONObject jsonObject = new JSONObject(o.toString());
-            if (companyPermisssions.contains(Permission.valueOf(jsonObject.getString("permission")))) {
-                answer.put(jsonObject);
-            }
-        });
+            JSONArray answer = new JSONArray();
 
-        return answer;
+
+            array.forEach(o -> {
+                JSONObject jsonObject = new JSONObject(o.toString());
+                if (companyPermisssions.contains(Permission.valueOf(jsonObject.getString("permission")))) {
+                    answer.put(jsonObject);
+                }
+            });
+
+            return answer;
+        } else
+            return new JSONArray();
+
     }
 
 }

@@ -1,3 +1,4 @@
+import { CompanyComponent } from './components/forms/company.component';
 import { InviteUserComponent } from './components/forms/settings/invite-user.component';
 import { EmployeeResolverService } from './services/guards/resolvers/employee-resolver.service';
 import { InstitutionsListComponent } from './components/lists/institutions-list.component';
@@ -8,7 +9,7 @@ import { EmployeeComponent } from './components/forms/employee/employee.componen
 import { NotificationResolverService } from './services/guards/resolvers/notification-resolver.service';
 import { InstitutionResolverService } from './services/guards/resolvers/institution-resolver.service';
 import { InstitutionRegisterComponent } from './components/forms/settings/institution-register.component';
-import { CompanyResolverService } from './services/guards/resolvers/company-resolver.service';
+import { CurrentCompanyResolverService } from './services/guards/resolvers/current-company-resolver.service';
 import { CompanySettingsComponent } from './components/forms/settings/company-settings/company-settings.component';
 import { RegisterCompanyComponent } from './components/forms/register-company/register-company.component';
 import { CompaniesResolverService } from './services/guards/resolvers/companies-resolver.service';
@@ -17,6 +18,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/custom/home/home.component';
 import { WelcomePageComponent } from './components/custom/welcome-page/welcome-page.component';
 import { UserSettingsComponent } from './components/forms/settings/user-settings/user-settings.component';
+import { CompanyResolverService } from './services/guards/resolvers/company-resolver.service';
 
 const routes: Routes = [
   {
@@ -68,11 +70,14 @@ const routes: Routes = [
       { path: 'user', component: UserSettingsComponent },
       {
         path: 'company', component: CompanySettingsComponent, resolve: {
-          company: CompanyResolverService
+          company: CurrentCompanyResolverService
         }
       }
     ]
   },
+  { path: 'company/:id' , component: CompanyComponent, resolve: {
+    company: CompanyResolverService
+  } },
   { path: '', component: WelcomePageComponent },
   { path: 'plan', loadChildren: () => import('./modules/plan/plan.module').then(m => m.PlanModule) },
 ];

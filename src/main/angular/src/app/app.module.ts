@@ -49,6 +49,7 @@ import { InstitutionsListComponent } from './components/lists/institutions-list.
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FileUploadModule } from 'ng2-file-upload';
 import { WelcomePageComponent } from './components/custom/welcome-page/welcome-page.component';
+import { CompanyComponent } from './components/forms/company.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -73,7 +74,8 @@ export function provideConfig() {
     InstitutionsListComponent,
     InviteUserComponent,
     DialogComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    CompanyComponent
   ],
   imports: [
     BrowserModule,
