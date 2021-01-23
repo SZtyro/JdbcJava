@@ -14,6 +14,7 @@ import pl.sztyro.main.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 
 @RestController()
@@ -40,11 +41,12 @@ public class ExtensionController {
     }
 
     @GetMapping("/company")
-    public Object getCompanyExtensions(HttpServletRequest request) throws NotFoundException, IOException {
+    public Object getCompanyExtensions(HttpServletRequest request) throws NotFoundException, IOException, GeneralSecurityException {
         User user = userService.getUser(authService.getLoggedUserMail(request));
         Company company = user.getSelectedCompany();
 
         return moduleService.getCompanyExtensions(company).toString();
+
     }
 
     @PostMapping("/company")

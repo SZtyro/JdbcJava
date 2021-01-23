@@ -87,7 +87,12 @@ public class ModuleService {
     }
 
     public JSONArray getCompanyExtensions(Company company) throws IOException {
-        EnumSet<Permission> companyPermisssions = decodeModules(company.getModules());
+
+        Session session = conf.getSession();
+
+        Company c = session.load(Company.class, company.getId());
+        EnumSet<Permission> companyPermisssions = decodeModules(c.getModules());
+
 
         if (companyPermisssions != null) {
             JSONArray array = getExtensions();
@@ -102,10 +107,13 @@ public class ModuleService {
                     answer.put(jsonObject);
                 }
             });
-
+            session.close();
             return answer;
-        } else
+        } else {
+            session.close();
             return new JSONArray();
+        }
+
 
     }
 

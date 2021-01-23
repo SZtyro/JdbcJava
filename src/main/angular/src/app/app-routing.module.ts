@@ -1,3 +1,4 @@
+import { CalendarResolverService } from './services/guards/resolvers/calendar-resolver.service';
 import { CompanyComponent } from './components/forms/company.component';
 import { InviteUserComponent } from './components/forms/settings/invite-user.component';
 import { EmployeeResolverService } from './services/guards/resolvers/employee-resolver.service';
@@ -24,7 +25,8 @@ const routes: Routes = [
   {
     path: 'home', component: HomeComponent, resolve: {
       companies: CompaniesResolverService,
-      notifications: NotificationResolverService
+      notifications: NotificationResolverService,
+      //calendar: CalendarResolverService
     },
   },
   { path: 'login', redirectTo: '' },

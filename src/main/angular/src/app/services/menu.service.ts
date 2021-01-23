@@ -92,7 +92,7 @@ export class MenuService {
       },
       err => console.error(err),
       () => {
-        console.log(this.menuItems)
+        
         this.httpClientService.getCompany().subscribe(
           companies => {
             companies.forEach(element => {

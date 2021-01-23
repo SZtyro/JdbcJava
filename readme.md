@@ -3,13 +3,13 @@
 - [x] Lista sklepów
 - [ ] Zadania 
 - [ ] Grupy
-- [ ] Integracja z kalendarzem
+- [x] Integracja z kalendarzem
 - [ ] Integracja ze skrzynką
 - [x] Poprawa modułu bazy
 - [ ] Pojazdy
 - [x] Dostępność modułów
 - [x] Popupy
 - [x] Powiadomienia z boku
-- [ ] Zmiana serwisu http
+- [x] Zmiana serwisu http
 - [ ] Strona startowa
 - [ ] Zmiana kluczy z maili na id

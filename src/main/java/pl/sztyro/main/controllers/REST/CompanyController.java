@@ -103,6 +103,7 @@ public class CompanyController {
     @PutMapping
     public void updateCompany(HttpServletRequest request, @RequestBody Object companyJson) throws Exception {
 
+        
         //Zalogowany użytkownik
         User owner = userService.getUser(authService.getLoggedUserMail(request));
         Gson gson = new Gson();

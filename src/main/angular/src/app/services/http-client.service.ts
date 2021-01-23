@@ -130,6 +130,12 @@ export class HttpClientService {
   }
 
 
+  getCalendar(){
+    return this.httpClient.get(this.url + '/api/calendar/events')
+  }
 
+  getCalendarEvents(){
+    return this.httpClient.get(this.url + '/api/calendar/events')
+  }
 }
 

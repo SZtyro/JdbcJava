@@ -1,4 +1,7 @@
 {
+    "today": "Today",
+    "calendar": "Calendar",
+    "notifications": "Notifications",
     "employees_count": "Employees count:",
     "extensions_summary": "Extensions cost:",
     "cancel": "Cancel",
