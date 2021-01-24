@@ -4,7 +4,7 @@
 - [ ] Zadania 
 - [ ] Grupy
 - [x] Integracja z kalendarzem
-- [ ] Integracja ze skrzynką
+- [x] Integracja ze skrzynką
 - [x] Poprawa modułu bazy
 - [ ] Pojazdy
 - [x] Dostępność modułów
