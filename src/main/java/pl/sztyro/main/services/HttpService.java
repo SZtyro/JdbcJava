@@ -20,7 +20,8 @@ public class HttpService {
     public JSONObject get(String uri, Header[] headers, NameValuePair[] params) throws IOException, URISyntaxException {
 
         URIBuilder builder = new URIBuilder(uri);
-        builder.setParameters(params);
+        if (params != null)
+            builder.setParameters(params);
 
         HttpGet httpGet = new HttpGet(builder.build());
 
@@ -29,6 +30,9 @@ public class HttpService {
         CloseableHttpClient client = HttpClients.createDefault();
         CloseableHttpResponse response = client.execute(httpGet);
 
-        return new JSONObject(EntityUtils.toString(response.getEntity()));
+        JSONObject answer = new JSONObject(EntityUtils.toString(response.getEntity()));
+
+        //System.out.println(answer.toString(2));
+        return answer;
     }
 }

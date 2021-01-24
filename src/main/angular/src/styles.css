@@ -1,11 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~@fortawesome/fontawesome-free/css/all.css";
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
+/*@import '@angular/material/prebuilt-themes/indigo-pink.css';*/
 :root {
   --textColor: #000;
   --textColorBright: #fff;
-  --mainColor: rgb(54, 73, 83);
+  --mainColor:#29434e;
   --deleteColor: #e53935;
   --warningColor: #ffa000;
   --errorColor: #b71c1c;
@@ -34,14 +34,14 @@ a {
   font-weight: 400;
 }
 
-.mat-raised-button, .mat-button-base {
+/* .mat-raised-button, .mat-button-base {
   background-color: var(--mainColor);
   color: var(--textColorBright);
 }
 
 .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
   background-color: var(--mainColor);
-}
+} */
 
 .text-icon {
   font-weight: 500;

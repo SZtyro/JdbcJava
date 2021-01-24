@@ -40,10 +40,12 @@ public class CalendarController {
     }
 
     @GetMapping("/events")
-    public Object getCalendarEvents() throws IOException, URISyntaxException {
+    public Object getCalendarEvents(HttpServletRequest request) throws IOException, URISyntaxException {
+
+        String mail = authService.getLoggedUserMail(request);
 
         return httpService.get(
-                "https://www.googleapis.com/calendar/v3/calendars/sztyrbot@gmail.com/events",
+                "https://www.googleapis.com/calendar/v3/calendars/" + mail + "/events",
                 new Header[]{
                         new BasicHeader("Authorization", authService.getBearerToken())
                 },

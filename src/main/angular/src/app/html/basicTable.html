@@ -39,14 +39,14 @@
 
                 <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayColumns" class="expandable-table-row"
-                    [style]="actions ? 'cursor: pointer;' : ''" [class.example-expanded-row]="expandedElement === row"
-                    (click)="expandedElement = row" (click)="$event.preventDefault()"></tr>
+                    [style]="rowStyle" [class.example-expanded-row]="expandedElement === row"
+                    (click)="expandedElement = row" (click)="onRowClick(row)" (click)="$event.preventDefault()"></tr>
                 <tr mat-row *matRowDef="let row; columns: actions ? ['expandedDetail'] : null"
-                    class="example-detail-row" style="height: 0;">
+                    class="example-detail-row" style="height: 0; ">
                 </tr>
             </table>
-            <mat-paginator *ngIf="dataSource.data.length > pageSize" [length]="dataSource.data.length"
-                [pageSize]="pageSize" [pageSizeOptions]="[10, 20, 50]"></mat-paginator>
+            <mat-progress-bar *ngIf="isLoading" mode="indeterminate" style="width: 100%;"></mat-progress-bar>
+            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[10, 20, 50]"></mat-paginator>
 
 
         </div>

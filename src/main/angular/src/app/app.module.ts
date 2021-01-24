@@ -50,6 +50,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FileUploadModule } from 'ng2-file-upload';
 import { WelcomePageComponent } from './components/custom/welcome-page/welcome-page.component';
 import { CompanyComponent } from './components/forms/company.component';
+import { MailComponent } from './components/lists/mail.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -75,7 +76,8 @@ export function provideConfig() {
     InviteUserComponent,
     DialogComponent,
     WelcomePageComponent,
-    CompanyComponent
+    CompanyComponent,
+    MailComponent
   ],
   imports: [
     BrowserModule,
@@ -126,7 +128,7 @@ export function provideConfig() {
     MatProgressBarModule,
     MatBadgeModule,
     MatTabsModule,
-
+    MatProgressBarModule
 
 
   ],

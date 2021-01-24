@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CalendarResolverService implements Resolve<Object>{
+export class MailResolverService implements Resolve<Object> {
 
   constructor(private http: HttpClientService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Object | Observable<Object> | Promise<Object> {
-    return this.http.getCalendarList()
+    return this.http.getMails(20);
   }
 }

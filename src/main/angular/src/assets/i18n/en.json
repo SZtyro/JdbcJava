@@ -1,4 +1,6 @@
 {
+    "subject": "Subject",
+    "from": "From",
     "today": "Today",
     "calendar": "Calendar",
     "notifications": "Notifications",

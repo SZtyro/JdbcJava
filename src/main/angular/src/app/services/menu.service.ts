@@ -16,7 +16,7 @@ export class MenuService {
     { icon: 'home', name: 'home', routerLink: 'home' },
 
     {
-      icon: 'email', name: 'E-mail', childs: []
+      icon: 'email', name: 'E-mail', routerLink: 'mail', childs: []
     },
     {
       icon: 'business', name: 'Company', childs: [

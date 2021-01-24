@@ -1,3 +1,5 @@
+import { MailResolverService } from './services/guards/resolvers/mail-resolver.service';
+import { MailComponent } from './components/lists/mail.component';
 import { CalendarResolverService } from './services/guards/resolvers/calendar-resolver.service';
 import { CompanyComponent } from './components/forms/company.component';
 import { InviteUserComponent } from './components/forms/settings/invite-user.component';
@@ -26,8 +28,13 @@ const routes: Routes = [
     path: 'home', component: HomeComponent, resolve: {
       companies: CompaniesResolverService,
       notifications: NotificationResolverService,
-      //calendar: CalendarResolverService
+      calendar: CalendarResolverService
     },
+  },
+  {
+    path: 'mail', component: MailComponent, resolve: {
+      mails: MailResolverService
+    }
   },
   { path: 'login', redirectTo: '' },
   {
@@ -77,9 +84,11 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'company/:id' , component: CompanyComponent, resolve: {
-    company: CompanyResolverService
-  } },
+  {
+    path: 'company/:id', component: CompanyComponent, resolve: {
+      company: CompanyResolverService
+    }
+  },
   { path: '', component: WelcomePageComponent },
   { path: 'plan', loadChildren: () => import('./modules/plan/plan.module').then(m => m.PlanModule) },
 ];

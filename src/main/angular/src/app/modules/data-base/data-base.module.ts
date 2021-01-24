@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TableListComponent } from './lists/table-list.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatPaginatorModule, MatDialogModule, MatNativeDateModule, MatInputModule, MatButtonModule, MatOptionModule } from '@angular/material';
+import { MatPaginatorModule, MatDialogModule, MatNativeDateModule, MatInputModule, MatButtonModule, MatOptionModule, MatProgressBarModule } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TableComponent } from './lists/table.component';
@@ -66,7 +66,8 @@ const routes: Routes = [
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatProgressBarModule
   ]
 })
 export class DataBaseModule { }

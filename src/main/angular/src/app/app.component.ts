@@ -1,7 +1,7 @@
 import { MenuService } from './services/menu.service';
 import { openClose, fadeIn } from './ts/animations';
 import { Component, OnInit, AfterViewChecked, AfterContentChecked, AfterContentInit } from '@angular/core';
-import { Router, RouterEvent, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, RouterEvent, NavigationEnd, ActivatedRoute, Event, NavigationStart, NavigationCancel, NavigationError } from '@angular/router';
 import { HttpClientService } from './services/http-client.service';
 //import { AuthService, SocialUser } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
@@ -24,10 +24,10 @@ import { ToastType } from './ts/enums/toastType';
 })
 export class AppComponent implements OnInit {
 
-  
+
 
   opened: boolean = true;
-  
+  isLoading: boolean = false;
 
   constructor(
     private httpClientService: HttpClientService,
@@ -57,7 +57,23 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit() {
-
+    this.router.events.subscribe((event: Event) => {
+      switch (true) {
+        case event instanceof NavigationStart: {
+          this.isLoading = true;
+          break;
+        }
+        case event instanceof NavigationEnd:
+        case event instanceof NavigationCancel:
+        case event instanceof NavigationError: {
+          this.isLoading = false;
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    })
   }
 
 

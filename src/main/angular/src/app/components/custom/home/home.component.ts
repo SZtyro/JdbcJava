@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
   notifications;
   notificationsDataSource;
 
-  tableNames: String[] = [];
   opened: boolean = false;
 
   events;

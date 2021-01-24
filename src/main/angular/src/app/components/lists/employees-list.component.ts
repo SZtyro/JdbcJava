@@ -40,10 +40,6 @@ export class EmployeesListComponent extends BasicTable implements OnInit {
   }
 
 
-  onRowClick() {
-    throw new Error('Method not implemented.');
-  }
-
   onRowAction(actionId: any, row) {
     switch (actionId) {
       case buttonEdit.id:

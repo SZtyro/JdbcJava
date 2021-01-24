@@ -29,9 +29,6 @@ export class InstitutionsListComponent extends BasicTable implements OnInit {
     })
   }
 
-  onRowClick() {
-    throw new Error('Method not implemented.');
-  }
 
   onRowAction(actionId, row) {
     switch (actionId) {

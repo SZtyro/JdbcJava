@@ -130,12 +130,21 @@ export class HttpClientService {
   }
 
 
-  getCalendar(){
+  getCalendarList() {
+    return this.httpClient.get(this.url + '/api/calendar/list')
+  }
+
+  getCalendarEvents() {
     return this.httpClient.get(this.url + '/api/calendar/events')
   }
 
-  getCalendarEvents(){
-    return this.httpClient.get(this.url + '/api/calendar/events')
+  getMails(maxResults, nextPageToken?) {
+    let params = { maxResults: maxResults };
+
+    if (nextPageToken)
+      params['nextPageToken'] = nextPageToken;
+
+    return this.httpClient.get(this.url + '/api/mail', { params: params })
   }
 }
 

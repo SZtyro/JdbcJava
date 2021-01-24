@@ -52,7 +52,17 @@
 
 
       <div style="width: 100%;">
-        <router-outlet></router-outlet>
+
+        <router-outlet *ngIf="!isLoading"></router-outlet>
+
+        <div *ngIf="isLoading" style="height: 100%; vertical-align: middle; display: flex;">
+
+          <mat-progress-spinner style="margin: auto;" mode="indeterminate" color="primary"></mat-progress-spinner>
+
+        </div>
+
+
+
       </div>
 
     </mat-sidenav-content>

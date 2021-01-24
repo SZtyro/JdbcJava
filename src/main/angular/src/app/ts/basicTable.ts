@@ -28,6 +28,12 @@ export abstract class BasicTable {
     underActions: TableActionButton[];
     /**Ilośc wierszy na jednej stronie*/
     pageSize: number = 10;
+    /**Ilośc wszystkich wierszy */
+    length: number;
+    /**Animacja doładowywania danych */
+    isLoading: boolean = false;
+    /**Styl */
+    rowStyle: string = '';
 
     constructor(
         protected route: ActivatedRoute,
@@ -56,5 +62,9 @@ export abstract class BasicTable {
 
     extractColumnNames() {
         this.displayColumns = this.columns.map(x => x.name);
+    }
+
+    onRowClick(row) {
+
     }
 }
