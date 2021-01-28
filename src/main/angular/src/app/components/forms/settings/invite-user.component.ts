@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FieldType } from '../../../ts/enums/fieldType';
 import { BasicForm } from '../../../ts/basicForm';
+import { ToastType } from 'src/app/ts/enums/toastType';
 
 @Component({
   selector: 'app-invite-user',
@@ -43,7 +44,13 @@ export class InviteUserComponent extends BasicForm implements OnInit {
           institutionId: this.fields[1].value
         }).subscribe(
           () => { this.router.navigate(['employees', 'list']) }),
-          err => { console.log(err) }
+          err => {
+            console.error(err)
+            this.shared.newToast({
+              message: err.error.message,
+              type: ToastType.ERROR
+            })
+          }
         break;
 
       default:

@@ -1,3 +1,4 @@
+import { CompanyListComponent } from './components/lists/company-list.component';
 import { MailResolverService } from './services/guards/resolvers/mail-resolver.service';
 import { MailComponent } from './components/lists/mail.component';
 import { CalendarResolverService } from './services/guards/resolvers/calendar-resolver.service';
@@ -85,9 +86,19 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'company/:id', component: CompanyComponent, resolve: {
-      company: CompanyResolverService
-    }
+    path: 'company', children: [
+      {
+        path: 'list', component: CompanyListComponent,resolve: {
+          companies: CompanyResolverService
+        }
+      },
+      {
+        path: ':id', component: CompanyComponent, resolve: {
+          company: CompanyResolverService
+        }
+      }
+    ]
+
   },
   { path: '', component: WelcomePageComponent },
   { path: 'plan', loadChildren: () => import('./modules/plan/plan.module').then(m => m.PlanModule) },

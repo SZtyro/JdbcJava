@@ -58,15 +58,16 @@ public class UserController {
         if (oldUser == null) {
             _logger.info("Zapraszanie użytkownika: " + mail);
             userService.addUser(mail);
-            userService.selectCompany(mail, user.getSelectedCompany().getId());
-            institutionService.addUserToInstitution(mail, object.getLong("institutionId"));
-
-            Gson params = new Gson();
-            JsonObject obj = new JsonObject();
-            obj.addProperty("mail", object.getString("mail"));
-            notificationService.createNotification("BOT", "notification.user.invite.success", params.toJson(obj), new ArrayList<User>(Arrays.asList(user)));
-
         }
+        userService.selectCompany(mail, user.getSelectedCompany().getId());
+        institutionService.addUserToInstitution(mail, object.getLong("institutionId"));
+
+        Gson params = new Gson();
+        JsonObject obj = new JsonObject();
+        obj.addProperty("mail", object.getString("mail"));
+        notificationService.createNotification("BOT", "notification.user.invite.success", params.toJson(obj), new ArrayList<User>(Arrays.asList(user)));
+
+
     }
 
     @PutMapping()

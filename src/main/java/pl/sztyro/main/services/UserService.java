@@ -2,6 +2,7 @@ package pl.sztyro.main.services;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,15 @@ public class UserService {
     @Autowired
     HibernateConf conf;
 
+    @Autowired
+    UserService userService;
+
+    /**
+     * @param mail
+     * @return
+     * @throws NotFoundException
+     * @deprecated
+     */
     public User getUser(String mail) throws NotFoundException {
         Session session = conf.getSession();
 
@@ -26,10 +36,8 @@ public class UserService {
         User u = null;
         try {
 
-            u = session.get(User.class, mail);
-            if (u == null) {
-                addUser(mail);
-            }
+            u = userService.getUserByMail(mail);
+
 
             Hibernate.initialize(u.getSelectedCompany());
             session.getTransaction().commit();
@@ -40,7 +48,28 @@ public class UserService {
 
         } finally {
             session.close();
+            if(u == null)
+                throw new NotFoundException("toasts.user.notfound");
             return u;
+        }
+    }
+
+    public User getUserByMail(String mail) {
+        _logger.info("Pobieranie użytkownika: " + mail);
+        Session session = conf.getSession();
+        User user = null;
+
+        try {
+            Query<User> query = session.createQuery("FROM User u where u.mail='" + mail + "'");
+            user = query.uniqueResult();
+
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            _logger.error(e.getMessage());
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+            return user;
         }
     }
 
@@ -65,7 +94,7 @@ public class UserService {
         Session session = conf.getSession();
         Company company = null;
         try {
-            User user = session.load(User.class, mail);
+            User user = userService.getUserByMail(mail);
             company = session.load(Company.class, id);
 
             user.setSelectedCompany(company);
@@ -90,7 +119,7 @@ public class UserService {
 
 
         try {
-            User u = session.load(User.class, mail);
+            User u = userService.getUserByMail(mail);
             u.merge(user);
             session.update(u);
             session.getTransaction().commit();

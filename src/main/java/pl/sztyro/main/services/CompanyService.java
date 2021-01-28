@@ -32,11 +32,14 @@ public class CompanyService {
     @Autowired
     NotificationService notificationService;
 
+    @Autowired
+    UserService userService;
+
     public Company createCompany(String mail) {
         Session session = conf.getSession();
         Company company = null;
         try {
-            User user = session.load(User.class, mail);
+            User user = userService.getUserByMail(mail);
             company = new Company(user);
             if (user.getSelectedCompany() == null)
                 user.setSelectedCompany(company);
@@ -91,7 +94,7 @@ public class CompanyService {
     public void selectCompany(String mail, long companyId) {
         Session session = conf.getSession();
         try {
-            User u = session.load(User.class, mail);
+            User u = userService.getUserByMail(mail);
             Company c = session.load(Company.class, companyId);
             u.setSelectedCompany(c);
             session.update(u);
@@ -117,7 +120,7 @@ public class CompanyService {
         Session session = conf.getSession();
         Company c;
         try {
-            User u = session.load(User.class, mail);
+            User u = userService.getUserByMail(mail);
             c = u.getSelectedCompany();
 
 
@@ -190,10 +193,10 @@ public class CompanyService {
         _logger.info("Pobieranie firm użytkownika: " + mail);
 
         try {
-            Query query = session.createQuery("from Company where owner=\'" + mail + "\'");
+            User owner = userService.getUserByMail(mail);
+            Query query = session.createQuery("from Company where owner=" + owner.getId());
             companies = query.list();
             session.getTransaction().commit();
-            _logger.info("Pobierano firmy użytkownika: " + mail + "\n" + companies);
         } catch (Exception e) {
             _logger.error(e.getMessage());
             session.getTransaction().rollback();
@@ -215,7 +218,7 @@ public class CompanyService {
 
         JSONArray json = new JSONArray();
         try {
-            User user = session.load(User.class, mail);
+            User user = userService.getUserByMail(mail);
             _logger.info("Pobieranie pracowników firmy: " + user.getSelectedCompany().getName());
 
             //Query query = session.createQuery("select user, i from Institution i join i.employee as user");

@@ -49,12 +49,16 @@ export abstract class BasicTable {
      * @param actionId id przycisku wywołanego
      * @param row obiekt przypisany do rzędu
     */
-    abstract onRowAction(actionId, row);
+    onRowAction(actionId, row){
+
+    }
 
     /**Funkcja wywoływana przy naciśnięciu przycisku akcji pod tabelą
      * @param actionId id przycisku wywołanego
     */
-    abstract onUnderAction(actionId);
+    onUnderAction(actionId){
+
+    }
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();

@@ -17,35 +17,35 @@ public class Company {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "company_id")
+    @Column()
     /**Id firmy*/
     private long id;
 
-    @JoinColumn(name = "company_owner")
+    @JoinColumn()
     @NotNull
     @ManyToOne
     @JsonIgnore
     private User owner;
 
-    @Column(name = "company_name")
+    @Column()
     private String name;
 
-    @Column(name = "company_NIP", unique = true, nullable = false, length = 10)
+    @Column(unique = true, nullable = false, length = 10)
     @Range(min = 1000000000, max = 9999999999L, message = "toasts.company.nip")
     @NotNull
     private long nip;
 
-    @Column(name = "company_address")
+    @Column()
     String address;
 
-    @Column(name = "company_city")
+    @Column()
     String city;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Database> database;
 
-    @Column(name = "company_modules")
+    @Column()
     @JsonIgnore
     private String modules;
 

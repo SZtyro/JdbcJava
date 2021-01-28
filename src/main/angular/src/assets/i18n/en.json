@@ -102,6 +102,9 @@
         "company": {
             "saved": "Company has been successfully saved.",
             "nip": "Please enter correct NIP."
+        },
+        "user": {
+            "notfound": "User not found."
         }
     },
     "dialog": {

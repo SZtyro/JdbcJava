@@ -12,4 +12,4 @@
 - [x] Powiadomienia z boku
 - [x] Zmiana serwisu http
 - [ ] Strona startowa
-- [ ] Zmiana kluczy z maili na id
+- [x] Zmiana kluczy z maili na id

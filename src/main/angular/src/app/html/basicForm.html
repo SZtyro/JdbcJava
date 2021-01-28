@@ -62,8 +62,8 @@
 
     <div class="row m-0" style="justify-content: flex-end;padding-bottom: 20px; padding-top: 20px;">
         <span *ngFor="let button of actions" class="col-12 col-md-6 col-lg-3 col-xl-1">
-            <button mat-raised-button style="width: 100%;line-height: 45px; margin-top: 10px;"
-                (click)="onAction(button.id)">
+            <button mat-raised-button [color]="button.backgroundColor ? '': 'primary'"
+                style="width: 100%;line-height: 45px; margin-top: 10px;" (click)="onAction(button.id)">
                 {{button.icon | translate}}
                 {{button.name | translate}}
             </button>

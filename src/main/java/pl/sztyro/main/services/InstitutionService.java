@@ -43,7 +43,7 @@ public class InstitutionService {
         Company selectedCompany = null;
         Institution institution = null;
         try {
-            user = session.load(User.class, mail);
+            user = userService.getUserByMail(mail);
             selectedCompany = user.getSelectedCompany();
             institution = new Institution(selectedCompany);
             session.save(institution);
@@ -91,7 +91,7 @@ public class InstitutionService {
     public List<Institution> getInstitutions(Company company) throws NotFoundException {
         Session session = conf.getSession();
         List<Institution> institutions = null;
-
+        _logger.info("Pobieranie placówek firmy: " + company.getName());
         try {
 
             Query query = session.createQuery("from Institution i where i.company.id=" + company.getId());
@@ -119,7 +119,7 @@ public class InstitutionService {
         _logger.info("Dodawanie placówki: " + institution.getName());
 
         try {
-            User user = session.load(User.class, mail);
+            User user = userService.getUserByMail(mail);
             Company selectedCompany = user.getSelectedCompany();
             if (selectedCompany == null) {
                 _logger.error("Użytkownik nie ma wybranej firmy");
@@ -145,7 +145,7 @@ public class InstitutionService {
         Session session = conf.getSession();
 
 
-        User user = session.load(User.class, mail);
+        User user = userService.getUserByMail(mail);
         Institution institution;
 
         Gson obj = new Gson();
@@ -194,7 +194,7 @@ public class InstitutionService {
         _logger.info("Dodawanie użytkownika: " + mail + " do placówki.");
 
         try {
-            User user = session.load(User.class, mail);
+            User user = userService.getUserByMail(mail);
             Institution institution = session.load(Institution.class, id);
             //institution.addEmployee(user);
             user.setInstitution(institution);
@@ -249,7 +249,7 @@ public class InstitutionService {
             //Object[] result = (Object[]) query.list().get(0);
 
             //institution = session.load(Institution.class, (Long) query.uniqueResult());
-            institution = session.load(User.class, mail).getInstitution();
+            institution = userService.getUserByMail(mail).getInstitution();
 
             session.getTransaction().commit();
 

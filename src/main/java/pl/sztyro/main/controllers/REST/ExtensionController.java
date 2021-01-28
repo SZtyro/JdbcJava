@@ -45,7 +45,10 @@ public class ExtensionController {
         User user = userService.getUser(authService.getLoggedUserMail(request));
         Company company = user.getSelectedCompany();
 
-        return moduleService.getCompanyExtensions(company).toString();
+        if (company != null)
+            return moduleService.getCompanyExtensions(company).toString();
+        else
+            throw new NotFoundException("Company not selected.");
 
     }
 

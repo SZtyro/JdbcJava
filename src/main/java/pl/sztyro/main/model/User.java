@@ -11,29 +11,30 @@ import java.util.Date;
 //@Proxy(lazy = false)
 public class User {
 
-    /**
-     * Email użytkownika
-     */
     @Id
-    @Column(name = "user_mail")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column()
+    private long id;
+
+    @Column()
     private String mail;
 
-    @JoinColumn(name = "user_selected_company")
+    @JoinColumn()
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private Company selectedCompany;
 
-    @Column(name = "user_created")
+    @Column()
     private Date created;
 
-    @Column(name = "user_firstname")
+    @Column()
     private String firstname;
 
-    @Column(name = "user_surname")
+    @Column()
     private String surname;
 
     @ManyToOne()
-    @JoinColumn(name = "user_institution")
+    @JoinColumn()
     Institution institution;
 
     public User() {
@@ -91,6 +92,11 @@ public class User {
     public void setInstitution(Institution institution) {
         this.institution = institution;
     }
+
+    public long getId() {
+        return id;
+    }
+
 }
 
 

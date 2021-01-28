@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { SharedService } from './shared.service';
 import { HttpClientService } from './http-client.service';
 import { Injectable } from '@angular/core';
@@ -76,6 +77,7 @@ export class MenuService {
     private httpClientService: HttpClientService,
     private shared: SharedService,
     public translate: TranslateService,
+    private router: Router
   ) {
 
     this.httpClientService.getCompanyExtensions().subscribe(
@@ -90,9 +92,16 @@ export class MenuService {
 
 
       },
-      err => console.error(err),
+      err => {
+        shared.newToast({
+          message:  err.error.message,
+          type: ToastType.ERROR
+        })
+        this.router.navigate(['company','list'])
+      },
       () => {
-        
+
+
         this.httpClientService.getCompany().subscribe(
           companies => {
             companies.forEach(element => {
@@ -180,7 +189,7 @@ export class MenuService {
 
   selectCompany(item) {
     if (item.id)
-      this.httpClientService.setCurrentCompany(item.id).subscribe(current => {      
+      this.httpClientService.setCurrentCompany(item.id).subscribe(current => {
 
         console.log(window.location.href)
         if (window.location.href != '/home')

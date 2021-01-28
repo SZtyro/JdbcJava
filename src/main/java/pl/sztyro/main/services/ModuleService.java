@@ -91,10 +91,10 @@ public class ModuleService {
         Session session = conf.getSession();
 
         Company c = session.load(Company.class, company.getId());
-        EnumSet<Permission> companyPermisssions = decodeModules(c.getModules());
+        EnumSet<Permission> companyPermissions = decodeModules(c.getModules());
 
 
-        if (companyPermisssions != null) {
+        if (companyPermissions != null) {
             JSONArray array = getExtensions();
 
 
@@ -103,7 +103,7 @@ public class ModuleService {
 
             array.forEach(o -> {
                 JSONObject jsonObject = new JSONObject(o.toString());
-                if (companyPermisssions.contains(Permission.valueOf(jsonObject.getString("permission")))) {
+                if (companyPermissions.contains(Permission.valueOf(jsonObject.getString("permission")))) {
                     answer.put(jsonObject);
                 }
             });
