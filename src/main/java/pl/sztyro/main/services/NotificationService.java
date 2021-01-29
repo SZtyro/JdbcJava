@@ -20,6 +20,9 @@ public class NotificationService {
     @Autowired
     HibernateConf conf;
 
+    @Autowired
+    UserService userService;
+
     public Notification createNotification(String author, String message, String params, List<User> involved) {
 
         Session session = conf.getSession();
@@ -47,9 +50,8 @@ public class NotificationService {
         List<Notification> notifications = null;
         try {
 
-            //Query query = session.createQuery("FROM \'notification\' n INNER JOIN notification_user u ON n.id = u.Notification_id WHERE u.involved_user_mail = 'fabixd123@gmail.com' ORDER BY created");
-
-            Query query = session.createQuery("FROM Notification as n where \'" + mail + "\' in elements(n.involved) order by n.created desc ");
+            User user = userService.getUserByMail(mail);
+            Query query = session.createQuery("FROM Notification as n where " + user.getId() + " in elements(n.involved) order by n.created desc ");
             notifications = query.list();
 
             _logger.info("Pobrano: " + notifications.size() + " powiadomień użytkownika: " + mail);
