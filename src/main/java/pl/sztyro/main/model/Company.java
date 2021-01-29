@@ -135,4 +135,9 @@ public class Company {
     public void setCity(String city) {
         this.city = city;
     }
+
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

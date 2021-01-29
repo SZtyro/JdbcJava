@@ -9,6 +9,7 @@ import java.util.Date;
 @Entity
 //
 //@Proxy(lazy = false)
+@Table(name = "AppUser")
 public class User {
 
     @Id

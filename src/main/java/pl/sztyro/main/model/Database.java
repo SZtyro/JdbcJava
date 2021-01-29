@@ -12,17 +12,17 @@ public class Database {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "database_id")
+    @Column()
     private long id;
-    @Column(name = "database_host")
+    @Column(name = "host")
     private String url;
-    @Column(name = "database_port")
+    @Column()
     private String port;
-    @Column(name = "database_name")
+    @Column(name = "databaseName")
     private String database;
-    @Column(name = "database_login")
+    @Column()
     private String login;
-    @Column(name = "database_password")
+    @Column()
     @JsonIgnore
     private String password;
 
@@ -115,5 +115,9 @@ public class Database {
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

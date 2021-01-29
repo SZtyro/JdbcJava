@@ -12,10 +12,10 @@ public class Notification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private int id;
+    @Column()
+    private long id;
 
-    @Column(name = "author")
+    @Column()
     private String author;
 
     @Column()
@@ -79,5 +79,9 @@ public class Notification {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public long getId() {
+        return id;
     }
 }
