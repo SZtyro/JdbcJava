@@ -196,10 +196,12 @@ public class InstitutionService {
         try {
             User user = userService.getUserByMail(mail);
             Institution institution = session.load(Institution.class, id);
-            //institution.addEmployee(user);
-            user.setInstitution(institution);
 
-            session.update(user);
+            if (institution.getEmployees().indexOf(user) == -1)
+                institution.addEmployee(user);
+
+
+            session.update(institution);
             session.getTransaction().commit();
 
         } catch (Exception e) {
@@ -237,19 +239,18 @@ public class InstitutionService {
         }
     }
 
-    public Institution getUserInstitution(String mail) {
+    public List<Institution> getUserInstitution(String mail) {
         Session session = conf.getSession();
-        Institution institution = null;
+        List<Institution> institutions = null;
         try {
 
-            //Query query = session.createQuery("select i from Institution as i left join fetch i.employee where \'" + mail + "\' in elements(i.employee)");
-            //List<Institution> institutions = query.list();
+            Query query = session.createQuery("select i from Institution as i left join fetch i.employees where \'" + mail + "\' in elements(i.employees)");
+            institutions = query.list();
             //institution = (Institution) query.uniqueResult();
 
             //Object[] result = (Object[]) query.list().get(0);
 
             //institution = session.load(Institution.class, (Long) query.uniqueResult());
-            institution = userService.getUserByMail(mail).getInstitution();
 
             session.getTransaction().commit();
 
@@ -260,7 +261,7 @@ public class InstitutionService {
             session.close();
 
         }
-        return institution;
+        return institutions;
     }
 
 

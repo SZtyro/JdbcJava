@@ -84,7 +84,7 @@ public class UserController {
             User u = session.load(User.class, requestBody.getString("mail"));
             _logger.info("Aktualizacja użytkownika: " + u.getMail());
 
-            u.setInstitution(institutionService.getInstitution(requestBody.getJSONObject("institution").getLong("id")));
+            institutionService.getInstitution(requestBody.getJSONObject("institution").getLong("id"));
             u.setFirstname(requestBody.has("firstname") ? requestBody.getString("firstname") : null);
             u.setSurname(requestBody.has("surname") ? requestBody.getString("surname") : null);
 

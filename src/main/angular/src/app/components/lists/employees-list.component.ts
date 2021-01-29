@@ -24,7 +24,7 @@ export class EmployeesListComponent extends BasicTable implements OnInit {
       { name: "mail" },
       { name: "firstname" },
       { name: "surname" },
-      { name: "institution", assignValue: (row) => { return row.institution.name } },
+      { name: "institution", assignValue: (row) => { return row.name } },
     ]
     this.extractColumnNames();
     this.name = "employees";

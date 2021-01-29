@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 //@Proxy(lazy = false)
@@ -12,17 +13,19 @@ public class Institution {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column()
     private long id;
 
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "company_id")
+    @JoinColumn()
     @JsonIgnore
     private Company company;
 
-
+    @ManyToMany
+    @JsonIgnore
+    private List<User> employees;
 
     public Institution(Company company) {
         this.company = company;
@@ -61,5 +64,17 @@ public class Institution {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public List<User> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<User> employees) {
+        this.employees = employees;
+    }
+
+    public void addEmployee(User user) {
+        this.employees.add(user);
     }
 }

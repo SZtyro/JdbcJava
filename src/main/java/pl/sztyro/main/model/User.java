@@ -33,10 +33,6 @@ public class User {
     @Column()
     private String surname;
 
-    @ManyToOne()
-    @JoinColumn()
-    Institution institution;
-
     public User() {
     }
 
@@ -83,14 +79,6 @@ public class User {
 
     public void setSurname(String userSurname) {
         this.surname = userSurname;
-    }
-
-    public Institution getInstitution() {
-        return institution;
-    }
-
-    public void setInstitution(Institution institution) {
-        this.institution = institution;
     }
 
     public long getId() {

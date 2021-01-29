@@ -37,7 +37,9 @@ public class UserService {
         try {
 
             u = userService.getUserByMail(mail);
-
+            if (u == null) {
+                addUser(mail);
+            }
 
             Hibernate.initialize(u.getSelectedCompany());
             session.getTransaction().commit();
@@ -48,8 +50,6 @@ public class UserService {
 
         } finally {
             session.close();
-            if(u == null)
-                throw new NotFoundException("toasts.user.notfound");
             return u;
         }
     }
@@ -78,7 +78,8 @@ public class UserService {
         Session session = conf.getSession();
 
         try {
-            session.save(new User(mail));
+            if (getUserByMail(mail) == null)
+                session.save(new User(mail));
             session.getTransaction().commit();
         } catch (Exception e) {
             _logger.error(e.getMessage());

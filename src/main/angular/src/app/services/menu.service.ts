@@ -31,14 +31,14 @@ export class MenuService {
           icon: 'person', name: 'Employees', childs: [
             { icon: 'list', name: 'employee_list', routerLink: 'employees/list' },
             { icon: 'person_add', name: 'employee_add', routerLink: 'employees/invite' },
-            { icon: 'groups', name: 'Groups' },
-            { icon: 'event_note', name: 'Shifts' },
-            { icon: 'fact_check', name: 'Tasks' }
+            // { icon: 'groups', name: 'Groups' },
+            // { icon: 'event_note', name: 'Shifts' },
+            // { icon: 'fact_check', name: 'Tasks' }
           ]
         },
-        {
-          icon: 'local_shipping', name: 'Vehicles', childs: []
-        }
+        // {
+        //   icon: 'local_shipping', name: 'Vehicles', childs: []
+        // }
       ]
     },
     {
@@ -46,7 +46,7 @@ export class MenuService {
 
       ]
     },
-    { icon: 'monetization_on', name: 'finances' },
+    // { icon: 'monetization_on', name: 'finances' },
     { icon: 'view_module', name: 'plan', routerLink: 'plan' },
   ];
 
