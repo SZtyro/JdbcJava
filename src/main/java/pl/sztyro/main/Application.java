@@ -10,13 +10,13 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 //@EnableEncryptableProperties
 @SpringBootApplication
 @EntityScan(basePackages = {"pl.sztyro.main.model"})
-public class DataBaseApplication implements CommandLineRunner {
+public class Application implements CommandLineRunner {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     public static void main(String[] args) {
-        SpringApplication.run(DataBaseApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
     @Override

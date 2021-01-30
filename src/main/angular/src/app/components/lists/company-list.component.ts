@@ -26,8 +26,6 @@ export class CompanyListComponent extends BasicTable implements OnInit {
     this.route.data.subscribe(data => {
       this.dataSource = new MatTableDataSource(data.companies);
       this.dataSource.paginator = this.paginator;
-
-      console.log(this.dataSource)
     })
   }
 

@@ -33,6 +33,8 @@ export abstract class BasicFormDialog {
      * @param actionId id przycisku wywołanego
      * @param row obiekt przypisany do rzędu
     */
-    abstract onAction(actionId);
+    onAction(actionId){
+        throw new Error('Method not implemented.');
+    };
 
 }

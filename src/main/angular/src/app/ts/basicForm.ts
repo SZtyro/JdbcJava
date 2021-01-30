@@ -30,7 +30,9 @@ export abstract class BasicForm {
      * @param actionId id przycisku wywołanego
      * @param row obiekt przypisany do rzędu
     */
-    abstract onAction(actionId);
+    onAction(actionId) {
+        throw new Error('Method not implemented.');
+    };
 
     createBodyFromFields(body) {
         this.fields.forEach(elem => {

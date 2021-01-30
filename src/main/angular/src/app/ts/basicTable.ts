@@ -50,25 +50,25 @@ export abstract class BasicTable {
      * @param row obiekt przypisany do rzędu
     */
     onRowAction(actionId, row){
-
-    }
+        throw new Error('Method not implemented.');
+    };
 
     /**Funkcja wywoływana przy naciśnięciu przycisku akcji pod tabelą
      * @param actionId id przycisku wywołanego
     */
     onUnderAction(actionId){
-
-    }
+        throw new Error('Method not implemented.');
+    };
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
-    }
+    };
 
     extractColumnNames() {
         this.displayColumns = this.columns.map(x => x.name);
-    }
+    };
 
     onRowClick(row) {
-
-    }
+        throw new Error('Method not implemented.');
+    };
 }
