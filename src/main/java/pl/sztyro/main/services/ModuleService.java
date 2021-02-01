@@ -36,9 +36,9 @@ public class ModuleService {
 
     public EnumSet<Permission> decodeModules(String modules) {
         EnumSet<Permission> permissions = EnumSet.allOf(Permission.class);
+
         if (modules != null) {
             permissions.removeIf(myVal -> !modules.contains(myVal.name()));
-
             return permissions;
         } else
             return null;

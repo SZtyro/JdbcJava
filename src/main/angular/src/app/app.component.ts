@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
 
 
 
-  opened: boolean = true;
+  screenWidth:number;
   isLoading: boolean = false;
 
   constructor(
@@ -41,6 +41,11 @@ export class AppComponent implements OnInit {
     translate.setDefaultLang('pl');
     translate.use('pl')
 
+    this.screenWidth = window.innerWidth;
+    window.onresize = () => {
+      this.screenWidth = window.innerWidth;
+    };
+
   }
 
   signOut() {
@@ -54,6 +59,8 @@ export class AppComponent implements OnInit {
     })
 
   }
+
+
 
 
   ngOnInit() {

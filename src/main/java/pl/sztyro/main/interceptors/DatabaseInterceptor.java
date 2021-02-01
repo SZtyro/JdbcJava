@@ -45,7 +45,6 @@ public class DatabaseInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws NoModuleException {
 
-
         User user = null;
         try {
             String mail = authService.getLoggedUserMail(request);

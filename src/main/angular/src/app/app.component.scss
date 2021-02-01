@@ -27,31 +27,6 @@ a {
   justify-content: space-between;
 }
 
-.barIcon {
-  /* display: block;
-    margin: 0 auto; */
-  //font-size: 20px;
-}
-
-button {
-  outline: none;
-  transition: all 0.2s ease-in-out;
-  border-left: solid 3px rgb(34, 34, 34);
-  width: 100%;
-
-  padding: 0px;
-  padding-right: 10px;
-  margin: 4px;
-  border-radius: 0px;
-  justify-content: center;
-}
-
-button:hover {
-  border-left: solid #fff 3px;
-  background-color: rgb(77, 77, 77);
-  //transform: scale(1.07);
-}
-
 .toast-wrapper {
   z-index: 50;
   position: absolute;

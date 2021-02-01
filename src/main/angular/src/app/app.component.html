@@ -1,8 +1,18 @@
 <body class="mat-app-background">
-  <mat-sidenav-container style="height: 100%; ">
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened" style="width: 50px; background-color: var(--mainColor)"
-      (mouseenter)="menu.sideNavExtend()" (mouseleave)="menu.sideNavExtend()"
-      [@openClose]="menu.sideNavExtension ? 'open' : 'closed'">
+
+  <span *ngIf="!(screenWidth > 991)" style="height: 36px;">
+    <button mat-button (click)="sidenav.toggle()" style="width: auto;"> 
+      <span class="material-icons">menu</span>
+    </button>
+  </span>
+
+  <mat-sidenav-container [style]="screenWidth > 991 ? 'height: 100%;' : 'height: calc(100% - 36px);' ">
+
+    
+
+    <mat-sidenav #sidenav mode="side" [opened]="screenWidth > 991"
+      style="width: 50px; background-color: var(--mainColor)" (mouseenter)="menu.sideNavExtend()"
+      (mouseleave)="menu.sideNavExtend()" [@openClose]="menu.sideNavExtension ? 'open' : 'closed'">
 
 
       <div

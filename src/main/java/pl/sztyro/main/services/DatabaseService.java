@@ -35,20 +35,12 @@ public class DatabaseService {
     private String encryptorPassword;
 
     private String decryptPassword(String password) {
-        //Dotenv dotenv = Dotenv.load();
-        System.out.println(encryptorPassword);
-
         textEncryptor.setPassword(encryptorPassword);
-
         return textEncryptor.decrypt(password);
     }
 
     private String encryptPassword(String password) {
-        //Dotenv dotenv = Dotenv.load();
-        System.out.println(encryptorPassword);
-
         textEncryptor.setPassword(encryptorPassword);
-
         return textEncryptor.encrypt(password);
     }
 
@@ -89,17 +81,15 @@ public class DatabaseService {
         _logger.info("Pobieranie szczegółów tabeli: " + tableName);
 
         Connection connection = prepareConnection(database);
-        //String sql = "SELECT * FROM all_tables where owner = (select user from dual)";
-        String sql = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = \'" + database.getDatabase() + "\' AND TABLE_NAME = \'" + tableName + "\';";
 
+        String sql = "SELECT * " +
+                "FROM INFORMATION_SCHEMA.COLUMNS " +
+                "WHERE TABLE_SCHEMA = \'" + database.getDatabase() + "\' " +
+                "AND TABLE_NAME = \'" + tableName + "\';";
 
         Statement statement = connection.createStatement();
-
         ResultSet result = statement.executeQuery(sql);
-
-
         JSONArray array = new JSONArray();
-
 
         while (result.next()) {
 
@@ -114,8 +104,6 @@ public class DatabaseService {
         }
 
         connection.close();
-
-        System.out.println(array.toString(2));
         return array.toString();
     }
 

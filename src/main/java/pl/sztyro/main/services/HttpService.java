@@ -24,15 +24,11 @@ public class HttpService {
             builder.setParameters(params);
 
         HttpGet httpGet = new HttpGet(builder.build());
-
         httpGet.setHeaders(headers);
 
         CloseableHttpClient client = HttpClients.createDefault();
         CloseableHttpResponse response = client.execute(httpGet);
 
-        JSONObject answer = new JSONObject(EntityUtils.toString(response.getEntity()));
-
-        //System.out.println(answer.toString(2));
-        return answer;
+        return new JSONObject(EntityUtils.toString(response.getEntity()));
     }
 }

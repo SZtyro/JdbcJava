@@ -27,9 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/login").permitAll()
-                //.antMatchers("/api/google/auth","/api/redirectHome").authenticated()
-
-                .anyRequest().permitAll()
+                //.anyRequest().permitAll()
                 .and().exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
 
             _logger.warn(authException.getMessage());
