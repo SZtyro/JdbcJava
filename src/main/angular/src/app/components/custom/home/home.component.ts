@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private httpClientService: HttpClientService,
     private router: Router,
-    private shared: SharedService,
+    //private shared: SharedService,
     private route: ActivatedRoute
   ) {
 

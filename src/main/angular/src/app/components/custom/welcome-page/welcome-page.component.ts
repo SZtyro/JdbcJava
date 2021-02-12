@@ -16,8 +16,6 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
   user;
 
   constructor(
-    private router: Router,
-    private http: HttpClientService,
     public translate: TranslateService,
     public shared: SharedService
   ) {

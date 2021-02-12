@@ -7,9 +7,6 @@
   </span>
 
   <mat-sidenav-container [style]="screenWidth > 991 ? 'height: 100%;' : 'height: calc(100% - 36px);' ">
-
-    
-
     <mat-sidenav #sidenav mode="side" [opened]="screenWidth > 991"
       style="width: 50px; background-color: var(--mainColor)" (mouseenter)="menu.sideNavExtend()"
       (mouseleave)="menu.sideNavExtend()" [@openClose]="menu.sideNavExtension ? 'open' : 'closed'">
@@ -84,7 +81,6 @@
     <div [class]="'col-12 col-md-7 col-lg-5 col-xl-2 toast-base mat-elevation-z6 ' + toast.type"
       *ngFor="let toast of shared.toasts" @fadeIn>
       <div [innerHTML]="toast.message | translate:toast.params" style="width: inherit;">
-
       </div>
     </div>
   </div>

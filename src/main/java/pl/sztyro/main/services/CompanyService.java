@@ -37,12 +37,12 @@ public class CompanyService {
     @Autowired
     UserService userService;
 
-    public Company createCompany(String mail) {
+    public void createCompany(User user, String name, Long nip) {
         Session session = conf.getSession();
-        Company company = null;
+
         try {
-            User user = userService.getUserByMail(mail);
-            company = new Company(user);
+
+            Company company = new Company(user, name, nip);
             if (user.getSelectedCompany() == null)
                 user.setSelectedCompany(company);
             session.save(company);
@@ -57,7 +57,6 @@ public class CompanyService {
             throw e;
         } finally {
             session.close();
-            return company;
         }
 
     }

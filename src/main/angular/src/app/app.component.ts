@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
 
 
 
-  screenWidth:number;
+  screenWidth: number;
   isLoading: boolean = false;
 
   constructor(
@@ -35,7 +35,8 @@ export class AppComponent implements OnInit {
     public translate: TranslateService,
     public dialog: MatDialog,
     public shared: SharedService,
-    public menu: MenuService
+    public menu: MenuService,
+    private route: ActivatedRoute
   ) {
     translate.addLangs(['en', 'pl']);
     translate.setDefaultLang('pl');
@@ -45,6 +46,8 @@ export class AppComponent implements OnInit {
     window.onresize = () => {
       this.screenWidth = window.innerWidth;
     };
+
+
 
   }
 
@@ -66,19 +69,16 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
-        case event instanceof NavigationStart: {
+        case event instanceof NavigationStart:
           this.isLoading = true;
           break;
-        }
         case event instanceof NavigationEnd:
         case event instanceof NavigationCancel:
-        case event instanceof NavigationError: {
+        case event instanceof NavigationError:
           this.isLoading = false;
           break;
-        }
-        default: {
+        default:
           break;
-        }
       }
     })
   }

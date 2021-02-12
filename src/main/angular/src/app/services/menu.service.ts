@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { SharedService } from './shared.service';
 import { HttpClientService } from './http-client.service';
 import { Injectable } from '@angular/core';
@@ -77,86 +77,95 @@ export class MenuService {
     private httpClientService: HttpClientService,
     private shared: SharedService,
     public translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-
-    this.httpClientService.getCompanyExtensions().subscribe(
-      extensions => {
-
-
-        extensions.forEach(extension => {
-          if (extension['menu'])
-            this.menuItems.push(extension['menu'])
-        })
-        console.log(this.menuItems)
+   
+    this.route.url.subscribe(url => {
+      console.log(window.location.pathname)
+      
+      if (window.location.pathname != "/") {
+        this.httpClientService.getCompanyExtensions().subscribe(
+          extensions => {
 
 
-      },
-      err => {
-        shared.newToast({
-          message:  err.error.message,
-          type: ToastType.ERROR
-        })
-        this.router.navigate(['company','list'])
-      },
-      () => {
+            extensions.forEach(extension => {
+              if (extension['menu'])
+                this.menuItems.push(extension['menu'])
+            })
+            console.log(this.menuItems)
 
-
-        this.httpClientService.getCompany().subscribe(
-          companies => {
-            companies.forEach(element => {
-              this.companies[0].childs.push(element)
-            });
 
           },
           err => {
-            console.error(err)
-            this.shared.newToast({
-              message: err.error.message, type: ToastType.ERROR
+            shared.newToast({
+              message: err.error.message,
+              type: ToastType.ERROR
             })
-          }
-        )
-
-        this.httpClientService.getCurrentCompany().subscribe(
-          current => {
-            console.log(current)
-            this.companies[0].name = current.name;
+            this.router.navigate(['company', 'list'])
           },
-          err => {
-            console.error(err)
-            this.shared.newToast({
-              message: err.error.message, type: ToastType.ERROR
-            })
-          })
+          () => {
 
 
-        if (this.menuItems.find(el => el.name == 'database'))
-          this.httpClientService.database.getDatabases().subscribe(
-            databases => {
+            this.httpClientService.getCompany().subscribe(
+              companies => {
+                console.log(companies)
+                companies.forEach(element => {
+                  this.companies[0].childs.push(element)
+                });
 
-              databases.forEach(element => {
-
-                let i = this.menuItems.findIndex(el => el.name == 'database');
-
-                this.menuItems[i].childs.push({
-                  icon: 'table_rows', name: element['database'], childs: [
-                    {
-                      icon: 'settings', name: 'settings', routerLink: 'databases/' + (element['id'] ? element['id'] : element['databaseId']) + '/settings', childs: []
-                    },
-                    { icon: 'list', name: 'tables', routerLink: 'databases/' + (element['id'] ? element['id'] : element['databaseId']), childs: [] }
-                  ]
+              },
+              err => {
+                console.error(err)
+                this.shared.newToast({
+                  message: err.error.message, type: ToastType.ERROR
                 })
-              });
+              }
+            )
 
-            },
-            err => {
-              console.error(err)
-              this.shared.newToast({
-                message: err.error.message, type: ToastType.ERROR
+            this.httpClientService.getCurrentCompany().subscribe(
+              current => {
+                console.log(current)
+                this.companies[0].name = current.name;
+              },
+              err => {
+                console.error(err)
+                this.shared.newToast({
+                  message: err.error.message, type: ToastType.ERROR
+                })
               })
-            }
-          )
-      })
+
+
+            if (this.menuItems.find(el => el.name == 'database'))
+              this.httpClientService.database.getDatabases().subscribe(
+                databases => {
+
+                  databases.forEach(element => {
+
+                    let i = this.menuItems.findIndex(el => el.name == 'database');
+
+                    this.menuItems[i].childs.push({
+                      icon: 'table_rows', name: element['database'], childs: [
+                        {
+                          icon: 'settings', name: 'settings', routerLink: 'databases/' + (element['id'] ? element['id'] : element['databaseId']) + '/settings', childs: []
+                        },
+                        { icon: 'list', name: 'tables', routerLink: 'databases/' + (element['id'] ? element['id'] : element['databaseId']), childs: [] }
+                      ]
+                    })
+                  });
+
+                },
+                err => {
+                  console.error(err)
+                  this.shared.newToast({
+                    message: err.error.message, type: ToastType.ERROR
+                  })
+                }
+              )
+          })
+      }
+    })
+
 
 
   }

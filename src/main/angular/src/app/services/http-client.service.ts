@@ -73,6 +73,10 @@ export class HttpClientService {
     return this.httpClient.put(this.url + "/api/company", company)
   }
 
+  createCompany(company) {
+    return this.httpClient.post(this.url + "/api/company", company)
+  }
+
   getInstitution(id?) {
     let params;
     if (id) {

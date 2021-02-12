@@ -34,19 +34,20 @@ export class EmployeeComponent implements OnInit {
 
   inviteUser() {
     //if(this.route.fragment)
-    this.http.updateUser(this.user).subscribe(success => {
-      this.shared.newToast({
-        message: "notification.user.updated",
-        params: { mail: this.user.mail }
+    this.http.updateUser(this.user).subscribe(
+      success => {
+        this.shared.newToast({
+          message: "notification.user.updated",
+          params: { mail: this.user.mail }
+        })
+        this.router.navigate(['employees', 'list'])
+      }, err => {
+        console.log(err)
+        this.shared.newToast({
+          message: err.error.message,
+          type: ToastType.ERROR
+        })
       })
-      this.router.navigate(['employees', 'list'])
-    }, err => {
-      console.log(err)
-      this.shared.newToast({
-        message: err.error.message,
-        type: ToastType.ERROR
-      })
-    })
 
   }
 

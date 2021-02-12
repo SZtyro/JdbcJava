@@ -1,4 +1,7 @@
 {
+    "home": "Strona domowa",
+    "pick_company": "Wybierz firmę",
+    "add_company": "Dodaj firmę",
     "subject": "Temat",
     "from": "Od",
     "today": "Dziś",
@@ -98,7 +101,8 @@
         },
         "company": {
             "saved": "Pomyślnie zapisano firmę.",
-            "nip": "Podaj prawidłowy NIP."
+            "nip": "Podaj prawidłowy NIP.",
+            "notfound": "Nie znaleziono firmy"
         },
         "user": {
             "notfound": "Nie znaleziono użytkownika"

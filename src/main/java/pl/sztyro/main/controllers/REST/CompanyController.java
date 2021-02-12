@@ -46,12 +46,7 @@ public class CompanyController {
         Company obj = gson.fromJson(gson.toJson(companyJson), Company.class);
         _logger.info("Tworzenie firmy: " + obj.getName());
         try {
-
-            companyService.updateCompany(obj, owner);
-            if (owner.getSelectedCompany() == null) {
-                userService.selectCompany(owner.getMail(), obj.getId());
-
-            }
+            companyService.createCompany(owner, obj.getName(), obj.getNip());
         } catch (ConstraintViolationException e) {
             String message = "";
             for (Object s : e.getConstraintViolations().toArray()) {
@@ -95,7 +90,8 @@ public class CompanyController {
         Company company = companyService.getCurrentCompany(mail);
 
         if (company == null)
-            return companyService.createCompany(mail);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "toasts.company.notfound");
+            //return companyService.createCompany(mail);
         else
             return company;
     }
@@ -103,7 +99,7 @@ public class CompanyController {
     @PutMapping
     public void updateCompany(HttpServletRequest request, @RequestBody Object companyJson) throws Exception {
 
-        
+
         //Zalogowany użytkownik
         User owner = userService.getUser(authService.getLoggedUserMail(request));
         Gson gson = new Gson();

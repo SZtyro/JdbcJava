@@ -1,7 +1,5 @@
 <div *ngFor="let item of menuItems" [style.background]="'rgb(0,0,0,'+ opacity +')'" style="cursor: pointer;" @fadeIn>
 
-
-
   <div *ngIf="direction == 'up'">
     <div [@openClose]="item.isOpen ? 'open' : 'closed'">
       <app-menu-item [direction]="'up'" [menuItems]="item.childs" [offset]="offset + 10" [isTitleVisible]="true"
@@ -44,7 +42,5 @@
       </app-menu-item>
     </div>
   </div>
-
-
 
 </div>

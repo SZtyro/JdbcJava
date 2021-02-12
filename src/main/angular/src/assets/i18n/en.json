@@ -1,4 +1,5 @@
 {
+    "home": "Home",
     "subject": "Subject",
     "from": "From",
     "today": "Today",
@@ -101,7 +102,8 @@
         },
         "company": {
             "saved": "Company has been successfully saved.",
-            "nip": "Please enter correct NIP."
+            "nip": "Please enter correct NIP.",
+            "notfound": "Company not found."
         },
         "user": {
             "notfound": "User not found."

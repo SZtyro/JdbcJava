@@ -17,7 +17,7 @@ public class User {
     @Column()
     private long id;
 
-    @Column()
+    @Column(unique = true)
     private String mail;
 
     @JoinColumn()

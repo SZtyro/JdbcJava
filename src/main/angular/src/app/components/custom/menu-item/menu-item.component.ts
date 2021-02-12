@@ -58,7 +58,7 @@ export class MenuItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.menuItems)
+
   }
 
   openList(item: FunctionBase) {

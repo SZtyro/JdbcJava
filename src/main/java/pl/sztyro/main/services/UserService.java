@@ -62,6 +62,7 @@ public class UserService {
         try {
             Query<User> query = session.createQuery("FROM User u where u.mail='" + mail + "'");
             user = query.uniqueResult();
+            Hibernate.initialize(user.getSelectedCompany());
 
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -80,6 +81,8 @@ public class UserService {
         try {
             if (getUserByMail(mail) == null)
                 session.save(new User(mail));
+            else
+                _logger.info("Użytkownik istnieje w bazie: " + mail);
             session.getTransaction().commit();
         } catch (Exception e) {
             _logger.error(e.getMessage());

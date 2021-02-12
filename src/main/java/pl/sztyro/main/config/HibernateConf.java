@@ -4,6 +4,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -20,6 +21,12 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 public class HibernateConf {
+
+    @Value("${spring.datasource.url}")
+    String url;
+
+    @Value("${ENABLE_LAZY}")
+    Boolean isLazyEnabled;
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
@@ -39,7 +46,7 @@ public class HibernateConf {
 
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl(dotenv.get("url"));
+        dataSource.setUrl(url);
         dataSource.setUsername(dotenv.get("DB_USER"));
         dataSource.setPassword(dotenv.get("DB_PASSWORD"));
 
@@ -60,6 +67,9 @@ public class HibernateConf {
                 "hibernate.hbm2ddl.auto", "update");
         hibernateProperties.setProperty(
                 "hibernate.dialect", "org.hibernate.dialect.MariaDB103Dialect");
+        if (isLazyEnabled)
+            hibernateProperties.setProperty(
+                    "hibernate.enable_lazy_load_no_trans", "true");
 
         return hibernateProperties;
     }

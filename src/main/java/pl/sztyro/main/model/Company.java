@@ -61,8 +61,10 @@ public class Company {
 
     }
 
-    public Company(@NotNull User owner) {
+    public Company(@NotNull User owner, String name, @Range(min = 1000000000, max = 9999999999L, message = "toasts.company.nip") @NotNull long nip) {
         this.owner = owner;
+        this.name = name;
+        this.nip = nip;
     }
 
     public Database getDatabaseByName(String name) throws NotFoundException {
