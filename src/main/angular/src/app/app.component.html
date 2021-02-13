@@ -1,9 +1,9 @@
 <body class="mat-app-background">
 
-  <span *ngIf="!(shared.screenWidth > 991)" style="height: 36px;">
-    <!-- <button mat-button (click)="sidenav.toggle()" style="width: auto;"> 
+  <span *ngIf="!(shared.screenWidth > 991) && !hasMenu()" style="height: 36px;">
+    <button mat-button (click)="toggleSideNav()" style="width: auto;"> 
       <span class="material-icons">menu</span>
-    </button> -->
+    </button>
   </span>
 
   <mat-sidenav-container [style]="shared.screenWidth > 991 ? 'height: 100%;' : 'height: calc(100% - 36px);' ">
