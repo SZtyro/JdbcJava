@@ -17,7 +17,8 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
 
   constructor(
     public translate: TranslateService,
-    public shared: SharedService
+    public shared: SharedService,
+    private http: HttpClientService
   ) {
 
 
@@ -29,7 +30,9 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-
+    this.http.getGoogleUser().subscribe(user => {
+      this.user = user
+    })
   }
 
   ngAfterViewInit() {

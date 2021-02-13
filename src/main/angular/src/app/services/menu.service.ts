@@ -85,84 +85,7 @@ export class MenuService {
       console.log(window.location.pathname)
       
       if (window.location.pathname != "/") {
-        this.httpClientService.getCompanyExtensions().subscribe(
-          extensions => {
-
-
-            extensions.forEach(extension => {
-              if (extension['menu'])
-                this.menuItems.push(extension['menu'])
-            })
-            console.log(this.menuItems)
-
-
-          },
-          err => {
-            shared.newToast({
-              message: err.error.message,
-              type: ToastType.ERROR
-            })
-            this.router.navigate(['company', 'list'])
-          },
-          () => {
-
-
-            this.httpClientService.getCompany().subscribe(
-              companies => {
-                console.log(companies)
-                companies.forEach(element => {
-                  this.companies[0].childs.push(element)
-                });
-
-              },
-              err => {
-                console.error(err)
-                this.shared.newToast({
-                  message: err.error.message, type: ToastType.ERROR
-                })
-              }
-            )
-
-            this.httpClientService.getCurrentCompany().subscribe(
-              current => {
-                console.log(current)
-                this.companies[0].name = current.name;
-              },
-              err => {
-                console.error(err)
-                this.shared.newToast({
-                  message: err.error.message, type: ToastType.ERROR
-                })
-              })
-
-
-            if (this.menuItems.find(el => el.name == 'database'))
-              this.httpClientService.database.getDatabases().subscribe(
-                databases => {
-
-                  databases.forEach(element => {
-
-                    let i = this.menuItems.findIndex(el => el.name == 'database');
-
-                    this.menuItems[i].childs.push({
-                      icon: 'table_rows', name: element['database'], childs: [
-                        {
-                          icon: 'settings', name: 'settings', routerLink: 'databases/' + (element['id'] ? element['id'] : element['databaseId']) + '/settings', childs: []
-                        },
-                        { icon: 'list', name: 'tables', routerLink: 'databases/' + (element['id'] ? element['id'] : element['databaseId']), childs: [] }
-                      ]
-                    })
-                  });
-
-                },
-                err => {
-                  console.error(err)
-                  this.shared.newToast({
-                    message: err.error.message, type: ToastType.ERROR
-                  })
-                }
-              )
-          })
+        
       }
     })
 
@@ -192,27 +115,6 @@ export class MenuService {
         }, 10);
       });
     }
-  }
-
-
-
-  selectCompany(item) {
-    if (item.id)
-      this.httpClientService.setCurrentCompany(item.id).subscribe(current => {
-
-        console.log(window.location.href)
-        if (window.location.href != '/home')
-          window.location.href = '/home'
-        else
-          window.location.reload()
-      })
-  }
-
-  selectLanguage(language: FunctionBase) {
-    this.languages[0].name = language.name;
-    if (language.extras.code)
-      this.languages[0].icon = '<span class="text-icon">' + language.extras.code.toUpperCase() + '</span>';
-    this.translate.use(language.extras.code)
   }
 
 

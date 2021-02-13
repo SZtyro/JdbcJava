@@ -39,9 +39,10 @@ public class AuthController {
         _logger.info("Pobieranie aktualnego użytkownika Google");
         Principal principal = request.getUserPrincipal();
 
+
         if (principal == null) {
             //response.sendRedirect("/api/google/auth");
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Forbidden");
             //return null;
         } else {
             Map<String, String> details = (Map<String, String>) ((OAuth2Authentication) principal).getUserAuthentication().getDetails();

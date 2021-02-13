@@ -24,12 +24,6 @@ export class HttpClientService {
     return of(err)
   }
 
-
-  getRandom() {
-    return this.httpClient.get(this.url + "/randomNumber");
-  }
-
-
   getUser(mail?) {
     //return this.httpClient.get(this.url + "/api/google/user", { responseType: 'text' })
 
@@ -37,6 +31,10 @@ export class HttpClientService {
       mail: mail
     }
     return this.httpClient.get(this.url + "/api/user", { params: mail != 0 ? params : null })
+  }
+
+  getGoogleUser(){
+    return this.httpClient.get(this.url + "/api/google/user")
   }
 
 

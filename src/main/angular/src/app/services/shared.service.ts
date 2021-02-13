@@ -9,6 +9,7 @@ import { DialogComponent, DialogData } from '../components/custom/dialog/dialog.
 export class SharedService {
 
   toasts: Toast[] = [];
+  screenWidth: number;
 
   constructor(
     protected dialog: MatDialog

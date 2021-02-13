@@ -1,58 +1,17 @@
 <body class="mat-app-background">
 
-  <span *ngIf="!(screenWidth > 991)" style="height: 36px;">
-    <button mat-button (click)="sidenav.toggle()" style="width: auto;"> 
+  <span *ngIf="!(shared.screenWidth > 991)" style="height: 36px;">
+    <!-- <button mat-button (click)="sidenav.toggle()" style="width: auto;"> 
       <span class="material-icons">menu</span>
-    </button>
+    </button> -->
   </span>
 
-  <mat-sidenav-container [style]="screenWidth > 991 ? 'height: 100%;' : 'height: calc(100% - 36px);' ">
-    <mat-sidenav #sidenav mode="side" [opened]="screenWidth > 991"
-      style="width: 50px; background-color: var(--mainColor)" (mouseenter)="menu.sideNavExtend()"
-      (mouseleave)="menu.sideNavExtend()" [@openClose]="menu.sideNavExtension ? 'open' : 'closed'">
+  <mat-sidenav-container [style]="shared.screenWidth > 991 ? 'height: 100%;' : 'height: calc(100% - 36px);' ">
 
-
-      <div
-        style="display: flex ; flex-direction: column; justify-content: space-between ; align-items: flex-end;overflow: hidden;width: 100%; ">
-        <div style="color: white; display: flex; flex-direction: column; width: 100%;">
-
-          <app-menu-item [direction]="'down'" [menuItems]="menu.menuItems" [isTitleVisible]="menu.sideNavExtension"
-            [offset]="15">
-          </app-menu-item>
-        </div>
-
-
-        <!-- <div style="align-self: flex-end; display: flex; justify-content: end; align-items: flex-end; flex-direction: column;"> -->
-        <div style="width: 100%; color: white;">
-          <div>
-            <app-menu-item (itemClicked)="menu.selectCompany($event)" [direction]="'up'" [menuItems]="menu.companies"
-              [isTitleVisible]="menu.sideNavExtension" [offset]="15"></app-menu-item>
-          </div>
-
-          <app-menu-item (itemClicked)="menu.selectLanguage($event)" [direction]="'up'" [menuItems]="menu.languages"
-            [isTitleVisible]="menu.sideNavExtension" [offset]="15"></app-menu-item>
-
-          <div matRipple (click)="signOut()" style="outline: none;cursor: pointer;">
-            <div [style.marginLeft.px]="15" style="margin-right: 10px; margin-left: 10px;">
-
-              <div class="item-content-wrapper">
-                <span style="display: flex;align-items: center;">
-                  <span class="material-icons" style="margin-right: 10px;">meeting_room</span>
-                  <span> {{'NAVBAR.SIGN_OUT' |translate}}</span>
-                </span>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-
-
-
-
-
+    <mat-sidenav *ngIf="hasMenu()" #sidenav mode="side" [opened]="shared.screenWidth > 991"
+      style="background-color: var(--mainColor)" (mouseenter)="menu.sideNavExtend()"
+      (mouseleave)="menu.sideNavExtend()" >
+      <app-menu [@openClose]="menu.sideNavExtension ? 'open' : 'closed'"></app-menu>
     </mat-sidenav>
 
     <mat-sidenav-content style="display: flex;">

@@ -25,9 +25,11 @@ import { ToastType } from './ts/enums/toastType';
 export class AppComponent implements OnInit {
 
 
-
-  screenWidth: number;
+  //sideNavExtension: boolean = false;
+  
   isLoading: boolean = false;
+
+  
 
   constructor(
     private httpClientService: HttpClientService,
@@ -42,27 +44,15 @@ export class AppComponent implements OnInit {
     translate.setDefaultLang('pl');
     translate.use('pl')
 
-    this.screenWidth = window.innerWidth;
+    this.shared.screenWidth = window.innerWidth;
     window.onresize = () => {
-      this.screenWidth = window.innerWidth;
+      this.shared.screenWidth = window.innerWidth;
     };
 
-
-
   }
 
-  signOut() {
-    this.httpClientService.logout().subscribe(() => {
-      this.router.navigate([''])
-    }, err => {
-      console.error(err)
-      this.shared.newToast({
-        message: err.error.message, type: ToastType.ERROR
-      })
-    })
-
-  }
-
+  
+  
 
 
 
@@ -83,6 +73,8 @@ export class AppComponent implements OnInit {
     })
   }
 
-
+  hasMenu() {
+    return window.location.pathname != "/"
+  }
 
 }

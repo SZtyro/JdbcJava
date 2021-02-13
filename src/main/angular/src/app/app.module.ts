@@ -52,6 +52,7 @@ import { WelcomePageComponent } from './components/custom/welcome-page/welcome-p
 import { CompanyComponent } from './components/forms/company.component';
 import { MailComponent } from './components/lists/mail.component';
 import { CompanyListComponent } from './components/lists/company-list.component';
+import { MenuComponent } from './components/custom/menu/menu.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -79,7 +80,8 @@ export function provideConfig() {
     WelcomePageComponent,
     CompanyComponent,
     MailComponent,
-    CompanyListComponent
+    CompanyListComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
