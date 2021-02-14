@@ -1,47 +1,88 @@
-.carouselImg{
- width: 100%;
- min-width: 1500px;
- //position: absolute;
- right: 0;
- //left: 0;
- filter: brightness(0.5);
 
+
+.carouselImg {
+  width: 100%;
+  //min-width: 1500px;
+  //position: absolute;
+  right: 0;
+  //left: 0;
+  filter: brightness(0.5);
 }
 
-.imgText{
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    color: white;
-    text-shadow: 0px 0px 5px black;
-    font-size: 50px;
-    font-weight: 700;
-
+.imgText {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: white;
+  text-shadow: 0px 0px 5px black;
+  font-size: 50px;
+  font-weight: 700;
 }
 
-.textBlock{
-    padding: 50px;
-    min-height: 100vh;
+.textBlock {
+  padding: 50px;
 }
 
-.accountType{
+.accountType {
   height: 700px;
   float: left !important;
   padding: 5px;
 }
 
-#bronze{
-  background-color:	#A77044;
+#bronze {
+  background-color: #a77044;
   width: 100%;
   height: 100%;
 }
 
-#silver{
-  background-color:	#D7D7D7;
+#silver {
+  background-color: #d7d7d7;
   width: 100%;
   height: 100%;
 }
 
 #gold {
-  background-color: #D6AF36;
+  background-color: #d6af36;
   width: 100%;
   height: 100%;
+}
+
+.app-carousel {
+  //height: calc(100vh - 66px);
+  overflow: hidden;
+}
+
+.img-boss {
+  content: url(../../../../assets/images/boss-l.jpg);
+  //width: 3840px;
+}
+
+.img-teamwork {
+  content: url(../../../../assets/images/teamwork-l.jpg);
+  // width: 3840px;
+}
+
+@media (max-width: 800px) {
+  @media (orientation: portrait) {
+    .img-boss {
+      content: url(../../../../assets/images/boss-m.jpg);
+      transform: translate(-660px, 0px);
+      width: auto;
+      height: 100vh;
+    }
+
+    .img-teamwork {
+      content: url(../../../../assets/images/teamwork-m.jpg);
+      transform: translate(-660px, 0px);
+      width: auto;
+      height: 100vh;
+    }
+
+    .app-carousel {
+      height: calc(100vh - 66px);
+      overflow: hidden;
+    }
+  }
+
+  @media (orientation: landscape) {
+    
+  }
 }

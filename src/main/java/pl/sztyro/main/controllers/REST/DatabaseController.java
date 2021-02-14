@@ -58,8 +58,7 @@ public class DatabaseController {
     public Object getReference(HttpServletRequest request, @RequestParam Long id, @RequestParam String tableName) throws NotFoundException, SQLException {
 
         User user = userService.getUser(authService.getLoggedUserMail(request));
-        Company company = user.getSelectedCompany();
-        Database database = databaseService.getCompanyDatabase(company);
+        Database database = databaseService.getDatabase(id);
 
         return databaseService.getTableReferences(database, tableName);
 
@@ -69,8 +68,7 @@ public class DatabaseController {
     public Object getForeignKeys(HttpServletRequest request, @RequestParam Long id, @RequestParam String tableName, @RequestParam String column) throws NotFoundException, SQLException {
 
         User user = userService.getUser(authService.getLoggedUserMail(request));
-        Company company = user.getSelectedCompany();
-        Database database = databaseService.getCompanyDatabase(company);
+        Database database = databaseService.getDatabase(id);
 
         return databaseService.getTableForeignKeys(database, tableName, column);
 

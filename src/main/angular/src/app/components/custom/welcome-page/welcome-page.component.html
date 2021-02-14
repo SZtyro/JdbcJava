@@ -1,6 +1,7 @@
 <div style="height:100vh; font-family: Roboto, 'Helvetica Neue', sans-serif; ">
 
-  <div style="z-index: 1000;position: sticky;width: 100%;padding: 15px;top: 0; background-color: var(--mainColor); display: flex; justify-content: space-between;">
+  <div
+    style="z-index: 1000;position: sticky;width: 100%;padding: 15px;top: 0; background-color: var(--mainColor); display: flex; justify-content: space-between;">
 
     <span>
       <button class="nav-link" (click)="scrollToElement(aboutApp)" mat-button
@@ -38,8 +39,7 @@
     </span>
   </div>
 
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
-    style="height: 100vh;overflow: hidden;">
+  <div id="carouselExampleIndicators" class="carousel slide app-carousel" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -50,7 +50,7 @@
       <div class="carousel-item active ">
         <div class="container" style="color: whitesmoke;">
           <div class="row">
-            <div class="col-6" style="top:300px; position: absolute;z-index: 10">
+            <div class="col-12 col-md-6" style="top:20%; position: absolute;z-index: 10">
               <h1 style="font-size: 50px; font-weight: 600; ">{{'WELCOME_PAGE.SLIDE_1.HEADER' | translate}}</h1>
               <p>{{'WELCOME_PAGE.SLIDE_1.TEXT' | translate}}</p>
             </div>
@@ -58,7 +58,8 @@
 
 
         </div>
-        <img src="assets/images/boss.jpg" class="d-block" class="carouselImg">
+        <!-- <div class="d-block img-boss carouselImg"></div> -->
+        <img class="d-block carouselImg img-boss">
 
       </div>
 
@@ -67,13 +68,13 @@
         <div style="color: whitesmoke;">
           <div class="container">
             <div class="row">
-              <div class="col-6" style="top:300px; position: absolute;z-index: 10">
+              <div class="col-12 col-md-6" style="top:20%; position: absolute;z-index: 10">
                 <h1 style="font-size: 50px; font-weight: 600; ">{{'WELCOME_PAGE.SLIDE_2.HEADER' | translate}}</h1>
                 <p>{{'WELCOME_PAGE.SLIDE_2.TEXT' | translate}}</p>
               </div>
             </div>
           </div>
-          <img src="assets/images/teamwork.jpg" class="d-block " class="carouselImg">
+          <div class="img-teamwork d-block carouselImg"></div>
         </div>
       </div>
     </div>

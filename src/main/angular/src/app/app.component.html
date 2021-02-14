@@ -1,6 +1,6 @@
-<body class="mat-app-background">
+<body class="mat-app-background" style="height: 100vh">
 
-  <span *ngIf="!(shared.screenWidth > 991) && !hasMenu()" style="height: 36px;">
+  <span *ngIf="!(shared.screenWidth > 991) && hasMenu()" style="height: 36px;">
     <button mat-button (click)="toggleSideNav()" style="width: auto;"> 
       <span class="material-icons">menu</span>
     </button>

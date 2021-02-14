@@ -357,15 +357,15 @@ public class DatabaseService {
         }
     }
 
-    public Database getCompanyDatabase(Company company) {
+    public List<Database> getCompanyDatabase(Company company) {
         Session session = conf.getSession();
 
         _logger.info("Pobieranie bazy firmy: " + company.getName());
-        Database database = null;
+        List<Database> database = null;
         try {
 
             Company c = session.load(Company.class, company.getId());
-            database = c.getDatabase().get(0);
+            database = c.getDatabase();
 
             session.getTransaction().commit();
 

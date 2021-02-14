@@ -1,6 +1,8 @@
 package pl.sztyro.main;
 
 import io.jsonwebtoken.lang.Assert;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.runner.RunWith;
@@ -11,9 +13,13 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.sztyro.main.model.Company;
+import pl.sztyro.main.model.Database;
 import pl.sztyro.main.model.User;
 import pl.sztyro.main.services.CompanyService;
+import pl.sztyro.main.services.DatabaseService;
 import pl.sztyro.main.services.UserService;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -36,6 +42,9 @@ public class DataBaseApplicationTests {
 
     @Autowired
     private CompanyService companyService;
+
+    @Autowired
+    DatabaseService databaseService;
 
 //    @Autowired
 //    private static HibernateConf hibernateConf;
@@ -78,6 +87,25 @@ public class DataBaseApplicationTests {
         assertEquals(mail, company.getOwner().getMail());
     }
 
+    @Test
+    public void addDatabase() throws JSONException {
+        user = userService.getUserByMail(mail);
+        Company company = companyService.getCompany(user.getSelectedCompany().getId());
+        databaseService.addCompanyDatabase(company, new JSONObject("{\"host\": \"localhost\", \"port\": 3306, \"database\" : \"testHurtownia\",\"user\" : \"root\"}"));
+
+        List<Database> list = databaseService.getCompanyDatabase(company);
+        Assert.notNull(list);
+        assertEquals("test", list.get(0).getDatabase());
+    }
+
+    @Test
+    public void addRow() throws JSONException {
+        user = userService.getUserByMail(mail);
+        Company company = companyService.getCompany(user.getSelectedCompany().getId());
+        Database database = databaseService.getCompanyDatabase(company).get(0);
+
+        //databaseService.insertRow(database, "dostawcy", new JSONObject("{\"nazwa\": \"TEST\""));
+    }
 
 
 }
