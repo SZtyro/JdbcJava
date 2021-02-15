@@ -25,8 +25,6 @@ public class AuthService {
 
         if (principal != null) {
             Map<String, String> details = (Map<String, String>) ((OAuth2Authentication) principal).getUserAuthentication().getDetails();
-            System.out.println(((OAuth2Authentication) principal).getUserAuthentication().getCredentials().toString());
-
 
             _logger.info("Zalogowany użytkownik: " + details.get("email"));
             return details.get("email");

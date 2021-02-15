@@ -20,17 +20,20 @@ export class MenuService {
       icon: 'email', name: 'E-mail', routerLink: 'mail', childs: []
     },
     {
-      icon: 'business', name: 'Company', childs: [
+      icon: 'business', name: 'company', childs: [
         {
-          icon: 'account_balance', name: 'Structures', childs: [
-            { icon: 'store', name: 'institutions', routerLink: 'institutions/list' },
-            { icon: 'add_business', name: 'Add', routerLink: 'institutions/0' }
+          icon: 'settings', name: 'settings', routerLink: 'company/settings'
+        },
+        {
+          icon: 'account_balance', name: 'institutions', childs: [
+            { icon: 'list', name: 'list', routerLink: 'institutions/list' },
+            { icon: 'add_business', name: 'add', routerLink: 'institutions/0' }
           ]
         },
         {
-          icon: 'person', name: 'Employees', childs: [
-            { icon: 'list', name: 'employee_list', routerLink: 'employees/list' },
-            { icon: 'person_add', name: 'employee_add', routerLink: 'employees/invite' },
+          icon: 'person', name: 'employees', childs: [
+            { icon: 'list', name: 'list', routerLink: 'employees/list' },
+            { icon: 'person_add', name: 'add', routerLink: 'employees/invite' },
             // { icon: 'groups', name: 'Groups' },
             // { icon: 'event_note', name: 'Shifts' },
             // { icon: 'fact_check', name: 'Tasks' }
@@ -41,11 +44,11 @@ export class MenuService {
         // }
       ]
     },
-    {
-      icon: 'settings', name: 'NAVBAR.SETTINGS', routerLink: 'settings/company', childs: [
+    // {
+    //   icon: 'settings', name: 'NAVBAR.SETTINGS', routerLink: 'settings/company', childs: [
 
-      ]
-    },
+    //   ]
+    // },
     // { icon: 'monetization_on', name: 'finances' },
     { icon: 'view_module', name: 'plan', routerLink: 'plan' },
   ];
@@ -80,12 +83,12 @@ export class MenuService {
     private router: Router,
     private route: ActivatedRoute
   ) {
-   
+
     this.route.url.subscribe(url => {
       console.log(window.location.pathname)
-      
+
       if (window.location.pathname != "/") {
-        
+
       }
     })
 

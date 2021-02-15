@@ -1,4 +1,5 @@
 {
+    "select_company": "Wybierz firmę",
     "home": "Strona domowa",
     "pick_company": "Wybierz firmę",
     "add_company": "Dodaj firmę",
@@ -35,9 +36,9 @@
     "save": "Zapisz",
     "company": "Firma",
     "employees": "Pracownicy",
-    "employee_list": "Lista",
-    "employee_add": "Dodaj",
+    "list": "Lista",
     "user": "Użytkownik",
+    "database": "Baza danych",
     "NAVBAR": {
         "GOOGLE_LOGIN": "Zaloguj się przez Google!",
         "HOME": "Strona główna",
@@ -63,8 +64,8 @@
             "HEADER": "Współpraca.",
             "TEXT": "ABC"
         },
-        "ABOUT_APP": "Aplikacja ta ma za zadanie zebrać wszystkie funkcje aplikacji do zarządzania firmą w jedną całość w formie edytowalnego pulpitu widgetów, dzięki czemu nie potrzeba do zarządzania firmą wykorzystywać żadnych innych aplikacji. Aplikacja jest dostępna na każdym urządzeniu w firmie podłączonym do internetu i zmniejsza koszty utrzymania technicznej strony firmy.",
-        "ABOUT_US": "Jesteśmy nowatorską firmą specjalizującą się w tworzeniu rozwiązań zarówno dla małych, i dużych firm. Na rynku IT zadebiutowaliśmy 2 lata temu z inicjatywy prezesa Fabiana Trubica i od tego czasu nasza wartość stale zwiększała się dzięki szybkiemu tworzeniu tanich, wydajnych aplikacji dla naszych klientów. Naszym celem na przyszłość jest dalsze wypuszczanie na rynek nowatorskich rozwiązań wraz z jednoczesnym dostosowywaniem się do potrzeb naszych klientów."
+        "ABOUT_APP": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "ABOUT_US": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     },
     "GMAIL_WIDGET": {
         "SENDER": "Nadawca",
@@ -72,7 +73,8 @@
     },
     "notification": {
         "company": {
-            "created": "Firma <b>{{name}}</b> została utworzona."
+            "created": "Firma <b>{{name}}</b> została utworzona.",
+            "updated": "Firma <b>{{name}}</b> została zaktualizowana."
         },
         "institution": {
             "created": "Placówka <b>{{name}}</b> została stworzona.",
@@ -81,7 +83,10 @@
         },
         "user": {
             "created": "Pomyślnie dodano użytkownika <b>{{mail}}</b>.",
-            "updated": "Pomyślnie zakutalizowano użytkownika <b>{{mail}}</b>"
+            "updated": "Pomyślnie zakutalizowano użytkownika <b>{{mail}}</b>",
+            "invite":{
+                "success": "Pomyślnie dodano użytkownika <b>{{mail}}</b>."
+            }
         }
     },
     "toasts": {
@@ -102,7 +107,9 @@
         "company": {
             "saved": "Pomyślnie zapisano firmę.",
             "nip": "Podaj prawidłowy NIP.",
-            "notfound": "Nie znaleziono firmy"
+            "notfound": "Nie znaleziono firmy.",
+            "notSelected": "Nie wybrano firmy."
+            
         },
         "user": {
             "notfound": "Nie znaleziono użytkownika"

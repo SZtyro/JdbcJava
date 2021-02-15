@@ -37,14 +37,19 @@ public class CompanyService {
     @Autowired
     UserService userService;
 
-    public void createCompany(User user, String name, Long nip) {
+    @Autowired
+    InstitutionService institutionService;
+
+    public void createCompany(User user, Company company) {
         Session session = conf.getSession();
 
         try {
 
-            Company company = new Company(user, name, nip);
+            //Company company = new Company(user, name, nip);
             if (user.getSelectedCompany() == null)
                 user.setSelectedCompany(company);
+
+            company.setOwner(user);
             session.save(company);
             session.update(user);
             //session.update(owner);
@@ -72,6 +77,8 @@ public class CompanyService {
 
             company = session.load(Company.class, id);
 
+            //Hibernate.initialize(company.getName());
+
             session.getTransaction().commit();
 
         } catch (Exception e) {
@@ -80,25 +87,20 @@ public class CompanyService {
             throw e;
         } finally {
             session.close();
+            return company;
         }
 
-        return company;
 
     }
 
-    /**
-     * Zaznacza firmę jako domyślną
-     *
-     * @param mail      - mail właściciela firmy
-     * @param companyId - id wybranej firmy
-     */
-    public void selectCompany(String mail, long companyId) {
+    public void selectCompany(User user, long companyId) {
         Session session = conf.getSession();
         try {
-            User u = userService.getUserByMail(mail);
+
             Company c = session.load(Company.class, companyId);
-            u.setSelectedCompany(c);
-            session.update(u);
+            user.setSelectedCompany(c);
+            session.clear();
+            session.update(user);
             session.getTransaction().commit();
 
         } catch (Exception e) {
@@ -173,7 +175,7 @@ public class CompanyService {
             Gson gson = new Gson();
             JsonObject params = new JsonObject();
             params.addProperty("name", company.getName());
-            notificationService.createNotification("BOT", "notification.company.created", gson.toJson(params), new ArrayList<User>(Arrays.asList(company.getOwner())));
+            notificationService.createNotification("BOT", "notification.company.updated", gson.toJson(params), new ArrayList<User>(Arrays.asList(company.getOwner())));
             //notificationService.createNotification("BOT","Company <b>" + company.getName() + "</b> has been created2.",new ArrayList<User>(Arrays.asList(company.getOwner())));
         } catch (Exception e) {
             _logger.error(e.getMessage());
@@ -195,8 +197,16 @@ public class CompanyService {
 
         try {
             User owner = userService.getUserByMail(mail);
+            List<Institution> institutions = institutionService.getUserInstitution(mail);
+
             Query query = session.createQuery("from Company where owner=" + owner.getId());
             companies = query.list();
+
+
+            for(Institution institution : institutions){
+                companies.add(institution.getCompany());
+            }
+
             session.getTransaction().commit();
         } catch (Exception e) {
             _logger.error(e.getMessage());

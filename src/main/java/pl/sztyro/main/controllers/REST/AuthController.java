@@ -52,7 +52,7 @@ public class AuthController {
                 userService.getUser(details.get("email"));
             } catch (NotFoundException e) {
                 _logger.error("Użytkownik nie istnieje.");
-                userService.addUser(details.get("email"));
+                userService.addUser(details.get("email"), details.get("given_name"), details.get("family_name"));
             }
 
             return details;
@@ -64,15 +64,17 @@ public class AuthController {
      */
     @CrossOrigin()
     @GetMapping("/google/auth")
-    public void googleLogin(HttpServletRequest request,HttpServletResponse response) throws IOException {
+    public void googleLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
         _logger.info("Autoryzacja");
         String mail = authService.getLoggedUserMail(request);
-        try{
+        try {
             userService.getUser(mail);
         } catch (NotFoundException e) {
             _logger.error(e.getMessage());
             e.printStackTrace();
-            userService.addUser(mail);
+            Principal principal = request.getUserPrincipal();
+            Map<String, String> details = (Map<String, String>) ((OAuth2Authentication) principal).getUserAuthentication().getDetails();
+            userService.addUser(mail, details.get("given_name"), details.get("family_name"));
         }
         response.sendRedirect("/home");
     }

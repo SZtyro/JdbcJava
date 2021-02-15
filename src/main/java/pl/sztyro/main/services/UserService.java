@@ -23,6 +23,9 @@ public class UserService {
     @Autowired
     UserService userService;
 
+    @Autowired
+    CompanyService companyService;
+
     /**
      * @param mail
      * @return
@@ -37,9 +40,10 @@ public class UserService {
         try {
 
             u = userService.getUserByMail(mail);
-            if (u == null) {
-                addUser(mail);
-            }
+//            if (u == null) {
+//                addUser(mail);
+//                u = userService.getUserByMail(mail);
+//            }
 
             Hibernate.initialize(u.getSelectedCompany());
             session.getTransaction().commit();
@@ -50,6 +54,8 @@ public class UserService {
 
         } finally {
             session.close();
+            if(u == null)
+                throw new NotFoundException("toasts.user.notfound");
             return u;
         }
     }
@@ -61,8 +67,8 @@ public class UserService {
 
         try {
             Query<User> query = session.createQuery("FROM User u where u.mail='" + mail + "'");
-            user = query.uniqueResult();
-            Hibernate.initialize(user.getSelectedCompany());
+            user = session.load(User.class, query.uniqueResult().getId());
+            //Hibernate.initialize(user.getSelectedCompany());
 
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -71,6 +77,24 @@ public class UserService {
         } finally {
             session.close();
             return user;
+        }
+    }
+
+    public void addUser(String mail, String firstname, String surname) {
+        _logger.info("Rejestracja użytkownika: " + mail);
+        Session session = conf.getSession();
+
+        try {
+            if (getUserByMail(mail) == null)
+                session.save(new User(mail,firstname,surname));
+            else
+                _logger.info("Użytkownik istnieje w bazie: " + mail);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            _logger.error(e.getMessage());
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
     }
 
@@ -95,11 +119,14 @@ public class UserService {
     public void selectCompany(String mail, Long id) throws NotFoundException {
         _logger.info("Wybór firmy: " + mail);
 
+        User user = userService.getUserByMail(mail);
         Session session = conf.getSession();
         Company company = null;
         try {
-            User user = userService.getUserByMail(mail);
+
             company = session.load(Company.class, id);
+
+            //companyService.selectCompany(mail,id);
 
             user.setSelectedCompany(company);
             session.update(user);

@@ -244,7 +244,7 @@ public class InstitutionService {
         List<Institution> institutions = null;
         try {
 
-            Query query = session.createQuery("select i from Institution as i left join fetch i.employees where \'" + mail + "\' in elements(i.employees)");
+            Query query = session.createQuery("from Institution i where \'" + userService.getUserByMail(mail).getId() + "\' in elements(i.employees)");
             institutions = query.list();
             //institution = (Institution) query.uniqueResult();
 

@@ -21,7 +21,7 @@ public class User {
     private String mail;
 
     @JoinColumn()
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JsonIgnore
     private Company selectedCompany;
 
@@ -39,6 +39,13 @@ public class User {
 
     public User(String mail) {
         this.mail = mail;
+        this.created = new Date();
+    }
+
+    public User(String mail, String firstname, String surname) {
+        this.mail = mail;
+        this.firstname = firstname;
+        this.surname = surname;
         this.created = new Date();
     }
 

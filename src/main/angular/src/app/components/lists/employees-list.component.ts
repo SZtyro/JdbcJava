@@ -29,7 +29,6 @@ export class EmployeesListComponent extends BasicTable implements OnInit {
     this.extractColumnNames();
     this.name = "employees";
     this.actions = [
-      buttonEdit,
       buttonDelete
     ]
     this.route.data.subscribe(data => {
@@ -42,9 +41,9 @@ export class EmployeesListComponent extends BasicTable implements OnInit {
 
   onRowAction(actionId: any, row) {
     switch (actionId) {
-      case buttonEdit.id:
-        this.router.navigate(['employees', row.mail])
-        break;
+      // case buttonEdit.id:
+      //   this.router.navigate(['employees', row.mail])
+      //   break;
       case buttonDelete.id:
         this.http.deleteInstitution(row.institutionId).subscribe(
           () => {

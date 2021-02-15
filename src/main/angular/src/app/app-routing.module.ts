@@ -93,6 +93,11 @@ const routes: Routes = [
         }
       },
       {
+        path: 'settings', component: CompanyComponent, resolve: {
+          company: CurrentCompanyResolverService
+        }
+      },
+      {
         path: ':id', component: CompanyComponent, resolve: {
           company: CompanyResolverService
         }

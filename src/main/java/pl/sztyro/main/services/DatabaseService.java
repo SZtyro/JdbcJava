@@ -390,7 +390,8 @@ public class DatabaseService {
             Database database = session.load(Database.class, body.getLong("id"));
 
             database.setDatabase(body.getString("database"));
-            database.setPassword(encryptPassword(body.getString("password")));
+            if (body.has("password"))
+                database.setPassword(encryptPassword(body.getString("password")));
             database.setLogin(body.getString("login"));
             database.setPort(body.getString("port"));
             database.setUrl(body.getString("url"));

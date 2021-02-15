@@ -27,6 +27,9 @@ export class CompanyComponent extends BasicForm implements OnInit {
 
     this.route.data.subscribe(data => {
       this.company = data.company;
+      this.fields.forEach(el => {
+        el.value = this.company[el.name];
+      })
     })
   }
 

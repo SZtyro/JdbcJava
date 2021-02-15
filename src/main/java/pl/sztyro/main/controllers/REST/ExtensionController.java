@@ -48,7 +48,7 @@ public class ExtensionController {
         if (company != null)
             return moduleService.getCompanyExtensions(company).toString();
         else
-            throw new NotFoundException("Company not selected.");
+            throw new NotFoundException("toasts.company.notSelected");
 
     }
 

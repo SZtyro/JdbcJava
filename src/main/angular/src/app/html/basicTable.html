@@ -56,7 +56,8 @@
         <div class="row m-0" style="justify-content: flex-end;padding-top: 20px; padding-bottom: 20px;">
             <span *ngFor="let button of underActions" class="col-12 col-sm-6 col-md-3 col-xl-2">
                 <button mat-raised-button style="width: 100%;line-height: 45px;margin-top: 10px;"
-                    [style.background]="button.backgroundColor" (click)="onUnderAction(button.id)">
+                    [color]="button.backgroundColor ? '' : 'primary'" [style.background]="button.backgroundColor"
+                    (click)="onUnderAction(button.id)">
                     <span class="material-icons" style="margin-right: 5px;" [innerHTML]="button.icon"></span>
                     <span>{{button.name | translate}}</span>
                 </button>

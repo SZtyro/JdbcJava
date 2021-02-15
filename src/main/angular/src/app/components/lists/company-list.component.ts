@@ -22,6 +22,9 @@ export class CompanyListComponent extends BasicTable implements OnInit {
     ]
     this.extractColumnNames();
     this.rowStyle = 'cursor: pointer;'
+    this.underActions = [
+      { id: 'add', name: 'add'}
+    ]
 
     this.route.data.subscribe(data => {
       this.dataSource = new MatTableDataSource(data.companies);
@@ -44,9 +47,10 @@ export class CompanyListComponent extends BasicTable implements OnInit {
   }
 
   onRowAction(actionId: any, row: any) {
-    throw new Error('Method not implemented.');
+    
   }
   onUnderAction(actionId: any) {
-    throw new Error('Method not implemented.');
+    if(actionId == 'add')
+      this.router.navigate(['company', 0]);
   }
 }

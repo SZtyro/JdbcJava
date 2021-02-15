@@ -1,6 +1,7 @@
 package pl.sztyro.main;
 
 import io.jsonwebtoken.lang.Assert;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
@@ -17,8 +18,11 @@ import pl.sztyro.main.model.Database;
 import pl.sztyro.main.model.User;
 import pl.sztyro.main.services.CompanyService;
 import pl.sztyro.main.services.DatabaseService;
+import pl.sztyro.main.services.InstitutionService;
 import pl.sztyro.main.services.UserService;
 
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -44,7 +48,10 @@ public class DataBaseApplicationTests {
     private CompanyService companyService;
 
     @Autowired
-    DatabaseService databaseService;
+    private DatabaseService databaseService;
+
+    @Autowired
+    private InstitutionService institutionService;
 
 //    @Autowired
 //    private static HibernateConf hibernateConf;
@@ -71,7 +78,7 @@ public class DataBaseApplicationTests {
 
     @Test
     public void addUser() {
-        userService.addUser(mail);
+        userService.addUser(mail,"Adam","Kowalski");
         user = userService.getUserByMail(mail);
         assertEquals(mail, user.getMail());
     }
@@ -79,7 +86,7 @@ public class DataBaseApplicationTests {
     @Test
     public void createCompany() {
         user = userService.getUserByMail(mail);
-        companyService.createCompany(user, "TestName", null);
+        companyService.createCompany(user, new Company(user, "TestName", 1231230867L));
         Company company = companyService.getCompany(user.getSelectedCompany().getId());
         Assert.notNull(company);
 
@@ -104,8 +111,22 @@ public class DataBaseApplicationTests {
         Company company = companyService.getCompany(user.getSelectedCompany().getId());
         Database database = databaseService.getCompanyDatabase(company).get(0);
 
-        //databaseService.insertRow(database, "dostawcy", new JSONObject("{\"nazwa\": \"TEST\""));
+        try {
+            databaseService.insertRow(database, "dostawcy", new JSONArray("[{\"nullable\":false,\"dataType\":\"int\",\"autoIncrement\":true,\"name\":\"id\",\"primary\":true},{\"nullable\":false,\"dataType\":\"varchar\",\"autoIncrement\":false,\"name\":\"nazwa\",\"value\":\"Test\",\"primary\":false}]"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
+    @Test
+    public void inviteUser() {
+        user = userService.getUserByMail(mail);
+        Company company = companyService.getCompany(user.getSelectedCompany().getId());
+
+        //institutionService.addInstitution(mail,new Institution(company));
+
+    }
 
 }

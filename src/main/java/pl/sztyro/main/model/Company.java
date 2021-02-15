@@ -1,6 +1,7 @@
 package pl.sztyro.main.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Proxy;
 import org.hibernate.validator.constraints.Range;
 import pl.sztyro.main.exceptions.NotFoundException;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Transactional
-//@Proxy(lazy = false)
+@Proxy(lazy = false)
 //@Table(name = "User_Company")
 public class Company {
 
@@ -23,7 +24,7 @@ public class Company {
 
     @JoinColumn()
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private User owner;
 
@@ -36,10 +37,10 @@ public class Company {
     private long nip;
 
     @Column()
-    String address;
+    private String address;
 
     @Column()
-    String city;
+    private String city;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JsonIgnore
@@ -55,6 +56,7 @@ public class Company {
         this.setNip(company.getNip());
         this.setName(company.getName());
         this.setAddress(company.getAddress());
+        this.setCity(company.getCity());
     }
 
     public Company() {
@@ -65,6 +67,14 @@ public class Company {
         this.owner = owner;
         this.name = name;
         this.nip = nip;
+    }
+
+    public Company(@NotNull User owner, String name, @Range(min = 1000000000, max = 9999999999L, message = "toasts.company.nip") @NotNull long nip, String address, String city) {
+        this.owner = owner;
+        this.name = name;
+        this.nip = nip;
+        this.address = address;
+        this.city = city;
     }
 
     public Database getDatabaseByName(String name) throws NotFoundException {
@@ -137,7 +147,6 @@ public class Company {
     public void setCity(String city) {
         this.city = city;
     }
-
 
     public void setId(long id) {
         this.id = id;

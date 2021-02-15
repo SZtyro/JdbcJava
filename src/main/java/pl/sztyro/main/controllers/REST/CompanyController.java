@@ -46,7 +46,11 @@ public class CompanyController {
         Company obj = gson.fromJson(gson.toJson(companyJson), Company.class);
         _logger.info("Tworzenie firmy: " + obj.getName());
         try {
-            companyService.createCompany(owner, obj.getName(), obj.getNip());
+            //companyService.createCompany(owner, obj.getName(), obj.getNip());
+            companyService.createCompany(owner, obj);
+            //companyService.getcompany()
+
+            //companyService.updateCompany(obj, owner);
         } catch (ConstraintViolationException e) {
             String message = "";
             for (Object s : e.getConstraintViolations().toArray()) {
@@ -124,8 +128,10 @@ public class CompanyController {
     public void setSelectedCompany(HttpServletRequest request, @NotNull @RequestParam Long id) {
 
         try {
-            userService.selectCompany(authService.getLoggedUserMail(request), id);
-        } catch (NotFoundException e) {
+            String mail = authService.getLoggedUserMail(request);
+            companyService.selectCompany(userService.getUserByMail(mail),id);
+            //userService.selectCompany(authService.getLoggedUserMail(request), id);
+        } catch (Exception e) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, e.getMessage());
         }
