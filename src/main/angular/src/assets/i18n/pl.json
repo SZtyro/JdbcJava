@@ -1,137 +1,138 @@
 {
-    "select_company": "Wybierz firmę",
-    "home": "Strona domowa",
-    "pick_company": "Wybierz firmę",
-    "add_company": "Dodaj firmę",
-    "subject": "Temat",
-    "from": "Od",
-    "today": "Dziś",
-    "calendar": "Kalendarz",
-    "notifications": "Powiadomienia",
-    "employees_count": "Ilość pracowników:",
-    "extensions_summary": "Cena rozszerzeń:",
-    "cancel": "Anuluj",
-    "plan": "Plan",
-    "summary": "Podsumowanie",
-    "available_extensions": "Dostępne rozszerzenia",
-    "your_extensions": "Twoje rozszerzenia",
-    "cancel_subscription": "Anuluj subskrypcję",
-    "add_to_plan": "Dodaj do planu",
-    "cost_per_user": "koszt na użytkownika: ",
-    "delete": "Usuń",
-    "export_pdf": "Wyeksportuj do PDF",
-    "tables": "Tabele",
-    "add": "Dodaj",
-    "institutions": "Placówki",
-    "invite": "Zaproś",
-    "invite_user": "Zaproś użytkownika",
-    "create_institution": "Stwórz placówkę",
-    "firstname": "Imię",
-    "surname": "Nazwisko",
-    "finances": "Finanse",
-    "name": "Nazwa",
-    "mail": "E-mail",
-    "institution": "Placówka",
-    "settings": "Ustawienia",
-    "save": "Zapisz",
-    "company": "Firma",
-    "employees": "Pracownicy",
-    "list": "Lista",
-    "user": "Użytkownik",
-    "database": "Baza danych",
-    "NAVBAR": {
-        "GOOGLE_LOGIN": "Zaloguj się przez Google!",
-        "HOME": "Strona główna",
-        "DATABASE": {
-            "CONNECTION": "Baza danych",
-            "NO_CONNECTION": "Nie jesteś połączony do bazy danych!"
-        },
-        "USERS": "Użytkownicy",
-        "WIDGETS": "Widżety",
-        "EDIT": "Edytuj siatkę",
-        "SETTINGS": "Ustawienia",
-        "LANGUAGE": "Zmień język",
-        "SIGN_OUT": "Wyloguj",
-        "BUG_REPORT": "Zgłoś błąd"
+  "select_company": "Wybierz firmę",
+  "filter": "Filtr",
+  "home": "Strona domowa",
+  "pick_company": "Wybierz firmę",
+  "add_company": "Dodaj firmę",
+  "subject": "Temat",
+  "from": "Od",
+  "today": "Dziś",
+  "calendar": "Kalendarz",
+  "notifications": "Powiadomienia",
+  "employees_count": "Ilość pracowników:",
+  "extensions_summary": "Cena rozszerzeń:",
+  "cancel": "Anuluj",
+  "plan": "Plan",
+  "summary": "Podsumowanie",
+  "available_extensions": "Dostępne rozszerzenia",
+  "your_extensions": "Twoje rozszerzenia",
+  "cancel_subscription": "Anuluj subskrypcję",
+  "add_to_plan": "Dodaj do planu",
+  "cost_per_user": "koszt na użytkownika: ",
+  "delete": "Usuń",
+  "export_pdf": "Wyeksportuj do PDF",
+  "tables": "Tabele",
+  "add": "Dodaj",
+  "institutions": "Placówki",
+  "invite": "Zaproś",
+  "invite_user": "Zaproś użytkownika",
+  "create_institution": "Stwórz placówkę",
+  "firstname": "Imię",
+  "surname": "Nazwisko",
+  "finances": "Finanse",
+  "name": "Nazwa",
+  "mail": "E-mail",
+  "institution": "Placówka",
+  "settings": "Ustawienia",
+  "save": "Zapisz",
+  "company": "Firma",
+  "employees": "Pracownicy",
+  "list": "Lista",
+  "user": "Użytkownik",
+  "database": "Baza danych",
+  "NAVBAR": {
+    "GOOGLE_LOGIN": "Zaloguj się przez Google!",
+    "HOME": "Strona główna",
+    "DATABASE": {
+      "CONNECTION": "Baza danych",
+      "NO_CONNECTION": "Nie jesteś połączony do bazy danych!"
     },
-    "WELCOME_PAGE": {
-        "GOOGLE_LOGIN": "Zaloguj się przez Google!",
-        "SLIDE_1": {
-            "HEADER": "Szef, gdziekolwiek jesteś.",
-            "TEXT": "Dom, pociąg, biuro? Zarządzaj swoją firmą gdziekolwiek jesteś i zawsze bądz poinformowany! Wszystko czego potrzebujesz to konto Google i dostęp do internetu."
-        },
-        "SLIDE_2": {
-            "HEADER": "Współpraca.",
-            "TEXT": "ABC"
-        },
-        "ABOUT_APP": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "ABOUT_US": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    "USERS": "Użytkownicy",
+    "WIDGETS": "Widżety",
+    "EDIT": "Edytuj siatkę",
+    "SETTINGS": "Ustawienia",
+    "LANGUAGE": "Zmień język",
+    "SIGN_OUT": "Wyloguj",
+    "BUG_REPORT": "Zgłoś błąd"
+  },
+  "WELCOME_PAGE": {
+    "GOOGLE_LOGIN": "Zaloguj się przez Google!",
+    "SLIDE_1": {
+      "HEADER": "Szef, gdziekolwiek jesteś.",
+      "TEXT": "Dom, pociąg, biuro? Zarządzaj swoją firmą gdziekolwiek jesteś i zawsze bądz poinformowany! Wszystko czego potrzebujesz to konto Google i dostęp do internetu."
     },
-    "GMAIL_WIDGET": {
-        "SENDER": "Nadawca",
-        "SNIPPET": "Wiadomość"
+    "SLIDE_2": {
+      "HEADER": "Współpraca.",
+      "TEXT": "ABC"
     },
-    "notification": {
-        "company": {
-            "created": "Firma <b>{{name}}</b> została utworzona.",
-            "updated": "Firma <b>{{name}}</b> została zaktualizowana."
-        },
-        "institution": {
-            "created": "Placówka <b>{{name}}</b> została stworzona.",
-            "updated": "Placówka <b>{{name}}</b> została zaktualizowana.",
-            "deleted": "Placówka <b>{{name}}</b> została usunięta."
-        },
-        "user": {
-            "created": "Pomyślnie dodano użytkownika <b>{{mail}}</b>.",
-            "updated": "Pomyślnie zakutalizowano użytkownika <b>{{mail}}</b>",
-            "invite":{
-                "success": "Pomyślnie dodano użytkownika <b>{{mail}}</b>."
-            }
-        }
+    "ABOUT_APP": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "ABOUT_US": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  "GMAIL_WIDGET": {
+    "SENDER": "Nadawca",
+    "SNIPPET": "Wiadomość"
+  },
+  "notification": {
+    "company": {
+      "created": "Firma <b>{{name}}</b> została utworzona.",
+      "updated": "Firma <b>{{name}}</b> została zaktualizowana."
     },
-    "toasts": {
-        "modules": {
-            "forbidden": "Nie masz dostępu do tego modułu.",
-            "updated": "Pomyślnie zaktualizowano plan."
-        },
-        "database": {
-            "created": "Pomyślnie utworzono bazę",
-            "updated": "Pomyślnie zaaktualizowano bazę",
-            "row": {
-                "inserted": "Pomyślnie dodano rekord.",
-                "updated": "Pomyślnie zaktualizowano rekord.",
-                "deleted": "Pomyślnie usunięto rekord.",
-                "notfound": "Nie znaleziono bazy danych"
-            }
-        },
-        "company": {
-            "saved": "Pomyślnie zapisano firmę.",
-            "nip": "Podaj prawidłowy NIP.",
-            "notfound": "Nie znaleziono firmy.",
-            "notSelected": "Nie wybrano firmy."
-            
-        },
-        "user": {
-            "notfound": "Nie znaleziono użytkownika"
-        }
+    "institution": {
+      "created": "Placówka <b>{{name}}</b> została stworzona.",
+      "updated": "Placówka <b>{{name}}</b> została zaktualizowana.",
+      "deleted": "Placówka <b>{{name}}</b> została usunięta."
     },
-    "dialog": {
-        "title": {
-            "sure": "Czy jesteś pewien?"
-        },
-        "message": {
-            "delete": "Czy na pewno chcesz usunąć rekord: <b>{{row}}</b>?"
-        }
-    },
-    "modules": {
-        "title": {
-            "database": "Moduł bazy danych"
-        },
-        "description": {
-            "database": "To rozszerzenie pozwala na połącznie i zarządzanie dowolną bazą danych wspieraną przez aplikację."
-        }
-    },
-    "currency": {
-        "pln": "zł"
+    "user": {
+      "created": "Pomyślnie dodano użytkownika <b>{{mail}}</b>.",
+      "updated": "Pomyślnie zakutalizowano użytkownika <b>{{mail}}</b>",
+      "invite": {
+        "success": "Pomyślnie dodano użytkownika <b>{{mail}}</b>."
+      }
     }
+  },
+  "toasts": {
+    "modules": {
+      "forbidden": "Nie masz dostępu do tego modułu.",
+      "updated": "Pomyślnie zaktualizowano plan."
+    },
+    "database": {
+      "created": "Pomyślnie utworzono bazę",
+      "updated": "Pomyślnie zaaktualizowano bazę",
+      "row": {
+        "inserted": "Pomyślnie dodano rekord.",
+        "updated": "Pomyślnie zaktualizowano rekord.",
+        "deleted": "Pomyślnie usunięto rekord.",
+        "notfound": "Nie znaleziono bazy danych"
+      }
+    },
+    "company": {
+      "saved": "Pomyślnie zapisano firmę.",
+      "nip": "Podaj prawidłowy NIP.",
+      "notfound": "Nie znaleziono firmy.",
+      "notSelected": "Nie wybrano firmy.",
+      "forbidden": "Nie masz uprawnień."
+    },
+    "user": {
+      "notfound": "Nie znaleziono użytkownika"
+    }
+  },
+  "dialog": {
+    "title": {
+      "sure": "Czy jesteś pewien?"
+    },
+    "message": {
+      "delete": "Czy na pewno chcesz usunąć rekord: <b>{{row}}</b>?"
+    }
+  },
+  "modules": {
+    "title": {
+      "database": "Moduł bazy danych"
+    },
+    "description": {
+      "database": "To rozszerzenie pozwala na połącznie i zarządzanie dowolną bazą danych wspieraną przez aplikację."
+    }
+  },
+  "currency": {
+    "pln": "zł"
+  }
 }

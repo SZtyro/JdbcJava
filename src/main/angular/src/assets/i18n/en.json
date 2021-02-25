@@ -1,137 +1,139 @@
 {
-    "select_company": "Select company",
-    "home": "Home",
-    "subject": "Subject",
-    "from": "From",
-    "today": "Today",
-    "calendar": "Calendar",
-    "notifications": "Notifications",
-    "employees_count": "Employees count:",
-    "extensions_summary": "Extensions cost:",
-    "cancel": "Cancel",
-    "plan": "Plan",
-    "summary": "Summary",
-    "available_extensions": "Avaiable extensions",
-    "your_extensions": "Your extensions",
-    "cancel_subscription": "Cancel",
-    "add_to_plan": "Add to plan",
-    "cost_per_user": "cost per user: ",
-    "delete": "Delete",
-    "export_pdf": "Export to PDF",
-    "tables": "Tables",
-    "add": "Add",
-    "institutions": "Institutions",
-    "invite": "Invite",
-    "invite_user": "Invite user",
-    "create_institution": "Create institution",
-    "firstname": "Firstname",
-    "surname": "Surname",
-    "finances": "Finances",
-    "name": "Name",
-    "mail": "E-mail",
-    "institution": "Institution",
-    "add_company": "Add company",
-    "pick_company": "Pick company",
-    "employees": "Employees",
-    "list": "List",
-    "new_institution": "New institution",
-    "settings": "Settings",
-    "save": "Save",
-    "company": "Company",
-    "user": "User",
-    "database": "Database",
-    "NAVBAR": {
-        "GOOGLE_LOGIN": "Sign in with Google!",
-        "HOME": "Home",
-        "DATABASE": {
-            "CONNECTION": "Database",
-            "NO_CONNECTION": "You are not connected to database!"
-        },
-        "USERS": "Users",
-        "WIDGETS": "Widgets",
-        "EDIT": "Edit grid",
-        "SETTINGS": "Settings",
-        "LANGUAGE": "Change language",
-        "SIGN_OUT": "Sign out",
-        "BUG_REPORT": "Report bug"
+  "select_company": "Select company",
+  "filter": "Filter",
+  "home": "Home",
+  "subject": "Subject",
+  "from": "From",
+  "today": "Today",
+  "calendar": "Calendar",
+  "notifications": "Notifications",
+  "employees_count": "Employees count:",
+  "extensions_summary": "Extensions cost:",
+  "cancel": "Cancel",
+  "plan": "Plan",
+  "summary": "Summary",
+  "available_extensions": "Avaiable extensions",
+  "your_extensions": "Your extensions",
+  "cancel_subscription": "Cancel",
+  "add_to_plan": "Add to plan",
+  "cost_per_user": "cost per user: ",
+  "delete": "Delete",
+  "export_pdf": "Export to PDF",
+  "tables": "Tables",
+  "add": "Add",
+  "institutions": "Institutions",
+  "invite": "Invite",
+  "invite_user": "Invite user",
+  "create_institution": "Create institution",
+  "firstname": "Firstname",
+  "surname": "Surname",
+  "finances": "Finances",
+  "name": "Name",
+  "mail": "E-mail",
+  "institution": "Institution",
+  "add_company": "Add company",
+  "pick_company": "Pick company",
+  "employees": "Employees",
+  "list": "List",
+  "new_institution": "New institution",
+  "settings": "Settings",
+  "save": "Save",
+  "company": "Company",
+  "user": "User",
+  "database": "Database",
+  "NAVBAR": {
+    "GOOGLE_LOGIN": "Sign in with Google!",
+    "HOME": "Home",
+    "DATABASE": {
+      "CONNECTION": "Database",
+      "NO_CONNECTION": "You are not connected to database!"
     },
-    "WELCOME_PAGE": {
-        "GOOGLE_LOGIN": "Sign in with Google!",
-        "SLIDE_1": {
-            "HEADER": "Boss, wherever you want.",
-            "TEXT": "Home, train, office? Manage your buisness from anywhere and always be informed! All you need is a Google account and Internet connection."
-        },
-        "SLIDE_2": {
-            "HEADER": "Teamwork",
-            "TEXT": "ABC"
-        },
-        "ABOUT_APP": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "ABOUT_US": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    "USERS": "Users",
+    "WIDGETS": "Widgets",
+    "EDIT": "Edit grid",
+    "SETTINGS": "Settings",
+    "LANGUAGE": "Change language",
+    "SIGN_OUT": "Sign out",
+    "BUG_REPORT": "Report bug"
+  },
+  "WELCOME_PAGE": {
+    "GOOGLE_LOGIN": "Sign in with Google!",
+    "SLIDE_1": {
+      "HEADER": "Boss, wherever you want.",
+      "TEXT": "Home, train, office? Manage your buisness from anywhere and always be informed! All you need is a Google account and Internet connection."
     },
-    "GMAIL_WIDGET": {
-        "SENDER": "Sender",
-        "SNIPPET": "Snippet"
+    "SLIDE_2": {
+      "HEADER": "Teamwork",
+      "TEXT": "ABC"
     },
-    "notification": {
-        "company": {
-            "created": "Company <b>{{name}}</b> has been created.",
-            "updated": "Company <b>{{name}}</b> has been updated."
-        },
-        "institution": {
-            "created": "Institution <b>{{name}}</b> has been created.",
-            "updated": "Institution <b>{{name}}</b> has been updated.",
-            "deleted": "Institution <b>{{name}}</b> has been deleted."
-        },
-        "user": {
-            "created": "User <b>{{mail}}</b> has been successfully created.",
-            "updated": "User <b>{{mail}}</b> has been successfully updated.",
-            "invite":{
-                "success": "User <b>{{mail}}</b> has been successfully added to company."
-            }
-        }
+    "ABOUT_APP": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "ABOUT_US": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  "GMAIL_WIDGET": {
+    "SENDER": "Sender",
+    "SNIPPET": "Snippet"
+  },
+  "notification": {
+    "company": {
+      "created": "Company <b>{{name}}</b> has been created.",
+      "updated": "Company <b>{{name}}</b> has been updated."
     },
-    "toasts": {
-        "modules": {
-            "forbidden": "You does not have access to this module.",
-            "updated": "Plan has been successfuly updated."
-        },
-        "database": {
-            "created": "Database has been successfully created.",
-            "updated": "Database has been successfully updated.",
-            "row": {
-                "inserted": "Row has been successfully inserted.",
-                "updated": "Row has been successfully updated.",
-                "deleted": "Row has been successfully deleted.",
-                "notfound": "Database not found"
-            }
-        },
-        "company": {
-            "saved": "Company has been successfully saved.",
-            "nip": "Please enter correct NIP.",
-            "notfound": "Company not found.",
-            "notSelected": "Company not selected."
-        },
-        "user": {
-            "notfound": "User not found."
-        }
+    "institution": {
+      "created": "Institution <b>{{name}}</b> has been created.",
+      "updated": "Institution <b>{{name}}</b> has been updated.",
+      "deleted": "Institution <b>{{name}}</b> has been deleted."
     },
-    "dialog": {
-        "title": {
-            "sure": "Are you sure?"
-        },
-        "message": {
-            "delete": "Are you sure you want to delete row: <b>{{row}}</b>?"
-        }
-    },
-    "modules": {
-        "title": {
-            "database": "Database Module"
-        },
-        "description": {
-            "database": "This extension allows to operate on any database supported by app."
-        }
-    },
-    "currency": {
-        "pln": "zł"
+    "user": {
+      "created": "User <b>{{mail}}</b> has been successfully created.",
+      "updated": "User <b>{{mail}}</b> has been successfully updated.",
+      "invite": {
+        "success": "User <b>{{mail}}</b> has been successfully added to company."
+      }
     }
+  },
+  "toasts": {
+    "modules": {
+      "forbidden": "You does not have access to this module.",
+      "updated": "Plan has been successfuly updated."
+    },
+    "database": {
+      "created": "Database has been successfully created.",
+      "updated": "Database has been successfully updated.",
+      "row": {
+        "inserted": "Row has been successfully inserted.",
+        "updated": "Row has been successfully updated.",
+        "deleted": "Row has been successfully deleted.",
+        "notfound": "Database not found"
+      }
+    },
+    "company": {
+      "saved": "Company has been successfully saved.",
+      "nip": "Please enter correct NIP.",
+      "notfound": "Company not found.",
+      "notSelected": "Company not selected.",
+      "forbidden": "You do not have permission to perform that operation."
+    },
+    "user": {
+      "notfound": "User not found."
+    }
+  },
+  "dialog": {
+    "title": {
+      "sure": "Are you sure?"
+    },
+    "message": {
+      "delete": "Are you sure you want to delete row: <b>{{row}}</b>?"
+    }
+  },
+  "modules": {
+    "title": {
+      "database": "Database Module"
+    },
+    "description": {
+      "database": "This extension allows to operate on any database supported by app."
+    }
+  },
+  "currency": {
+    "pln": "zł"
+  }
 }

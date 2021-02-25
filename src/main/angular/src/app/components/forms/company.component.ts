@@ -1,7 +1,7 @@
-import { BasicForm } from 'src/app/ts/basicForm';
-import { Component, OnInit } from '@angular/core';
-import { FieldType } from 'src/app/ts/enums/fieldType';
-import { ToastType } from 'src/app/ts/enums/toastType';
+import {BasicForm} from 'src/app/ts/basicForm';
+import {Component, OnInit} from '@angular/core';
+import {FieldType} from 'src/app/ts/enums/fieldType';
+import {ToastType} from 'src/app/ts/enums/toastType';
 
 @Component({
   selector: 'app-company',
@@ -15,14 +15,26 @@ export class CompanyComponent extends BasicForm implements OnInit {
   ngOnInit(): void {
     this.name = "company";
     this.fields = [
-      { name: 'name', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-4', value: this.company['name'], required: true },
-      { name: 'nip', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-4', value: this.company['nip'], required: true },
-      { name: 'address', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-4', value: this.company['address'] },
-      { name: 'city', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-4', value: this.company['city'] },
+      {
+        name: 'name',
+        type: FieldType.INPUT,
+        class: 'col-12 col-md-6 col-lg-4',
+        value: this.company['name'],
+        required: true
+      },
+      {
+        name: 'nip',
+        type: FieldType.INPUT,
+        class: 'col-12 col-md-6 col-lg-4',
+        value: this.company['nip'],
+        required: true
+      },
+      {name: 'address', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-4', value: this.company['address']},
+      {name: 'city', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-4', value: this.company['city']},
     ]
 
     this.actions = [
-      { name: 'save', id: 'save' }
+      {name: 'save', id: 'save'}
     ]
 
     this.route.data.subscribe(data => {

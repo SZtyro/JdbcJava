@@ -5,7 +5,7 @@
 :root {
   --textColor: #000;
   --textColorBright: #fff;
-  --mainColor:#29434e;
+  --mainColor: #29434e;
   --deleteColor: #e53935;
   --warningColor: #ffa000;
   --errorColor: #b71c1c;
@@ -30,7 +30,7 @@ a {
 }
 
 .main-header {
-  font-size: 9rem;
+  font-size: 10vw;
   font-weight: 400;
 }
 

@@ -1,21 +1,20 @@
 <div style="height: 100%;display: flex; justify-content: space-between; flex-direction: column;">
-    <div>
-        <div class="container-fluid" style="display: flex; justify-content: space-between;">
-            <h1 class="main-header" translate>
-                {{name}}</h1>
-        </div>
+  <div>
+    <div class="container-fluid" style="display: flex; justify-content: space-between;">
+      <h1 class="main-header" translate>
+        {{name}}</h1>
+    </div>
 
 
-
-        <div class="container-fluid">
+    <div class="container-fluid">
 
             <span *ngFor="let field of fields">
                 <span [ngSwitch]="field.type">
                     <span *ngSwitchCase="0">
                         <mat-form-field [class]="field.class">
                             <mat-label translate>{{field.name}}</mat-label>
-                            <input matInput type="text" [(ngModel)]="field.value" [disabled]="field.disabled"
-                                [required]="field.required">
+                            <input matInput [type]="field.attrType ? field.attrType : 'text'" [(ngModel)]="field.value"
+                                   [disabled]="field.disabled" [required]="field.required">
                         </mat-form-field>
                     </span>
 
@@ -23,7 +22,7 @@
                         <mat-form-field appearance="fill" [class]="field.class">
                             <mat-label translate>{{field.name}}</mat-label>
                             <mat-select [(ngModel)]="field.value" [compareWith]="field.compareWith"
-                                [disabled]="field.disabled" [required]="field.required">
+                                        [disabled]="field.disabled" [required]="field.required">
                                 <mat-option *ngFor="let option of field.options" [value]="option.value">
                                     {{option.name ? option.name : option.value}}
                                 </mat-option>
@@ -35,7 +34,7 @@
                         <mat-form-field appearance="fill" [class]="field.class">
                             <mat-label translate>{{field.name}}</mat-label>
                             <input matInput [matDatepicker]="picker" [(ngModel)]="field.value"
-                                [disabled]="field.disabled" [required]="field.required">
+                                   [disabled]="field.disabled" [required]="field.required">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
@@ -45,7 +44,7 @@
                         <mat-form-field appearance="fill" [class]="field.class">
                             <mat-label translate>{{field.name}}</mat-label>
                             <textarea matInput [(ngModel)]="field.value" [disabled]="field.disabled"
-                                [required]="field.required"></textarea>
+                                      [required]="field.required"></textarea>
                         </mat-form-field>
                     </span>
 
@@ -56,17 +55,17 @@
             </span>
 
 
-        </div>
-
     </div>
 
-    <div class="row m-0" style="justify-content: flex-end;padding-bottom: 20px; padding-top: 20px;">
+  </div>
+
+  <div class="row m-0" style="justify-content: flex-end;padding-bottom: 20px; padding-top: 20px;">
         <span *ngFor="let button of actions" class="col-12 col-md-6 col-lg-3 col-xl-1">
             <button mat-raised-button [color]="button.backgroundColor ? '': 'primary'"
-                style="width: 100%;line-height: 45px; margin-top: 10px;" (click)="onAction(button.id)">
+                    style="width: 100%;line-height: 45px; margin-top: 10px;" (click)="onAction(button.id)">
                 {{button.icon | translate}}
                 {{button.name | translate}}
             </button>
         </span>
-    </div>
+  </div>
 </div>

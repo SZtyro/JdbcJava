@@ -108,20 +108,26 @@ public class CompanyController {
         User owner = userService.getUser(authService.getLoggedUserMail(request));
         Gson gson = new Gson();
         Company obj = gson.fromJson(gson.toJson(companyJson), Company.class);
-        _logger.info("Aktualizacja firmy o id: " + obj.getId());
-        try {
+        if (owner.getId() == companyService.getCompany(obj.getId()).getOwner().getId()) {
+            _logger.info("Aktualizacja firmy o id: " + obj.getId());
+            try {
 
-            companyService.updateCompany(obj, owner);
+                companyService.updateCompany(obj, owner);
 
-        } catch (ConstraintViolationException e) {
-            String message = "";
-            for (Object s : e.getConstraintViolations().toArray()) {
-                ConstraintViolationImpl a = (ConstraintViolationImpl) s;
-                message += a.getMessage();
+            } catch (ConstraintViolationException e) {
+                String message = "";
+                for (Object s : e.getConstraintViolations().toArray()) {
+                    ConstraintViolationImpl a = (ConstraintViolationImpl) s;
+                    message += a.getMessage();
+                }
+                _logger.error(message);
+                throw new Exception(message);
             }
-            _logger.error(message);
-            throw new Exception(message);
+        }else{
+            _logger.error("Użytkownik nie ma uprawnień by modyfikować ustawienia firmy.");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "toasts.company.forbidden");
         }
+
     }
 
     @PutMapping("/current")
@@ -129,7 +135,7 @@ public class CompanyController {
 
         try {
             String mail = authService.getLoggedUserMail(request);
-            companyService.selectCompany(userService.getUserByMail(mail),id);
+            companyService.selectCompany(userService.getUserByMail(mail), id);
             //userService.selectCompany(authService.getLoggedUserMail(request), id);
         } catch (Exception e) {
             throw new ResponseStatusException(

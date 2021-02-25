@@ -23,7 +23,7 @@ import java.util.List;
 public class DatabaseService {
 
     private static final Logger _logger = LoggerFactory.getLogger(DatabaseService.class);
-    AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
+
 
     @Autowired
     HibernateConf conf;
@@ -35,11 +35,13 @@ public class DatabaseService {
     private String encryptorPassword;
 
     private String decryptPassword(String password) {
+        AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
         textEncryptor.setPassword(encryptorPassword);
         return textEncryptor.decrypt(password);
     }
 
     private String encryptPassword(String password) {
+        AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
         textEncryptor.setPassword(encryptorPassword);
         return textEncryptor.encrypt(password);
     }

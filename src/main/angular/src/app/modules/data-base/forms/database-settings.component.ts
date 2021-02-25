@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FieldType } from 'src/app/ts/enums/fieldType';
-import { ToastType } from 'src/app/ts/enums/toastType';
-import { BasicForm } from 'src/app/ts/basicForm';
+import {Component, OnInit} from '@angular/core';
+import {FieldType} from 'src/app/ts/enums/fieldType';
+import {ToastType} from 'src/app/ts/enums/toastType';
+import {BasicForm} from 'src/app/ts/basicForm';
 
 @Component({
   selector: 'app-database-settings',
@@ -20,14 +20,20 @@ export class DatabaseSettingsComponent extends BasicForm implements OnInit {
     })
 
     this.fields = [
-      { name: 'host', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-3', value: this.database.url },
-      { name: 'port', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-3', value: this.database.port },
-      { name: 'database', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-3', value: this.database.database },
-      { name: 'user', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-3', value: this.database.login },
-      { name: 'password', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-3', value: this.database.password },
+      {name: 'host', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-3', value: this.database.url},
+      {name: 'port', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-3', value: this.database.port},
+      {name: 'database', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-3', value: this.database.database},
+      {name: 'user', type: FieldType.INPUT, class: 'col-12 col-md-6 col-lg-3', value: this.database.login},
+      {
+        name: 'password',
+        type: FieldType.INPUT,
+        attrType: 'password',
+        class: 'col-12 col-md-6 col-lg-3',
+        value: this.database.password
+      },
     ]
     this.actions = [
-      { name: 'save', id: 'save' }
+      {name: 'save', id: 'save'}
     ]
 
 

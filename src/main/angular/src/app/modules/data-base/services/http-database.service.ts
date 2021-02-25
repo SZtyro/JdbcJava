@@ -1,5 +1,5 @@
-import { HttpCoreService } from './../../../services/http-core.service';
-import { Injectable } from '@angular/core';
+import {HttpCoreService} from './../../../services/http-core.service';
+import {Injectable} from '@angular/core';
 
 /**
  * Serwis http modułu bazy danych
@@ -29,7 +29,7 @@ export class HttpDatabaseService extends HttpCoreService {
     if (id)
       params['id'] = id;
 
-    return this.http.get(this.prefix + "/database/table", { params: params })
+    return this.http.get(this.prefix + "/database/table", {params: params})
   }
 
   getTableContent(id, tableName?: string) {
@@ -39,7 +39,7 @@ export class HttpDatabaseService extends HttpCoreService {
     if (tableName)
       params['tableName'] = tableName
 
-    return this.http.get(this.prefix + "/database/content", { params: params })
+    return this.http.get(this.prefix + "/database/content", {params: params})
   }
 
   saveRow(body, tableName, id) {
@@ -77,7 +77,7 @@ export class HttpDatabaseService extends HttpCoreService {
 
   getDatabase(id) {
     return this.http.get(this.prefix + '/database', {
-      params: { id: id }
+      params: {id: id}
     })
   }
 

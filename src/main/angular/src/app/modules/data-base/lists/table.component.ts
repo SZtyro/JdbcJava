@@ -1,12 +1,15 @@
-import { FieldType } from '../../../ts/enums/fieldType';
-import { buttonPDFExport } from '../../../ts/buttons';
-import { BasicTable } from 'src/app/ts/basicTable';
-import { Component, OnInit } from '@angular/core';
-import { detailExpand } from 'src/app/ts/animations';
-import { MatTableDataSource } from '@angular/material';
-import { buttonDelete, buttonEdit } from 'src/app/ts/buttons';
-import { TableContentComponent } from '../forms/table-content.component';
-import { ToastType } from 'src/app/ts/enums/toastType';
+import {FieldType} from '../../../ts/enums/fieldType';
+import {buttonPDFExport} from '../../../ts/buttons';
+import {BasicTable} from 'src/app/ts/basicTable';
+import {Component, OnInit} from '@angular/core';
+import {detailExpand} from 'src/app/ts/animations';
+import {MatTableDataSource} from '@angular/material';
+import {buttonDelete, buttonEdit} from 'src/app/ts/buttons';
+import {TableContentComponent} from '../forms/table-content.component';
+import {ToastType} from 'src/app/ts/enums/toastType';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-table',
@@ -25,13 +28,17 @@ export class TableComponent extends BasicTable implements OnInit {
     this.databaseId = this.route.snapshot.params['id'];
     this.route.data.subscribe(data => {
       this.dataSource = new MatTableDataSource(data.content);
+      console.log(this.dataSource)
+      this.dataSource.paginator = this.paginator;
       this.metadata = data.columns;
-      this.columns = this.metadata.map(el => { return { name: el['name'] } })
+      this.columns = this.metadata.map(el => {
+        return {name: el['name']}
+      })
       this.constraints = data.constraints;
       this.assingConstraints()
     })
     this.underActions = [
-      { icon: 'add', id: 'add', name: 'add' },
+      {icon: 'add', id: 'add', name: 'add'},
       buttonPDFExport
     ]
 
@@ -47,7 +54,9 @@ export class TableComponent extends BasicTable implements OnInit {
       let metaElem = this.metadata.find(meta => meta['name'] == element.name)
       //metaElem['dataType'] = FieldType.SELECT;
       this.http.database.getIds(this.route.snapshot.params['id'], element['referencedTableName'], element['referencedColumnName']).subscribe(ids => {
-        metaElem['options'] = ids.map(id => { return { value: id } });
+        metaElem['options'] = ids.map(id => {
+          return {value: id}
+        });
 
       })
 
@@ -126,7 +135,27 @@ export class TableComponent extends BasicTable implements OnInit {
         });
 
         break;
+      case buttonPDFExport.id:
 
+        var doc = new jsPDF()
+
+        let tab = [];
+
+
+        doc.autoTable({
+          headStyles: {fillColor: [34, 34, 34]},
+          head: [this.displayColumns],
+          body: this.dataSource.data.map(elem => {
+            let row = [];
+            this.displayColumns.forEach(col => {
+              row.push(elem[col + '']);
+            })
+            return row;
+          })
+        })
+        doc.save(this.name + formatDate(new Date(), 'yyyy/MM/dd', 'en') + '.pdf')
+
+        break;
 
       default:
         break;
