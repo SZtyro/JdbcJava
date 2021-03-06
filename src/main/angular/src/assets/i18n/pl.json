@@ -56,6 +56,7 @@
     "BUG_REPORT": "Zgłoś błąd"
   },
   "WELCOME_PAGE": {
+    "SUPPORTED_DATABASES": "Wspierane bazy danych",
     "GOOGLE_LOGIN": "Zaloguj się przez Google!",
     "SLIDE_1": {
       "HEADER": "Szef, gdziekolwiek jesteś.",
@@ -63,10 +64,12 @@
     },
     "SLIDE_2": {
       "HEADER": "Współpraca.",
-      "TEXT": "ABC"
+      "TEXT": "Aplikacja poprawia komunikację w twoim zespole, dzięki czemu zwiększysz zyski!"
     },
-    "ABOUT_APP": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "ABOUT_US": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    "ABOUT_APP": "O aplikacji",
+    "ABOUT_APP_DESCRIPTION": "Aplikacja wspomaga zarządzanie firmą poprzez połączenie z bazą danych klienta. To niecodzienne rozwiązanie nie wymaga czasochłonnego procesu migracji danych. Jedynie co musisz zrobić to zapisać dane logowania. Korzystamy również z serwisów autoryzacyjnych, co stanowi dodatkowe zabezpieczenie twoich danych. Nie musisz również tworzyć nowego konta!.",
+    "ABOUT_US": "O nas",
+    "ABOUT_US_DESCRIPTION": "Jesteśmy młodą firmą specjalizującą się w tworzeniu rozwiązań małych firm. Nasze aplikacje pozwalają w łatwy sposób korzystać z danych przedsiębiorstwa oraz nie wymagają kosztownego i długiego czasu wdrażania. Celem na przyszłość jest dalsze wypuszczanie na rynek nowatorskich rozwiązań wraz z jednoczesnym dostosowywaniem się do potrzeb naszych klientów."
   },
   "GMAIL_WIDGET": {
     "SENDER": "Nadawca",

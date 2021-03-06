@@ -5,12 +5,10 @@
 
     <span>
       <button class="nav-link" (click)="scrollToElement(aboutApp)" mat-button
-        style="color: whitesmoke; outline: 0;">About
-        app</button>
+        style="color: whitesmoke; outline: 0;">{{'WELCOME_PAGE.ABOUT_APP' | translate}}</button>
 
-      <button class="nav-link" (click)="scrollToElement(aboutUs)" mat-button
-        style="color: whitesmoke; outline: 0;">About
-        us</button>
+      <button class="nav-link" (click)="scrollToElement(aboutUs)" mat-button style="color: whitesmoke; outline: 0;"
+        translate>{{'WELCOME_PAGE.ABOUT_US' | translate}}</button>
     </span>
 
 
@@ -93,20 +91,23 @@
 
 
   <div #aboutApp class="textBlock">
-    <h1 style="font-weight: 700;">About app</h1>
+    <h1 style="font-weight: 700;" translate>WELCOME_PAGE.ABOUT_APP</h1>
     <br>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Non sapiente cumque, minima ipsam molestias nobis sint
-      voluptatum commodi. Pariatur animi totam corrupti id fugiat expedita aliquid quod optio facilis doloremque.
-    </p>
+    <div style="display: flex;">
+      <p translate style="max-width: 50%;">
+        WELCOME_PAGE.ABOUT_APP_DESCRIPTION
+      </p>
+      <span style="display: flex;flex-direction: column;width: 100%;align-items: center;">
+        <img src="./../../../../assets/images/logo-mysql.png">
+        <p>{{'WELCOME_PAGE.SUPPORTED_DATABASES' | translate}}</p>
+      </span>
+    </div>
   </div>
 
   <div #aboutUs class="textBlock">
-    <h1 style="font-weight: 700;">About us</h1>
-    <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium, quia labore? Sint illo exercitationem
-      maiores
-      nemo odio accusamus, voluptate, ratione obcaecati optio dolores aut incidunt nobis esse quisquam nihil inventore!
+    <h1 style="font-weight: 700;" translate>WELCOME_PAGE.ABOUT_US</h1>
+    <p translate>
+      WELCOME_PAGE.ABOUT_US_DESCRIPTION
     </p>
   </div>
 </div>

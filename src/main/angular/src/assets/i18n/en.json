@@ -57,6 +57,7 @@
     "BUG_REPORT": "Report bug"
   },
   "WELCOME_PAGE": {
+    "SUPPORTED_DATABASES": "Supported databases",
     "GOOGLE_LOGIN": "Sign in with Google!",
     "SLIDE_1": {
       "HEADER": "Boss, wherever you want.",
@@ -66,8 +67,10 @@
       "HEADER": "Teamwork",
       "TEXT": "ABC"
     },
-    "ABOUT_APP": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "ABOUT_US": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    "ABOUT_APP": "About app",
+    "ABOUT_APP_DESCRIPTION": "The application supports company management by connecting to the customer's database. This unusual solution does not require a time-consuming data migration process. All you have to do is save your login details. We also use authorization services, which provide additional security for your data. You also don't need to create a new account!",
+    "ABOUT_US": "About us",
+    "ABOUT_US_DESCRIPTION": "We are a young company specializing in creating small business solutions. Our applications allow you to easily use enterprise data and do not require expensive and long implementation time. The goal for the future is to continue to bring innovative solutions to the market while adapting to the needs of our customers."
   },
   "GMAIL_WIDGET": {
     "SENDER": "Sender",
